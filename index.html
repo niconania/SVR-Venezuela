@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="SVR Laboratoire Dermatologique — Ciencia francesa para pieles sensibles. Más de 60 años de innovación. Disponible en Venezuela.">
   <title>SVR Venezuela — Laboratoire Dermatologique</title>
+  <link rel="canonical" href="https://svr-venezuela.com/">
   <link rel="icon" type="image/png" href="assets/SVR.png">
   <meta property="og:type" content="website">
   <meta property="og:title" content="SVR Venezuela — Laboratoire Dermatologique">
@@ -1082,10 +1083,10 @@
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <div class="hero-eyebrow">Laboratoire Dermatologique · Paris · 1962</div>
-      <p class="hero-tagline">
-        Más de 60 años de ciencia dermatológica francesa.<br>
+      <h1 class="hero-tagline">
+        SVR Venezuela · Más de 60 años de ciencia dermatológica francesa.<br>
         Fórmulas de alta concentración para las pieles más sensibles.
-      </p>
+      </h1>
       <div class="hero-actions">
         <a href="#productos" class="btn-primary">Ver todas las líneas</a>
         <a href="#herencia" class="btn-ghost">Nuestra historia</a>
@@ -1455,7 +1456,7 @@
                 <div class="clinica-info"><span class="clinica-nombre">710 Clinique</span><a href="https://api.whatsapp.com/send?phone=584122898240&text=" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
               </div>
               <div class="clinica-card">
-                <div class="clinica-photo"><video src="assets/pdv-blua-caracas.mp4" autoplay loop muted playsinline></video></div>
+                <div class="clinica-photo"><video class="lazy-video" data-src="assets/pdv-blua-caracas.mp4" loop muted playsinline preload="none"></video></div>
                 <div class="clinica-info"><span class="clinica-nombre">Blua Clinic</span><a href="https://api.whatsapp.com/send/?phone=584125384070&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
               </div>
               <div class="clinica-card">
@@ -1514,7 +1515,7 @@
                 <div class="clinica-info"><span class="clinica-nombre">Spazio Vital</span><a href="https://api.whatsapp.com/send?phone=584144128428&text=Me+interesa+agendar+cita&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGntZHuo7G4m-H3Cwok9P1g5pr1GNOl_2H0Yk5Lp99p9RXOf68SlrV2trWU3As_aem_g3F7MUtKsn3EinxTgKh6jQ" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
               </div>
               <div class="clinica-card">
-                <div class="clinica-photo"><video src="assets/pdv-maryjocolz.mp4" autoplay loop muted playsinline></video></div>
+                <div class="clinica-photo"><video class="lazy-video" data-src="assets/pdv-maryjocolz.mp4" loop muted playsinline preload="none"></video></div>
                 <div class="clinica-info"><span class="clinica-nombre">𝐃𝐫𝐚. 𝐌𝐚𝐫𝐢𝐣𝐨 𝐂𝐨𝐥𝐦𝐞𝐧𝐚𝐫𝐞𝐳</span><a href="https://api.whatsapp.com/send/?phone=584244633343&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
               </div>
             </div>
@@ -1590,7 +1591,7 @@
           <div class="estado-body">
             <div class="clinicas-grid">
               <div class="clinica-card">
-                <div class="clinica-photo"><video src="assets/pdv-blua-lecheria.mp4" autoplay loop muted playsinline></video></div>
+                <div class="clinica-photo"><video class="lazy-video" data-src="assets/pdv-blua-lecheria.mp4" loop muted playsinline preload="none"></video></div>
                 <div class="clinica-info"><span class="clinica-nombre">Blua Clinic</span><a href="https://api.whatsapp.com/send/?phone=584125384070&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
               </div>
               <div class="clinica-card">
@@ -1721,7 +1722,17 @@
       // Cierra todos
       document.querySelectorAll('.estado-item.open').forEach(el => el.classList.remove('open'));
       // Abre el clickeado si estaba cerrado
-      if (!isOpen) item.classList.add('open');
+      if (!isOpen) {
+        item.classList.add('open');
+        // Carga y reproduce los videos de este estado solo cuando se abre
+        item.querySelectorAll('.lazy-video').forEach(video => {
+          if (video.dataset.src) {
+            video.src = video.dataset.src;
+            video.removeAttribute('data-src');
+          }
+          video.play();
+        });
+      }
     }
 
     /* ── COUNTER ANIMATION ── */

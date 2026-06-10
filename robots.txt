@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://svr-venezuela.com/sitemap.xml
