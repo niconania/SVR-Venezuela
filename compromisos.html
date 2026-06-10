@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Nuestros compromisos — SVR cuida la piel mientras reduce su impacto en el planeta.">
+  <title>Nuestros Compromisos — SVR Venezuela</title>
+  <link rel="icon" type="image/png" href="assets/SVR.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nuestros Compromisos — SVR Venezuela">
+  <meta property="og:description" content="SVR cuida la piel mientras reduce su impacto en el planeta. Eco-diseño, formulación responsable y compromisos concretos.">
+  <meta property="og:image" content="assets/ampoule-vision.jpg">
+  <meta property="og:locale" content="es_VE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nuestros Compromisos — SVR Venezuela">
+  <meta name="twitter:description" content="SVR cuida la piel mientras reduce su impacto en el planeta.">
+  <meta name="twitter:image" content="assets/ampoule-vision.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: #1a1a1a;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    :root {
+      --coral:   #FB637E;
+      --orange:  #ff7c23;
+      --dark:    #1a1a1a;
+      --gray:    #5a5a5a;
+      --light:   #9ea2a2;
+      --cream:   #f8f6f3;
+      --border:  rgba(0,0,0,0.08);
+      --max-w:   1200px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo img { height: 32px; width: auto; }
+    .nav-divider { width: 1px; height: 20px; background: var(--border); }
+    .nav-sub {
+      font-size: 0.52rem; font-weight: 600;
+      letter-spacing: 0.3em; text-transform: uppercase; color: var(--light);
+    }
+    .nav-back {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--light);
+      text-decoration: none; display: flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--coral); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 520px;
+    }
+    .hero-image {
+      background: #000 url('assets/ampoule-vision.jpg') center/cover no-repeat;
+      min-height: 520px;
+    }
+    .hero-text {
+      padding: 80px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 24px;
+    }
+    .hero-label {
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.28em; text-transform: uppercase; color: var(--light);
+    }
+    .hero-title {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 800; color: var(--dark); line-height: 1.15;
+    }
+    .hero-intro {
+      font-size: 0.95rem; color: var(--gray); line-height: 1.85;
+    }
+    .hero-intro strong { color: var(--dark); font-weight: 600; }
+    .hero-summary {
+      margin-top: 8px;
+      border-top: 1px solid var(--border);
+      padding-top: 24px;
+    }
+    .hero-summary h3 {
+      font-size: 0.72rem; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--dark); margin-bottom: 14px;
+    }
+    .summary-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .summary-list li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.82rem; color: var(--gray);
+    }
+    .summary-list li::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--coral); flex-shrink: 0;
+    }
+    .summary-list a {
+      color: var(--gray); text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .summary-list a:hover { color: var(--coral); border-color: var(--coral); }
+
+    /* ── SHARED ── */
+    .section-wrap { max-width: var(--max-w); margin: 0 auto; padding: 0 48px; }
+
+    /* ── BLOCK NARANJA ── */
+    .block-orange {
+      background: var(--orange);
+      padding: 72px 48px;
+      margin: 64px 0;
+    }
+    .block-orange-inner { max-width: var(--max-w); margin: 0 auto; }
+    .block-orange h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800; color: #fff; margin-bottom: 20px; line-height: 1.2;
+    }
+    .block-orange .intro {
+      font-size: 0.92rem; color: rgba(255,255,255,0.82);
+      line-height: 1.8; margin-bottom: 32px;
+    }
+    .commitments-list { display: flex; flex-direction: column; gap: 20px; }
+    .commitment-item { display: flex; flex-direction: column; gap: 6px; }
+    .commitment-item .ci-title {
+      font-size: 0.9rem; font-weight: 700;
+      color: #fff; line-height: 1.4;
+    }
+    .commitment-item .ci-body {
+      font-size: 0.85rem; color: rgba(255,255,255,0.8); line-height: 1.75;
+    }
+
+    /* ── SPLIT: eco-diseño ── */
+    .split-section {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      align-items: stretch;
+      margin: 0 0 80px;
+    }
+    .split-text {
+      padding: 72px 64px 72px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .split-image {
+      background: #000;
+      min-height: 500px;
+      position: relative;
+      overflow: hidden;
+    }
+    .split-image video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @media (max-width: 960px) {
+      .split-image { aspect-ratio: 9 / 16; min-height: unset; }
+      .split-image video { object-fit: fill; }
+    }
+    .split-section.reverse .split-text { order: 2; padding: 72px 48px 72px 64px; }
+    .split-section.reverse .split-image { order: 1; }
+
+    .split-h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800; color: var(--dark); line-height: 1.2;
+    }
+    .split-lead {
+      font-size: 0.88rem; font-weight: 600;
+      color: var(--dark); line-height: 1.65;
+    }
+    .split-text p {
+      font-size: 0.88rem; color: var(--gray); line-height: 1.85;
+    }
+    .split-text strong { color: var(--dark); font-weight: 600; }
+
+    .eco-list { list-style: none; display: flex; flex-direction: column; gap: 18px; }
+    .eco-item { display: flex; flex-direction: column; gap: 4px; }
+    .eco-item-title {
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--dark); display: flex; align-items: center; gap: 8px;
+    }
+    .eco-item-body {
+      font-size: 0.82rem; color: var(--gray);
+      line-height: 1.7; padding-left: 26px;
+    }
+    .eco-goal {
+      background: var(--cream);
+      border-left: 3px solid var(--orange);
+      padding: 16px 20px;
+      font-size: 0.88rem; font-weight: 700;
+      color: var(--dark); border-radius: 0 4px 4px 0;
+    }
+
+    /* ── SECCIÓN IMPACTO ── */
+    .impact-section { padding: 80px 0; background: var(--cream); }
+    .impact-inner {
+      max-width: var(--max-w); margin: 0 auto; padding: 0 48px;
+      display: flex; flex-direction: column; gap: 36px;
+    }
+    .impact-h2 {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 800; color: var(--dark); line-height: 1.2;
+      max-width: 800px;
+    }
+    .impact-intro { font-size: 0.92rem; color: var(--gray); line-height: 1.85; max-width: 860px; }
+    .impact-items { display: flex; flex-direction: column; gap: 24px; max-width: 860px; }
+    .impact-item { display: flex; flex-direction: column; gap: 6px; }
+    .impact-item .ii-title {
+      font-size: 0.9rem; font-weight: 700; color: var(--dark);
+    }
+    .impact-item .ii-body {
+      font-size: 0.85rem; color: var(--gray); line-height: 1.75;
+    }
+    .year-blocks { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 860px; }
+    .year-block {
+      background: #fff; border: 1px solid var(--border);
+      border-radius: 6px; padding: 28px 24px;
+    }
+    .year-block h4 {
+      font-size: 0.78rem; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 12px;
+    }
+    .year-block p { font-size: 0.84rem; color: var(--gray); line-height: 1.75; }
+    .impact-closing {
+      font-size: 0.95rem; font-weight: 600;
+      color: var(--dark); line-height: 1.7;
+      padding-top: 12px; border-top: 1px solid var(--border);
+      max-width: 860px;
+    }
+
+    /* ── RELATED ── */
+    .related {
+      padding: 80px 0;
+      border-top: 1px solid var(--border);
+    }
+    .related-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 48px; }
+    .related-label {
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--coral); display: block; margin-bottom: 32px;
+    }
+    .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .related-card {
+      background: var(--cream); border: 1px solid var(--border);
+      border-radius: 4px; padding: 36px 32px;
+      display: flex; flex-direction: column; gap: 10px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+    }
+    .related-card:hover {
+      border-color: rgba(251,99,126,0.3);
+      box-shadow: 0 4px 20px rgba(251,99,126,0.08);
+    }
+    .related-card-label {
+      font-size: 0.58rem; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--coral);
+    }
+    .related-card-title { font-size: 1.05rem; font-weight: 700; color: var(--dark); }
+    .related-card-desc { font-size: 0.82rem; color: var(--light); line-height: 1.65; }
+    .related-card-cta {
+      font-size: 0.6rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--coral); margin-top: 8px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark); padding: 40px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    footer img { height: 26px; filter: brightness(0) invert(1); }
+    .footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.25); }
+    .footer-back {
+      font-size: 0.62rem; font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--coral); text-decoration: none; opacity: 0.7; transition: opacity 0.2s;
+    }
+    .footer-back:hover { opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 14px 24px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-image { min-height: 260px; }
+      .hero-text { padding: 40px 24px; }
+      .block-orange { padding: 44px 24px; margin: 32px 0; }
+      .split-section { grid-template-columns: 1fr; margin-bottom: 48px; }
+      .split-section.reverse .split-text { order: 1; }
+      .split-section.reverse .split-image { order: 2; }
+      .split-text { padding: 40px 24px; }
+      .split-image { min-height: 260px; }
+      .impact-section { padding: 52px 0; }
+      .impact-inner { padding: 0 24px; }
+      .year-blocks { grid-template-columns: 1fr; }
+      .related { padding: 52px 0; }
+      .related-inner { padding: 0 24px; }
+      .related-grid { grid-template-columns: 1fr; }
+      .section-wrap { padding: 0 24px; }
+      footer { padding: 32px 24px; }
+    }
+    @media (max-width: 640px) {
+      .hero-image { min-height: 220px; }
+      .hero-text { padding: 32px 18px; gap: 16px; }
+      .block-orange { padding: 36px 18px; margin: 24px 0; }
+      .split-text { padding: 32px 18px; gap: 20px; }
+      .split-image { min-height: 220px; }
+      .impact-inner { padding: 0 18px; }
+      .related-inner { padding: 0 18px; }
+      footer { padding: 28px 18px; }
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px;
+      border-radius: 999px;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, padding 0.3s ease, gap 0.3s ease;
+    }
+    .whatsapp-float svg { width: 26px; height: 26px; flex-shrink: 0; display: block; }
+    .whatsapp-float span {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-width 0.35s ease, opacity 0.25s ease;
+    }
+    .whatsapp-float:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(37,211,102,0.5);
+      padding: 15px 20px;
+      gap: 10px;
+    }
+    .whatsapp-float:hover span {
+      max-width: 220px;
+      opacity: 1;
+    }
+    @media (max-width: 640px) {
+      .whatsapp-float { bottom: 18px; right: 18px; }
+      .whatsapp-float span { display: none; }
+      .whatsapp-float:hover { padding: 15px; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ WHATSAPP FLOAT ══ -->
+  <a href="https://wa.me/584242565586?text=%C2%A1Hola!%20Me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20productos%20SVR." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.65 4.6 1.885 6.566L4 29l7.62-1.857A11.93 11.93 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm0 21.7c-1.95 0-3.86-.524-5.524-1.516l-.396-.236-4.523 1.103 1.18-4.337-.258-.41A9.62 9.62 0 0 1 6.31 15c0-5.347 4.36-9.7 9.694-9.7 5.335 0 9.694 4.353 9.694 9.7 0 5.347-4.36 9.7-9.694 9.7zm5.32-7.27c-.29-.146-1.717-.847-1.983-.943-.266-.097-.46-.146-.654.146-.193.29-.75.943-.92 1.137-.17.193-.34.218-.63.073-.29-.146-1.224-.452-2.332-1.44-.862-.77-1.444-1.72-1.613-2.01-.17-.29-.018-.447.128-.592.13-.13.29-.34.435-.51.145-.17.193-.29.29-.484.097-.193.048-.363-.024-.51-.073-.145-.654-1.578-.897-2.16-.236-.567-.477-.49-.654-.5-.17-.008-.363-.01-.557-.01-.193 0-.508.073-.774.363-.266.29-1.016.993-1.016 2.422 0 1.43 1.04 2.81 1.185 3.003.145.193 2.05 3.13 4.967 4.39.694.3 1.236.48 1.658.614.696.222 1.33.19 1.83.115.558-.083 1.717-.702 1.96-1.38.242-.677.242-1.257.17-1.38-.073-.122-.266-.193-.557-.34z"/></svg>
+    <span>Escríbenos por WhatsApp</span>
+  </a>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/SVR-transparent.png" alt="SVR">
+      <span class="nav-divider"></span>
+      <span class="nav-sub">Venezuela</span>
+    </a>
+    <a href="index.html" class="nav-back">← Volver al inicio</a>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-image">
+      <!-- Placeholder — agrega tu foto aquí como background-image -->
+    </div>
+    <div class="hero-text">
+      <span class="hero-label">SVR · Compromisos</span>
+      <h1 class="hero-title">Cuidar la piel mientras reducimos nuestro impacto en el planeta</h1>
+      <p class="hero-intro">
+        En SVR, somos conscientes de que como fabricantes tenemos una responsabilidad importante hacia nuestros consumidores y el planeta: continuar nuestra actividad limitando al máximo nuestro impacto. <strong>Innovar para la salud humana, pero también innovar para preservar el planeta y sus recursos</strong>, es el eje central de SVR. Por eso, los compromisos de sostenibilidad están en el centro de nuestras decisiones estratégicas y operativas.
+      </p>
+      <div class="hero-summary">
+        <h3>En esta página</h3>
+        <ul class="summary-list">
+          <li><a href="#diseno">Un diseño más responsable</a></li>
+          <li><a href="#eco">¿Qué significan concretamente los productos eco-diseñados?</a></li>
+          <li><a href="#impacto">Reducir nuestro impacto ambiental: un compromiso diario y colectivo</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── BLOQUE NARANJA: DISEÑO RESPONSABLE ── -->
+  <div class="block-orange" id="diseno">
+    <div class="block-orange-inner">
+      <h2>Un diseño más responsable</h2>
+      <p class="intro">Los equipos SVR están capacitados para diseñar productos eficientes, seguros y respetuosos. Nuestros compromisos:</p>
+      <div class="commitments-list">
+        <div class="commitment-item">
+          <span class="ci-title">En cuanto al abastecimiento</span>
+          <span class="ci-body">Con la elección de materias primas e ingredientes responsables, materiales reciclables y reciclados, reducción del peso de los envases. También durante la formulación, <strong>reduciendo al máximo el número de ingredientes</strong> y considerando el consumo energético en los procesos de fabricación.</span>
+        </div>
+        <div class="commitment-item">
+          <span class="ci-title">Para la selección de packaging</span>
+          <span class="ci-body">Utilizamos la herramienta SPICE para evaluar el impacto ambiental de nuestros envases, desarrollada para la industria cosmética y supervisada por Quantis, firma experta en Análisis de Ciclo de Vida.</span>
+        </div>
+        <div class="commitment-item">
+          <span class="ci-title">Gracias a la plataforma Ecovadis</span>
+          <span class="ci-body">Hemos desarrollado una <strong>estrategia de compra responsable</strong> para nuestras materias primas y embalajes.</span>
+        </div>
+        <div class="commitment-item">
+          <span class="ci-title">Una carta de formulación estricta</span>
+          <span class="ci-body">Elaborada con dermatólogos, alergólogos y toxicólogos. Cada material utilizado en la composición de un producto es analizado para validar su seguridad a la concentración utilizada. Nuestro compromiso de más de 5 años con los disruptores endocrinos nos permite crear fórmulas garantizadas sin efectos nocivos sobre los principales mecanismos endocrinos. Miles de materiales observados, cientos en lista negra, unos pocos elegidos.</span>
+        </div>
+        <div class="commitment-item">
+          <span class="ci-title">Un consejo de expertos científicos</span>
+          <span class="ci-body">Dermatólogos y alergólogos nos apoyan en la creación de nuevos productos, la realización de pruebas y estudios clínicos. Un equipo especializado en disruptores endocrinos nos ayuda a definir nuestras cartas de formulación y a validar nuestros protocolos de prueba. Trabajar con asociaciones de pacientes (Asociación Francesa de Eczema, Asociación Francesa de Psoriasis, Belle et Bien) nos permite gestionar mejor las patologías cutáneas.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SPLIT: ECO-DISEÑO ── -->
+  <div id="eco">
+    <div class="split-section">
+      <div class="split-text">
+        <h2 class="split-h2">¿Qué significan concretamente los productos eco-diseñados?</h2>
+        <p class="split-lead">Una reducción en plástico mediante:</p>
+        <ul class="eco-list">
+          <li class="eco-item">
+            <span class="eco-item-title">🧴 Envases recargables y eco-recargas</span>
+            <span class="eco-item-body">Topialyse, con reducción del 71% de plástico en comparación con una botella de 1L, y su variación en la mayoría de nuestros tratamientos diarios de higiene (agua micelar, geles de limpieza espumosos).</span>
+          </li>
+          <li class="eco-item">
+            <span class="eco-item-title">🪣 La botella de Aceite de Limpieza</span>
+            <span class="eco-item-body">100% PET reciclado recolectado de los océanos por Waste Free Oceans.</span>
+          </li>
+          <li class="eco-item">
+            <span class="eco-item-title">🧴 El tubo con cápsula eco-fusión</span>
+            <span class="eco-item-body">Extra plano, -51% de plástico respecto a un tubo de formato similar, probado en la crema Topialyse y desplegado en gran parte de nuestros tubos desde 2023/2024.</span>
+          </li>
+          <li class="eco-item">
+            <span class="eco-item-title">♻️ La integración del 25% de PET reciclado</span>
+            <span class="eco-item-body">En todas nuestras botellas. También la reducción del plástico en la falda de nuestros tubos y la introducción de PET reciclado.</span>
+          </li>
+          <li class="eco-item">
+            <span class="eco-item-title">📦 Estuches FSC y su formato ajustado</span>
+            <span class="eco-item-body">Para reducir el cartón, la eliminación de instrucciones de uso y cajas en los grandes formatos.</span>
+          </li>
+          <li class="eco-item">
+            <span class="eco-item-title">🚰 Fuentes a granel</span>
+            <span class="eco-item-body">Topialyse, Gel de Limpieza y Aceite de Limpieza disponibles en 27 puntos de venta en Francia.</span>
+          </li>
+          <li class="eco-item">
+            <span class="eco-item-title">☀️ La gama Sun Secure</span>
+            <span class="eco-item-body">Probada como biodegradable y no tóxica para el medio ambiente. Todos los productos SVR de enjuague también están probados como biodegradables.</span>
+          </li>
+          <li class="eco-item">
+            <span class="eco-item-title">💧 La gama Hydraliane completamente rediseñada</span>
+            <span class="eco-item-body">Con envases de plástico reducido, utilizables hasta la última gota, 100% reciclables y con fórmula 100% natural e ingredientes de origen eco-sostenible.</span>
+          </li>
+        </ul>
+        <div class="eco-goal">🎯 ¡Lograr el 100% de productos eco-diseñados para 2025 es nuestro objetivo!</div>
+        <p>Nuestras comunicaciones y materiales promocionales también han sido revisados: displays PDV optimizados y producidos enteramente en cartón para mejorar la reciclabilidad. En términos de herramientas digitales, nos unimos al Green IT Club en 2022.</p>
+      </div>
+      <div class="split-image">
+        <video autoplay loop muted playsinline preload="auto" src="assets/svr-ampoule.mp4"></video>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── IMPACTO AMBIENTAL ── -->
+  <div class="impact-section" id="impacto">
+    <div class="impact-inner">
+
+      <h2 class="impact-h2">Reducir nuestro impacto ambiental: un compromiso diario y colectivo</h2>
+
+      <p class="impact-intro">
+        Trabajar cada día para reducir nuestro impacto no puede ser improvisado. Más allá de una convicción, también se necesita formación y saber rodearse de los socios adecuados: para integrar prácticas más responsables en cada profesión, cada empleado es apoyado en un recorrido de RSE que busca reducir nuestros impactos negativos y desarrollar los positivos.
+      </p>
+
+      <div class="impact-items">
+        <div class="impact-item">
+          <span class="ii-title">Sensibilización</span>
+          <span class="ii-body">Gracias al despliegue de la herramienta Fresque du Climat al 100% de los empleados en 2023 (eran el 42% a finales de 2022), apoyándonos en una red de facilitadores y empleados especialmente formados.</span>
+        </div>
+        <div class="impact-item">
+          <span class="ii-title">Formación empresarial</span>
+          <span class="ii-body">Eco-diseño para los equipos de I+D en packaging, compra responsable para los equipos de compras de grupo, comunicación responsable para todos los creadores de contenido, comunicación de declaraciones de productos ambientales para los equipos de marketing y asuntos regulatorios, estrategia digital responsable para el equipo de IT. El objetivo de estas iniciativas: facilitar la emergencia de acciones impactantes en todas nuestras actividades.</span>
+        </div>
+      </div>
+
+      <div class="year-blocks">
+        <div class="year-block">
+          <h4>En 2022</h4>
+          <p>Realizamos la auditoría energética de nuestro sitio de I+D y producción e implementamos un plan de acción para reducir el consumo de energía.</p>
+        </div>
+        <div class="year-block">
+          <h4>En 2023</h4>
+          <p>Realizamos un inventario voluntario de Gases de Efecto Invernadero en el 100% de las actividades de SVR, incluidas las filiales internacionales. Hemos integrado los "3 alcances", el método más completo para medir nuestra contribución al calentamiento global, así como todos los gases de efecto invernadero, no solo el CO₂. También hemos integrado la fase de uso de nuestros productos con nuestros clientes. Estamos trabajando en talleres multi-negocio para impulsar nuestro enfoque y definir una trayectoria de reducción compatible con el Acuerdo de París.</p>
+        </div>
+      </div>
+
+      <p class="impact-closing">
+        Cada detalle cuenta. Aún queda camino por recorrer, pero avanzamos paso a paso, con total sinceridad y transparencia. El próximo paso: embárcate con nosotros en nuestra aventura, con la promoción de un consumo más responsable y más información para ayudarte a elegir.
+      </p>
+
+    </div>
+  </div>
+
+  <!-- ── RELATED ── -->
+  <div class="related">
+    <div class="related-inner">
+      <span class="related-label">Conoce más sobre SVR</span>
+      <div class="related-grid">
+        <a href="manifiesto.html" class="related-card">
+          <span class="related-card-label">Empresa</span>
+          <h3 class="related-card-title">Nuestro Manifiesto</h3>
+          <p class="related-card-desc">La convicción de Simone y Robert Véret: la dermatología te hace sentir a gusto en tu propia piel.</p>
+          <span class="related-card-cta">Leer más →</span>
+        </a>
+        <a href="https://us.svr.com/pages/endocrine-disruptors" target="_blank" rel="noopener" class="related-card">
+          <span class="related-card-label">Formulación</span>
+          <h3 class="related-card-title">Disruptores Endocrinos</h3>
+          <p class="related-card-desc">Nuestro compromiso con la eliminación de disruptores endocrinos en todas nuestras fórmulas.</p>
+          <span class="related-card-cta">Leer más →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <img src="assets/SVR-transparent.png" alt="SVR">
+    <span class="footer-copy">© 2026 Laboratoires SVR. Distribuido en Venezuela por canal farmacéutico oficial.</span>
+    <a href="index.html" class="footer-back">← Volver al inicio</a>
+  </footer>
+
+</body>
+</html>

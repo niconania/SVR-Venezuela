@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="El manifiesto de SVR Venezuela — Ciencia dermatológica al servicio de la piel sensible desde 1962.">
+  <title>Nuestro Manifiesto — SVR Venezuela</title>
+  <link rel="icon" type="image/png" href="assets/SVR.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Nuestro Manifiesto — SVR Venezuela">
+  <meta property="og:description" content="Expertos en cuidado dermatológico para toda la familia desde 1962. La convicción de Simone y Robert Véret al servicio de tu piel.">
+  <meta property="og:image" content="assets/BaumeProtect_6a.jpg">
+  <meta property="og:locale" content="es_VE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Nuestro Manifiesto — SVR Venezuela">
+  <meta name="twitter:description" content="Expertos en cuidado dermatológico para toda la familia desde 1962.">
+  <meta name="twitter:image" content="assets/BaumeProtect_6a.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: #1a1a1a;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    :root {
+      --coral: #FB637E;
+      --dark:  #1a1a1a;
+      --gray:  #5a5a5a;
+      --cream: #f8f6f3;
+      --border: rgba(0,0,0,0.08);
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-logo img { height: 32px; width: auto; }
+    .nav-logo-divider { width: 1px; height: 20px; background: var(--border); }
+    .nav-logo-sub {
+      font-size: 0.52rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #9ea2a2;
+    }
+    .nav-back {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #9ea2a2;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--coral); }
+
+    /* ── HERO ── */
+    .hero {
+      height: 52vh;
+      min-height: 360px;
+      background: var(--cream);
+      display: flex;
+      align-items: flex-end;
+      padding: 0 0 64px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+    }
+    .hero-bg video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.05) 60%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 0 80px;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+    .hero-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      display: block;
+      margin-bottom: 12px;
+    }
+    .hero-title {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.05;
+    }
+
+    /* ── CONTENT ── */
+    .content-wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 96px 80px;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 96px;
+      align-items: start;
+    }
+    .content-sidebar {
+      position: sticky;
+      top: 96px;
+    }
+    .sidebar-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--coral);
+      display: block;
+      margin-bottom: 16px;
+    }
+    .sidebar-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.15;
+      margin-bottom: 28px;
+    }
+    .sidebar-divider {
+      width: 36px;
+      height: 3px;
+      background: var(--coral);
+      border-radius: 2px;
+      margin-bottom: 28px;
+    }
+    .sidebar-nav {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      list-style: none;
+    }
+    .sidebar-nav a {
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: #9ea2a2;
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+    .sidebar-nav a:hover { color: var(--coral); }
+
+    .content-body {
+      display: flex;
+      flex-direction: column;
+      gap: 36px;
+    }
+    .manifesto-lead {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.7;
+      padding-bottom: 36px;
+      border-bottom: 1px solid var(--border);
+    }
+    .content-body p {
+      font-size: 0.98rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.9;
+    }
+    .content-body strong {
+      color: var(--dark);
+      font-weight: 600;
+    }
+    .manifesto-highlight {
+      background: var(--cream);
+      border-left: 3px solid var(--coral);
+      padding: 28px 32px;
+      border-radius: 0 4px 4px 0;
+    }
+    .manifesto-highlight p {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.65;
+      font-style: normal;
+    }
+    .manifesto-sign {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--coral);
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RELATED CARDS ── */
+    .related {
+      background: var(--cream);
+      padding: 80px 0;
+      margin-top: 80px;
+      border-top: 1px solid var(--border);
+    }
+    .related-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 80px;
+    }
+    .related-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--coral);
+      display: block;
+      margin-bottom: 32px;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+    .related-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      transition: border-color 0.25s, box-shadow 0.25s;
+      text-decoration: none;
+    }
+    .related-card:hover {
+      border-color: rgba(251,99,126,0.3);
+      box-shadow: 0 4px 20px rgba(251,99,126,0.08);
+    }
+    .related-card-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--coral);
+    }
+    .related-card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.25;
+    }
+    .related-card-desc {
+      font-size: 0.82rem;
+      color: #9ea2a2;
+      line-height: 1.65;
+    }
+    .related-card-cta {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--coral);
+      margin-top: 8px;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      padding: 40px 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    footer img { height: 26px; filter: brightness(0) invert(1); }
+    .footer-copy {
+      font-size: 0.68rem;
+      color: rgba(255,255,255,0.25);
+    }
+    .footer-back {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--coral);
+      text-decoration: none;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .footer-back:hover { opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 14px 24px; }
+      .hero-content { padding: 0 24px; }
+      .content-wrap { grid-template-columns: 1fr; gap: 40px; padding: 64px 24px; }
+      .content-sidebar { position: static; }
+      .related-inner { padding: 0 24px; }
+      .related-grid { grid-template-columns: 1fr; }
+      footer { padding: 36px 24px; }
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px;
+      border-radius: 999px;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, padding 0.3s ease, gap 0.3s ease;
+    }
+    .whatsapp-float svg { width: 26px; height: 26px; flex-shrink: 0; display: block; }
+    .whatsapp-float span {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-width 0.35s ease, opacity 0.25s ease;
+    }
+    .whatsapp-float:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(37,211,102,0.5);
+      padding: 15px 20px;
+      gap: 10px;
+    }
+    .whatsapp-float:hover span {
+      max-width: 220px;
+      opacity: 1;
+    }
+    @media (max-width: 640px) {
+      .whatsapp-float { bottom: 18px; right: 18px; }
+      .whatsapp-float span { display: none; }
+      .whatsapp-float:hover { padding: 15px; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ WHATSAPP FLOAT ══ -->
+  <a href="https://wa.me/584242565586?text=%C2%A1Hola!%20Me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20productos%20SVR." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.65 4.6 1.885 6.566L4 29l7.62-1.857A11.93 11.93 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm0 21.7c-1.95 0-3.86-.524-5.524-1.516l-.396-.236-4.523 1.103 1.18-4.337-.258-.41A9.62 9.62 0 0 1 6.31 15c0-5.347 4.36-9.7 9.694-9.7 5.335 0 9.694 4.353 9.694 9.7 0 5.347-4.36 9.7-9.694 9.7zm5.32-7.27c-.29-.146-1.717-.847-1.983-.943-.266-.097-.46-.146-.654.146-.193.29-.75.943-.92 1.137-.17.193-.34.218-.63.073-.29-.146-1.224-.452-2.332-1.44-.862-.77-1.444-1.72-1.613-2.01-.17-.29-.018-.447.128-.592.13-.13.29-.34.435-.51.145-.17.193-.29.29-.484.097-.193.048-.363-.024-.51-.073-.145-.654-1.578-.897-2.16-.236-.567-.477-.49-.654-.5-.17-.008-.363-.01-.557-.01-.193 0-.508.073-.774.363-.266.29-1.016.993-1.016 2.422 0 1.43 1.04 2.81 1.185 3.003.145.193 2.05 3.13 4.967 4.39.694.3 1.236.48 1.658.614.696.222 1.33.19 1.83.115.558-.083 1.717-.702 1.96-1.38.242-.677.242-1.257.17-1.38-.073-.122-.266-.193-.557-.34z"/></svg>
+    <span>Escríbenos por WhatsApp</span>
+  </a>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/SVR-transparent.png" alt="SVR">
+      <span class="nav-logo-divider"></span>
+      <span class="nav-logo-sub">Venezuela</span>
+    </a>
+    <a href="index.html" class="nav-back">← Volver al inicio</a>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-bg">
+      <video autoplay loop muted playsinline preload="auto">
+        <source src="assets/portade.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-label">SVR Laboratoire Dermatologique · 1962</span>
+      <h1 class="hero-title">Nuestro<br>Manifiesto</h1>
+    </div>
+  </div>
+
+  <!-- ── CONTENT ── -->
+  <div class="content-wrap">
+
+    <aside class="content-sidebar">
+      <span class="sidebar-label">SVR Venezuela</span>
+      <h2 class="sidebar-title">La convicción detrás de cada fórmula</h2>
+      <div class="sidebar-divider"></div>
+      <ul class="sidebar-nav">
+        <li><a href="#origen">Nuestro origen</a></li>
+        <li><a href="#conviccion">La convicción</a></li>
+        <li><a href="#promesa">Nuestra promesa</a></li>
+      </ul>
+    </aside>
+
+    <div class="content-body">
+
+      <p class="manifesto-lead" id="origen">
+        Cuando tenemos la piel sensible o debilitada, lo sentimos profundamente. Influye en nuestras emociones y en nuestro bienestar cada día.
+      </p>
+
+      <p id="conviccion">
+        Cuando sufrimos, podemos sentir vergüenza o incomodidad.<br>
+        Cuando estamos mejor, nos sentimos más seguros, más radiantes, más atractivos.
+      </p>
+
+      <div class="manifesto-highlight">
+        <p>Porque los tratamientos SVR son un concentrado de ingredientes activos y fórmulas innovadoras que aportan confianza y bienestar en altas dosis.</p>
+      </div>
+
+      <p id="promesa">
+        <strong>Creados por Simone y Robert Véret</strong> bajo la convicción de que la dermatología te hace sentir mejor contigo mismo, SVR te acompaña cada día para que te sientas a gusto en tu propia piel.
+      </p>
+
+      <p>
+        Más de 60 años después, esa misma filosofía guía cada producto que llega a Venezuela: fórmulas de alta concentración, toleradas incluso por las pieles más reactivas, respaldadas por dermatólogos en más de 72 países.
+      </p>
+
+      <p class="manifesto-sign">— El equipo SVR</p>
+
+    </div>
+  </div>
+
+  <!-- ── RELATED ── -->
+  <div class="related">
+    <div class="related-inner">
+      <span class="related-label">Conoce más sobre SVR</span>
+      <div class="related-grid">
+        <a href="https://us.svr.com/pages/engagements" target="_blank" rel="noopener" class="related-card">
+          <span class="related-card-label">Empresa</span>
+          <h3 class="related-card-title">Nuestros Compromisos</h3>
+          <p class="related-card-desc">SVR siempre ha estado comprometido con tu piel y con el planeta. Descubre nuestros valores y compromisos.</p>
+          <span class="related-card-cta">Leer más →</span>
+        </a>
+        <a href="https://us.svr.com/pages/endocrine-disruptors" target="_blank" rel="noopener" class="related-card">
+          <span class="related-card-label">Formulación</span>
+          <h3 class="related-card-title">Disruptores Endocrinos</h3>
+          <p class="related-card-desc">Conoce nuestro compromiso con la eliminación de disruptores endocrinos en todas nuestras fórmulas.</p>
+          <span class="related-card-cta">Leer más →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <img src="assets/SVR-transparent.png" alt="SVR">
+    <span class="footer-copy">© 2026 Laboratoires SVR. Distribuido en Venezuela por canal farmacéutico oficial.</span>
+    <a href="index.html" class="footer-back">← Volver al inicio</a>
+  </footer>
+
+</body>
+</html>

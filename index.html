@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SVR Laboratoire Dermatologique — Ciencia francesa para pieles sensibles. Más de 60 años de innovación. Disponible en Venezuela.">
+  <title>SVR Venezuela — Laboratoire Dermatologique</title>
+  <link rel="icon" type="image/png" href="assets/SVR.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="SVR Venezuela — Laboratoire Dermatologique">
+  <meta property="og:description" content="Más de 60 años de ciencia dermatológica francesa. Fórmulas de alta concentración para las pieles más sensibles. Disponible en Venezuela.">
+  <meta property="og:image" content="assets/BaumeProtect_6a.jpg">
+  <meta property="og:locale" content="es_VE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="SVR Venezuela — Laboratoire Dermatologique">
+  <meta name="twitter:description" content="Más de 60 años de ciencia dermatológica francesa para pieles sensibles.">
+  <meta name="twitter:image" content="assets/BaumeProtect_6a.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    /* ─── RESET ─── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: #1a1a1a;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── VARIABLES ─── */
+    :root {
+      --coral:        #FB637E;
+      --coral-dark:   #e04d67;
+      --coral-light:  rgba(251,99,126,0.08);
+      --coral-border: rgba(251,99,126,0.2);
+      --white:        #ffffff;
+      --cream:        #f8f6f3;
+      --dark:         #1a1a1a;
+      --gray:         #5a5a5a;
+      --light-gray:   #9ea2a2;
+      --border:       rgba(0,0,0,0.08);
+      --max-w:        1200px;
+
+      /* Line colors */
+      --lc-sebiaclear: #92d050;
+      --lc-topialyse:  #fd91a8;
+      --lc-cicavit:    #ff0000;
+      --lc-sunsecure:  #ff7c23;
+      --lc-sensifine:  #ff0066;
+      --lc-clairial:   #bfbfbf;
+      --lc-antiage:    #7f7f7f;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1, h2, h3, h4, h5 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      line-height: 1.15;
+    }
+    .label {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--light-gray);
+    }
+    .label-coral {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--coral);
+    }
+
+    /* ─── LAYOUT ─── */
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 48px; }
+    section { padding: 112px 0; }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: var(--cream); }
+    ::-webkit-scrollbar-thumb { background: var(--coral); border-radius: 2px; }
+
+    /* ══════════════════════════════
+       NAVIGATION
+    ══════════════════════════════ */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, box-shadow 0.4s, padding 0.3s;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 var(--border);
+      padding: 14px 48px;
+    }
+    .nav-logo {
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-logo img {
+      height: 34px;
+      width: auto;
+      filter: brightness(0) invert(1);
+      transition: filter 0.3s;
+    }
+    nav.scrolled .nav-logo img { filter: none; }
+    .nav-logo-divider {
+      width: 1px; height: 22px;
+      background: rgba(255,255,255,0.3);
+      transition: background 0.3s;
+    }
+    nav.scrolled .nav-logo-divider { background: var(--border); }
+    .nav-logo-sub {
+      font-size: 0.52rem;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      transition: color 0.3s;
+    }
+    nav.scrolled .nav-logo-sub { color: var(--light-gray); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      transition: color 0.25s;
+    }
+    nav.scrolled .nav-links a { color: var(--gray); }
+    nav.scrolled .nav-links a:hover { color: var(--coral); }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--coral);
+      padding: 10px 22px;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .nav-cta:hover { background: var(--coral-dark); transform: translateY(-1px); }
+
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 620px;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 130px;
+    }
+    .hero-video {
+      position: absolute;
+      inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.62) 0%,
+        rgba(0,0,0,0.1) 55%,
+        rgba(0,0,0,0.0) 100%
+      );
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 0 24px;
+      max-width: 780px;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      width: 24px; height: 1px;
+      background: var(--coral);
+    }
+    .hero-tagline {
+      font-size: clamp(0.9rem, 2vw, 1.15rem);
+      font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.7;
+      margin-bottom: 36px;
+    }
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--coral);
+      padding: 14px 34px;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
+    }
+    .btn-primary:hover {
+      background: var(--coral-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(251,99,126,0.35);
+    }
+    .btn-ghost {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255,255,255,0.3);
+      padding-bottom: 2px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+    .btn-ghost:hover { color: #fff; border-color: var(--coral); }
+
+    /* ══════════════════════════════
+       STATS BAR
+    ══════════════════════════════ */
+    .stats-bar { background: #ff7c23; }
+    .stats-bar .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .stat-item {
+      padding: 34px 24px;
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,0.2);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .stat-label {
+      font-size: 0.6rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.78);
+    }
+
+    /* ══════════════════════════════
+       HERITAGE
+    ══════════════════════════════ */
+    #herencia { background: var(--white); }
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 88px;
+      align-items: center;
+    }
+    .heritage-year-card {
+      background: var(--coral);
+      padding: 60px 44px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .heritage-year-card::before {
+      content: '1962';
+      position: absolute;
+      bottom: -0.12em; right: -0.04em;
+      font-size: 10rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .heritage-year-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      display: block;
+      margin-bottom: 16px;
+    }
+    .heritage-year-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .heritage-year-desc {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.75;
+    }
+    .heritage-text .label-coral { display: block; margin-bottom: 14px; }
+    .heritage-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--dark);
+      margin-bottom: 22px;
+    }
+    .heritage-text p {
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 1.85;
+      margin-bottom: 14px;
+    }
+    .heritage-text strong { color: var(--dark); font-weight: 600; }
+    .heritage-divider { width: 36px; height: 3px; background: var(--coral); margin: 24px 0; border-radius: 2px; }
+    .heritage-quote {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.55;
+      padding-left: 18px;
+      border-left: 3px solid var(--coral);
+      font-style: normal;
+    }
+
+    /* ══════════════════════════════
+       PHILOSOPHY
+    ══════════════════════════════ */
+    #filosofia { background: var(--cream); }
+    .philosophy-header {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 64px;
+    }
+    .philosophy-header .label-coral { display: block; margin-bottom: 14px; }
+    .philosophy-header h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+    .philosophy-header p { font-size: 0.92rem; color: var(--gray); line-height: 1.8; }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .pillar {
+      background: var(--white);
+      padding: 48px 36px;
+      border-radius: 4px;
+      transition: box-shadow 0.3s;
+    }
+    .pillar:hover { box-shadow: 0 8px 32px rgba(251,99,126,0.1); }
+    .pillar-emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+    .pillar-num {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--coral);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .pillar h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+    .pillar p { font-size: 0.86rem; font-weight: 400; color: var(--gray); line-height: 1.85; }
+
+    /* ══════════════════════════════
+       PRODUCTS — 7 LINES
+    ══════════════════════════════ */
+    #productos { background: var(--white); }
+    .products-header {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 72px;
+    }
+    .products-header .label-coral { display: block; margin-bottom: 14px; }
+    .products-header h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+    .products-header p { font-size: 0.92rem; color: var(--gray); line-height: 1.8; margin-bottom: 20px; }
+    .farmatodo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      padding: 7px 18px;
+      border-radius: 100px;
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #16a34a;
+    }
+    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #22c55e; flex-shrink: 0; }
+
+    /* Line block */
+    .line-block {
+      margin-bottom: 64px;
+    }
+    .line-block:last-child { margin-bottom: 0; }
+    .line-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 20px 24px;
+      border-radius: 6px 6px 0 0;
+      margin-bottom: 2px;
+      background: var(--lc);
+    }
+    .line-emoji { font-size: 1.5rem; line-height: 1; }
+    .line-header-text { flex: 1; }
+    .line-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--btn-text, #fff);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .line-desc {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--btn-text, #fff);
+      opacity: 0.75;
+      line-height: 1.4;
+    }
+    .line-products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2px;
+    }
+    .product-card {
+      background: var(--cream);
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      transition: background 0.25s, transform 0.25s;
+      border-radius: 0;
+    }
+    .product-card:last-child { border-radius: 0 0 6px 0; }
+    .product-card:hover { background: #f0ede8; transform: translateY(-2px); }
+    .product-size {
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--lc);
+    }
+    .product-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.25;
+    }
+    .product-desc {
+      font-size: 0.78rem;
+      font-weight: 400;
+      color: var(--gray);
+      line-height: 1.7;
+      flex-grow: 1;
+    }
+    .product-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--btn-text, #fff);
+      background: var(--lc);
+      padding: 9px 16px;
+      text-decoration: none;
+      border-radius: 3px;
+      align-self: flex-start;
+      transition: opacity 0.2s, transform 0.2s;
+    }
+    .product-btn:hover { opacity: 0.82; transform: translateY(-1px); }
+    .product-btn-pdv {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gray);
+      background: transparent;
+      padding: 9px 16px;
+      text-decoration: none;
+      border-radius: 3px;
+      border: 1.5px solid var(--border);
+      align-self: flex-start;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .product-btn-pdv:hover { border-color: var(--lc); color: var(--lc); }
+
+    /* Per-line btn text color overrides */
+    .line-sebiaclear  { --lc: var(--lc-sebiaclear); --btn-text: #ffffff; }
+    .line-topialyse   { --lc: var(--lc-topialyse);  --btn-text: #ffffff; }
+    .line-cicavit     { --lc: var(--lc-cicavit);     --btn-text: #ffffff; }
+    .line-sunsecure   { --lc: var(--lc-sunsecure);   --btn-text: #ffffff; }
+    .line-sensifine   { --lc: var(--lc-sensifine);   --btn-text: #ffffff; }
+    .line-clairial    { --lc: var(--lc-clairial);    --btn-text: #ffffff; }
+    .line-antiage     { --lc: var(--lc-antiage);     --btn-text: #ffffff; }
+
+    /* ══════════════════════════════
+       PUNTOS DE VENTA
+    ══════════════════════════════ */
+    #puntos { background: var(--cream); }
+    .puntos-header {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 56px;
+    }
+    .puntos-header .label-coral { display: block; margin-bottom: 14px; }
+    .puntos-header h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+    .puntos-header p { font-size: 0.92rem; color: var(--gray); line-height: 1.8; }
+
+    /* Acordeones */
+    .estados-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .estado-item {
+      background: var(--white);
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .estado-trigger {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 28px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-align: left;
+      gap: 16px;
+      transition: background 0.2s;
+    }
+    .estado-trigger:hover { background: var(--cream); }
+    .estado-trigger-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .estado-emoji { font-size: 1.4rem; line-height: 1; }
+    .estado-nombre {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+    .estado-count {
+      font-size: 0.62rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--light-gray);
+      margin-left: 4px;
+    }
+    .estado-arrow {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      transition: transform 0.35s ease, border-color 0.2s;
+      font-size: 0.7rem;
+      color: var(--light-gray);
+    }
+    .estado-item.open .estado-arrow {
+      transform: rotate(180deg);
+      border-color: var(--coral);
+      color: var(--coral);
+    }
+    .estado-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.45s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .estado-item.open .estado-body { max-height: 2400px; }
+    .clinicas-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      padding: 4px 24px 28px;
+    }
+    .clinica-card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--cream);
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: box-shadow 0.25s, transform 0.25s;
+    }
+    .clinica-card:hover {
+      box-shadow: 0 6px 24px rgba(251,99,126,0.1);
+      transform: translateY(-2px);
+    }
+    .clinica-photo {
+      aspect-ratio: 4 / 3;
+      background: linear-gradient(135deg, #f0ede8 0%, #e4dfd8 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      position: relative;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .clinica-photo-icon {
+      font-size: 2rem;
+      opacity: 0.4;
+    }
+    .clinica-photo-label {
+      font-size: 0.55rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--light-gray);
+    }
+    .clinica-photo img,
+    .clinica-photo video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .clinica-info {
+      padding: 0 14px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .clinica-nombre {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--dark);
+      line-height: 1.3;
+    }
+    .clinica-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      align-self: flex-start;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--coral);
+      padding: 8px 14px;
+      border-radius: 3px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .clinica-btn:hover { background: var(--coral-dark); transform: translateY(-1px); }
+    .puntos-note {
+      text-align: center;
+      margin-top: 32px;
+      font-size: 0.78rem;
+      color: var(--light-gray);
+      line-height: 1.7;
+    }
+    .puntos-note strong { color: var(--gray); font-weight: 600; }
+    @media (max-width: 960px) {
+      .clinicas-grid { grid-template-columns: repeat(2, 1fr); padding: 4px 16px 24px; }
+      .estados-list { gap: 6px; }
+    }
+    @media (max-width: 640px) {
+      .estado-trigger { padding: 14px 16px; }
+      .estado-nombre { font-size: 0.9rem; }
+      .clinicas-grid { grid-template-columns: 1fr 1fr; gap: 8px; padding: 4px 12px 16px; }
+      .clinica-info { padding: 0 10px 10px; }
+      .clinica-nombre { font-size: 0.78rem; }
+      .clinica-btn { font-size: 0.55rem; padding: 7px 10px; }
+      .puntos-header { margin-bottom: 28px; }
+    }
+    @media (max-width: 400px) {
+      .clinicas-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ══════════════════════════════
+       EDITORIAL CARDS
+    ══════════════════════════════ */
+    .editorial-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      height: 560px;
+    }
+    .editorial-card {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+    }
+    .editorial-card-link {
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+    }
+    .editorial-card-bg {
+      position: absolute;
+      inset: 0;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .editorial-card:hover .editorial-card-bg {
+      transform: scale(1.04);
+    }
+    .editorial-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to top,
+        rgba(0,0,0,0.72) 0%,
+        rgba(0,0,0,0.18) 50%,
+        rgba(0,0,0,0.0) 100%
+      );
+      z-index: 1;
+    }
+    .editorial-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 2;
+      padding: 36px 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .editorial-card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #ffffff;
+      line-height: 1.2;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .editorial-card-desc {
+      font-size: 0.82rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.6;
+      max-width: 280px;
+    }
+    .editorial-card-content { position: relative; z-index: 4; }
+    .editorial-card-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 6px;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #ffffff;
+      text-decoration: none;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255,255,255,0.35);
+      padding: 9px 18px;
+      border-radius: 3px;
+      align-self: flex-start;
+      transition: background 0.25s, border-color 0.25s;
+    }
+    .editorial-card-btn:hover {
+      background: rgba(255,255,255,0.28);
+      border-color: rgba(255,255,255,0.65);
+    }
+    .editorial-card + .editorial-card {
+      border-left: 1px solid rgba(255,255,255,0.1);
+    }
+
+    @media (max-width: 960px) {
+      .editorial-grid { grid-template-columns: 1fr; height: auto; }
+      .editorial-card { height: 380px; }
+      .editorial-card + .editorial-card { border-left: none; border-top: 1px solid rgba(255,255,255,0.1); }
+      .manifesto-inner { grid-template-columns: 1fr; gap: 32px; }
+      .manifesto-header h2 { position: static; }
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+    footer {
+      background: var(--dark);
+      padding: 60px 0 36px;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 180px 1fr 1fr;
+      gap: 56px;
+      padding-bottom: 44px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      margin-bottom: 32px;
+    }
+    .footer-brand img {
+      height: 30px;
+      width: auto;
+      margin-bottom: 14px;
+      filter: brightness(0) invert(1);
+    }
+    .footer-brand p {
+      font-size: 0.76rem;
+      color: rgba(255,255,255,0.3);
+      line-height: 1.7;
+    }
+    .footer-col h4 {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col a {
+      font-size: 0.84rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col a:hover { color: var(--coral); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .footer-copy {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.22);
+      line-height: 1.7;
+    }
+    .footer-tagline {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--coral);
+      opacity: 0.55;
+    }
+
+    /* ══════════════════════════════
+       REVEAL ANIMATIONS
+    ══════════════════════════════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s cubic-bezier(0.25,0.46,0.45,0.94),
+                  transform 0.65s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .reveal-left  { opacity: 0; transform: translateX(-28px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .reveal-right { opacity: 0; transform: translateX(28px);  transition: opacity 0.7s ease, transform 0.7s ease; }
+    .revealed { opacity: 1 !important; transform: none !important; }
+    .d1 { transition-delay: 0.06s; }
+    .d2 { transition-delay: 0.12s; }
+    .d3 { transition-delay: 0.18s; }
+    .d4 { transition-delay: 0.24s; }
+    .d5 { transition-delay: 0.30s; }
+    .d6 { transition-delay: 0.36s; }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 960px) {
+      .container { padding: 0 28px; }
+      section { padding: 64px 0; }
+      nav { padding: 16px 28px; }
+      nav.scrolled { padding: 12px 28px; }
+      .nav-links { display: none; }
+      .heritage-grid { grid-template-columns: 1fr; gap: 32px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
+      .footer-inner { grid-template-columns: 1fr 1fr; gap: 28px; }
+      .state-row { grid-template-columns: 1fr auto; }
+      .state-row .state-handle { display: none; }
+      .pillar { padding: 32px 24px; }
+      .heritage-year-card { padding: 40px 28px; }
+      .heritage-text h2 { margin-bottom: 16px; }
+      .products-header { margin-bottom: 48px; }
+      .line-block { margin-bottom: 40px; }
+      .puntos-header { margin-bottom: 36px; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 18px; }
+      section { padding: 48px 0; }
+      .line-products-grid { grid-template-columns: 1fr; }
+      .footer-inner { grid-template-columns: 1fr; gap: 24px; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+      .state-row { grid-template-columns: 1fr auto; gap: 12px; padding: 14px 18px; }
+      .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
+      .stat-item { padding: 22px 16px; }
+      .stat-number { font-size: 1.8rem; }
+      .products-header { margin-bottom: 32px; }
+      .line-block { margin-bottom: 28px; }
+      .pillar { padding: 26px 20px; }
+      footer { padding: 44px 0 28px; }
+
+      /* Hero: proporción 16:9, texto encima del video */
+      .hero {
+        height: auto;
+        min-height: unset;
+        aspect-ratio: 16 / 9;
+        padding-top: 0;
+        align-items: center;
+        justify-content: center;
+      }
+      .hero-video {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: fill;
+      }
+      .hero-overlay {
+        display: block;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 100%);
+      }
+      .hero-content { padding: 0 20px; }
+      .hero-eyebrow { display: none; }
+      .hero-tagline { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; transition: none; }
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px;
+      border-radius: 999px;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, padding 0.3s ease, gap 0.3s ease;
+    }
+    .whatsapp-float svg { width: 26px; height: 26px; flex-shrink: 0; display: block; }
+    .whatsapp-float span {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-width 0.35s ease, opacity 0.25s ease;
+    }
+    .whatsapp-float:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(37,211,102,0.5);
+      padding: 15px 20px;
+      gap: 10px;
+    }
+    .whatsapp-float:hover span {
+      max-width: 220px;
+      opacity: 1;
+    }
+    @media (max-width: 640px) {
+      .whatsapp-float { bottom: 18px; right: 18px; }
+      .whatsapp-float span { display: none; }
+      .whatsapp-float:hover { padding: 15px; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ WHATSAPP FLOAT ══ -->
+  <a href="https://wa.me/584242565586?text=%C2%A1Hola!%20Me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20productos%20SVR." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.65 4.6 1.885 6.566L4 29l7.62-1.857A11.93 11.93 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm0 21.7c-1.95 0-3.86-.524-5.524-1.516l-.396-.236-4.523 1.103 1.18-4.337-.258-.41A9.62 9.62 0 0 1 6.31 15c0-5.347 4.36-9.7 9.694-9.7 5.335 0 9.694 4.353 9.694 9.7 0 5.347-4.36 9.7-9.694 9.7zm5.32-7.27c-.29-.146-1.717-.847-1.983-.943-.266-.097-.46-.146-.654.146-.193.29-.75.943-.92 1.137-.17.193-.34.218-.63.073-.29-.146-1.224-.452-2.332-1.44-.862-.77-1.444-1.72-1.613-2.01-.17-.29-.018-.447.128-.592.13-.13.29-.34.435-.51.145-.17.193-.29.29-.484.097-.193.048-.363-.024-.51-.073-.145-.654-1.578-.897-2.16-.236-.567-.477-.49-.654-.5-.17-.008-.363-.01-.557-.01-.193 0-.508.073-.774.363-.266.29-1.016.993-1.016 2.422 0 1.43 1.04 2.81 1.185 3.003.145.193 2.05 3.13 4.967 4.39.694.3 1.236.48 1.658.614.696.222 1.33.19 1.83.115.558-.083 1.717-.702 1.96-1.38.242-.677.242-1.257.17-1.38-.073-.122-.266-.193-.557-.34z"/></svg>
+    <span>Escríbenos por WhatsApp</span>
+  </a>
+
+  <!-- ══ NAV ══ -->
+  <nav id="mainNav">
+    <a href="#" class="nav-logo">
+      <img src="assets/SVR-transparent.png" alt="SVR Laboratoire Dermatologique">
+      <span class="nav-logo-divider"></span>
+      <span class="nav-logo-sub">Venezuela</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#herencia">Historia</a></li>
+      <li><a href="#filosofia">Ciencia</a></li>
+      <li><a href="#productos">Líneas</a></li>
+      <li><a href="#puntos">Dónde comprar</a></li>
+    </ul>
+    <a href="#puntos" class="nav-cta">Dónde comprar →</a>
+  </nav>
+
+  <!-- ══ HERO ══ -->
+  <section class="hero">
+    <video class="hero-video" id="heroVideo"
+           src="assets/svr-story-60ans.mp4"
+           autoplay loop muted playsinline preload="auto"></video>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Laboratoire Dermatologique · Paris · 1962</div>
+      <p class="hero-tagline">
+        Más de 60 años de ciencia dermatológica francesa.<br>
+        Fórmulas de alta concentración para las pieles más sensibles.
+      </p>
+      <div class="hero-actions">
+        <a href="#productos" class="btn-primary">Ver todas las líneas</a>
+        <a href="#herencia" class="btn-ghost">Nuestra historia</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STATS BAR ══ -->
+  <div class="stats-bar">
+    <div class="container">
+      <div class="stat-item reveal d1">
+        <span class="stat-number" data-count="1962" data-year="true">1962</span>
+        <span class="stat-label">Fundación · París</span>
+      </div>
+      <div class="stat-item reveal d2">
+        <span class="stat-number" data-count="72" data-prefix="+">+72</span>
+        <span class="stat-label">Países</span>
+      </div>
+      <div class="stat-item reveal d3">
+        <span class="stat-number" data-count="60" data-prefix="+">+60</span>
+        <span class="stat-label">Años de innovación</span>
+      </div>
+      <div class="stat-item reveal d4">
+        <span class="stat-number">N°1</span>
+        <span class="stat-label">Lab. familiar francés</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ HERITAGE ══ -->
+  <section id="herencia">
+    <div class="container">
+      <div class="heritage-grid">
+        <div class="reveal-left">
+          <div class="heritage-year-card">
+            <span class="heritage-year-label">El comienzo</span>
+            <h3 class="heritage-year-title">Una farmacéutica<br>y su laboratorio<br>en Ault</h3>
+            <p class="heritage-year-desc">
+              En 1962, Simone y Robert Véret fundaron SVR desde la trastienda de una farmacia en el norte de Francia. Sus iniciales, su legado.
+            </p>
+          </div>
+        </div>
+        <div class="heritage-text reveal-right">
+          <span class="label-coral">Herencia Farmacéutica</span>
+          <h2>Desde 1962, ciencia al servicio de la piel</h2>
+          <p>
+            Todo comenzó con <strong>Simone Véret</strong>, farmacéutica francesa que formulaba
+            soluciones para pieles frágiles. Los productos de entonces no estaban pensados para las
+            pieles más sensibles. Ella cambió eso.
+          </p>
+          <p>
+            Más de seis décadas después, esa misma convicción guía cada fórmula SVR:
+            <strong>concentraciones excepcionalmente altas de principios activos</strong>,
+            tolerancia comprobada y resultados rápidos y visibles.
+          </p>
+          <div class="heritage-divider"></div>
+          <blockquote class="heritage-quote" style="border-left-color:#ff7c23;font-size:1.5rem;font-weight:800;color:#ff7c23;letter-spacing:-0.01em;">
+            #AGustoEnMiPiel
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PHILOSOPHY ══ -->
+  <section id="filosofia">
+    <div class="container">
+      <div class="philosophy-header reveal">
+        <span class="label-coral">Nuestra Ciencia</span>
+        <h2>Formulados para pieles sensibles</h2>
+        <p>Millones de personas conviven con piel sensible sin encontrar productos que realmente las entiendan. SVR nació para resolver eso.</p>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar reveal d1">
+          <span class="pillar-emoji">🔬</span>
+          <span class="pillar-num">01</span>
+          <h3>El problema: piel reactiva sin solución real</h3>
+          <p>La piel sensible necesita activos potentes pero tolera poco. SVR desarrolla fórmulas con las concentraciones más altas del mercado, probadas para no irritar incluso las pieles más reactivas.</p>
+        </div>
+        <div class="pillar reveal d2">
+          <span class="pillar-emoji">🩺</span>
+          <span class="pillar-num">02</span>
+          <h3>La solución: diseñada para pieles sensibles</h3>
+          <p>Cada fórmula se desarrolla pensando primero en la piel sensible: atópica, reactiva, post-procedimiento o simplemente intolerante. Si funciona en la piel más sensible, funciona en cualquiera.</p>
+        </div>
+        <div class="pillar reveal d3">
+          <span class="pillar-emoji">🧬</span>
+          <span class="pillar-num">03</span>
+          <h3>El respaldo: prescripción dermatológica</h3>
+          <p>No es cosmética. Es dermocosmética clínica avalada por dermatólogos en más de 72 países. Cuando la piel lo necesita de verdad, SVR es la respuesta que recetan los especialistas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PRODUCTS — 7 LINES ══ -->
+  <section id="productos">
+    <div class="container">
+
+      <div class="products-header reveal">
+        <span class="label-coral">Líneas Disponibles</span>
+        <h2>SVR ya está en Venezuela</h2>
+        <p>Siete líneas de dermocosmética clínica francesa disponibles en puntos de venta seleccionados.</p>
+        <div class="farmatodo-badge">
+          <div class="badge-dot"></div>
+          Disponible en puntos de venta seleccionados
+        </div>
+      </div>
+
+      <!-- 1 — SEBIACLEAR -->
+      <div class="line-block line-sebiaclear reveal">
+        <div class="line-header">
+          <span class="line-emoji">🫧</span>
+          <div class="line-header-text">
+            <div class="line-name">Sebiaclear</div>
+            <div class="line-desc">Control de imperfecciones y acné · Piel grasa y mixta</div>
+          </div>
+        </div>
+        <div class="line-products-grid">
+          <div class="product-card">
+            <span class="product-size">40 ML</span>
+            <h3 class="product-name">Active Gel</h3>
+            <p class="product-desc">Gel concentrado antiimperfecciones. Acción visible desde los primeros días de uso.</p>
+            <a href="https://www.farmatodo.com.ve/producto/116457598-corrector-facial-svr-active-gel-sebiaclear-40ml" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">200 ML</span>
+            <h3 class="product-name">Gel Moussant</h3>
+            <p class="product-desc">Limpiador espumoso con ácido salicílico para piel con imperfecciones.</p>
+            <a href="https://www.farmatodo.com.ve/producto/116437651-limpiador-facial-svr-sebiaclear-gel-moussant-200ml" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">400 ML</span>
+            <h3 class="product-name">Gel Moussant</h3>
+            <p class="product-desc">Formato familiar del limpiador espumoso antiimperfecciones con ácido salicílico.</p>
+            <a href="https://www.farmatodo.com.ve/producto/116438611-limpiador-facial-svr-sebiaclear-gel-moussant-400ml" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">30 ML</span>
+            <h3 class="product-name">Ampoule AZ</h3>
+            <p class="product-desc">Sérum concentrado antiimperfecciones de acción rápida con zinc y niacinamida.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">30 ML</span>
+            <h3 class="product-name">Sérum</h3>
+            <p class="product-desc">Sérum antiedad-acné de nueva generación. Trata imperfecciones y previene el envejecimiento cutáneo.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2 — TOPIALYSE -->
+      <div class="line-block line-topialyse reveal">
+        <div class="line-header">
+          <span class="line-emoji">🩷</span>
+          <div class="line-header-text">
+            <div class="line-name">Topialyse</div>
+            <div class="line-desc">Piel atópica, seca y muy seca · Para toda la familia desde el nacimiento</div>
+          </div>
+        </div>
+        <div class="line-products-grid">
+          <div class="product-card">
+            <span class="product-size">400 ML</span>
+            <h3 class="product-name">Huile Lavante Refo</h3>
+            <p class="product-desc">Aceite-espuma multi-uso: ducha, champú, higiene íntima y desmaquillante. Un solo producto para toda la familia. 89% de origen natural.</p>
+            <a href="https://www.farmatodo.com.ve/producto/116437677-limpiador-facial-svr-topialyse-400ml" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">200 ML</span>
+            <h3 class="product-name">Baume Protect+</h3>
+            <p class="product-desc">Bálsamo reparador intensivo para piel atópica y muy seca. Calma y repara durante 48 h. 98% de origen natural.</p>
+            <a href="https://www.farmatodo.com.ve/producto/116438629-crema-facial-svr-topialyse-200ml" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 — CICAVIT+ -->
+      <div class="line-block line-cicavit reveal">
+        <div class="line-header">
+          <span class="line-emoji">❤️‍🩹</span>
+          <div class="line-header-text">
+            <div class="line-name">Cicavit+</div>
+            <div class="line-desc">Reparación · Irritaciones · Post-procedimiento · Desde el nacimiento</div>
+          </div>
+        </div>
+        <div class="line-products-grid">
+          <div class="product-card">
+            <span class="product-size">40 ML</span>
+            <h3 class="product-name">Crème HPPI</h3>
+            <p class="product-desc">Crema reparadora para irritaciones, quemaduras solares, depilación y post-procedimiento. Sin perfume. Apta durante el embarazo. 94% de origen natural.</p>
+            <a href="https://www.farmatodo.com.ve" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4 — SUN SECURE -->
+      <div class="line-block line-sunsecure reveal">
+        <div class="line-header">
+          <span class="line-emoji">☀️</span>
+          <div class="line-header-text">
+            <div class="line-name">Sun Secure</div>
+            <div class="line-desc">Fotoprotección dermatológica SPF 50+ · Alta tolerancia</div>
+          </div>
+        </div>
+        <div class="line-products-grid">
+          <div class="product-card">
+            <span class="product-size">50 ML</span>
+            <h3 class="product-name">Extreme SPF50+</h3>
+            <p class="product-desc">Fotoprotector invisible de textura desnuda. Protección UVA/UVB de alta tolerancia para piel sensible.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">50 ML</span>
+            <h3 class="product-name">Blur Sans Parfum SPF50+</h3>
+            <p class="product-desc">Primer + protección solar. Efecto blur matificante sin perfume. Piel grasa y mixta sensible.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">50 ML</span>
+            <h3 class="product-name">Blur Teinté Hale SPF50+</h3>
+            <p class="product-desc">Primer + protección solar con color beige natural. Unifica el tono y protege al mismo tiempo.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">40 ML</span>
+            <h3 class="product-name">Fluide Photo Age SPF50+</h3>
+            <p class="product-desc">Fotoprotector anti-fotoenvejecimiento. Previene manchas y pérdida de firmeza inducidas por el sol.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5 — SENSIFINE -->
+      <div class="line-block line-sensifine reveal">
+        <div class="line-header">
+          <span class="line-emoji">🌸</span>
+          <div class="line-header-text">
+            <div class="line-name">Sensifine</div>
+            <div class="line-desc">Pieles reactivas, intolerantes y con rosácea</div>
+          </div>
+        </div>
+        <div class="line-products-grid">
+          <div class="product-card">
+            <span class="product-size">30 ML</span>
+            <h3 class="product-name">Extreme</h3>
+            <p class="product-desc">Crema ultra-calmante para pieles extremadamente reactivas e intolerantes. Alivia el picor y el enrojecimiento de inmediato.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">400 ML</span>
+            <h3 class="product-name">AR Eau Micellaire</h3>
+            <p class="product-desc">Agua micelar sin aclarado para pieles reactivas y con tendencia a la rosácea. Limpia y calma en un solo gesto.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6 — CLAIRIAL -->
+      <div class="line-block line-clairial reveal">
+        <div class="line-header">
+          <span class="line-emoji">🩹</span>
+          <div class="line-header-text">
+            <div class="line-name">Clairial</div>
+            <div class="line-desc">Despigmentación · Manchas · Uniformización del tono</div>
+          </div>
+        </div>
+        <div class="line-products-grid">
+          <div class="product-card">
+            <span class="product-size">30 ML</span>
+            <h3 class="product-name">Ampoule</h3>
+            <p class="product-desc">Sérum concentrado despigmentante con vitamina C y ácido ferúlico. Corrige manchas y unifica el tono progresivamente.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">50 ML</span>
+            <h3 class="product-name">Night Peel</h3>
+            <p class="product-desc">Exfoliante nocturno despigmentante con AHA. Elimina manchas, afina la textura y reaparece un tono uniforme por la mañana.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 7 — ANTI AGE -->
+      <div class="line-block line-antiage reveal">
+        <div class="line-header">
+          <span class="line-emoji">💫</span>
+          <div class="line-header-text">
+            <div class="line-name">Anti Age</div>
+            <div class="line-desc">Antienvejecimiento · Vitamina C · Retinol · Colágeno · Ácido Hialurónico</div>
+          </div>
+        </div>
+        <div class="line-products-grid">
+          <div class="product-card">
+            <span class="product-size">30 ML</span>
+            <h3 class="product-name">Ampoule C</h3>
+            <p class="product-desc">Sérum de vitamina C pura al 23%. Antioxidante, luminosidad y firmeza en 4 semanas.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">30 ML</span>
+            <h3 class="product-name">Ampoule B3</h3>
+            <p class="product-desc">Sérum de niacinamida al 12%. Mejora la textura, reduce poros y unifica el tono de forma visible.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">30 ML</span>
+            <h3 class="product-name">Ampoule A</h3>
+            <p class="product-desc">Sérum de retinol puro. Antiedad de referencia para pieles maduras que buscan firmeza y renovación celular.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">15 ML</span>
+            <h3 class="product-name">[C] Eye Biotic</h3>
+            <p class="product-desc">Contorno de ojos con vitamina C y probióticos. Descongestiona, ilumina y reduce ojeras y bolsas.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">50 ML</span>
+            <h3 class="product-name">[C20] Rechargeable</h3>
+            <p class="product-desc">Crema recargable con vitamina C al 20%. Combate los primeros signos de envejecimiento con fórmula ecorecargable.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">50 ML</span>
+            <h3 class="product-name">[Collagen] Rechargeable</h3>
+            <p class="product-desc">Crema recargable con colágeno marino. Densifica, rellena y restaura el volumen perdido en pieles maduras.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+          <div class="product-card">
+            <span class="product-size">50 ML</span>
+            <h3 class="product-name">[Hyalu] Rechargeable</h3>
+            <p class="product-desc">Crema recargable con ácido hialurónico triple peso molecular. Hidratación profunda y efecto relleno de arrugas.</p>
+            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ PUNTOS DE VENTA POR ESTADOS ══ -->
+  <section id="puntos">
+    <div class="container">
+
+      <div class="puntos-header reveal">
+        <span class="label-coral">Dónde Comprar</span>
+        <h2>Puntos de venta por estado</h2>
+        <p>SVR está disponible en centros dermatológicos y clínicas seleccionadas. Selecciona tu estado para encontrar el más cercano.</p>
+      </div>
+
+      <div class="estados-list reveal">
+
+        <!-- ── CARACAS ── -->
+        <div class="estado-item">
+          <button class="estado-trigger" onclick="toggleEstado(this)">
+            <span class="estado-trigger-left">
+              <span class="estado-emoji">🏙️</span>
+              <span class="estado-nombre">Caracas <span class="estado-count">· 9 centros</span></span>
+            </span>
+            <span class="estado-arrow">▾</span>
+          </button>
+          <div class="estado-body">
+            <div class="clinicas-grid">
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-710clinique.jpg" alt="710 Clinique"></div>
+                <div class="clinica-info"><span class="clinica-nombre">710 Clinique</span><a href="https://api.whatsapp.com/send?phone=584122898240&text=" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><video src="assets/pdv-blua-caracas.mp4" autoplay loop muted playsinline></video></div>
+                <div class="clinica-info"><span class="clinica-nombre">Blua Clinic</span><a href="https://api.whatsapp.com/send/?phone=584125384070&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-cdermavanzado.jpg" alt="Centro Dermatológico Avanzado"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Centro Dermatológico Avanzado</span><a href="https://l.instagram.com/?u=https%3A%2F%2Fwa.link%2F2bldjn%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio%26fbclid%3DPAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn6iwo1_thmI12QOYFMSrJ64tqOT6dipbjJpfnIx4nk8LGhJFPtw8QuPZCepM_aem_1OXkTUIeqJVBtzg7xOvPiA&e=AUCJ8eBbJ46VbspMt1BH2EsuBR6PNmYJ2Si0x9L7wrp7R8u88_qC4MEuiZi5iwq1ZJjfGhpFePEuasriEKCdMCC0jho9DG-q9uZXbvZjGrUKlZHlAdmtLpBHWNLA7oP6Iqp_WBzl6-AS" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-cderbrazon.jpg" alt="Centro Dermatológico Brazón"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Centro Dermatológico Brazón</span><a href="https://wa.me/+584122010704" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-avilabeauty.jpg" alt="Ávila Beauty and Health Center"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Ávila Beauty and Health Center</span><a href="https://www.instagram.com/avilabeautyhealth/" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-eca.jpg" alt="ECA Clinique"></div>
+                <div class="clinica-info"><span class="clinica-nombre">ECA Clinique</span><a href="https://api.whatsapp.com/message/7NBBSZUVX2BVH1?autoload=1&app_absent=0&utm_source=ig" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-fotopiel.jpg" alt="Fotopiel"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Fotopiel</span><a href="https://linktr.ee/fotopiel?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGnlPlcUrIrGArIsP2tREvikoJ977DvUCvTPaLVr5LcsBlCHyalrfQ0ey3xeEE_aem_Z3HekWNl3P3zNfAEpL3j8A" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-proage.jpg" alt="Proage"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Proage</span><a href="https://api.whatsapp.com/send/?phone=584143026921&text&type=phone_number&app_absent=0&utm_source=ig" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-misticone.jpg" alt="Unidad Dermatológica Misticone"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Unidad Dermatológica Misticone</span><a href="https://api.whatsapp.com/send?phone=5804122240780" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── VALENCIA ── -->
+        <div class="estado-item">
+          <button class="estado-trigger" onclick="toggleEstado(this)">
+            <span class="estado-trigger-left">
+              <span class="estado-emoji">🏭</span>
+              <span class="estado-nombre">Valencia <span class="estado-count">· 4 centros</span></span>
+            </span>
+            <span class="estado-arrow">▾</span>
+          </button>
+          <div class="estado-body">
+            <div class="clinicas-grid">
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-farmadito.jpg" alt="Farmadito"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Farmadito</span><a href="https://api.whatsapp.com/send/?phone=584244747743&text&type=phone_number&app_absent=0&utm_source=ig" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-unidaddgb.jpg" alt="Unidad DGB"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Unidad DGB</span><a href="https://api.whatsapp.com/send?phone=584141429881&text=Hola%20Unidad%20DGB!" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-spaziovital.jpg" alt="Spazio Vital" style="object-position: top;"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Spazio Vital</span><a href="https://api.whatsapp.com/send?phone=584144128428&text=Me+interesa+agendar+cita&utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGntZHuo7G4m-H3Cwok9P1g5pr1GNOl_2H0Yk5Lp99p9RXOf68SlrV2trWU3As_aem_g3F7MUtKsn3EinxTgKh6jQ" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><video src="assets/pdv-maryjocolz.mp4" autoplay loop muted playsinline></video></div>
+                <div class="clinica-info"><span class="clinica-nombre">𝐃𝐫𝐚. 𝐌𝐚𝐫𝐢𝐣𝐨 𝐂𝐨𝐥𝐦𝐞𝐧𝐚𝐫𝐞𝐳</span><a href="https://api.whatsapp.com/send/?phone=584244633343&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── MARACAY ── -->
+        <div class="estado-item">
+          <button class="estado-trigger" onclick="toggleEstado(this)">
+            <span class="estado-trigger-left">
+              <span class="estado-emoji">🌿</span>
+              <span class="estado-nombre">Maracay <span class="estado-count">· 1 centro</span></span>
+            </span>
+            <span class="estado-arrow">▾</span>
+          </button>
+          <div class="estado-body">
+            <div class="clinicas-grid">
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-farmadito.jpg" alt="Farmadito"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Farmadito</span><a href="https://api.whatsapp.com/send/?phone=584243113763&text&type=phone_number&app_absent=0&utm_source=ig" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── BARQUISIMETO ── -->
+        <div class="estado-item">
+          <button class="estado-trigger" onclick="toggleEstado(this)">
+            <span class="estado-trigger-left">
+              <span class="estado-emoji">🌾</span>
+              <span class="estado-nombre">Barquisimeto <span class="estado-count">· 1 centro</span></span>
+            </span>
+            <span class="estado-arrow">▾</span>
+          </button>
+          <div class="estado-body">
+            <div class="clinicas-grid">
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-meca.jpg" alt="Clínica M.E.C.A"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Clínica M.E.C.A</span><a href="https://api.whatsapp.com/send?phone=584145362893&text=%C2%A1Hola%2C%20%F0%9D%90%82%F0%9D%90%8BI%CC%81%F0%9D%90%8D%F0%9D%90%88%F0%9D%90%82%F0%9D%90%80%20%F0%9D%90%8C%E2%80%A2%F0%9D%90%84%E2%80%A2%F0%9D%90%82%E2%80%A2%F0%9D%90%80!%20Quisiera%20obtener%20informaci%C3%B3n%20sobre...%20" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── MARGARITA ── -->
+        <div class="estado-item">
+          <button class="estado-trigger" onclick="toggleEstado(this)">
+            <span class="estado-trigger-left">
+              <span class="estado-emoji">🌊</span>
+              <span class="estado-nombre">Margarita <span class="estado-count">· 1 centro</span></span>
+            </span>
+            <span class="estado-arrow">▾</span>
+          </button>
+          <div class="estado-body">
+            <div class="clinicas-grid">
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-danielfernandez.jpg" alt="Dr. Daniel Fernandez"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Dr. Daniel Fernandez</span><a href="https://api.whatsapp.com/message/K7YZTB2T4IZRE1?autoload=1&app_absent=0&utm_source=ig" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── LECHERÍA ── -->
+        <div class="estado-item">
+          <button class="estado-trigger" onclick="toggleEstado(this)">
+            <span class="estado-trigger-left">
+              <span class="estado-emoji">⚓</span>
+              <span class="estado-nombre">Lechería <span class="estado-count">· 2 centros</span></span>
+            </span>
+            <span class="estado-arrow">▾</span>
+          </button>
+          <div class="estado-body">
+            <div class="clinicas-grid">
+              <div class="clinica-card">
+                <div class="clinica-photo"><video src="assets/pdv-blua-lecheria.mp4" autoplay loop muted playsinline></video></div>
+                <div class="clinica-info"><span class="clinica-nombre">Blua Clinic</span><a href="https://api.whatsapp.com/send/?phone=584125384070&text&type=phone_number&app_absent=0" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+              <div class="clinica-card">
+                <div class="clinica-photo"><img loading="lazy" src="assets/pdv-essenza.jpg" alt="Essenza Clínica Estética"></div>
+                <div class="clinica-info"><span class="clinica-nombre">Essenza Clínica Estética — Dra. Elizabeth Quintero</span><a href="https://essenzaclinica.com/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn7Hd5CieEqs9GGnmlirkTagv0c8qDgaeCpYsmWsNoRy--BZ8AzS7GSlyhvFY_aem_KFSJQpMOuf4X7Wabg-XDpw" target="_blank" rel="noopener" class="clinica-btn">Contáctalos →</a></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="puntos-note">
+        <strong>¿No encuentras tu ciudad?</strong> Escríbenos en
+        <a href="https://www.instagram.com/svr_venezuela" target="_blank" rel="noopener" style="color:var(--coral);text-decoration:none;">@svr_venezuela</a>
+        y te indicamos el distribuidor más cercano.
+      </p>
+
+    </div>
+  </section>
+
+  <!-- ══ EDITORIAL CARDS ══ -->
+  <section id="editorial" style="padding: 0; background: var(--white);">
+    <div class="editorial-grid">
+
+      <!-- Card 1: Manifiesto -->
+      <div class="editorial-card" id="card-manifiesto">
+        <a href="manifiesto.html" class="editorial-card-link" aria-label="Leer nuestro manifiesto"></a>
+        <div class="editorial-card-bg" style="background-image: url('assets/BaumeProtect_6a.jpg'); background-size: cover; background-position: center top;"></div>
+        <div class="editorial-card-overlay"></div>
+        <div class="editorial-card-content">
+          <h3 class="editorial-card-title">Nuestro Manifiesto</h3>
+          <p class="editorial-card-desc">Expertos en cuidado dermatológico para toda la familia y todo tipo de piel, incluso las más sensibles, desde 1962.</p>
+          <a href="manifiesto.html" class="editorial-card-btn">Leer más</a>
+        </div>
+      </div>
+
+      <!-- Card 2: Compromisos -->
+      <div class="editorial-card" id="card-compromisos">
+        <a href="compromisos.html" class="editorial-card-link" aria-label="Ver nuestros compromisos"></a>
+        <div class="editorial-card-bg" style="background-image: url('assets/ActiveGel_8a.jpg'); background-size: cover; background-position: center top;"></div>
+        <div class="editorial-card-overlay"></div>
+        <div class="editorial-card-content">
+          <h3 class="editorial-card-title">Nuestros Compromisos</h3>
+          <p class="editorial-card-desc">SVR siempre ha estado comprometido con tu piel y con el planeta. Descubre nuestros compromisos.</p>
+          <a href="compromisos.html" class="editorial-card-btn">Leer más</a>
+        </div>
+      </div>
+
+      <!-- Card 3: Disruptores Endocrinos -->
+      <div class="editorial-card" id="card-endocrinos">
+        <a href="disruptores.html" class="editorial-card-link" aria-label="Ver disruptores endocrinos"></a>
+        <div class="editorial-card-bg" style="background-image: url('assets/BaumeProtect_4.jpg'); background-size: cover; background-position: center top;"></div>
+        <div class="editorial-card-overlay"></div>
+        <div class="editorial-card-content">
+          <h3 class="editorial-card-title">Disruptores Endocrinos</h3>
+          <p class="editorial-card-desc">Conoce nuestro compromiso con la eliminación de disruptores endocrinos en todas nuestras fórmulas.</p>
+          <a href="disruptores.html" class="editorial-card-btn">Leer más</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="assets/SVR-transparent.png" alt="SVR">
+          <p>Laboratoire Dermatologique · Paris<br>Fundado en 1962 por Simone & Robert Véret.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Líneas</h4>
+          <ul>
+            <li><a href="#productos">🫧 Sebiaclear</a></li>
+            <li><a href="#productos">🩷 Topialyse</a></li>
+            <li><a href="#productos">❤️‍🩹 Cicavit+</a></li>
+            <li><a href="#productos">☀️ Sun Secure</a></li>
+            <li><a href="#productos">🌸 Sensifine</a></li>
+            <li><a href="#productos">🩹 Clairial</a></li>
+            <li><a href="#productos">💫 Anti Age</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Comprar</h4>
+          <ul>
+            <li><a href="#puntos">Puntos de venta</a></li>
+            <li><a href="https://www.instagram.com/svr_venezuela" target="_blank" rel="noopener">@svr_venezuela</a></li>
+            <li><a href="https://www.farmatodo.com.ve" target="_blank" rel="noopener">Farmatodo.com.ve</a></li>
+            <li><a href="https://us.svr.com" target="_blank" rel="noopener">SVR Global</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">
+          © 2026 Laboratoires SVR. Distribuido en Venezuela por canal farmacéutico oficial.
+          Todos los derechos reservados.
+        </p>
+        <span class="footer-tagline">SVR — #AGustoEnMiPiel</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ── NAV SCROLL ── */
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    /* ── REVEAL OBSERVER ── */
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right')
+      .forEach(el => revealObserver.observe(el));
+
+    /* ── ACCORDION ESTADOS ── */
+    function toggleEstado(btn) {
+      const item = btn.closest('.estado-item');
+      const isOpen = item.classList.contains('open');
+      // Cierra todos
+      document.querySelectorAll('.estado-item.open').forEach(el => el.classList.remove('open'));
+      // Abre el clickeado si estaba cerrado
+      if (!isOpen) item.classList.add('open');
+    }
+
+    /* ── COUNTER ANIMATION ── */
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el     = entry.target;
+        const target = parseInt(el.dataset.count);
+        const prefix = el.dataset.prefix || '';
+        const isYear = !!el.dataset.year;
+        if (!target) return;
+        const from = isYear ? target - 8 : 0;
+        const dur  = 1300;
+        const t0   = performance.now();
+        function tick(now) {
+          const p = Math.min((now - t0) / dur, 1);
+          const e = 1 - Math.pow(1 - p, 3);
+          el.textContent = prefix + Math.floor(from + (target - from) * e);
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = prefix + target;
+        }
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('[data-count]')
+      .forEach(el => counterObserver.observe(el));
+  </script>
+</body>
+</html>

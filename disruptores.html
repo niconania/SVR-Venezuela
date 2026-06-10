@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SVR se compromete a abordar los disruptores endocrinos — qué son, cómo los identificamos y cómo actuamos.">
+  <title>Disruptores Endocrinos — SVR Venezuela</title>
+  <link rel="icon" type="image/png" href="assets/SVR.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Disruptores Endocrinos — SVR Venezuela">
+  <meta property="og:description" content="SVR se compromete a eliminar los disruptores endocrinos de todas sus fórmulas. Conoce qué son y cómo actúa SVR.">
+  <meta property="og:image" content="assets/ilustracion-disruptores.png">
+  <meta property="og:locale" content="es_VE">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Disruptores Endocrinos — SVR Venezuela">
+  <meta name="twitter:description" content="SVR se compromete a eliminar los disruptores endocrinos de todas sus fórmulas.">
+  <meta name="twitter:image" content="assets/ilustracion-disruptores.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #fff;
+      color: #1a1a1a;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    :root {
+      --coral:   #FB637E;
+      --orange:  #ff7c23;
+      --teal:    #5bc4c4;
+      --teal-bg: #e8f6f6;
+      --dark:    #1a1a1a;
+      --gray:    #5a5a5a;
+      --light:   #9ea2a2;
+      --cream:   #f8f6f3;
+      --border:  rgba(0,0,0,0.08);
+      --max-w:   1200px;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 16px 48px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .nav-logo img { height: 32px; width: auto; }
+    .nav-divider { width: 1px; height: 20px; background: var(--border); }
+    .nav-sub { font-size: 0.52rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: var(--light); }
+    .nav-back {
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--light); text-decoration: none; display: flex; align-items: center; gap: 8px; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--coral); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 480px;
+    }
+    .hero-illustration {
+      background: #b8d8e8;
+      display: flex; align-items: center; justify-content: center;
+      min-height: 480px; position: relative; overflow: hidden;
+    }
+    .placeholder-label {
+      font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em;
+      text-transform: uppercase; color: rgba(255,255,255,0.6);
+      text-align: center; padding: 20px;
+    }
+    .hero-text {
+      padding: 72px 64px;
+      display: flex; flex-direction: column; justify-content: center; gap: 24px;
+    }
+    .hero-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--light); }
+    .hero-title { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 800; color: var(--dark); line-height: 1.15; }
+    .hero-summary { border-top: 1px solid var(--border); padding-top: 24px; margin-top: 8px; }
+    .hero-summary h3 { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--dark); margin-bottom: 14px; }
+    .summary-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .summary-list li { display: flex; align-items: center; gap: 10px; font-size: 0.82rem; color: var(--gray); }
+    .summary-list li::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--coral); flex-shrink: 0; }
+    .summary-list a { color: var(--gray); text-decoration: none; border-bottom: 1px solid var(--border); transition: color 0.2s, border-color 0.2s; }
+    .summary-list a:hover { color: var(--coral); border-color: var(--coral); }
+
+    /* ── STAT BANNER (coral) ── */
+    .stat-banner {
+      background: var(--coral);
+      padding: 56px 48px;
+      text-align: center;
+      display: flex; flex-direction: column; gap: 24px;
+    }
+    .stat-banner-inner { max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+    .stat-big {
+      font-size: clamp(0.88rem, 1.8vw, 1.05rem); font-weight: 800;
+      color: #fff; text-transform: uppercase; letter-spacing: 0.05em; line-height: 1.5;
+    }
+    .stat-source { font-size: 0.72rem; color: rgba(255,255,255,0.6); font-style: italic; }
+    .stat-divider { width: 40px; height: 2px; background: rgba(255,255,255,0.35); margin: 0 auto; }
+    .stat-sub { font-size: 1rem; font-weight: 400; color: rgba(255,255,255,0.92); line-height: 1.65; }
+
+    /* ── SECTION SHARED ── */
+    .section { padding: 80px 0; }
+    .section-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 48px; }
+
+    /* ── SPLIT: entendiendo ── */
+    .split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; align-items: stretch;
+    }
+    .split-img {
+      min-height: 420px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .split-img.color-blue { background: #000; }
+    .split-img video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    @media (max-width: 960px) {
+      .split-img { aspect-ratio: 16 / 9; min-height: unset; }
+      .split-img video { object-fit: fill; }
+    }
+    .split-img.color-cream { background: linear-gradient(135deg, #f0ede8 0%, #e4dfd8 100%); }
+    .split-txt { padding: 64px 56px; display: flex; flex-direction: column; gap: 22px; }
+    .split-txt h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); font-weight: 800; color: var(--dark); line-height: 1.2; }
+    .split-txt p { font-size: 0.9rem; color: var(--gray); line-height: 1.85; }
+    .split-txt strong { color: var(--dark); font-weight: 600; }
+    .split-item { display: flex; gap: 14px; }
+    .split-item-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1.5; }
+    .split-item-body { font-size: 0.88rem; color: var(--gray); line-height: 1.8; }
+    .split-item-body strong { color: var(--dark); font-weight: 600; }
+
+    /* ── TEAL BLOCK: identificando ── */
+    .teal-block {
+      background: var(--teal);
+      padding: 72px 48px;
+    }
+    .teal-inner { max-width: var(--max-w); margin: 0 auto; display: flex; flex-direction: column; gap: 32px; }
+    .teal-block h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); font-weight: 800; color: #fff; line-height: 1.2; }
+    .teal-block p { font-size: 0.9rem; color: rgba(255,255,255,0.88); line-height: 1.85; }
+    .teal-block strong { color: #fff; font-weight: 700; }
+    .teal-actions { display: flex; flex-direction: column; gap: 14px; }
+    .teal-action { display: flex; align-items: flex-start; gap: 12px; font-size: 0.88rem; color: rgba(255,255,255,0.9); line-height: 1.7; }
+    .teal-action-icon { font-size: 1.1rem; flex-shrink: 0; line-height: 1.5; }
+    .teal-action strong { color: #fff; font-weight: 700; }
+
+    /* Bisphenoles image box */
+    .disruptores-image-box {
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 32px;
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .disruptores-image-box h3 {
+      font-size: 1.4rem; font-weight: 800;
+      color: rgba(255,255,255,0.5); text-transform: uppercase;
+      letter-spacing: 0.18em; text-align: center;
+    }
+    .disruptores-image-box img {
+      width: 100%; border-radius: 4px;
+      display: block;
+    }
+    .disruptores-image-box .source-note {
+      font-size: 0.72rem; font-style: italic;
+      color: rgba(255,255,255,0.5); text-align: center;
+    }
+
+    /* ── SVR TOMA ACCIÓN ── */
+    .action-split {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 0; align-items: center;
+    }
+    .action-txt { padding: 72px 56px 72px 48px; display: flex; flex-direction: column; gap: 24px; }
+    .action-txt h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); font-weight: 800; color: var(--dark); line-height: 1.2; }
+    .action-item { display: flex; gap: 14px; align-items: flex-start; }
+    .action-item-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1.5; }
+    .action-item-body { font-size: 0.88rem; color: var(--gray); line-height: 1.8; }
+    .action-item-body strong { color: var(--dark); font-weight: 600; }
+    .action-badge {
+      background: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      min-height: 420px; padding: 48px;
+    }
+    .badge-circle {
+      width: 280px; height: 280px; border-radius: 50%;
+      border: 3px solid var(--dark);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 32px; gap: 8px;
+    }
+    .badge-top { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dark); }
+    .badge-main { font-size: 1.5rem; font-weight: 800; text-transform: uppercase; color: var(--dark); line-height: 1.15; letter-spacing: 0.04em; }
+    .badge-sub { font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--dark); }
+
+    /* ── ORANGE BLOCK: expertos ── */
+    .orange-block { background: var(--orange); padding: 64px 48px; }
+    .orange-inner { max-width: var(--max-w); margin: 0 auto; display: flex; flex-direction: column; gap: 24px; }
+    .orange-block h2 { font-size: clamp(1.5rem, 2.8vw, 2rem); font-weight: 800; color: #fff; line-height: 1.2; }
+    .expert-item { display: flex; gap: 14px; align-items: flex-start; }
+    .expert-icon { font-size: 1.2rem; flex-shrink: 0; line-height: 1.5; }
+    .expert-body { font-size: 0.88rem; color: rgba(255,255,255,0.88); line-height: 1.8; }
+    .expert-body strong { color: #fff; font-weight: 700; }
+
+    /* ── PRIMEROS PASOS ── */
+    .steps-section { padding: 80px 0; background: #fff; }
+    .steps-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 48px; }
+    .steps-inner h2 {
+      font-size: clamp(1.5rem, 2.8vw, 2rem); font-weight: 800;
+      color: var(--dark); text-align: center; margin-bottom: 48px; line-height: 1.2;
+    }
+    .steps-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
+    }
+    .step-card { display: flex; flex-direction: column; gap: 14px; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-12px); }
+    }
+    .step-card-img {
+      aspect-ratio: 1 / 1;
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px; text-align: center;
+    }
+    .step-emoji {
+      font-size: 4rem;
+      line-height: 1;
+      animation: float 3.6s ease-in-out infinite;
+      display: block;
+    }
+    .step-card:nth-child(1) .step-emoji { animation-delay: 0s; }
+    .step-card:nth-child(2) .step-emoji { animation-delay: 0.5s; }
+    .step-card:nth-child(3) .step-emoji { animation-delay: 1.0s; }
+    .step-card:nth-child(4) .step-emoji { animation-delay: 1.5s; }
+    .step-card:nth-child(5) .step-emoji { animation-delay: 2.0s; }
+    .step-card:nth-child(6) .step-emoji { animation-delay: 2.5s; }
+    .step-card-img.c1 { background: #f9c0c8; }
+    .step-card-img.c2 { background: #f5aab6; }
+    .step-card-img.c3 { background: #fb8fa0; }
+    .step-card-img.c4 { background: #f9c0c8; }
+    .step-card-img.c5 { background: #f5aab6; }
+    .step-card-img.c6 { background: #fb8fa0; }
+    .step-card-label {
+      font-size: 0.62rem; font-weight: 800;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--dark);
+    }
+    .step-card-body { font-size: 0.82rem; color: var(--gray); line-height: 1.8; }
+    .step-card-body strong { color: var(--dark); font-weight: 600; }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      position: relative;
+      min-height: 280px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden;
+    }
+    .cta-banner-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #f9c0c8 0%, var(--coral) 100%);
+    }
+    .cta-banner-overlay {
+      position: absolute; inset: 0;
+      background: rgba(0,0,0,0.08);
+    }
+    .cta-banner-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 0 24px;
+    }
+    .cta-banner-small { font-size: 0.6rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(255,255,255,0.65); display: block; margin-bottom: 12px; }
+    .cta-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--dark); background: #fff;
+      padding: 16px 36px; text-decoration: none; border-radius: 3px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.15); }
+
+    /* ── RELATED ── */
+    .related { padding: 80px 0; border-top: 1px solid var(--border); }
+    .related-inner { max-width: var(--max-w); margin: 0 auto; padding: 0 48px; }
+    .related-label { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--coral); display: block; margin-bottom: 32px; }
+    .related-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .related-card { background: var(--cream); border: 1px solid var(--border); border-radius: 4px; padding: 36px 32px; display: flex; flex-direction: column; gap: 10px; transition: border-color 0.25s, box-shadow 0.25s; text-decoration: none; }
+    .related-card:hover { border-color: rgba(251,99,126,0.3); box-shadow: 0 4px 20px rgba(251,99,126,0.08); }
+    .related-card-label { font-size: 0.58rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--coral); }
+    .related-card-title { font-size: 1.05rem; font-weight: 700; color: var(--dark); }
+    .related-card-desc { font-size: 0.82rem; color: var(--light); line-height: 1.65; }
+    .related-card-cta { font-size: 0.6rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--coral); margin-top: 8px; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--dark); padding: 40px 48px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    footer img { height: 26px; filter: brightness(0) invert(1); }
+    .footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.25); }
+    .footer-back { font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--coral); text-decoration: none; opacity: 0.7; transition: opacity 0.2s; }
+    .footer-back:hover { opacity: 1; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 14px 24px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-illustration { min-height: 240px; }
+      .hero-text { padding: 40px 24px; }
+      .split { grid-template-columns: 1fr; }
+      .split-txt { padding: 40px 24px; }
+      .split-img { min-height: 240px; }
+      .action-split { grid-template-columns: 1fr; }
+      .action-txt { padding: 40px 24px; }
+      .action-badge { min-height: 220px; }
+      .badge-circle { width: 180px; height: 180px; }
+      .teal-block { padding: 44px 24px; }
+      .orange-block { padding: 44px 24px; }
+      .steps-section { padding: 52px 0; }
+      .steps-inner { padding: 0 24px; }
+      .steps-inner h2 { margin-bottom: 32px; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .related { padding: 52px 0; }
+      .related-inner { padding: 0 24px; }
+      .related-grid { grid-template-columns: 1fr; }
+      footer { padding: 32px 24px; }
+      .stat-banner { padding: 40px 24px; }
+      .section { padding: 52px 0; }
+    }
+    @media (max-width: 560px) {
+      .hero-text { padding: 32px 18px; }
+      .split-txt { padding: 32px 18px; }
+      .action-txt { padding: 32px 18px; }
+      .teal-block { padding: 36px 18px; }
+      .orange-block { padding: 36px 18px; }
+      .steps-inner { padding: 0 18px; }
+      .steps-grid { grid-template-columns: 1fr; gap: 12px; }
+      .related-inner { padding: 0 18px; }
+      footer { padding: 28px 18px; }
+      .stat-banner { padding: 32px 18px; }
+      .section { padding: 40px 0; }
+    }
+
+    /* ── WHATSAPP FLOAT ── */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 999;
+      display: inline-flex;
+      align-items: center;
+      gap: 0;
+      background: #25D366;
+      color: #fff;
+      text-decoration: none;
+      padding: 15px;
+      border-radius: 999px;
+      box-shadow: 0 6px 24px rgba(37,211,102,0.4);
+      transition: transform 0.25s ease, box-shadow 0.25s ease, padding 0.3s ease, gap 0.3s ease;
+    }
+    .whatsapp-float svg { width: 26px; height: 26px; flex-shrink: 0; display: block; }
+    .whatsapp-float span {
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      max-width: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-width 0.35s ease, opacity 0.25s ease;
+    }
+    .whatsapp-float:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(37,211,102,0.5);
+      padding: 15px 20px;
+      gap: 10px;
+    }
+    .whatsapp-float:hover span {
+      max-width: 220px;
+      opacity: 1;
+    }
+    @media (max-width: 640px) {
+      .whatsapp-float { bottom: 18px; right: 18px; }
+      .whatsapp-float span { display: none; }
+      .whatsapp-float:hover { padding: 15px; gap: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ WHATSAPP FLOAT ══ -->
+  <a href="https://wa.me/584242565586?text=%C2%A1Hola!%20Me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20productos%20SVR." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Escríbenos por WhatsApp">
+    <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.65 4.6 1.885 6.566L4 29l7.62-1.857A11.93 11.93 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm0 21.7c-1.95 0-3.86-.524-5.524-1.516l-.396-.236-4.523 1.103 1.18-4.337-.258-.41A9.62 9.62 0 0 1 6.31 15c0-5.347 4.36-9.7 9.694-9.7 5.335 0 9.694 4.353 9.694 9.7 0 5.347-4.36 9.7-9.694 9.7zm5.32-7.27c-.29-.146-1.717-.847-1.983-.943-.266-.097-.46-.146-.654.146-.193.29-.75.943-.92 1.137-.17.193-.34.218-.63.073-.29-.146-1.224-.452-2.332-1.44-.862-.77-1.444-1.72-1.613-2.01-.17-.29-.018-.447.128-.592.13-.13.29-.34.435-.51.145-.17.193-.29.29-.484.097-.193.048-.363-.024-.51-.073-.145-.654-1.578-.897-2.16-.236-.567-.477-.49-.654-.5-.17-.008-.363-.01-.557-.01-.193 0-.508.073-.774.363-.266.29-1.016.993-1.016 2.422 0 1.43 1.04 2.81 1.185 3.003.145.193 2.05 3.13 4.967 4.39.694.3 1.236.48 1.658.614.696.222 1.33.19 1.83.115.558-.083 1.717-.702 1.96-1.38.242-.677.242-1.257.17-1.38-.073-.122-.266-.193-.557-.34z"/></svg>
+    <span>Escríbenos por WhatsApp</span>
+  </a>
+
+  <!-- ── NAV ── -->
+  <nav>
+    <a href="index.html" class="nav-logo">
+      <img src="assets/SVR-transparent.png" alt="SVR">
+      <span class="nav-divider"></span>
+      <span class="nav-sub">Venezuela</span>
+    </a>
+    <a href="index.html" class="nav-back">← Volver al inicio</a>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-illustration" style="background: #b0d0e0; padding: 0; overflow: hidden;">
+      <img src="assets/ilustracion-disruptores.png" alt="Ilustración disruptores endocrinos" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+    </div>
+    <div class="hero-text">
+      <span class="hero-label">SVR · Ciencia & Compromiso</span>
+      <h1 class="hero-title">SVR se compromete a abordar los disruptores endocrinos</h1>
+      <div class="hero-summary">
+        <h3>En esta página</h3>
+        <ul class="summary-list">
+          <li><a href="#entendiendo">Entendiendo los disruptores endocrinos</a></li>
+          <li><a href="#identificando">Identificando los disruptores endocrinos</a></li>
+          <li><a href="#accion">SVR toma acción</a></li>
+          <li><a href="#expertos">Nuestros expertos</a></li>
+          <li><a href="#pasos">Primeros pasos para reducir tu exposición</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── STAT BANNER ── -->
+  <div class="stat-banner">
+    <div class="stat-banner-inner">
+      <p class="stat-big">
+        Más de 8 de cada 10 personas quieren estar mejor informadas<br>
+        y/o más involucradas cuando se trata de disruptores endocrinos,<br>
+        pero no siempre saben cómo actuar.
+      </p>
+      <span class="stat-source">* Fuente: Harris Interactive</span>
+      <div class="stat-divider"></div>
+      <p class="stat-sub">Juntos, conozcamos mejor los disruptores endocrinos y cómo reducir nuestra exposición.</p>
+    </div>
+  </div>
+
+  <!-- ── ENTENDIENDO ── -->
+  <div class="section" id="entendiendo">
+    <div class="split">
+      <div class="split-img color-blue">
+        <video autoplay loop muted playsinline preload="auto" src="assets/svr-topialyse.mp4"></video>
+      </div>
+      <div class="split-txt">
+        <h2>Entendiendo los disruptores endocrinos</h2>
+        <div class="split-item">
+          <span class="split-item-icon">🧫</span>
+          <p class="split-item-body">Los disruptores endocrinos son <strong>sustancias (o mezclas de sustancias) que interfieren con el correcto funcionamiento de nuestro sistema endocrino</strong> (que produce nuestras hormonas) y pueden tener <strong>efectos nocivos en nuestra salud</strong>. Los impactos de los disruptores endocrinos pueden incluso transmitirse a nuestros hijos, nietos y bisnietos...</p>
+        </div>
+        <div class="split-item">
+          <span class="split-item-icon">🔍</span>
+          <p class="split-item-body"><strong>Todos estamos expuestos a los disruptores endocrinos.</strong> Sin embargo, somos especialmente sensibles a sus efectos durante los períodos de cambios hormonales en nuestra vida. Estos se conocen como <strong>períodos vulnerables</strong>: durante los primeros 1.000 días de vida (desde el embarazo temprano hasta el tercer cumpleaños del bebé), durante toda la infancia y, en particular, durante la adolescencia.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TEAL BLOCK: IDENTIFICANDO ── -->
+  <div class="teal-block" id="identificando">
+    <div class="teal-inner">
+      <h2>Identificando los disruptores endocrinos</h2>
+      <p>🔬 <strong>Las sustancias que pueden alterar el sistema endocrino se encuentran en muchos artículos cotidianos:</strong> comidas preparadas industriales, productos de limpieza del hogar, utensilios de cocina, plásticos varios y a veces incluso en algunos cosméticos.</p>
+      <p>Comprometida con la seguridad y tolerancia de sus productos (ya desarrollados bajo estándares más estrictos que las regulaciones actuales), <strong>SVR toma acción:</strong></p>
+      <div class="teal-actions">
+        <div class="teal-action">
+          <span class="teal-action-icon">✅</span>
+          <span><strong>Desarrollando fórmulas limpias</strong>, libres de sustancias identificadas como disruptoras endocrinas que pudieran tener un efecto nocivo sobre el sistema endocrino.</span>
+        </div>
+        <div class="teal-action">
+          <span class="teal-action-icon">✅</span>
+          <span><strong>Yendo más allá con pruebas reconocidas</strong> en productos terminados en su envase final, para asegurar que no activen mecanismos endocrinos.</span>
+        </div>
+        <div class="teal-action">
+          <span class="teal-action-icon">♻️</span>
+          <span><strong>Eligiendo envases con contenido plástico reducido</strong>, fabricados con materiales reciclados y reciclables.</span>
+        </div>
+      </div>
+
+      <!-- IMAGE BOX: Lista de productos disruptores -->
+      <div class="disruptores-image-box">
+        <h3>Bisfenoles</h3>
+        <img src="assets/lista-productos-disruptores.jpg" alt="Lista de productos con posibles disruptores endocrinos — Bisfenoles">
+        <p class="source-note">(Fuente: Instituto Nacional del Cáncer de Francia)</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SVR TOMA ACCIÓN ── -->
+  <div id="accion">
+    <div class="action-split">
+      <div class="action-txt">
+        <h2>SVR toma acción</h2>
+        <div class="action-item">
+          <span class="action-item-icon">🧪</span>
+          <p class="action-item-body"><strong>Desde 2017, sometemos nuestros productos a pruebas sobre mecanismos endocrinos estrogénicos, androgénicos y tiroideos.</strong> Estas pruebas son realizadas por un laboratorio independiente especializado en disrupción endocrina.</p>
+        </div>
+        <div class="action-item">
+          <span class="action-item-icon">👍</span>
+          <p class="action-item-body"><strong>Nuestro objetivo es probar los productos SVR diseñados para nuestros usuarios más vulnerables, y reformular los que no superen estas pruebas.</strong></p>
+        </div>
+        <div class="action-item">
+          <span class="action-item-icon">🕯️</span>
+          <p class="action-item-body"><strong>La ciencia aún está evolucionando en la comprensión de los disruptores endocrinos.</strong> Nos esforzamos por avanzar en estos temas con humildad. Pero seguimos adelante — porque queremos proporcionarte <strong>información clara y honesta</strong>, junto con <strong>los productos más seguros posibles para todos</strong>.</p>
+        </div>
+      </div>
+      <div class="action-badge">
+        <!-- Badge "Tested Endocrine Disruptors" -->
+        <div class="badge-circle">
+          <span class="badge-top">Testado</span>
+          <span class="badge-main">Endocrine<br>Disruptors</span>
+          <span class="badge-sub">SVR Laboratoire</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ORANGE BLOCK: EXPERTOS ── -->
+  <div class="orange-block" id="expertos">
+    <div class="orange-inner">
+      <h2>Nuestros Expertos</h2>
+      <div class="expert-item">
+        <span class="expert-icon">👨‍🔬</span>
+        <p class="expert-body">Estamos comprometidos a ampliar continuamente nuestro conocimiento sobre los disruptores endocrinos. Para ello, <strong>trabajamos estrechamente con un grupo de expertos especializados en este campo</strong>.</p>
+      </div>
+      <div class="expert-item">
+        <span class="expert-icon">💬</span>
+        <p class="expert-body">Nuestro comité está compuesto por <strong>endocrinólogos, toxicólogos y especialistas de agencias reguladoras</strong>. Juntos, discutimos nuestros desafíos y avances, y nos proporcionan recomendaciones sobre procedimientos a seguir, nuevas pruebas a explorar y direcciones de investigación a perseguir.</p>
+      </div>
+      <div class="expert-item">
+        <span class="expert-icon">💡</span>
+        <p class="expert-body">Gracias a estos expertos, <strong>identificamos constantemente nuevas oportunidades</strong> para proporcionarte respuestas claras y avanzar en la seguridad de los productos SVR, en los que confías.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── PRIMEROS PASOS ── -->
+  <div class="steps-section" id="pasos">
+    <div class="steps-inner">
+      <h2>Primeros pasos para reducir tu exposición a los disruptores endocrinos</h2>
+      <div class="steps-grid">
+
+        <div class="step-card">
+          <div class="step-card-img c1">
+            <span class="step-emoji">🧴</span>
+          </div>
+          <span class="step-card-label">Cosméticos</span>
+          <p class="step-card-body">Elige los que hayan sido <strong>testados para disruptores endocrinos</strong>, con un número reducido de ingredientes y sin fragancias artificiales.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-card-img c2">
+            <span class="step-emoji">👕</span>
+          </div>
+          <span class="step-card-label">Textiles</span>
+          <p class="step-card-body">Elige <strong>fibras naturales</strong> como algodón, lino, lana, seda o de segunda mano cuando sea posible.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-card-img c3">
+            <span class="step-emoji">🧹</span>
+          </div>
+          <span class="step-card-label">Productos del Hogar</span>
+          <p class="step-card-body">Opta por <strong>opciones eco-friendly</strong>, usando jabón negro, vinagre blanco o bicarbonato de sodio.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-card-img c4">
+            <span class="step-emoji">🍳</span>
+          </div>
+          <span class="step-card-label">Utensilios</span>
+          <p class="step-card-body">Elige <strong>acero inoxidable, vidrio o utensilios de hierro fundido</strong>. No dejes tu botella de agua al sol; prefiere agua del grifo.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-card-img c5">
+            <span class="step-emoji">🌸</span>
+          </div>
+          <span class="step-card-label">Productos Menstruales</span>
+          <p class="step-card-body">Elige opciones <strong>sin plástico</strong> hechas de materiales naturales, sin fragancia. Usa <strong>compresas lavables o salvaslips</strong>, y cámbialos regularmente.</p>
+        </div>
+
+        <div class="step-card">
+          <div class="step-card-img c6">
+            <span class="step-emoji">🥦</span>
+          </div>
+          <span class="step-card-label">Alimentos</span>
+          <p class="step-card-body">Frutas y verduras: elige <strong>orgánicas</strong> y pélalas bien. Comidas precocinadas: transfiérelas a un <strong>envase no plástico</strong> antes de recalentar.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CTA BANNER ── -->
+  <div class="cta-banner">
+    <div class="cta-banner-bg">
+      <!-- Placeholder: foto de fondo (madre e hijo) -->
+    </div>
+    <div class="cta-banner-overlay"></div>
+    <div class="cta-banner-content">
+      <span class="cta-banner-small">SVR Venezuela</span>
+      <a href="index.html#productos" class="cta-btn">Descubrir todos los productos SVR →</a>
+    </div>
+  </div>
+
+  <!-- ── RELATED ── -->
+  <div class="related">
+    <div class="related-inner">
+      <span class="related-label">Conoce más sobre SVR</span>
+      <div class="related-grid">
+        <a href="manifiesto.html" class="related-card">
+          <span class="related-card-label">Empresa</span>
+          <h3 class="related-card-title">Nuestro Manifiesto</h3>
+          <p class="related-card-desc">La convicción de Simone y Robert Véret: la dermatología te hace sentir a gusto en tu propia piel.</p>
+          <span class="related-card-cta">Leer más →</span>
+        </a>
+        <a href="compromisos.html" class="related-card">
+          <span class="related-card-label">Sostenibilidad</span>
+          <h3 class="related-card-title">Nuestros Compromisos</h3>
+          <p class="related-card-desc">Cómo SVR cuida la piel mientras reduce su impacto en el planeta.</p>
+          <span class="related-card-cta">Leer más →</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <img src="assets/SVR-transparent.png" alt="SVR">
+    <span class="footer-copy">© 2026 Laboratoires SVR. Distribuido en Venezuela por canal farmacéutico oficial.</span>
+    <a href="index.html" class="footer-back">← Volver al inicio</a>
+  </footer>
+
+</body>
+</html>
