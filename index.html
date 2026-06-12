@@ -1153,7 +1153,7 @@
     .product-modal-media {
       position: relative;
       background: var(--cream);
-      min-height: 280px;
+      aspect-ratio: 1 / 1;
       overflow: hidden;
     }
     .product-modal-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
@@ -1228,6 +1228,7 @@
       flex-direction: column;
       gap: 14px;
       overflow-y: auto;
+      overscroll-behavior: contain;
     }
     .product-modal-size {
       font-size: 0.62rem;
@@ -1292,13 +1293,14 @@
     @media (max-width: 640px) {
       .product-modal { padding: 0; align-items: flex-end; }
       .product-modal-content {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
         max-height: 92vh;
         border-radius: 16px 16px 0 0;
         animation: pmSlideUp 0.3s ease;
       }
-      .product-modal-media { min-height: 220px; }
-      .product-modal-info { padding: 28px 24px; }
+      .product-modal-media { flex-shrink: 0; }
+      .product-modal-info { flex: 1; min-height: 0; padding: 28px 24px; }
       .product-modal-name { font-size: 1.4rem; }
     }
     @keyframes pmSlideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
@@ -2340,6 +2342,32 @@
       if (e.key === 'Escape') closeProductModal();
       if (e.key === 'ArrowLeft') pmNav(-1);
       if (e.key === 'ArrowRight') pmNav(1);
+    });
+
+    /* Evita que el swipe dentro del modal mueva la página de fondo
+       (o dispare el gesto de "volver atrás" del navegador en móvil) */
+    productModal.addEventListener('touchmove', (e) => {
+      if (e.target.closest('.product-modal-info')) return;
+      e.preventDefault();
+    }, { passive: false });
+
+    /* Swipe horizontal sobre la imagen/video para navegar el carrusel */
+    let pmTouchStartX = 0;
+    let pmTouchStartY = 0;
+    productModal.addEventListener('touchstart', (e) => {
+      const t = e.touches[0];
+      pmTouchStartX = t.clientX;
+      pmTouchStartY = t.clientY;
+    }, { passive: true });
+
+    productModal.addEventListener('touchend', (e) => {
+      if (!e.target.closest('#pmMedia') || pmMediaList.length < 2) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - pmTouchStartX;
+      const dy = t.clientY - pmTouchStartY;
+      if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+        pmNav(dx < 0 ? 1 : -1);
+      }
     });
 
     /* ── COUNTER ANIMATION ── */
