@@ -1049,6 +1049,259 @@
       .whatsapp-float span { display: none; }
       .whatsapp-float:hover { padding: 15px; gap: 0; }
     }
+
+    /* ── PRODUCT CARD (clickable) ── */
+    .product-card { position: relative; cursor: pointer; }
+    .product-card-hint {
+      display: inline-flex;
+      align-items: center;
+      align-self: flex-start;
+      gap: 4px;
+      margin-top: 8px;
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--lc);
+      opacity: 0.65;
+      transition: opacity 0.2s, gap 0.2s;
+    }
+    .product-card:hover .product-card-hint { opacity: 1; gap: 9px; }
+    .product-card-farmatodo {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #16a34a;
+      font-size: 0.52rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 9px;
+      border-radius: 100px;
+      text-decoration: none;
+      z-index: 2;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .product-card-farmatodo:hover { background: #dcfce7; transform: translateY(-1px); }
+    .product-card-farmatodo::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #22c55e;
+      flex-shrink: 0;
+    }
+
+    /* ── PRODUCT MODAL ── */
+    .product-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .product-modal.open { display: flex; }
+    .product-modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26,26,26,0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      animation: pmFade 0.25s ease;
+    }
+    .product-modal-content {
+      position: relative;
+      background: #fff;
+      border-radius: 12px;
+      max-width: 760px;
+      width: 100%;
+      max-height: 88vh;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      z-index: 1;
+      animation: pmUp 0.3s ease;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.25);
+    }
+    @keyframes pmFade { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes pmUp { from { opacity: 0; transform: translateY(24px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    .product-modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.92);
+      color: var(--dark);
+      font-size: 1.1rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .product-modal-close:hover { background: #fff; transform: scale(1.08); }
+    .product-modal-media {
+      position: relative;
+      background: var(--cream);
+      min-height: 280px;
+      overflow: hidden;
+    }
+    .product-modal-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .product-modal-media img, .product-modal-media video { animation: pmFade 0.35s ease; }
+    .product-modal-media img.pm-slide-next, .product-modal-media video.pm-slide-next { animation: pmSlideNext 0.35s ease; }
+    .product-modal-media img.pm-slide-prev, .product-modal-media video.pm-slide-prev { animation: pmSlidePrev 0.35s ease; }
+    @keyframes pmSlideNext { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: translateX(0); } }
+    @keyframes pmSlidePrev { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: translateX(0); } }
+    .product-modal-media.no-image {
+      background: var(--lc, var(--cream));
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+    }
+    .product-modal-media.no-image .pm-emoji { font-size: 4rem; }
+    .product-modal-media.no-image .pm-line {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.85);
+    }
+    .product-modal-media video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .pm-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255,255,255,0.85);
+      color: var(--dark);
+      font-size: 1.2rem;
+      line-height: 1;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .pm-arrow:hover { background: #fff; transform: translateY(-50%) scale(1.08); }
+    .pm-arrow-prev { left: 14px; }
+    .pm-arrow-next { right: 14px; }
+    .pm-dots {
+      position: absolute;
+      bottom: 14px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      z-index: 2;
+    }
+    .pm-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.55);
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .pm-dot.active { background: #fff; transform: scale(1.25); }
+    .product-modal-info {
+      padding: 40px 36px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow-y: auto;
+    }
+    .product-modal-size {
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--lc, var(--coral));
+    }
+    .product-modal-name {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--dark);
+      line-height: 1.15;
+    }
+    .product-modal-farmatodo {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #16a34a;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      align-self: flex-start;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .product-modal-farmatodo:hover { background: #dcfce7; transform: translateY(-1px); }
+    .product-modal-desc {
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 1.8;
+    }
+    .product-modal-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 8px;
+    }
+    .product-modal-actions .btn-primary { font-size: 0.66rem; }
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.66rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #fff;
+      background: #25D366;
+      padding: 14px 28px;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .btn-whatsapp:hover { background: #1ebe5a; transform: translateY(-2px); }
+    .btn-whatsapp svg { width: 15px; height: 15px; flex-shrink: 0; }
+    @media (max-width: 640px) {
+      .product-modal { padding: 0; align-items: flex-end; }
+      .product-modal-content {
+        grid-template-columns: 1fr;
+        max-height: 92vh;
+        border-radius: 16px 16px 0 0;
+        animation: pmSlideUp 0.3s ease;
+      }
+      .product-modal-media { min-height: 220px; }
+      .product-modal-info { padding: 28px 24px; }
+      .product-modal-name { font-size: 1.4rem; }
+    }
+    @keyframes pmSlideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
   </style>
 </head>
 <body>
@@ -1058,6 +1311,28 @@
     <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.65 4.6 1.885 6.566L4 29l7.62-1.857A11.93 11.93 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm0 21.7c-1.95 0-3.86-.524-5.524-1.516l-.396-.236-4.523 1.103 1.18-4.337-.258-.41A9.62 9.62 0 0 1 6.31 15c0-5.347 4.36-9.7 9.694-9.7 5.335 0 9.694 4.353 9.694 9.7 0 5.347-4.36 9.7-9.694 9.7zm5.32-7.27c-.29-.146-1.717-.847-1.983-.943-.266-.097-.46-.146-.654.146-.193.29-.75.943-.92 1.137-.17.193-.34.218-.63.073-.29-.146-1.224-.452-2.332-1.44-.862-.77-1.444-1.72-1.613-2.01-.17-.29-.018-.447.128-.592.13-.13.29-.34.435-.51.145-.17.193-.29.29-.484.097-.193.048-.363-.024-.51-.073-.145-.654-1.578-.897-2.16-.236-.567-.477-.49-.654-.5-.17-.008-.363-.01-.557-.01-.193 0-.508.073-.774.363-.266.29-1.016.993-1.016 2.422 0 1.43 1.04 2.81 1.185 3.003.145.193 2.05 3.13 4.967 4.39.694.3 1.236.48 1.658.614.696.222 1.33.19 1.83.115.558-.083 1.717-.702 1.96-1.38.242-.677.242-1.257.17-1.38-.073-.122-.266-.193-.557-.34z"/></svg>
     <span>Escríbenos por WhatsApp</span>
   </a>
+
+  <!-- ══ PRODUCT MODAL ══ -->
+  <div class="product-modal" id="productModal" onclick="if(event.target===this) closeProductModal()">
+    <div class="product-modal-overlay"></div>
+    <div class="product-modal-content">
+      <button class="product-modal-close" onclick="closeProductModal()" aria-label="Cerrar">✕</button>
+      <div class="product-modal-media" id="pmMedia"></div>
+      <div class="product-modal-info">
+        <span class="product-modal-size" id="pmSize"></span>
+        <h3 class="product-modal-name" id="pmName"></h3>
+        <a href="#" target="_blank" rel="noopener" class="product-modal-farmatodo" id="pmFarmatodo">✓ Disponible en Farmatodo · Ver →</a>
+        <p class="product-modal-desc" id="pmDesc"></p>
+        <div class="product-modal-actions">
+          <a href="#puntos" class="btn-primary" onclick="closeProductModal()">Dónde Comprar</a>
+          <a href="#" id="pmWhatsapp" target="_blank" rel="noopener" class="btn-whatsapp">
+            <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.65 4.6 1.885 6.566L4 29l7.62-1.857A11.93 11.93 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm0 21.7c-1.95 0-3.86-.524-5.524-1.516l-.396-.236-4.523 1.103 1.18-4.337-.258-.41A9.62 9.62 0 0 1 6.31 15c0-5.347 4.36-9.7 9.694-9.7 5.335 0 9.694 4.353 9.694 9.7 0 5.347-4.36 9.7-9.694 9.7zm5.32-7.27c-.29-.146-1.717-.847-1.983-.943-.266-.097-.46-.146-.654.146-.193.29-.75.943-.92 1.137-.17.193-.34.218-.63.073-.29-.146-1.224-.452-2.332-1.44-.862-.77-1.444-1.72-1.613-2.01-.17-.29-.018-.447.128-.592.13-.13.29-.34.435-.51.145-.17.193-.29.29-.484.097-.193.048-.363-.024-.51-.073-.145-.654-1.578-.897-2.16-.236-.567-.477-.49-.654-.5-.17-.008-.363-.01-.557-.01-.193 0-.508.073-.774.363-.266.29-1.016.993-1.016 2.422 0 1.43 1.04 2.81 1.185 3.003.145.193 2.05 3.13 4.967 4.39.694.3 1.236.48 1.658.614.696.222 1.33.19 1.83.115.558-.083 1.717-.702 1.96-1.38.242-.677.242-1.257.17-1.38-.073-.122-.266-.193-.557-.34z"/></svg>
+            Preguntar por WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- ══ NAV ══ -->
   <nav id="mainNav">
@@ -1206,35 +1481,38 @@
           </div>
         </div>
         <div class="line-products-grid">
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sebia-active-gel')">
+            <a href="https://www.farmatodo.com.ve/producto/116457598-corrector-facial-svr-active-gel-sebiaclear-40ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
             <span class="product-size">40 ML</span>
             <h3 class="product-name">Active Gel</h3>
             <p class="product-desc">Gel concentrado antiimperfecciones. Acción visible desde los primeros días de uso.</p>
-            <a href="https://www.farmatodo.com.ve/producto/116457598-corrector-facial-svr-active-gel-sebiaclear-40ml" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sebia-gel-moussant-200')">
+            <a href="https://www.farmatodo.com.ve/producto/116437651-limpiador-facial-svr-sebiaclear-gel-moussant-200ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
             <span class="product-size">200 ML</span>
             <h3 class="product-name">Gel Moussant</h3>
             <p class="product-desc">Limpiador espumoso con ácido salicílico para piel con imperfecciones.</p>
-            <a href="https://www.farmatodo.com.ve/producto/116437651-limpiador-facial-svr-sebiaclear-gel-moussant-200ml" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sebia-gel-moussant-400')">
+            <a href="https://www.farmatodo.com.ve/producto/116438611-limpiador-facial-svr-sebiaclear-gel-moussant-400ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
             <span class="product-size">400 ML</span>
             <h3 class="product-name">Gel Moussant</h3>
             <p class="product-desc">Formato familiar del limpiador espumoso antiimperfecciones con ácido salicílico.</p>
-            <a href="https://www.farmatodo.com.ve/producto/116438611-limpiador-facial-svr-sebiaclear-gel-moussant-400ml" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sebia-ampoule-az')">
             <span class="product-size">30 ML</span>
             <h3 class="product-name">Ampoule AZ</h3>
             <p class="product-desc">Sérum concentrado antiimperfecciones de acción rápida con zinc y niacinamida.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sebia-serum')">
             <span class="product-size">30 ML</span>
             <h3 class="product-name">Sérum</h3>
             <p class="product-desc">Sérum antiedad-acné de nueva generación. Trata imperfecciones y previene el envejecimiento cutáneo.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
         </div>
       </div>
@@ -1249,17 +1527,19 @@
           </div>
         </div>
         <div class="line-products-grid">
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('topialyse-huile-lavante')">
+            <a href="https://www.farmatodo.com.ve/producto/116437677-limpiador-facial-svr-topialyse-400ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
             <span class="product-size">400 ML</span>
             <h3 class="product-name">Huile Lavante Refo</h3>
             <p class="product-desc">Aceite-espuma multi-uso: ducha, champú, higiene íntima y desmaquillante. Un solo producto para toda la familia. 89% de origen natural.</p>
-            <a href="https://www.farmatodo.com.ve/producto/116437677-limpiador-facial-svr-topialyse-400ml" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('topialyse-baume-protect')">
+            <a href="https://www.farmatodo.com.ve/producto/116438629-crema-facial-svr-topialyse-200ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
             <span class="product-size">200 ML</span>
             <h3 class="product-name">Baume Protect+</h3>
             <p class="product-desc">Bálsamo reparador intensivo para piel atópica y muy seca. Calma y repara durante 48 h. 98% de origen natural.</p>
-            <a href="https://www.farmatodo.com.ve/producto/116438629-crema-facial-svr-topialyse-200ml" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
         </div>
       </div>
@@ -1274,11 +1554,11 @@
           </div>
         </div>
         <div class="line-products-grid">
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('cicavit-creme-hppi')">
             <span class="product-size">40 ML</span>
             <h3 class="product-name">Crème HPPI</h3>
             <p class="product-desc">Crema reparadora para irritaciones, quemaduras solares, depilación y post-procedimiento. Sin perfume. Apta durante el embarazo. 94% de origen natural.</p>
-            <a href="https://www.farmatodo.com.ve" target="_blank" rel="noopener" class="product-btn">Ver en Farmatodo →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
         </div>
       </div>
@@ -1293,29 +1573,29 @@
           </div>
         </div>
         <div class="line-products-grid">
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sunsecure-extreme')">
             <span class="product-size">50 ML</span>
             <h3 class="product-name">Extreme SPF50+</h3>
             <p class="product-desc">Fotoprotector invisible de textura desnuda. Protección UVA/UVB de alta tolerancia para piel sensible.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sunsecure-blur')">
             <span class="product-size">50 ML</span>
             <h3 class="product-name">Blur Sans Parfum SPF50+</h3>
             <p class="product-desc">Primer + protección solar. Efecto blur matificante sin perfume. Piel grasa y mixta sensible.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sunsecure-blur-teinte')">
             <span class="product-size">50 ML</span>
             <h3 class="product-name">Blur Teinté Hale SPF50+</h3>
             <p class="product-desc">Primer + protección solar con color beige natural. Unifica el tono y protege al mismo tiempo.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sunsecure-fluide-photoage')">
             <span class="product-size">40 ML</span>
             <h3 class="product-name">Fluide Photo Age SPF50+</h3>
             <p class="product-desc">Fotoprotector anti-fotoenvejecimiento. Previene manchas y pérdida de firmeza inducidas por el sol.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
         </div>
       </div>
@@ -1330,17 +1610,17 @@
           </div>
         </div>
         <div class="line-products-grid">
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sensifine-extreme')">
             <span class="product-size">30 ML</span>
             <h3 class="product-name">Extreme</h3>
             <p class="product-desc">Crema ultra-calmante para pieles extremadamente reactivas e intolerantes. Alivia el picor y el enrojecimiento de inmediato.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('sensifine-eau-micellaire')">
             <span class="product-size">400 ML</span>
             <h3 class="product-name">AR Eau Micellaire</h3>
             <p class="product-desc">Agua micelar sin aclarado para pieles reactivas y con tendencia a la rosácea. Limpia y calma en un solo gesto.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
         </div>
       </div>
@@ -1355,17 +1635,17 @@
           </div>
         </div>
         <div class="line-products-grid">
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('clairial-ampoule')">
             <span class="product-size">30 ML</span>
             <h3 class="product-name">Ampoule</h3>
             <p class="product-desc">Sérum concentrado despigmentante con vitamina C y ácido ferúlico. Corrige manchas y unifica el tono progresivamente.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('clairial-night-peel')">
             <span class="product-size">50 ML</span>
             <h3 class="product-name">Night Peel</h3>
             <p class="product-desc">Exfoliante nocturno despigmentante con AHA. Elimina manchas, afina la textura y reaparece un tono uniforme por la mañana.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
         </div>
       </div>
@@ -1380,47 +1660,47 @@
           </div>
         </div>
         <div class="line-products-grid">
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('antiage-ampoule-c')">
             <span class="product-size">30 ML</span>
             <h3 class="product-name">Ampoule C</h3>
             <p class="product-desc">Sérum de vitamina C pura al 23%. Antioxidante, luminosidad y firmeza en 4 semanas.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('antiage-ampoule-b3')">
             <span class="product-size">30 ML</span>
             <h3 class="product-name">Ampoule B3</h3>
             <p class="product-desc">Sérum de niacinamida al 12%. Mejora la textura, reduce poros y unifica el tono de forma visible.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('antiage-ampoule-a')">
             <span class="product-size">30 ML</span>
             <h3 class="product-name">Ampoule A</h3>
             <p class="product-desc">Sérum de retinol puro. Antiedad de referencia para pieles maduras que buscan firmeza y renovación celular.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('antiage-ceye')">
             <span class="product-size">15 ML</span>
             <h3 class="product-name">[C] Eye Biotic</h3>
             <p class="product-desc">Contorno de ojos con vitamina C y probióticos. Descongestiona, ilumina y reduce ojeras y bolsas.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('antiage-c20')">
             <span class="product-size">50 ML</span>
             <h3 class="product-name">[C20] Rechargeable</h3>
             <p class="product-desc">Crema recargable con vitamina C al 20%. Combate los primeros signos de envejecimiento con fórmula ecorecargable.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('antiage-collagen')">
             <span class="product-size">50 ML</span>
             <h3 class="product-name">[Collagen] Rechargeable</h3>
             <p class="product-desc">Crema recargable con colágeno marino. Densifica, rellena y restaura el volumen perdido en pieles maduras.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
-          <div class="product-card">
+          <div class="product-card" onclick="openProduct('antiage-hyalu')">
             <span class="product-size">50 ML</span>
             <h3 class="product-name">[Hyalu] Rechargeable</h3>
             <p class="product-desc">Crema recargable con ácido hialurónico triple peso molecular. Hidratación profunda y efecto relleno de arrugas.</p>
-            <a href="#puntos" class="product-btn-pdv">Ver punto de venta →</a>
+            <span class="product-card-hint">Ver más →</span>
           </div>
         </div>
       </div>
@@ -1734,6 +2014,333 @@
         });
       }
     }
+
+    /* ── PRODUCT MODAL ── */
+    const PRODUCTS = {
+      'sebia-active-gel': {
+        line: 'Sebiaclear', lc: 'var(--lc-sebiaclear)', emoji: '🫧',
+        name: 'Active Gel', size: '40 ML',
+        desc: 'Tratamiento antigranos con Zinc y BHA. Reduce imperfecciones activas, puntos negros y marcas en tiempo récord. Textura gel de absorción inmediata, no comedogénico.',
+        media: [
+          { type: 'img', src: 'assets/ActiveGel_8a.jpg' }
+        ],
+        farmatodo: 'https://www.farmatodo.com.ve/producto/116457598-corrector-facial-svr-active-gel-sebiaclear-40ml'
+      },
+      'sebia-gel-moussant-200': {
+        line: 'Sebiaclear', lc: 'var(--lc-sebiaclear)', emoji: '🫧',
+        name: 'Gel Moussant', size: '200 ML',
+        desc: 'Gel limpiador purificante para piel con tendencia acneica. Elimina el exceso de sebo y limpia los poros sin resecar ni irritar. Uso diario mañana y noche.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-gel-moussant-200.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-gel-moussant-200-2.jpg' }
+        ],
+        farmatodo: 'https://www.farmatodo.com.ve/producto/116437651-limpiador-facial-svr-sebiaclear-gel-moussant-200ml'
+      },
+      'sebia-gel-moussant-400': {
+        line: 'Sebiaclear', lc: 'var(--lc-sebiaclear)', emoji: '🫧',
+        name: 'Gel Moussant', size: '400 ML',
+        desc: 'Gel limpiador purificante en formato familiar. Controla el sebo, limpia poros y calma imperfecciones sin efecto tirante. Mayor rendimiento para uso prolongado.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-gel-moussant-400.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-gel-moussant-400-2.jpg' }
+        ],
+        farmatodo: 'https://www.farmatodo.com.ve/producto/116438611-limpiador-facial-svr-sebiaclear-gel-moussant-400ml'
+      },
+      'sebia-ampoule-az': {
+        line: 'Sebiaclear', lc: 'var(--lc-sebiaclear)', emoji: '🫧',
+        name: 'Ampoule AZ', size: '30 ML',
+        desc: 'Ampolla de choque antiimperfecciones con Zinc purificante. Desinflama granos activos, regula el sebo y previene nuevos brotes. Ideal para acné recurrente o brotes severos.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-ampoule-az.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-ampoule-az-2.jpg' },
+          { type: 'video', src: 'assets/productos/pdt-ampoule-az-3.mp4' }
+        ],
+        farmatodo: null
+      },
+      'sebia-serum': {
+        line: 'Sebiaclear', lc: 'var(--lc-sebiaclear)', emoji: '🫧',
+        name: 'Sérum', size: '30 ML',
+        desc: 'Sérum doble acción antiedad y antigranos para piel adulta con imperfecciones. Controla el sebo mientras combate las arrugas. La rutina completa en un solo paso.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-serum-sebiaclear.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-serum-sebiaclear-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'topialyse-huile-lavante': {
+        line: 'Topialyse', lc: 'var(--lc-topialyse)', emoji: '🩷',
+        name: 'Huile Lavante Refo', size: '400 ML',
+        desc: 'Aceite de baño y ducha para piel seca y atópica. Limpia sin irritar y deja una película hidratante protectora al enjuagar. Para toda la familia, desde bebés hasta adultos.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-huile-lavante.jpg' },
+          { type: 'video', src: 'assets/productos/pdt-huile-lavante-2.mp4' }
+        ],
+        farmatodo: 'https://www.farmatodo.com.ve/producto/116437677-limpiador-facial-svr-topialyse-400ml'
+      },
+      'topialyse-baume-protect': {
+        line: 'Topialyse', lc: 'var(--lc-topialyse)', emoji: '🩷',
+        name: 'Baume Protect+', size: '200 ML',
+        desc: 'Bálsamo emoliente de alta protección para piel muy seca o atópica. Restaura la barrera hidrolipídica, calma el picor y protege de agresiones externas. Confort inmediato y duradero.',
+        media: [
+          { type: 'img', src: 'assets/BaumeProtect_6a.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-baume-protect-2.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-baume-protect-3.jpg' }
+        ],
+        farmatodo: 'https://www.farmatodo.com.ve/producto/116438629-crema-facial-svr-topialyse-200ml'
+      },
+      'cicavit-creme-hppi': {
+        line: 'Cicavit+', lc: 'var(--lc-cicavit)', emoji: '❤️‍🩹',
+        name: 'Crème HPPI', size: '40 ML',
+        desc: 'Crema cicatrizante para piel irritada, post-procedimiento o con heridas. Acelera la cicatrización, reduce el riesgo de queloide y calma la inflamación. Apta para toda la familia.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-creme-hppi.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-creme-hppi-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'sunsecure-extreme': {
+        line: 'Sun Secure', lc: 'var(--lc-sunsecure)', emoji: '☀️',
+        name: 'Extreme SPF50+', size: '50 ML',
+        desc: 'Protector solar fluido de muy alta protección UVA/UVB. Textura ultraligera, fotoestable y resistente al agua. Para todo tipo de piel. El básico indispensable de la rutina solar.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-sunsecure-extreme.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-sunsecure-extreme-2.jpg' },
+          { type: 'video', src: 'assets/productos/pdt-sunsecure-extreme-3.mp4' }
+        ],
+        farmatodo: null
+      },
+      'sunsecure-blur': {
+        line: 'Sun Secure', lc: 'var(--lc-sunsecure)', emoji: '☀️',
+        name: 'Blur Sans Parfum SPF50+', size: '50 ML',
+        desc: 'SPF50+ con efecto blur, sin perfume. Difumina poros e imperfecciones con acabado mate sedoso. Para pieles sensibles a las fragancias que no renuncian a una protección perfecta.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-blur.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-blur-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'sunsecure-blur-teinte': {
+        line: 'Sun Secure', lc: 'var(--lc-sunsecure)', emoji: '☀️',
+        name: 'Blur Teinté Hâlé SPF50+', size: '50 ML',
+        desc: 'Protector solar SPF50+ con tinte bronceado y efecto blur. Unifica el tono con acabado luminoso y natural. El solar que también embellece mientras cuida tu piel.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-blur-teinte.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-blur-teinte-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'sunsecure-fluide-photoage': {
+        line: 'Sun Secure', lc: 'var(--lc-sunsecure)', emoji: '☀️',
+        name: 'Fluide Photo Age SPF50+', size: '40 ML',
+        desc: 'Solar antiedad de muy alta protección. Previene el fotoenvejecimiento prematuro, las manchas y la pérdida de firmeza. Para piel madura que protege su inversión antiedad.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-fluide-photoage.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-fluide-photoage-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'sensifine-extreme': {
+        line: 'Sensifine', lc: 'var(--lc-sensifine)', emoji: '🌸',
+        name: 'Extreme', size: '30 ML',
+        desc: 'Crema SOS para piel muy sensible e intolerante. Apaga el ardor, el picor y las rojeces de inmediato. Refuerza la barrera cutánea y protege de agresiones externas todo el día.',
+        media: [
+          { type: 'video', src: 'assets/productos/pdt-sensifine-extreme-1.mp4' }
+        ],
+        farmatodo: null
+      },
+      'sensifine-eau-micellaire': {
+        line: 'Sensifine', lc: 'var(--lc-sensifine)', emoji: '🌸',
+        name: 'AR Eau Micellaire', size: '400 ML',
+        desc: 'Agua micelar para piel con rosácea o rojeces crónicas. Limpieza suave sin frotar, sin alcohol. Reduce la reactividad vascular y calma el enrojecimiento desde la limpieza diaria.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-eau-micellaire.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-eau-micellaire-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'clairial-ampoule': {
+        line: 'Clairial', lc: 'var(--lc-clairial)', emoji: '🩹',
+        name: 'Ampoule', size: '30 ML',
+        desc: 'Ampolla antimancha de alta concentración para uso diario. Actúa sobre manchas solares, hormonales y postinflamatorias desde el interior de la piel. Tono verdaderamente uniforme.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-ampoule-clairial.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-ampoule-clairial-2.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-ampoule-clairial-3.jpg' }
+        ],
+        farmatodo: null
+      },
+      'clairial-night-peel': {
+        line: 'Clairial', lc: 'var(--lc-clairial)', emoji: '🩹',
+        name: 'Night Peel', size: '50 ML',
+        desc: 'Sérum nocturno despigmentante con AHA. Borra manchas solares, hormonales y postacné mientras duermes. Piel más uniforme y sin marcas en 4 a 8 semanas de uso.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-night-peel.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-night-peel-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'antiage-ampoule-c': {
+        line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
+        name: 'Ampoule C', size: '30 ML',
+        desc: 'Vitamina C estabilizada al 23% en ampolla. Flash antimancha, antioxidante y antiedad. Activa la síntesis de colágeno y aporta luminosidad visible desde los primeros días.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-ampoule-c.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-ampoule-c-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'antiage-ampoule-b3': {
+        line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
+        name: 'Ampoule B3', size: '30 ML',
+        desc: 'Ampolla concentrada con Niacinamida 10%. Unifica el tono, afina los poros y regula el sebo. Textura impecable en 4 semanas de uso constante. Apta para todo tipo de piel.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-ampoule-b3.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-ampoule-b3-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'antiage-ampoule-a': {
+        line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
+        name: 'Ampoule A', size: '30 ML',
+        desc: 'Retinol encapsulado de tolerancia mejorada. Suaviza arrugas, renueva y regenera la piel mientras duermes. Toda la eficacia del retinol sin la irritación clásica.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-ampoule-a.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-ampoule-a-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'antiage-ceye': {
+        line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
+        name: '[C] Eye Biotic', size: '15 ML',
+        desc: 'Contorno de ojos antiedad con Vitamina C pura y probióticos. Ilumina ojeras, reduce bolsas y protege del estrés oxidativo. Piel del contorno visiblemente más joven desde la primera semana.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-ceye.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-ceye-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'antiage-c20': {
+        line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
+        name: '[C20] Rechargeable', size: '50 ML',
+        desc: '20% de Vitamina C pura: máxima concentración antiedad. Efecto tensor, antimancha y antifatiga. Envase recargable eco-friendly. Para piel madura que exige resultados reales.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-c20.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-c20-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'antiage-collagen': {
+        line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
+        name: '[Collagen] Rechargeable', size: '50 ML',
+        desc: 'Colágeno marino y probióticos en sérum recargable. Recupera densidad, firmeza y elasticidad. Piel visiblemente más llena y tonificada en 4 semanas de uso constante.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-collagen.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-collagen-2.jpg' }
+        ],
+        farmatodo: null
+      },
+      'antiage-hyalu': {
+        line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
+        name: '[Hyalu] Rechargeable', size: '50 ML',
+        desc: 'Ácido Hialurónico triple acción: hidratación superficial, relleno en profundidad y barrera reforzada. Sérum antiedad de nueva generación en envase recargable.',
+        media: [
+          { type: 'img', src: 'assets/productos/pdt-hyalu.jpg' },
+          { type: 'img', src: 'assets/productos/pdt-hyalu-2.jpg' }
+        ],
+        farmatodo: null
+      }
+    };
+
+    const productModal = document.getElementById('productModal');
+    let pmMediaList = [];
+    let pmMediaIndex = 0;
+    let pmCurrentLc = '';
+    let pmCurrentAlt = '';
+
+    function pmRenderMedia(dir) {
+      const media = document.getElementById('pmMedia');
+      media.style.setProperty('--lc', pmCurrentLc);
+
+      if (!pmMediaList.length) {
+        media.className = 'product-modal-media no-image';
+        media.innerHTML = `<span class="pm-emoji">${pmCurrentEmoji}</span><span class="pm-line">SVR ${pmCurrentLine}</span>`;
+        return;
+      }
+
+      media.className = 'product-modal-media';
+      const item = pmMediaList[pmMediaIndex];
+      const animClass = dir > 0 ? ' class="pm-slide-next"' : dir < 0 ? ' class="pm-slide-prev"' : '';
+      let html = item.type === 'video'
+        ? `<video${animClass} src="${item.src}" autoplay loop muted playsinline></video>`
+        : `<img${animClass} src="${item.src}" alt="${pmCurrentAlt}">`;
+
+      if (pmMediaList.length > 1) {
+        html += `<button class="pm-arrow pm-arrow-prev" onclick="pmNav(-1)" aria-label="Foto anterior">‹</button>`;
+        html += `<button class="pm-arrow pm-arrow-next" onclick="pmNav(1)" aria-label="Foto siguiente">›</button>`;
+        html += `<div class="pm-dots">` + pmMediaList.map((_, i) =>
+          `<button class="pm-dot${i === pmMediaIndex ? ' active' : ''}" onclick="pmGoTo(${i})" aria-label="Foto ${i + 1}"></button>`
+        ).join('') + `</div>`;
+      }
+
+      media.innerHTML = html;
+    }
+
+    function pmNav(delta) {
+      pmMediaIndex = (pmMediaIndex + delta + pmMediaList.length) % pmMediaList.length;
+      pmRenderMedia(delta);
+    }
+
+    function pmGoTo(i) {
+      const dir = i > pmMediaIndex ? 1 : i < pmMediaIndex ? -1 : 0;
+      pmMediaIndex = i;
+      pmRenderMedia(dir);
+    }
+
+    let pmCurrentEmoji = '';
+    let pmCurrentLine = '';
+
+    function openProduct(key) {
+      const p = PRODUCTS[key];
+      if (!p) return;
+
+      document.getElementById('pmSize').textContent = p.size;
+      document.getElementById('pmName').textContent = p.name;
+      document.getElementById('pmDesc').textContent = p.desc;
+
+      pmMediaList = p.media || [];
+      pmMediaIndex = 0;
+      pmCurrentLc = p.lc;
+      pmCurrentAlt = `${p.name} ${p.size}`;
+      pmCurrentEmoji = p.emoji;
+      pmCurrentLine = p.line;
+      pmRenderMedia();
+
+      const farmatodoLink = document.getElementById('pmFarmatodo');
+      if (p.farmatodo) {
+        farmatodoLink.style.display = 'inline-flex';
+        farmatodoLink.href = p.farmatodo;
+      } else {
+        farmatodoLink.style.display = 'none';
+      }
+
+      const msg = `¡Hola! Me gustaría obtener más información sobre ${p.name} ${p.size} de SVR ${p.line}.`;
+      document.getElementById('pmWhatsapp').href = `https://wa.me/584242565586?text=${encodeURIComponent(msg)}`;
+
+      productModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductModal() {
+      productModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (!productModal.classList.contains('open')) return;
+      if (e.key === 'Escape') closeProductModal();
+      if (e.key === 'ArrowLeft') pmNav(-1);
+      if (e.key === 'ArrowRight') pmNav(1);
+    });
 
     /* ── COUNTER ANIMATION ── */
     const counterObserver = new IntersectionObserver((entries) => {
