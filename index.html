@@ -218,70 +218,111 @@
     /* ══════════════════════════════
        HERO
     ══════════════════════════════ */
-    .hero {
+    .hero-slider {
       position: relative;
-      height: 100vh;
-      min-height: 620px;
+      height: clamp(420px, 56vw, 800px);
       overflow: hidden;
+    }
+    .hero-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.8s ease;
       display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      padding-top: 130px;
+      align-items: center;
     }
-    .hero-video {
+    .hero-slide.active { opacity: 1; z-index: 1; }
+    .hero-slide-bg {
       position: absolute;
       inset: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
+      background-size: cover;
+      background-position: center;
     }
-    .hero-overlay {
+    .hero-slide-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.62) 0%,
-        rgba(0,0,0,0.1) 55%,
-        rgba(0,0,0,0.0) 100%
-      );
-      z-index: 1;
+      background: linear-gradient(to right, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.15) 50%, transparent 100%);
     }
-    .hero-content {
+    .hero-slide-content {
       position: relative;
       z-index: 2;
-      text-align: center;
-      padding: 0 24px;
-      max-width: 780px;
+      max-width: 560px;
+      padding: 0 80px;
     }
-    .hero-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+    .hero-slide-kicker {
       font-size: 0.62rem;
-      font-weight: 600;
-      letter-spacing: 0.32em;
+      font-weight: 700;
+      letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.65);
-      margin-bottom: 20px;
+      color: var(--coral);
+      margin-bottom: 14px;
     }
-    .hero-eyebrow::before,
-    .hero-eyebrow::after {
-      content: '';
-      width: 24px; height: 1px;
-      background: var(--coral);
+    .hero-slide-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.8rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.1;
+      margin-bottom: 14px;
     }
-    .hero-tagline {
-      font-size: clamp(0.9rem, 2vw, 1.15rem);
+    .hero-slide-claim {
+      font-size: clamp(0.82rem, 1.2vw, 0.95rem);
       font-weight: 400;
-      color: rgba(255,255,255,0.9);
+      color: rgba(255,255,255,0.8);
       line-height: 1.7;
-      margin-bottom: 36px;
+      margin-bottom: 28px;
     }
-    .hero-actions {
+    .hero-slide-cta {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #fff;
+      background: var(--coral);
+      padding: 13px 32px;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: background 0.25s, transform 0.2s;
+    }
+    .hero-slide-cta:hover { background: var(--coral-dark); transform: translateY(-2px); }
+    .hero-nav {
+      position: absolute;
+      bottom: 32px;
+      left: 80px;
+      z-index: 3;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 18px;
-      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .hero-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.5);
+      background: transparent;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .hero-dot.active { background: #fff; border-color: #fff; }
+    .hero-dot:hover { border-color: #fff; }
+    .hero-counter {
+      font-size: 0.65rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.1em;
+      margin-left: 10px;
+    }
+    .hero-counter .current { color: #fff; }
+    @media (max-width: 960px) {
+      .hero-slide-content { padding: 0 40px; }
+      .hero-nav { left: 40px; }
+    }
+    @media (max-width: 640px) {
+      .hero-slider { height: clamp(360px, 80vw, 520px); }
+      .hero-slide-content { padding: 0 24px; max-width: 100%; }
+      .hero-slide-overlay { background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%); }
+      .hero-nav { left: 24px; bottom: 20px; }
     }
     .btn-primary {
       font-size: 0.68rem;
@@ -1041,29 +1082,6 @@
       .pillar { padding: 26px 20px; }
       footer { padding: 44px 0 28px; }
 
-      /* Hero: proporción 16:9, texto encima del video */
-      .hero {
-        height: auto;
-        min-height: unset;
-        aspect-ratio: 16 / 9;
-        padding-top: 0;
-        align-items: center;
-        justify-content: center;
-      }
-      .hero-video {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: fill;
-      }
-      .hero-overlay {
-        display: block;
-        background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0.35) 100%);
-      }
-      .hero-content { padding: 0 20px; }
-      .hero-eyebrow { display: none; }
-      .hero-tagline { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; transition: none; }
@@ -1433,22 +1451,54 @@
     <a href="#puntos" class="nav-cta">Encuéntralo cerca de ti →</a>
   </nav>
 
-  <!-- ══ HERO ══ -->
-  <section class="hero">
-    <video class="hero-video" id="heroVideo"
-           src="assets/svr-story-60ans.mp4"
-           autoplay loop muted playsinline preload="auto"></video>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">Laboratoire Dermatologique · Paris · 1962</div>
-      <h1 class="hero-tagline">
-        Tu piel sensible merece resultados reales.<br>
-        Más de 60 años de ciencia dermatológica francesa, ahora en Venezuela.
-      </h1>
-      <div class="hero-actions">
-        <a href="#productos" class="btn-primary">Encuentra tu producto ideal</a>
-        <a href="#herencia" class="btn-ghost">Nuestra historia</a>
+  <!-- ══ HERO SLIDER ══ -->
+  <section class="hero-slider" id="heroSlider">
+    <div class="hero-slide active" data-index="0">
+      <div class="hero-slide-bg" style="background-image:url('assets/hero-sebiaclear.jpg')"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-slide-content">
+        <div class="hero-slide-kicker">Piel real, cuidado real</div>
+        <h2 class="hero-slide-title">Di adiós a las imperfecciones</h2>
+        <p class="hero-slide-claim">Reducción visible de imperfecciones y marcas en solo 7 días.</p>
+        <a href="sebiaclear.html" class="hero-slide-cta">Descubrir →</a>
       </div>
+    </div>
+    <div class="hero-slide" data-index="1">
+      <div class="hero-slide-bg" style="background-image:url('assets/hero-sunsecure.jpg')"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-slide-content">
+        <div class="hero-slide-kicker">Protección diaria ultra-ligera</div>
+        <h2 class="hero-slide-title">Alta protección, acabado imperceptible</h2>
+        <p class="hero-slide-claim">Una piel protegida con un efecto completamente invisible al tacto.</p>
+        <a href="sun-secure.html" class="hero-slide-cta">Descubrir →</a>
+      </div>
+    </div>
+    <div class="hero-slide" data-index="2">
+      <div class="hero-slide-bg" style="background-image:url('assets/hero-topialyse.jpg')"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-slide-content">
+        <div class="hero-slide-kicker">Piel seca y con tendencia atópica</div>
+        <h2 class="hero-slide-title">Alivia la piel con total tranquilidad</h2>
+        <p class="hero-slide-claim">Repara intensamente la barrera cutánea hasta por 48 horas.</p>
+        <a href="#productos" class="hero-slide-cta">Descubrir →</a>
+      </div>
+    </div>
+    <div class="hero-slide" data-index="3">
+      <div class="hero-slide-bg" style="background-image:url('assets/hero-biotic.jpg')"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-slide-content">
+        <div class="hero-slide-kicker">El poder de la Vitamina C</div>
+        <h2 class="hero-slide-title">[C20] Biotic: +91% de luminosidad</h2>
+        <p class="hero-slide-claim">Fluido energizante ultra-concentrado para una piel más lisa y uniforme.</p>
+        <a href="#productos" class="hero-slide-cta">Descubrir →</a>
+      </div>
+    </div>
+    <div class="hero-nav">
+      <button class="hero-dot active" data-slide="0"></button>
+      <button class="hero-dot" data-slide="1"></button>
+      <button class="hero-dot" data-slide="2"></button>
+      <button class="hero-dot" data-slide="3"></button>
+      <span class="hero-counter"><span class="current">01</span> / 04</span>
     </div>
   </section>
 
@@ -2404,6 +2454,29 @@
         farmatodo: null
       }
     };
+
+    /* ── HERO SLIDER ── */
+    (function() {
+      const slides = document.querySelectorAll('.hero-slide');
+      const dots = document.querySelectorAll('.hero-dot');
+      const counter = document.querySelector('.hero-counter .current');
+      let cur = 0, timer;
+      function goTo(i) {
+        slides[cur].classList.remove('active');
+        dots[cur].classList.remove('active');
+        cur = (i + slides.length) % slides.length;
+        slides[cur].classList.add('active');
+        dots[cur].classList.add('active');
+        if (counter) counter.textContent = String(cur + 1).padStart(2, '0');
+      }
+      function auto() { timer = setInterval(() => goTo(cur + 1), 5000); }
+      dots.forEach(d => d.addEventListener('click', () => { clearInterval(timer); goTo(+d.dataset.slide); auto(); }));
+      let tx = 0;
+      const sl = document.getElementById('heroSlider');
+      sl.addEventListener('touchstart', e => { tx = e.touches[0].clientX; clearInterval(timer); }, {passive: true});
+      sl.addEventListener('touchend', e => { const dx = e.changedTouches[0].clientX - tx; if (Math.abs(dx) > 40) goTo(cur + (dx < 0 ? 1 : -1)); auto(); }, {passive: true});
+      auto();
+    })();
 
     const productModal = document.getElementById('productModal');
     let pmMediaList = [];
