@@ -2487,26 +2487,30 @@
     document.querySelectorAll('[data-count]')
       .forEach(el => counterObserver.observe(el));
 
-    /* ── META PIXEL CONVERSION EVENTS ── */
+    /* ── CONVERSION EVENTS (Meta Pixel + GA4) ── */
     document.querySelectorAll('a[href*="wa.me"], .whatsapp-float, .btn-whatsapp').forEach(el => {
       el.addEventListener('click', () => {
         if (typeof fbq !== 'undefined') fbq('track', 'Contact', {content_name: 'WhatsApp'});
+        if (typeof gtag !== 'undefined') gtag('event', 'click_whatsapp');
       });
     });
     document.querySelectorAll('a[href*="farmatodo"]').forEach(el => {
       el.addEventListener('click', () => {
         if (typeof fbq !== 'undefined') fbq('track', 'Lead', {content_name: 'Farmatodo', content_category: el.textContent.trim()});
+        if (typeof gtag !== 'undefined') gtag('event', 'click_farmatodo');
       });
     });
     document.querySelectorAll('a[href="#puntos"], .nav-cta').forEach(el => {
       el.addEventListener('click', () => {
         if (typeof fbq !== 'undefined') fbq('trackCustom', 'ClickDondeComprar');
+        if (typeof gtag !== 'undefined') gtag('event', 'click_donde_comprar');
       });
     });
     const _origOpenProduct = typeof openProduct === 'function' ? openProduct : null;
     if (_origOpenProduct) {
       window.openProduct = function(slug) {
         if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', {content_name: slug, content_type: 'product'});
+        if (typeof gtag !== 'undefined') gtag('event', 'view_product', {product_slug: slug});
         return _origOpenProduct(slug);
       };
     }
