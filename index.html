@@ -254,7 +254,7 @@
       font-weight: 700;
       letter-spacing: 0.28em;
       text-transform: uppercase;
-      color: var(--coral);
+      color: var(--slide-accent, var(--coral));
       margin-bottom: 14px;
     }
     .hero-slide-title {
@@ -278,13 +278,13 @@
       letter-spacing: 0.16em;
       text-transform: uppercase;
       color: #fff;
-      background: var(--coral);
+      background: var(--slide-accent, var(--coral));
       padding: 13px 32px;
       text-decoration: none;
       border-radius: 3px;
-      transition: background 0.25s, transform 0.2s;
+      transition: background 0.25s, transform 0.2s, box-shadow 0.25s;
     }
-    .hero-slide-cta:hover { background: var(--coral-dark); transform: translateY(-2px); }
+    .hero-slide-cta:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
     .hero-nav {
       position: absolute;
       bottom: 32px;
@@ -304,7 +304,7 @@
       padding: 0;
       transition: background 0.3s, border-color 0.3s;
     }
-    .hero-dot.active { background: #fff; border-color: #fff; }
+    .hero-dot.active { background: var(--dot-color, #fff); border-color: var(--dot-color, #fff); }
     .hero-dot:hover { border-color: #fff; }
     .hero-counter {
       font-size: 0.65rem;
@@ -1453,7 +1453,7 @@
 
   <!-- ══ HERO SLIDER ══ -->
   <section class="hero-slider" id="heroSlider">
-    <div class="hero-slide active" data-index="0">
+    <div class="hero-slide active" data-index="0" style="--slide-accent:#92d050">
       <div class="hero-slide-bg" style="background-image:url('assets/hero-sebiaclear.jpg')"></div>
       <div class="hero-slide-overlay"></div>
       <div class="hero-slide-content">
@@ -1463,7 +1463,7 @@
         <a href="sebiaclear.html" class="hero-slide-cta">Descubrir →</a>
       </div>
     </div>
-    <div class="hero-slide" data-index="1">
+    <div class="hero-slide" data-index="1" style="--slide-accent:#ff7c23">
       <div class="hero-slide-bg" style="background-image:url('assets/hero-sunsecure.jpg')"></div>
       <div class="hero-slide-overlay"></div>
       <div class="hero-slide-content">
@@ -1473,7 +1473,7 @@
         <a href="sun-secure.html" class="hero-slide-cta">Descubrir →</a>
       </div>
     </div>
-    <div class="hero-slide" data-index="2">
+    <div class="hero-slide" data-index="2" style="--slide-accent:#fd91a8">
       <div class="hero-slide-bg" style="background-image:url('assets/hero-topialyse.jpg')"></div>
       <div class="hero-slide-overlay"></div>
       <div class="hero-slide-content">
@@ -1483,7 +1483,7 @@
         <a href="#productos" class="hero-slide-cta">Descubrir →</a>
       </div>
     </div>
-    <div class="hero-slide" data-index="3">
+    <div class="hero-slide" data-index="3" style="--slide-accent:#ff7c23">
       <div class="hero-slide-bg" style="background-image:url('assets/hero-biotic.jpg')"></div>
       <div class="hero-slide-overlay"></div>
       <div class="hero-slide-content">
@@ -2461,6 +2461,7 @@
       const dots = document.querySelectorAll('.hero-dot');
       const counter = document.querySelector('.hero-counter .current');
       let cur = 0, timer;
+      const navEl = document.querySelector('.hero-nav');
       function goTo(i) {
         slides[cur].classList.remove('active');
         dots[cur].classList.remove('active');
@@ -2468,6 +2469,8 @@
         slides[cur].classList.add('active');
         dots[cur].classList.add('active');
         if (counter) counter.textContent = String(cur + 1).padStart(2, '0');
+        const accent = slides[cur].style.getPropertyValue('--slide-accent');
+        if (accent && navEl) navEl.style.setProperty('--dot-color', accent);
       }
       function auto() { timer = setInterval(() => goTo(cur + 1), 5000); }
       dots.forEach(d => d.addEventListener('click', () => { clearInterval(timer); goTo(+d.dataset.slide); auto(); }));
