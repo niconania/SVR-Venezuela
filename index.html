@@ -27,14 +27,36 @@
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
   <meta property="og:type" content="website">
+  <meta property="og:url" content="https://svr-venezuela.com/">
   <meta property="og:title" content="SVR Venezuela — Laboratoire Dermatologique">
   <meta property="og:description" content="Más de 60 años de ciencia dermatológica francesa. Fórmulas de alta concentración para las pieles más sensibles. Disponible en Venezuela.">
-  <meta property="og:image" content="assets/BaumeProtect_6a.jpg">
+  <meta property="og:image" content="https://svr-venezuela.com/assets/BaumeProtect_6a.jpg">
   <meta property="og:locale" content="es_VE">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="SVR Venezuela — Laboratoire Dermatologique">
   <meta name="twitter:description" content="Más de 60 años de ciencia dermatológica francesa para pieles sensibles.">
-  <meta name="twitter:image" content="assets/BaumeProtect_6a.jpg">
+  <meta name="twitter:image" content="https://svr-venezuela.com/assets/BaumeProtect_6a.jpg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "SVR Venezuela",
+    "url": "https://svr-venezuela.com",
+    "logo": "https://svr-venezuela.com/assets/SVR-transparent.png",
+    "description": "Laboratoire Dermatologique SVR — Más de 60 años de ciencia dermatológica francesa. Dermocosmética clínica para pieles sensibles, disponible en Venezuela.",
+    "foundingDate": "1962",
+    "sameAs": [
+      "https://www.instagram.com/svr_venezuela",
+      "https://us.svr.com"
+    ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "url": "https://wa.me/584242565586",
+      "availableLanguage": "Spanish"
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1347,7 +1369,7 @@
   <!-- ══ WHATSAPP FLOAT ══ -->
   <a href="https://wa.me/584242565586?text=%C2%A1Hola!%20Me%20gustar%C3%ADa%20obtener%20m%C3%A1s%20informaci%C3%B3n%20sobre%20los%20productos%20SVR." target="_blank" rel="noopener" class="whatsapp-float" aria-label="Escríbenos por WhatsApp">
     <svg viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16.004 3C9.376 3 4 8.373 4 15c0 2.34.65 4.6 1.885 6.566L4 29l7.62-1.857A11.93 11.93 0 0 0 16.004 27C22.63 27 28 21.627 28 15S22.63 3 16.004 3zm0 21.7c-1.95 0-3.86-.524-5.524-1.516l-.396-.236-4.523 1.103 1.18-4.337-.258-.41A9.62 9.62 0 0 1 6.31 15c0-5.347 4.36-9.7 9.694-9.7 5.335 0 9.694 4.353 9.694 9.7 0 5.347-4.36 9.7-9.694 9.7zm5.32-7.27c-.29-.146-1.717-.847-1.983-.943-.266-.097-.46-.146-.654.146-.193.29-.75.943-.92 1.137-.17.193-.34.218-.63.073-.29-.146-1.224-.452-2.332-1.44-.862-.77-1.444-1.72-1.613-2.01-.17-.29-.018-.447.128-.592.13-.13.29-.34.435-.51.145-.17.193-.29.29-.484.097-.193.048-.363-.024-.51-.073-.145-.654-1.578-.897-2.16-.236-.567-.477-.49-.654-.5-.17-.008-.363-.01-.557-.01-.193 0-.508.073-.774.363-.266.29-1.016.993-1.016 2.422 0 1.43 1.04 2.81 1.185 3.003.145.193 2.05 3.13 4.967 4.39.694.3 1.236.48 1.658.614.696.222 1.33.19 1.83.115.558-.083 1.717-.702 1.96-1.38.242-.677.242-1.257.17-1.38-.073-.122-.266-.193-.557-.34z"/></svg>
-    <span>Escríbenos por WhatsApp</span>
+    <span>Pide tu asesoría gratuita</span>
   </a>
 
   <!-- ══ PRODUCT MODAL ══ -->
@@ -1386,7 +1408,7 @@
       <li><a href="manifiesto.html">Nosotros</a></li>
       <li><a href="#puntos">Dónde comprar</a></li>
     </ul>
-    <a href="#puntos" class="nav-cta">Dónde comprar →</a>
+    <a href="#puntos" class="nav-cta">Encuéntralo cerca de ti →</a>
   </nav>
 
   <!-- ══ HERO ══ -->
@@ -1402,7 +1424,7 @@
         Fórmulas de alta concentración para las pieles más sensibles.
       </h1>
       <div class="hero-actions">
-        <a href="#productos" class="btn-primary">Ver todas las líneas</a>
+        <a href="#productos" class="btn-primary">Encuentra tu producto ideal</a>
         <a href="#herencia" class="btn-ghost">Nuestra historia</a>
       </div>
     </div>
@@ -2456,6 +2478,30 @@
     }, { threshold: 0.5 });
     document.querySelectorAll('[data-count]')
       .forEach(el => counterObserver.observe(el));
+
+    /* ── META PIXEL CONVERSION EVENTS ── */
+    document.querySelectorAll('a[href*="wa.me"], .whatsapp-float, .btn-whatsapp').forEach(el => {
+      el.addEventListener('click', () => {
+        if (typeof fbq !== 'undefined') fbq('track', 'Contact', {content_name: 'WhatsApp'});
+      });
+    });
+    document.querySelectorAll('a[href*="farmatodo"]').forEach(el => {
+      el.addEventListener('click', () => {
+        if (typeof fbq !== 'undefined') fbq('track', 'Lead', {content_name: 'Farmatodo', content_category: el.textContent.trim()});
+      });
+    });
+    document.querySelectorAll('a[href="#puntos"], .nav-cta').forEach(el => {
+      el.addEventListener('click', () => {
+        if (typeof fbq !== 'undefined') fbq('trackCustom', 'ClickDondeComprar');
+      });
+    });
+    const _origOpenProduct = typeof openProduct === 'function' ? openProduct : null;
+    if (_origOpenProduct) {
+      window.openProduct = function(slug) {
+        if (typeof fbq !== 'undefined') fbq('track', 'ViewContent', {content_name: slug, content_type: 'product'});
+        return _origOpenProduct(slug);
+      };
+    }
   </script>
 </body>
 </html>
