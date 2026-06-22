@@ -220,7 +220,8 @@
     ══════════════════════════════ */
     .hero-slider {
       position: relative;
-      height: clamp(420px, 56vw, 800px);
+      aspect-ratio: 1920 / 800;
+      max-height: 800px;
       overflow: hidden;
     }
     .hero-slide {
@@ -319,7 +320,7 @@
       .hero-nav { left: 40px; }
     }
     @media (max-width: 640px) {
-      .hero-slider { height: clamp(360px, 80vw, 520px); }
+      .hero-slider { aspect-ratio: auto; height: 420px; }
       .hero-slide-content { padding: 0 24px; max-width: 100%; }
       .hero-slide-overlay { background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%); }
       .hero-nav { left: 24px; bottom: 20px; }
