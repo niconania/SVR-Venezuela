@@ -320,10 +320,14 @@
       .hero-nav { left: 40px; }
     }
     @media (max-width: 640px) {
-      .hero-slider { aspect-ratio: auto; height: 420px; }
+      .hero-slider { aspect-ratio: 9/16; max-height: 75vh; }
+      .hero-slide-bg { background-position: center right; }
       .hero-slide-content { padding: 0 24px; max-width: 100%; }
-      .hero-slide-overlay { background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 100%); }
-      .hero-nav { left: 24px; bottom: 20px; }
+      .hero-slide-overlay { background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.25) 50%, transparent 100%); }
+      .hero-slide { align-items: flex-end; padding-bottom: 60px; }
+      .hero-slide-title { font-size: 1.5rem; }
+      .hero-slide-claim { font-size: 0.82rem; margin-bottom: 20px; }
+      .hero-nav { left: 24px; bottom: 16px; }
     }
     .btn-primary {
       font-size: 0.68rem;
@@ -358,7 +362,7 @@
     /* ══════════════════════════════
        STATS BAR
     ══════════════════════════════ */
-    .stats-bar { background: #ff7c23; }
+    .stats-bar { background: var(--dark); }
     .stats-bar .container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -366,13 +370,13 @@
     .stat-item {
       padding: 34px 24px;
       text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.2);
+      border-right: 1px solid rgba(255,255,255,0.1);
     }
     .stat-item:last-child { border-right: none; }
     .stat-number {
       font-size: 2.4rem;
       font-weight: 800;
-      color: #ffffff;
+      color: var(--coral);
       line-height: 1;
       display: block;
       margin-bottom: 8px;
@@ -382,7 +386,7 @@
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.78);
+      color: rgba(255,255,255,0.55);
     }
 
     /* ══════════════════════════════
@@ -1055,6 +1059,7 @@
       nav { padding: 16px 28px; }
       nav.scrolled { padding: 12px 28px; }
       .nav-links { display: none; }
+      .nav-cta { font-size: 0.52rem; padding: 10px 16px; white-space: nowrap; }
       .heritage-grid { grid-template-columns: 1fr; gap: 32px; }
       .pillars-grid { grid-template-columns: 1fr; }
       .stats-bar .container { grid-template-columns: repeat(2, 1fr); }
@@ -1071,6 +1076,7 @@
     @media (max-width: 640px) {
       .container { padding: 0 18px; }
       section { padding: 48px 0; }
+      .nav-cta { font-size: 0.48rem; padding: 8px 12px; }
       .line-products-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 24px; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
