@@ -320,14 +320,13 @@
       .hero-nav { left: 40px; }
     }
     @media (max-width: 640px) {
-      .hero-slider { aspect-ratio: 9/16; max-height: 75vh; }
-      .hero-slide-bg { background-position: center right; }
+      .hero-slider { aspect-ratio: 4/3; max-height: 480px; }
       .hero-slide-content { padding: 0 24px; max-width: 100%; }
-      .hero-slide-overlay { background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.25) 50%, transparent 100%); }
-      .hero-slide { align-items: flex-end; padding-bottom: 60px; }
-      .hero-slide-title { font-size: 1.5rem; }
-      .hero-slide-claim { font-size: 0.82rem; margin-bottom: 20px; }
-      .hero-nav { left: 24px; bottom: 16px; }
+      .hero-slide-overlay { background: linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.2) 100%); }
+      .hero-slide-title { font-size: 1.4rem; }
+      .hero-slide-claim { font-size: 0.8rem; margin-bottom: 18px; }
+      .hero-slide-cta { font-size: 0.58rem; padding: 11px 24px; }
+      .hero-nav { left: 24px; bottom: 14px; }
     }
     .btn-primary {
       font-size: 0.68rem;
@@ -362,7 +361,7 @@
     /* ══════════════════════════════
        STATS BAR
     ══════════════════════════════ */
-    .stats-bar { background: var(--dark); }
+    .stats-bar { background: #ff7c23; }
     .stats-bar .container {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -370,13 +369,13 @@
     .stat-item {
       padding: 34px 24px;
       text-align: center;
-      border-right: 1px solid rgba(255,255,255,0.1);
+      border-right: 1px solid rgba(255,255,255,0.2);
     }
     .stat-item:last-child { border-right: none; }
     .stat-number {
       font-size: 2.4rem;
       font-weight: 800;
-      color: var(--coral);
+      color: #ffffff;
       line-height: 1;
       display: block;
       margin-bottom: 8px;
@@ -386,7 +385,7 @@
       font-weight: 500;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.55);
+      color: rgba(255,255,255,0.78);
     }
 
     /* ══════════════════════════════
