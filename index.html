@@ -1356,6 +1356,42 @@
       color: var(--gray);
       line-height: 1.8;
     }
+    .product-modal-ingredients {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .product-modal-ingredients-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--coral);
+    }
+    .product-modal-ingredients ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .product-modal-ingredients li {
+      font-size: 0.82rem;
+      color: var(--gray);
+      line-height: 1.6;
+      padding-left: 14px;
+      position: relative;
+    }
+    .product-modal-ingredients li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--coral);
+    }
+    .product-modal-ingredients li strong { color: var(--dark); font-weight: 700; }
     .product-modal-actions {
       display: flex;
       gap: 12px;
@@ -1432,6 +1468,7 @@
         <h3 class="product-modal-name" id="pmName"></h3>
         <a href="#" target="_blank" rel="noopener" class="product-modal-farmatodo" id="pmFarmatodo">✓ Disponible en Farmatodo · Ver →</a>
         <p class="product-modal-desc" id="pmDesc"></p>
+        <div class="product-modal-ingredients" id="pmIngredients"></div>
         <div class="product-modal-actions">
           <a href="#puntos" class="btn-primary" onclick="closeProductModal()">Dónde Comprar</a>
           <a href="#" id="pmWhatsapp" target="_blank" rel="noopener" class="btn-whatsapp">
@@ -2224,6 +2261,10 @@
         line: 'Sebiaclear', lc: 'var(--lc-sebiaclear)', emoji: '🫧',
         name: 'Active Gel', size: '40 ML',
         desc: 'Tratamiento antigranos con Zinc y BHA. Reduce imperfecciones activas, puntos negros y marcas en tiempo récord. Textura gel de absorción inmediata, no comedogénico.',
+        ingredients: [
+          '14% Gluconolactona (PHA): Desobstruye poros y refina la piel.',
+          'Niacinamida: Calma la irritación, combate bacterias y previene manchas.'
+        ],
         media: [
           { type: 'img', src: 'assets/ActiveGel_8a.jpg' }
         ],
@@ -2233,6 +2274,11 @@
         line: 'Sebiaclear', lc: 'var(--lc-sebiaclear)', emoji: '🫧',
         name: 'Gel Moussant', size: '200 ML',
         desc: 'Gel limpiador purificante para piel con tendencia acneica. Elimina el exceso de sebo y limpia los poros sin resecar ni irritar. Uso diario mañana y noche.',
+        ingredients: [
+          'Gluconolactona: Desobstruye los poros respetando las pieles sensibles.',
+          'Ácido Salicílico: Exfolia suavemente, regula el sebo y reduce imperfecciones.',
+          'Base Limpiadora Suave (Sin jabón): Limpia a fondo sin agredir.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-gel-moussant-200.jpg' },
           { type: 'img', src: 'assets/productos/pdt-gel-moussant-200-2.jpg' }
@@ -2243,6 +2289,11 @@
         line: 'Sebiaclear', lc: 'var(--lc-sebiaclear)', emoji: '🫧',
         name: 'Gel Moussant', size: '400 ML',
         desc: 'Gel limpiador purificante en formato familiar. Controla el sebo, limpia poros y calma imperfecciones sin efecto tirante. Mayor rendimiento para uso prolongado.',
+        ingredients: [
+          'Gluconolactona: Desobstruye los poros respetando las pieles sensibles.',
+          'Ácido Salicílico: Exfolia suavemente, regula el sebo y reduce imperfecciones.',
+          'Base Limpiadora Suave (Sin jabón): Limpia a fondo sin agredir.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-gel-moussant-400.jpg' },
           { type: 'img', src: 'assets/productos/pdt-gel-moussant-400-2.jpg' }
@@ -2253,6 +2304,11 @@
         line: 'Sebiaclear', lc: 'var(--lc-sebiaclear)', emoji: '🫧',
         name: 'Ampoule AZ', size: '30 ML',
         desc: 'Ampolla de choque antiimperfecciones con Zinc purificante. Desinflama granos activos, regula el sebo y previene nuevos brotes. Ideal para acné recurrente o brotes severos.',
+        ingredients: [
+          '15% Ácido Azelaico: regula el sebo, desinflama y reduce imperfecciones y marcas.',
+          '2% Niacinamida + 2% Zinc: Hidratan, calman la barrera cutánea y controlan el brillo.',
+          'Ácido Salicílico: Purifica y suaviza la textura de la piel.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-ampoule-az.jpg' },
           { type: 'img', src: 'assets/productos/pdt-ampoule-az-2.jpg' },
@@ -2264,6 +2320,11 @@
         line: 'Sebiaclear', lc: 'var(--lc-sebiaclear)', emoji: '🫧',
         name: 'Sérum', size: '30 ML',
         desc: 'Sérum doble acción antiedad y antigranos para piel adulta con imperfecciones. Controla el sebo mientras combate las arrugas. La rutina completa en un solo paso.',
+        ingredients: [
+          '14% Gluconolactona + 4% Niacinamida: Desobstruyen poros, reducen imperfecciones y calman la piel.',
+          'Ácido Hialurónico + Activo Retinoide-Like: Hidratan, reafirman y reducen líneas de expresión.',
+          'Antioxidante Vegetal: Protege la piel de agresiones externas y evita nuevos brotes.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-serum-sebiaclear.jpg' },
           { type: 'img', src: 'assets/productos/pdt-serum-sebiaclear-2.jpg' }
@@ -2274,6 +2335,11 @@
         line: 'Topialyse', lc: 'var(--lc-topialyse)', emoji: '🩷',
         name: 'Huile Lavante Refo', size: '400 ML',
         desc: 'Aceite de baño y ducha para piel seca y atópica. Limpia sin irritar y deja una película hidratante protectora al enjuagar. Para toda la familia, desde bebés hasta adultos.',
+        ingredients: [
+          '35% Activos Reponedores: Nutren profundamente y restauran la barrera de la piel.',
+          'Niacinamida: Calma la irritación y la tirantez.',
+          'Tensioactivos Suaves: Limpian con delicadeza sin resecar.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-huile-lavante.jpg' },
           { type: 'video', src: 'assets/productos/pdt-huile-lavante-2.mp4' }
@@ -2284,6 +2350,10 @@
         line: 'Topialyse', lc: 'var(--lc-topialyse)', emoji: '🩷',
         name: 'Baume Protect+', size: '200 ML',
         desc: 'Bálsamo emoliente de alta protección para piel muy seca o atópica. Restaura la barrera hidrolipídica, calma el picor y protege de agresiones externas. Confort inmediato y duradero.',
+        ingredients: [
+          'Ceramidas AD Patentadas + Prebióticos: Protegen de alérgenos.',
+          '46% Fase Lipídica (Coco y Babasú): Nutren profundamente y suavizan la piel.'
+        ],
         media: [
           { type: 'img', src: 'assets/BaumeProtect_6a.jpg' },
           { type: 'img', src: 'assets/productos/pdt-baume-protect-2.jpg' },
@@ -2295,6 +2365,11 @@
         line: 'Topialyse', lc: 'var(--lc-topialyse)', emoji: '🩷',
         name: 'Palpebral+ Baume', size: '30 ML',
         desc: 'Bálsamo especializado para párpados con eccema o dermatitis. Sin perfume ni conservantes. Calma el picor, reduce la descamación y restaura la barrera del párpado. Dermatológicamente probado.',
+        ingredients: [
+          'Ceramidas AD Patentadas + Prebióticos: Protegen de alérgenos y calman la irritación.',
+          'Fase Lipídica + Omegas 3, 6, 9: Nutren profundamente y evitan la deshidratación.',
+          'Ácido Hialurónico: Hidrata intensamente el área.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-palpebral-baume.jpg' },
           { type: 'video', src: 'assets/productos/pdt-palpebral-baume-2.mp4' }
@@ -2305,6 +2380,11 @@
         line: 'Cicavit+', lc: 'var(--lc-cicavit)', emoji: '❤️‍🩹',
         name: 'Crème HPPI', size: '40 ML',
         desc: 'Crema cicatrizante para piel irritada, post-procedimiento o con heridas. Acelera la cicatrización, reduce el riesgo de queloide y calma la inflamación. Apta para toda la familia.',
+        ingredients: [
+          'Derivado de Cúrcuma + Ácido Hialurónico: Calman, hidratan y aceleran la regeneración de la piel.',
+          'Postbióticos Marinos: Evitan la formación de marcas y manchas de hiperpigmentación.',
+          'Polisacáridos + Niacinamida: Protegen la zona y fortalecen la barrera cutánea.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-creme-hppi.jpg' },
           { type: 'img', src: 'assets/productos/pdt-creme-hppi-2.jpg' }
@@ -2315,6 +2395,12 @@
         line: 'Sun Secure', lc: 'var(--lc-sunsecure)', emoji: '☀️',
         name: 'Extreme SPF50+', size: '50 ML',
         desc: 'Protector solar fluido de muy alta protección UVA/UVB. Textura ultraligera, fotoestable y resistente al agua. Para todo tipo de piel. El básico indispensable de la rutina solar.',
+        ingredientsLabel: 'Beneficios clave',
+        ingredients: [
+          'Combinación de 4 filtros solares que protegen la superficie de la piel.',
+          'Protege contra el daño celular causado por los rayos UVA/UVB, la luz azul y la luz infrarroja.',
+          'Acabado invisible, mate y no pegajoso.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-sunsecure-extreme.jpg' },
           { type: 'img', src: 'assets/productos/pdt-sunsecure-extreme-2.jpg' },
@@ -2326,6 +2412,12 @@
         line: 'Sun Secure', lc: 'var(--lc-sunsecure)', emoji: '☀️',
         name: 'Blur Sans Parfum SPF50+', size: '50 ML',
         desc: 'SPF50+ con efecto blur, sin perfume. Difumina poros e imperfecciones con acabado mate sedoso. Para pieles sensibles a las fragancias que no renuncian a una protección perfecta.',
+        ingredientsLabel: 'Beneficios clave',
+        ingredients: [
+          '4 filtros orgánicos fotoestables de muy alta protección contra rayos UVA/UVB.',
+          'Protege contra la luz azul, infrarroja y el estrés oxidativo que causa el envejecimiento.',
+          'Textura ligera, no grasa y de rápida absorción.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-blur.jpg' },
           { type: 'img', src: 'assets/productos/pdt-blur-2.jpg' }
@@ -2336,6 +2428,12 @@
         line: 'Sun Secure', lc: 'var(--lc-sunsecure)', emoji: '☀️',
         name: 'Blur Teinté Hâlé SPF50+', size: '50 ML',
         desc: 'Protector solar SPF50+ con tinte bronceado y efecto blur. Unifica el tono con acabado luminoso y natural. El solar que también embellece mientras cuida tu piel.',
+        ingredientsLabel: 'Beneficios clave',
+        ingredients: [
+          '4 filtros orgánicos fotoestables de muy alta protección contra rayos UVA/UVB.',
+          'Defiende la piel contra la luz azul, infrarroja y el estrés oxidativo para prevenir el envejecimiento.',
+          'Aporta un tono unificado, saludable y aterciopelado al instante.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-blur-teinte.jpg' },
           { type: 'img', src: 'assets/productos/pdt-blur-teinte-2.jpg' }
@@ -2346,6 +2444,12 @@
         line: 'Sun Secure', lc: 'var(--lc-sunsecure)', emoji: '☀️',
         name: 'Fluide Photo Age SPF50+', size: '40 ML',
         desc: 'Solar antiedad de muy alta protección. Previene el fotoenvejecimiento prematuro, las manchas y la pérdida de firmeza. Para piel madura que protege su inversión antiedad.',
+        ingredientsLabel: 'Beneficios clave',
+        ingredients: [
+          'Defiende contra rayos UVA/UVB, luz azul e infrarroja, evitando manchas solares.',
+          'Hidrata, rellena y suaviza líneas de expresión.',
+          'Combate el estrés oxidativo causante del envejecimiento prematuro.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-fluide-photoage.jpg' },
           { type: 'img', src: 'assets/productos/pdt-fluide-photoage-2.jpg' }
@@ -2356,6 +2460,11 @@
         line: 'Sensifine', lc: 'var(--lc-sensifine)', emoji: '🌸',
         name: 'Extreme', size: '30 ML',
         desc: 'Crema SOS para piel muy sensible e intolerante. Apaga el ardor, el picor y las rojeces de inmediato. Refuerza la barrera cutánea y protege de agresiones externas todo el día.',
+        ingredients: [
+          'Calma, protege y repara la barrera de las pieles más intolerantes.',
+          'Nutre, suaviza y protege la piel con total delicadeza.',
+          'Diseñada con solo 6 componentes para minimizar cualquier riesgo de alergia.'
+        ],
         media: [
           { type: 'video', src: 'assets/productos/pdt-sensifine-extreme-1.mp4' }
         ],
@@ -2365,6 +2474,11 @@
         line: 'Sensifine', lc: 'var(--lc-sensifine)', emoji: '🌸',
         name: 'AR Eau Micellaire', size: '400 ML',
         desc: 'Agua micelar para piel con rosácea o rojeces crónicas. Limpieza suave sin frotar, sin alcohol. Reduce la reactividad vascular y calma el enrojecimiento desde la limpieza diaria.',
+        ingredients: [
+          'Niacinamida: Calma profundamente la piel y reduce las rojeces.',
+          'Tensioactivos: Limpian con total delicadeza respetando las pieles reactivas.',
+          'Agentes Hidratantes: Aportan frescura y evitan la tirantez.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-eau-micellaire.jpg' },
           { type: 'img', src: 'assets/productos/pdt-eau-micellaire-2.jpg' }
@@ -2375,6 +2489,11 @@
         line: 'Clairial', lc: 'var(--lc-clairial)', emoji: '🩹',
         name: 'Ampoule', size: '30 ML',
         desc: 'Ampolla antimancha de alta concentración para uso diario. Actúa sobre manchas solares, hormonales y postinflamatorias desde el interior de la piel. Tono verdaderamente uniforme.',
+        ingredients: [
+          '14% Complejo Despigmentante: Reduce el tamaño e intensidad de las manchas oscuras.',
+          '2% Vitamina C Optimizada: Unifica el tono y activa la luminosidad.',
+          'Algas y Microorganismos Marinos: Protegen contra la contaminación y evitan que las manchas reaparezcan.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-ampoule-clairial.jpg' },
           { type: 'img', src: 'assets/productos/pdt-ampoule-clairial-2.jpg' },
@@ -2386,6 +2505,11 @@
         line: 'Clairial', lc: 'var(--lc-clairial)', emoji: '🩹',
         name: 'Night Peel', size: '50 ML',
         desc: 'Sérum nocturno despigmentante con AHA. Borra manchas solares, hormonales y postacné mientras duermes. Piel más uniforme y sin marcas en 4 a 8 semanas de uso.',
+        ingredients: [
+          'Complejo Despigmentante: Corrige y reduce las manchas existentes y previene su reaparición.',
+          'Enzima de Papaya: Exfolia con total suavidad en la superficie para acelerar la eliminación de manchas.',
+          'Niacinamida + Levadura Anti-Estrés: Potencian la renovación celular y fortalecen la barrera cutánea.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-night-peel.jpg' },
           { type: 'img', src: 'assets/productos/pdt-night-peel-2.jpg' }
@@ -2396,6 +2520,9 @@
         line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
         name: 'Ampoule C', size: '30 ML',
         desc: 'Vitamina C optimizada al 20% en ampolla. Flash antimancha, antioxidante y antiedad. Activa la síntesis de colágeno y aporta luminosidad visible desde los primeros días.',
+        ingredients: [
+          '20% Vitamina C Optimizada: Potente antioxidante que ilumina y reduce arrugas.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-ampoule-c.jpg' },
           { type: 'img', src: 'assets/productos/pdt-ampoule-c-2.jpg' }
@@ -2406,6 +2533,10 @@
         line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
         name: 'Ampoule B3', size: '30 ML',
         desc: 'Ampolla concentrada con Niacinamida 10%. Unifica el tono, afina los poros y regula el sebo. Textura impecable en 4 semanas de uso constante. Apta para todo tipo de piel.',
+        ingredients: [
+          '5% Niacinamida (Vitamina B3): Fortalece, restaura la barrera cutánea y calma la piel.',
+          '3 Ácidos Hialurónicos: Hidratan en la superficie y actúan en profundidad para estimular el colágeno.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-ampoule-b3.jpg' },
           { type: 'img', src: 'assets/productos/pdt-ampoule-b3-2.jpg' }
@@ -2416,6 +2547,10 @@
         line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
         name: 'Ampoule A', size: '30 ML',
         desc: 'Retinol encapsulado de tolerancia mejorada. Suaviza arrugas, renueva y regenera la piel mientras duermes. Toda la eficacia del retinol sin la irritación clásica.',
+        ingredients: [
+          '0.3% Retinol Puro + 2% NovoRetin™: Acelera la renovación celular, alisa arrugas y mejora visiblemente la textura de la piel.',
+          'Niacinamida + Ceramidas: Protegen y fortalecen la barrera cutánea para asegurar una tolerancia óptima.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-ampoule-a.jpg' },
           { type: 'img', src: 'assets/productos/pdt-ampoule-a-2.jpg' }
@@ -2426,6 +2561,10 @@
         line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
         name: '[C] Eye Biotic', size: '15 ML',
         desc: 'Contorno de ojos antiedad con Vitamina C pura y probióticos. Ilumina ojeras, reduce bolsas y protege del estrés oxidativo. Piel del contorno visiblemente más joven desde la primera semana.',
+        ingredients: [
+          '5% Vitamina C Optimizada + Péptido: Iluminan, combaten la fatiga y disminuyen las patas de gallo.',
+          'Probióticos + Ácido Hialurónico: Fortalecen la piel, hidratan y rellenan líneas de expresión.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-ceye.jpg' },
           { type: 'img', src: 'assets/productos/pdt-ceye-2.jpg' }
@@ -2436,6 +2575,12 @@
         line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
         name: '[C20] Rechargeable', size: '50 ML',
         desc: '20% de Vitamina C pura: máxima concentración antiedad. Efecto tensor, antimancha y antifatiga. Envase recargable eco-friendly. Para piel madura que exige resultados reales.',
+        ingredients: [
+          '20% Vitamina C Optimizada: ilumina y reduce los signos del envejecimiento.',
+          'Probióticos Pasteurizados: Fortalecen la microbiota y protegen la barrera de la piel.',
+          'Ácido Hialurónico: Hidrata en profundidad y suaviza arrugas o líneas de expresión.',
+          'Extracto de Gentiana: Reafirma los párpados y drena bolsas.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-c20.jpg' },
           { type: 'img', src: 'assets/productos/pdt-c20-2.jpg' }
@@ -2446,6 +2591,11 @@
         line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
         name: '[Collagen] Rechargeable', size: '50 ML',
         desc: 'Colágeno marino y probióticos en sérum recargable. Recupera densidad, firmeza y elasticidad. Piel visiblemente más llena y tonificada en 4 semanas de uso constante.',
+        ingredients: [
+          '2% Colágeno Vegetal: Reestructura y devuelve la firmeza natural a la piel.',
+          'Probióticos Pasteurizados: Fortalecen la microbiota y protegen la barrera cutánea.',
+          'Vitamina C + Ácido Hialurónico: Iluminan, hidratan en profundidad y suavizan las arrugas.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-collagen.jpg' },
           { type: 'img', src: 'assets/productos/pdt-collagen-2.jpg' }
@@ -2456,6 +2606,10 @@
         line: 'Anti Age', lc: 'var(--lc-antiage)', emoji: '💫',
         name: '[Hyalu] Rechargeable', size: '50 ML',
         desc: 'Ácido Hialurónico triple acción: hidratación superficial, relleno en profundidad y barrera reforzada. Sérum antiedad de nueva generación en envase recargable.',
+        ingredients: [
+          'Dúo de Ácido Hialurónico: Hidrata, rellena y alisa las líneas de expresión.',
+          'Vitamina C Optimizada: Ilumina y previene el envejecimiento prematuro.'
+        ],
         media: [
           { type: 'img', src: 'assets/productos/pdt-hyalu.jpg' },
           { type: 'img', src: 'assets/productos/pdt-hyalu-2.jpg' }
@@ -2545,6 +2699,22 @@
       document.getElementById('pmSize').textContent = p.size;
       document.getElementById('pmName').textContent = p.name;
       document.getElementById('pmDesc').textContent = p.desc;
+
+      const ingredientsEl = document.getElementById('pmIngredients');
+      if (p.ingredients && p.ingredients.length) {
+        const label = p.ingredientsLabel || 'Ingredientes clave';
+        const items = p.ingredients.map(i => {
+          const idx = i.indexOf(': ');
+          return idx > -1
+            ? `<li><strong>${i.slice(0, idx)}:</strong>${i.slice(idx + 1)}</li>`
+            : `<li>${i}</li>`;
+        }).join('');
+        ingredientsEl.innerHTML = `<span class="product-modal-ingredients-label">${label}</span><ul>${items}</ul>`;
+        ingredientsEl.style.display = '';
+      } else {
+        ingredientsEl.innerHTML = '';
+        ingredientsEl.style.display = 'none';
+      }
 
       pmMediaList = p.media || [];
       pmMediaIndex = 0;
