@@ -1425,9 +1425,12 @@
         max-height: 92vh;
         border-radius: 16px 16px 0 0;
         animation: pmSlideUp 0.3s ease;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        -webkit-overflow-scrolling: touch;
       }
-      .product-modal-media { flex: 0 0 auto; height: 38vh; min-height: 220px; }
-      .product-modal-info { flex: 1; min-height: 0; padding: 28px 24px; }
+      .product-modal-media { flex: none; height: min(38vh, 300px); min-height: 200px; }
+      .product-modal-info { flex: none; padding: 28px 24px; overflow-y: visible; }
       .product-modal-name { font-size: 1.4rem; }
     }
     @keyframes pmSlideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
@@ -2752,10 +2755,11 @@
       if (e.key === 'ArrowRight') pmNav(1);
     });
 
-    /* Evita que el swipe dentro del modal mueva la página de fondo
-       (o dispare el gesto de "volver atrás" del navegador en móvil) */
+    /* Evita que el swipe sobre el fondo (backdrop) mueva la página detrás del modal.
+       Dentro de product-modal-content se deja el scroll nativo, así se puede
+       deslizar verticalmente incluso empezando sobre la foto/video. */
     productModal.addEventListener('touchmove', (e) => {
-      if (e.target.closest('.product-modal-info')) return;
+      if (e.target.closest('.product-modal-content')) return;
       e.preventDefault();
     }, { passive: false });
 
