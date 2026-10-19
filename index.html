@@ -1434,6 +1434,293 @@
       .product-modal-name { font-size: 1.4rem; }
     }
     @keyframes pmSlideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+    /* ══════════════════════════════
+       MAPA · SVR EN FARMATODO
+    ══════════════════════════════ */
+    #farmatodo {
+      --ftd: #418fde;              /* azul Farmatodo (theme-color de farmatodo.com.ve) */
+      --ftd-tinta: #2468ad;        /* el mismo azul, oscurecido para texto pequeño */
+      --coral-tinta: #c63f59;      /* coral para texto pequeño sobre blanco */
+      --mf-bg: #f2f7fd;
+      --mf-panel: #ffffff;
+      --mf-field: #f2f6fb;
+      --mf-line: rgba(20,48,82,0.11);
+      --mf-text: #1a1a1a;
+      --mf-muted: #5a5a5a;
+      --mf-faint: #637080;
+      --mf-land: #e4e9ef;
+      --mf-land-svr: #cfe2f7;
+      --mf-land-hover: #b8d4f3;
+      --mf-land-sel: #b3d1f2;
+      --mf-punto: #e04d67;
+      position: relative;
+      overflow: hidden;
+      background: var(--mf-bg);
+      color: var(--mf-text);
+    }
+    #farmatodo::before {
+      content: '';
+      position: absolute;
+      left: -10%; right: -10%; top: 25%; bottom: -10%;
+      background: radial-gradient(55% 60% at 32% 55%, rgba(65,143,222,0.12), transparent 70%);
+      pointer-events: none;
+    }
+    #farmatodo .container { position: relative; }
+    #farmatodo [hidden] { display: none !important; }   /* sus botones usan display:flex, que le gana a [hidden] */
+    .mf-sr {
+      position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+      overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+    }
+    .mf-head { text-align: center; max-width: 620px; margin: 0 auto 44px; }
+    .mf-head h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--mf-text);
+      margin: 12px 0 14px;
+      text-wrap: balance;
+    }
+    .mf-head h2 .mf-svr { color: var(--coral-dark); }
+    .mf-head h2 .mf-ftd { color: var(--ftd); }
+    .mf-head p { font-size: 0.92rem; color: var(--mf-muted); line-height: 1.8; text-wrap: pretty; }
+    .mf-cifras { display: flex; justify-content: center; gap: clamp(28px, 6vw, 64px); margin-top: 28px; }
+    .mf-cifra b {
+      display: block;
+      font-size: clamp(2rem, 4.2vw, 2.7rem);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--coral-dark);
+    }
+    .mf-cifra span {
+      display: block;
+      margin-top: 8px;
+      font-size: 0.58rem;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--mf-muted);
+    }
+
+    .mf-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    /* ── Mapa ── */
+    .mf-mapa {
+      position: relative;
+      background: var(--mf-panel);
+      border: 1px solid var(--mf-line);
+      border-radius: 12px;
+      padding: 14px 14px 12px;
+      box-shadow: 0 10px 30px rgba(20,48,82,0.06);
+    }
+    .mf-barra { display: flex; align-items: center; gap: 12px; min-height: 34px; padding: 0 4px 8px; }
+    .mf-volver {
+      display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
+      font: inherit; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--mf-text); background: var(--mf-panel);
+      border: 1px solid var(--mf-line); border-radius: 100px; padding: 7px 13px;
+      cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .mf-volver:hover { border-color: var(--ftd); color: var(--ftd-tinta); }
+    .mf-ayuda { font-size: 0.7rem; color: var(--mf-faint); line-height: 1.35; min-width: 0; }
+    @media (hover: none) { .mf-ayuda-raton { display: none; } }
+    @media (hover: hover) { .mf-ayuda-tactil { display: none; } }
+    .mf-donde-mapa { margin-left: auto; text-align: right; line-height: 1.25; min-width: 0; flex-shrink: 0; max-width: 55%; }
+    .mf-donde-mapa b { display: block; font-size: 0.95rem; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .mf-donde-mapa span { font-size: 0.7rem; color: var(--mf-muted); }
+    .mf-lienzo { position: relative; }
+    .mf-svg { display: block; width: 100%; height: auto; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .mf-svg.mf-acercado { touch-action: none; cursor: grab; }
+    .mf-svg.mf-arrastrando, .mf-svg.mf-arrastrando * { cursor: grabbing !important; }
+    .mf-e { fill: var(--mf-land); stroke: var(--mf-panel); stroke-width: 1px; vector-effect: non-scaling-stroke; stroke-linejoin: round; transition: fill 0.2s; }
+    .mf-e-svr { fill: var(--mf-land-svr); cursor: pointer; }
+    .mf-e-svr:hover, .mf-e-svr:focus-visible, .mf-e.mf-hover { fill: var(--mf-land-hover); }
+    .mf-e:focus { outline: none; }   /* Chrome dibuja un recuadro de foco alrededor de todo el estado al tocarlo */
+    .mf-e-svr:focus-visible { stroke: var(--mf-text); stroke-width: 1.5px; }   /* solo al navegar con teclado */
+    .mf-e-rec { fill: url(#mfRayas); }
+    .mf-e.mf-sel { fill: var(--mf-land-sel); }
+    .mf-svg.mf-enfocado .mf-e:not(.mf-sel):not(.mf-e-rec) { fill-opacity: 0.55; }
+    .mf-halo { fill: var(--mf-punto); opacity: 0.18; pointer-events: none; }
+    .mf-punto { fill: var(--mf-punto); stroke: #fff; stroke-width: 1.5px; vector-effect: non-scaling-stroke; pointer-events: none; transition: opacity 0.25s; }
+    .mf-toque { fill: transparent; cursor: pointer; }
+    .mf-punto.mf-tenue { opacity: 0.3; }
+    .mf-halo.mf-tenue { opacity: 0.05; }
+    .mf-punto.mf-resalta, .mf-punto.mf-activa { fill: #fff; stroke: var(--mf-punto); stroke-width: 3px; }
+    .mf-pulso { fill: none; stroke: var(--mf-punto); stroke-width: 2px; vector-effect: non-scaling-stroke; pointer-events: none; transform-box: fill-box; transform-origin: center; animation: mf-pulso 1.8s ease-out infinite; }
+    .mf-yo { fill: var(--ftd); stroke: #fff; stroke-width: 2px; vector-effect: non-scaling-stroke; }
+    .mf-yo-halo { fill: var(--ftd); opacity: 0.22; pointer-events: none; }
+    @keyframes mf-pulso { from { transform: scale(0.6); opacity: 0.9; } to { transform: scale(2.4); opacity: 0; } }
+    .mf-svg.mf-entrada .mf-punto, .mf-svg.mf-entrada .mf-halo {
+      transform-box: fill-box; transform-origin: center;
+      animation: mf-aparece 0.55s cubic-bezier(0.25,0.46,0.45,0.94) backwards;
+      animation-delay: var(--mf-retraso, 0s);
+    }
+    @keyframes mf-aparece { from { transform: scale(0); opacity: 0; } }
+
+    .mf-zoom { position: absolute; right: 8px; bottom: 8px; display: flex; flex-direction: column; gap: 6px; }
+    .mf-zoom button {
+      width: 38px; height: 38px; display: grid; place-items: center;
+      color: var(--mf-text); background: var(--mf-panel);
+      border: 1px solid var(--mf-line); border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(20,48,82,0.12);
+      cursor: pointer; transition: color 0.2s, border-color 0.2s, opacity 0.2s;
+    }
+    .mf-zoom button:hover:not(:disabled) { color: var(--ftd-tinta); border-color: var(--ftd); }
+    .mf-zoom button:disabled { opacity: 0.4; cursor: default; }
+    .mf-zoom svg { width: 20px; height: 20px; }
+
+    .mf-tip {
+      position: absolute; z-index: 3; pointer-events: none;
+      transform: translate(-50%, calc(-100% - 14px));
+      background: #1a1a1a; color: #fff;
+      border-radius: 8px; padding: 7px 11px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+      font-size: 0.72rem; line-height: 1.35; white-space: nowrap;
+    }
+    .mf-tip.mf-abajo { transform: translate(-50%, 18px); }
+    .mf-tip b { display: block; font-size: 0.8rem; }
+    .mf-tip span { color: #c9ced6; }
+    .mf-leyenda {
+      display: flex; flex-wrap: wrap; gap: 6px 18px;
+      padding: 10px 4px 0; margin-top: 4px; border-top: 1px solid var(--mf-line);
+      font-size: 0.66rem; color: var(--mf-muted); list-style: none;
+    }
+    .mf-leyenda li { display: inline-flex; align-items: center; gap: 7px; }
+    .mf-ley-punto { width: 9px; height: 9px; border-radius: 50%; background: var(--mf-punto); box-shadow: 0 0 0 4px rgba(224,77,103,0.18); }
+    .mf-ley-area { width: 14px; height: 10px; border-radius: 2px; background: var(--mf-land-svr); }
+    .mf-ley-rayas { width: 14px; height: 10px; border-radius: 2px; background: repeating-linear-gradient(45deg, #c6d0dc 0 2px, #eef2f7 2px 5px); }
+
+    /* ── Panel ── */
+    .mf-panel {
+      background: var(--mf-panel);
+      border: 1px solid var(--mf-line);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex; flex-direction: column; gap: 12px;
+      box-shadow: 0 10px 30px rgba(20,48,82,0.06);
+      contain: size;   /* la altura la marca el mapa; la lista se desplaza por dentro */
+    }
+    .mf-buscar { display: flex; gap: 8px; }
+    .mf-campo { position: relative; flex: 1; min-width: 0; }
+    .mf-campo svg { position: absolute; left: 14px; top: 50%; width: 15px; height: 15px; transform: translateY(-50%); color: var(--mf-faint); pointer-events: none; }
+    .mf-campo input {
+      width: 100%; font: inherit; font-size: 0.85rem; color: var(--mf-text);
+      background: var(--mf-field); border: 1px solid var(--mf-line); border-radius: 100px;
+      padding: 11px 14px 11px 38px; -webkit-appearance: none; appearance: none;
+    }
+    .mf-campo input::placeholder { color: var(--mf-faint); }
+    .mf-campo input:focus { outline: none; border-color: var(--ftd); background: #fff; }
+    .mf-cerca {
+      display: inline-flex; align-items: center; gap: 7px; flex-shrink: 0;
+      font: inherit; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--ftd-tinta); background: transparent;
+      border: 1px solid var(--ftd); border-radius: 100px; padding: 0 15px;
+      cursor: pointer; transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .mf-cerca svg { width: 14px; height: 14px; }
+    .mf-cerca:hover:not(:disabled) { background: var(--ftd-tinta); border-color: var(--ftd-tinta); color: #fff; }
+    .mf-cerca:disabled { opacity: 0.6; cursor: wait; }
+    .mf-cerca:focus-visible, .mf-volver:focus-visible, .mf-fila:focus-visible, .mf-mas:focus-visible,
+    .mf-atras:focus-visible, .mf-ver:focus-visible, .mf-btn:focus-visible, .mf-zoom button:focus-visible { outline: 2px solid var(--ftd); outline-offset: 2px; }
+    .mf-vista { flex: 1; min-height: 0; overflow-y: auto; overscroll-behavior: contain; margin: 0 -6px; padding: 0 6px; scrollbar-width: thin; }
+    .mf-vista-cab { padding: 2px 0 10px; }
+    .mf-vista-cab h3 { font-size: 1.05rem; font-weight: 700; color: var(--mf-text); }
+    .mf-vista-cab p { font-size: 0.74rem; color: var(--mf-muted); margin-top: 2px; }
+    .mf-atras {
+      font: inherit; font-size: 0.64rem; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--mf-muted); background: none; border: none; padding: 2px 0; margin-bottom: 8px; cursor: pointer;
+    }
+    .mf-atras:hover { color: var(--ftd-tinta); }
+    .mf-aviso { font-size: 0.8rem; color: var(--mf-muted); line-height: 1.6; padding: 6px 0 4px; }
+    .mf-aviso a { color: var(--ftd-tinta); }
+
+    .mf-filas { list-style: none; }
+    .mf-fila {
+      width: 100%; display: flex; align-items: center; gap: 12px; text-align: left;
+      font: inherit; color: var(--mf-text); background: none;
+      border: none; border-bottom: 1px solid var(--mf-line);
+      padding: 12px 6px; cursor: pointer; transition: background 0.2s;
+    }
+    .mf-fila:hover { background: rgba(65,143,222,0.07); }
+    .mf-fila-txt { flex: 1; min-width: 0; }
+    .mf-fila-txt b { display: block; font-size: 0.86rem; font-weight: 600; }
+    .mf-fila-txt small { display: block; font-size: 0.7rem; color: var(--mf-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .mf-fila-n {
+      min-width: 30px; padding: 3px 9px; border-radius: 100px; text-align: center;
+      background: rgba(224,77,103,0.1); color: var(--coral-tinta); font-size: 0.74rem; font-weight: 700;
+    }
+    .mf-fila-flecha { color: var(--mf-faint); font-size: 0.9rem; }
+    .mf-mas {
+      width: 100%; margin-top: 10px; font: inherit; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--mf-text); background: var(--mf-field); border: 1px solid var(--mf-line); border-radius: 100px;
+      padding: 10px; cursor: pointer; transition: border-color 0.2s, color 0.2s;
+    }
+    .mf-mas:hover { border-color: var(--ftd); color: var(--ftd-tinta); }
+
+    .mf-ciudad {
+      display: flex; align-items: baseline; justify-content: space-between;
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--coral-tinta); padding: 14px 0 2px;
+    }
+    .mf-ciudad span { color: var(--mf-faint); letter-spacing: 0.08em; }
+    .mf-tienda { padding: 14px 6px 15px; border-bottom: 1px solid var(--mf-line); border-radius: 6px; transition: background 0.2s; }
+    .mf-tienda.mf-activa { background: rgba(224,77,103,0.07); }
+    .mf-tienda-cab { display: flex; align-items: flex-start; gap: 10px; }
+    .mf-tienda h4 { flex: 1; font-size: 0.9rem; font-weight: 600; line-height: 1.3; color: var(--mf-text); }
+    .mf-dist { flex-shrink: 0; font-size: 0.72rem; font-weight: 700; color: var(--ftd-tinta); }
+    .mf-donde { font-size: 0.7rem; color: var(--coral-tinta); margin-top: 2px; }
+    .mf-dir { font-size: 0.76rem; color: var(--mf-muted); line-height: 1.5; margin-top: 4px; }
+    .mf-hora { display: flex; align-items: center; gap: 7px; font-size: 0.74rem; color: var(--mf-text); margin-top: 7px; }
+    .mf-hora::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #b7c0cb; flex-shrink: 0; }
+    .mf-hora.mf-24::before { background: #34c759; box-shadow: 0 0 0 3px rgba(52,199,89,0.2); }
+    .mf-prods { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; list-style: none; }
+    .mf-prods li {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.64rem; color: var(--mf-text);
+      background: var(--mf-field); border-radius: 100px; padding: 3px 9px 3px 7px;
+    }
+    .mf-prods i { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .mf-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
+    .mf-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      text-decoration: none; border-radius: 100px; padding: 8px 14px;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .mf-ir { background: var(--coral); color: #1a1a1a; }
+    .mf-ir:hover { background: var(--coral-dark); }
+    .mf-waze { color: var(--mf-text); border: 1px solid var(--mf-line); }
+    .mf-waze:hover { border-color: var(--ftd); color: var(--ftd-tinta); }
+    .mf-ver {
+      margin-left: auto; font: inherit; font-size: 0.66rem; color: var(--mf-muted);
+      background: none; border: none; padding: 6px 2px; cursor: pointer;
+      text-decoration: underline; text-underline-offset: 3px; text-decoration-color: #b7c0cb;
+    }
+    .mf-ver:hover { color: var(--ftd-tinta); }
+    .mf-nota { position: relative; max-width: 720px; margin: 22px auto 0; text-align: center; font-size: 0.72rem; color: var(--mf-muted); line-height: 1.7; }
+
+    @media (max-width: 960px) {
+      .mf-grid { grid-template-columns: 1fr; }
+      .mf-panel { contain: none; }
+      .mf-vista { overflow: visible; }
+    }
+    @media (max-width: 640px) {
+      .mf-head { margin-bottom: 30px; }
+      .mf-mapa { padding: 10px 8px 10px; border-radius: 10px; }
+      .mf-barra { padding: 0 2px 6px; }
+      .mf-panel { padding: 14px 12px; }
+      .mf-buscar { flex-direction: column; }
+      .mf-cerca { justify-content: center; padding: 11px 15px; }
+      .mf-ver { margin-left: 0; }
+      .mf-zoom button { width: 42px; height: 42px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .mf-pulso { animation: none; opacity: 0.6; }
+      .mf-svg.mf-entrada .mf-punto, .mf-svg.mf-entrada .mf-halo { animation: none; }
+    }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -1639,6 +1926,673 @@
       </div>
     </div>
   </section>
+
+  <!-- ══ MAPA · SVR EN FARMATODO ══ -->
+  <section id="farmatodo" aria-labelledby="mfTitulo">
+    <div class="container">
+
+      <div class="mf-head reveal">
+        <span class="label-coral">Dónde comprar</span>
+        <h2 id="mfTitulo">Encuentra <span class="mf-svr">SVR</span> en tu <span class="mf-ftd">Farmatodo</span></h2>
+        <p>Busca tu ciudad, toca tu estado en el mapa o mira las tiendas más cercanas a ti con productos SVR en existencia.</p>
+        <div class="mf-cifras" id="mfCifras" hidden>
+          <div class="mf-cifra"><b id="mfNTiendas"></b><span>Tiendas</span></div>
+          <div class="mf-cifra"><b id="mfNCiudades"></b><span>Ciudades</span></div>
+          <div class="mf-cifra"><b id="mfNEstados"></b><span>Estados</span></div>
+        </div>
+      </div>
+
+      <div class="mf-grid reveal">
+        <div class="mf-mapa">
+          <div class="mf-barra">
+            <button type="button" class="mf-volver" id="mfVolver" hidden>← Toda Venezuela</button>
+            <p class="mf-ayuda" id="mfAyuda"><span class="mf-ayuda-raton">Acerca con las lupas y arrastra para moverte</span><span class="mf-ayuda-tactil">Pellizca o usa las lupas para acercar</span></p>
+            <div class="mf-donde-mapa"><b id="mfLugar">Venezuela</b><span id="mfLugarN"></span></div>
+          </div>
+          <div class="mf-lienzo">
+            <svg class="mf-svg" id="mfSvg" viewBox="0 0 1000 767" role="group" aria-label="Mapa de Venezuela con las tiendas Farmatodo que tienen productos SVR">
+              <defs>
+                <pattern id="mfRayas" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                  <rect width="7" height="7" fill="#eef2f7"/>
+                  <line x1="0" y1="0" x2="0" y2="7" stroke="#c6d0dc" stroke-width="2.4"/>
+                </pattern>
+              </defs>
+              <g id="mfEstados"></g>
+              <g id="mfPuntos"></g>
+              <g id="mfYo"></g>
+            </svg>
+            <div class="mf-zoom">
+              <button type="button" id="mfMas" aria-label="Acercar el mapa" title="Acercar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.5-4.5M10.5 7.5v6M7.5 10.5h6"/></svg></button>
+              <button type="button" id="mfMenos" aria-label="Alejar el mapa" title="Alejar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m20 20-4.5-4.5M7.5 10.5h6"/></svg></button>
+            </div>
+            <div class="mf-tip" id="mfTip" hidden></div>
+          </div>
+          <ul class="mf-leyenda" aria-hidden="true">
+            <li><span class="mf-ley-punto"></span>Tienda Farmatodo con SVR</li>
+            <li><span class="mf-ley-area"></span>Estado con tiendas</li>
+            <li><span class="mf-ley-rayas"></span>Guayana Esequiba</li>
+          </ul>
+        </div>
+
+        <div class="mf-panel">
+          <div class="mf-buscar">
+            <label class="mf-campo">
+              <span class="mf-sr">Busca por ciudad, zona o centro comercial</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
+              <input type="search" id="mfQ" placeholder="Busca tu ciudad o zona" autocomplete="off" enterkeyhint="search">
+            </label>
+            <button type="button" class="mf-cerca" id="mfCerca">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+              <span>Cerca de mí</span>
+            </button>
+          </div>
+          <p class="mf-sr" id="mfAnuncio" aria-live="polite"></p>
+          <div class="mf-vista" id="mfVista"><p class="mf-aviso">Cargando tiendas…</p></div>
+        </div>
+      </div>
+
+      <p class="mf-nota" id="mfNota">Existencias según farmatodo.com.ve. Pueden cambiar durante el día: antes de ir, confírmalas en la app de Farmatodo o al 0800-3276286.</p>
+      <noscript><p class="mf-nota">Activa JavaScript para ver el mapa, o busca tu tienda en farmatodo.com.ve.</p></noscript>
+    </div>
+  </section>
+  <script>
+  /* Tiendas Farmatodo con SVR. Los datos salen de sedes-farmatodo.json,
+     que se actualiza con scripts/sedes-farmatodo.py. */
+  (() => {
+    const $ = id => document.getElementById(id);
+    const raiz = $('farmatodo');
+    if (!raiz) return;
+    const svg = $('mfSvg'), gEstados = $('mfEstados'), gPuntos = $('mfPuntos'), gYo = $('mfYo');
+    const tip = $('mfTip'), vista = $('mfVista'), q = $('mfQ'), btnCerca = $('mfCerca');
+    const btnVolver = $('mfVolver'), lugar = $('mfLugar'), lugarN = $('mfLugarN'), anuncio = $('mfAnuncio');
+    const btnMas = $('mfMas'), btnMenos = $('mfMenos'), ayuda = $('mfAyuda');
+    const ANCHO_MIN = 30;   // zoom máximo: ~50 km de ancho; más cerca los trazos simplificados se ven toscos
+    const NS = 'http://www.w3.org/2000/svg';
+    const LINEAS = { 'Sebiaclear': '--lc-sebiaclear', 'Topialyse': '--lc-topialyse', 'Cicavit+': '--lc-cicavit',
+                     'Sun Secure': '--lc-sunsecure', 'Sensifine': '--lc-sensifine', 'Clairial': '--lc-clairial', 'Anti Age': '--lc-antiage' };
+    const CORTA = 6;
+    const calma = matchMedia('(prefers-reduced-motion: reduce)');
+    const decimal = new Intl.NumberFormat('es-VE', { maximumFractionDigits: 1 });
+
+    let D, VB0, vb, aspecto, ancho = 1, anim = 0, inercia = 0, activa = null, pulso = null, yo = null;
+    let vistaActual = { tipo: 'pais' }, vistaBase = vistaActual;
+    const estados = {}, tiendasDe = {};
+
+    const plano = s => s.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const plural = (n, uno, varios) => n + ' ' + (n === 1 ? uno : varios);
+    const el = (tag, cls, txt) => { const e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+    const sv = (tag, at) => { const e = document.createElementNS(NS, tag); for (const k in at) e.setAttribute(k, at[k]); return e; };
+    const contar = (lista, clave) => { const m = new Map(); lista.forEach(t => m.set(t[clave], (m.get(t[clave]) || 0) + 1)); return m; };
+    const suave = () => calma.matches ? 'auto' : 'smooth';
+
+    fetch('sedes-farmatodo.json')
+      .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(iniciar)
+      .catch(() => {
+        const p = el('p', 'mf-aviso', 'No pudimos cargar el mapa. Busca tu tienda directamente en ');
+        const a = el('a', null, 'farmatodo.com.ve'); a.href = 'https://www.farmatodo.com.ve'; a.target = '_blank'; a.rel = 'noopener';
+        p.append(a, '.');
+        vista.replaceChildren(p);
+      });
+
+    function iniciar(datos) {
+      D = datos;
+      const m = D.mapa;
+      VB0 = [0, 0, m.ancho, m.alto];
+      aspecto = m.ancho / m.alto;
+      vb = VB0.slice();
+      svg.setAttribute('viewBox', vb.join(' '));
+      D.tiendas.forEach(t => (tiendasDe[t.estado] = tiendasDe[t.estado] || []).push(t));
+      const repetidos = contar(D.productos, 'nombre');
+      D.productos.forEach(p => { p.corto = repetidos.get(p.nombre) > 1 ? p.nombre + ' ' + p.tam : p.nombre; });
+
+      m.estados.forEach(e => {
+        estados[e.id] = e;
+        const n = (tiendasDe[e.id] || []).length;
+        const p = sv('path', { d: e.d, 'fill-rule': 'evenodd',
+                               class: 'mf-e' + (n ? ' mf-e-svr' : '') + (e.reclamado ? ' mf-e-rec' : '') });
+        e.el = p;
+        if (n) {
+          p.setAttribute('tabindex', '0');
+          p.setAttribute('role', 'button');
+          p.setAttribute('aria-label', `${e.nombre}: ${plural(n, 'tienda', 'tiendas')} con SVR`);
+          p.addEventListener('click', () => verEstado(e.id));
+          p.addEventListener('keydown', ev => { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); verEstado(e.id); } });
+        } else {
+          p.setAttribute('aria-hidden', 'true');
+        }
+        conTip(p, () => e.reclamado ? [e.nombre, 'Zona en reclamación']
+                      : n ? [plural(n, 'tienda', 'tiendas') + ' con SVR', e.nombre]
+                      : [e.nombre, 'Por ahora sin tiendas con SVR']);
+        gEstados.appendChild(p);
+      });
+
+      D.tiendas.forEach(t => {
+        const g = sv('g', { 'aria-hidden': 'true' });
+        t.halo = sv('circle', { cx: t.x, cy: t.y, class: 'mf-halo' });
+        t.punto = sv('circle', { cx: t.x, cy: t.y, class: 'mf-punto' });
+        t.toque = sv('circle', { cx: t.x, cy: t.y, class: 'mf-toque' });
+        const retraso = (0.15 + t.x / m.ancho * 0.9).toFixed(2) + 's';   // se encienden de oeste a este
+        t.halo.style.setProperty('--mf-retraso', retraso);
+        t.punto.style.setProperty('--mf-retraso', retraso);
+        t.toque.addEventListener('click', () => elegirTienda(t, true));
+        conTip(t.toque, () => [t.nombre, (t.nombre === t.ciudad ? '' : t.ciudad + ' · ') + estados[t.estado].nombre]);
+        g.append(t.halo, t.punto, t.toque);
+        gPuntos.appendChild(g);
+      });
+
+      $('mfNTiendas').textContent = D.tiendas.length;
+      $('mfNCiudades').textContent = new Set(D.tiendas.map(t => t.ciudad)).size;
+      $('mfNEstados').textContent = Object.keys(tiendasDe).length;
+      $('mfCifras').hidden = false;
+      const fecha = new Date(D.actualizado).toLocaleDateString('es-VE', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'America/Caracas' });
+      $('mfNota').textContent = `Existencias según farmatodo.com.ve al ${fecha}. Pueden cambiar durante el día: antes de ir, confírmalas en la app de Farmatodo o al 0800-3276286.`;
+
+      ancho = svg.getBoundingClientRect().width || 1;
+      new ResizeObserver(es => { ancho = es[0].contentRect.width || 1; radios(); }).observe(svg);
+      radios();
+      if (!calma.matches && 'IntersectionObserver' in window) {
+        const io = new IntersectionObserver(es => {
+          if (es[0].isIntersecting) { svg.classList.add('mf-entrada'); io.disconnect(); }
+        }, { threshold: 0.35 });
+        io.observe(svg);
+      }
+
+      activarGestos();
+      btnMas.addEventListener('click', () => zoomBoton(1.8));
+      btnMenos.addEventListener('click', () => zoomBoton(1 / 1.8));
+      let espera;
+      q.addEventListener('input', () => { clearTimeout(espera); espera = setTimeout(buscar, 140); });
+      q.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); clearTimeout(espera); buscar(); } });
+      btnVolver.addEventListener('click', () => verPais());
+      if ('geolocation' in navigator) btnCerca.addEventListener('click', cercaDeMi);
+      else btnCerca.hidden = true;
+      raiz.addEventListener('keydown', e => {
+        if (e.key === 'Escape' && e.target !== q && vistaActual.tipo !== 'pais') verPais();
+      });
+      pintar();
+    }
+
+    /* ── Mapa ── */
+    function conTip(nodo, texto) {
+      nodo.addEventListener('pointerenter', e => {
+        if (e.pointerType !== 'mouse') return;
+        const [fuerte, flojo] = texto();
+        tip.replaceChildren(el('b', null, fuerte), el('span', null, flojo));
+        tip.hidden = false;
+        moverTip(e);
+      });
+      nodo.addEventListener('pointermove', e => { if (e.pointerType === 'mouse') moverTip(e); });
+      nodo.addEventListener('pointerleave', () => { tip.hidden = true; });
+    }
+    function moverTip(e) {
+      const r = tip.parentNode.getBoundingClientRect(), medio = tip.offsetWidth / 2;
+      const x = Math.max(medio + 4, Math.min(r.width - medio - 4, e.clientX - r.left));
+      const y = e.clientY - r.top;
+      tip.classList.toggle('mf-abajo', y < tip.offsetHeight + 24);
+      tip.style.left = x + 'px';
+      tip.style.top = y + 'px';
+    }
+
+    function encuadre(x0, y0, x1, y1, margen, minimo) {
+      const a = VB0[2] / VB0[3], cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+      let w = Math.max(x1 - x0, minimo) * (1 + margen), h = Math.max(y1 - y0, minimo / a) * (1 + margen);
+      if (w / h > a) h = w / a; else w = h * a;
+      if (w >= VB0[2]) return VB0.slice();
+      const x = Math.max(0, Math.min(VB0[2] - w, cx - w / 2));
+      const y = Math.max(0, Math.min(VB0[3] - h, cy - h / 2));
+      return [x, y, w, h];
+    }
+    function encuadrePuntos(lista, margen, minimo) {
+      const xs = lista.map(p => p.x), ys = lista.map(p => p.y);
+      return encuadre(Math.min(...xs), Math.min(...ys), Math.max(...xs), Math.max(...ys), margen, minimo);
+    }
+    function ir(destino) {
+      cancelAnimationFrame(anim);
+      cancelAnimationFrame(inercia);
+      const desde = vb.slice();
+      if (calma.matches) { vb = destino; aplicar(); return; }
+      const t0 = performance.now(), duracion = 560;
+      const paso = ahora => {
+        const k = Math.min(1, (ahora - t0) / duracion);
+        const f = k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2;
+        vb = desde.map((v, i) => v + (destino[i] - v) * f);
+        aplicar();
+        if (k < 1) anim = requestAnimationFrame(paso);
+      };
+      anim = requestAnimationFrame(paso);
+    }
+    function aplicar() { svg.setAttribute('viewBox', vb.join(' ')); radios(); controles(); }
+    const acercado = () => vb[2] < VB0[2] - 0.5;
+    function controles() {
+      const lleno = !acercado();
+      btnMenos.disabled = lleno;
+      btnMas.disabled = vb[2] <= ANCHO_MIN + 0.5;
+      btnVolver.hidden = vistaActual.tipo === 'pais' && lleno;
+      ayuda.hidden = !btnVolver.hidden;
+      svg.classList.toggle('mf-acercado', !lleno);
+    }
+    /* Mantiene el encuadre dentro del mapa y con su misma proporción. */
+    function limitar([x, y, w]) {
+      w = Math.min(VB0[2], Math.max(ANCHO_MIN, w));
+      const h = w / aspecto;
+      return [Math.max(0, Math.min(VB0[2] - w, x)), Math.max(0, Math.min(VB0[3] - h, y)), w, h];
+    }
+    /* Acerca (factor > 1) o aleja dejando fijo el punto (ux, uy) del mapa. */
+    function zoomPunto(factor, ux, uy, animado) {
+      const w = Math.min(VB0[2], Math.max(ANCHO_MIN, vb[2] / factor)), k = w / vb[2];
+      const destino = limitar([ux - (ux - vb[0]) * k, uy - (uy - vb[1]) * k, w]);
+      if (animado) ir(destino); else { cancelAnimationFrame(anim); vb = destino; aplicar(); }
+    }
+    function zoomBoton(factor) {
+      const c = activa && activa.x >= vb[0] && activa.x <= vb[0] + vb[2] && activa.y >= vb[1] && activa.y <= vb[1] + vb[3]
+        ? activa : { x: vb[0] + vb[2] / 2, y: vb[1] + vb[3] / 2 };
+      zoomPunto(factor, c.x, c.y, true);
+    }
+    const aMapa = (cx, cy) => {
+      const r = svg.getBoundingClientRect();
+      return [vb[0] + (cx - r.left) * vb[2] / r.width, vb[1] + (cy - r.top) * vb[3] / r.height];
+    };
+
+    /* ── Arrastrar, deslizar y pellizcar ──
+       Con el mapa completo, un dedo desplaza la página (touch-action: pan-y);
+       al acercar, el mapa toma el gesto (touch-action: none). */
+    function activarGestos() {
+      const dedos = new Map();
+      let gesto = null, ignorarClicHasta = 0;
+      const moverDesde = (id, x, y, ya) => ({ tipo: 'mover', id, x0: x, y0: y, vb0: vb.slice(), movio: ya, muestras: [] });
+      svg.addEventListener('pointerdown', e => {
+        if (e.pointerType === 'mouse' && e.button !== 0) return;
+        dedos.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        cancelAnimationFrame(anim);
+        cancelAnimationFrame(inercia);
+        if (dedos.size === 1) {
+          gesto = moverDesde(e.pointerId, e.clientX, e.clientY, false);
+        } else if (dedos.size === 2) {
+          const [a, b] = [...dedos.values()];
+          const [ux, uy] = aMapa((a.x + b.x) / 2, (a.y + b.y) / 2);
+          gesto = { tipo: 'pellizco', d0: Math.hypot(a.x - b.x, a.y - b.y) || 1, w0: vb[2], ux, uy };
+          dedos.forEach((_, id) => { try { svg.setPointerCapture(id); } catch (err) {} });
+          tip.hidden = true;
+        }
+      });
+      svg.addEventListener('pointermove', e => {
+        if (!dedos.has(e.pointerId)) return;
+        dedos.set(e.pointerId, { x: e.clientX, y: e.clientY });
+        if (!gesto) return;
+        if (gesto.tipo === 'pellizco') {
+          if (dedos.size < 2) return;
+          const [a, b] = [...dedos.values()];
+          const r = svg.getBoundingClientRect(), mx = (a.x + b.x) / 2, my = (a.y + b.y) / 2;
+          const w = Math.min(VB0[2], Math.max(ANCHO_MIN, gesto.w0 * gesto.d0 / (Math.hypot(a.x - b.x, a.y - b.y) || 1)));
+          vb = limitar([gesto.ux - (mx - r.left) * w / r.width, gesto.uy - (my - r.top) * (w / aspecto) / r.height, w]);
+          aplicar();
+          return;
+        }
+        if (gesto.id !== e.pointerId) return;
+        const dx = e.clientX - gesto.x0, dy = e.clientY - gesto.y0;
+        if (!gesto.movio) {
+          if (Math.hypot(dx, dy) < 6) return;
+          if (!acercado()) { gesto = null; return; }   // con el mapa completo no hay a dónde moverse
+          gesto.movio = true;
+          try { svg.setPointerCapture(e.pointerId); } catch (err) {}
+          svg.classList.add('mf-arrastrando');
+          tip.hidden = true;
+        }
+        const k = gesto.vb0[2] / ancho;
+        vb = limitar([gesto.vb0[0] - dx * k, gesto.vb0[1] - dy * k, gesto.vb0[2]]);
+        aplicar();
+        gesto.muestras.push({ t: e.timeStamp, x: e.clientX, y: e.clientY });
+        if (gesto.muestras.length > 6) gesto.muestras.shift();
+      });
+      const soltar = e => {
+        if (!dedos.delete(e.pointerId) || !gesto) return;
+        if (gesto.tipo === 'pellizco') {
+          ignorarClicHasta = performance.now() + 400;
+          const [quedan] = [...dedos];
+          gesto = quedan ? moverDesde(quedan[0], quedan[1].x, quedan[1].y, true) : null;
+          return;
+        }
+        if (gesto.id !== e.pointerId) return;
+        if (gesto.movio) {
+          svg.classList.remove('mf-arrastrando');
+          ignorarClicHasta = performance.now() + 400;
+          if (e.type === 'pointerup') deslizar(gesto.muestras);
+        }
+        gesto = null;
+      };
+      svg.addEventListener('pointerup', soltar);
+      svg.addEventListener('pointercancel', soltar);
+      // Soltar un arrastre encima de un estado no debe seleccionarlo.
+      svg.addEventListener('click', e => {
+        if (performance.now() < ignorarClicHasta) { e.stopPropagation(); e.preventDefault(); }
+      }, true);
+      // La rueda sola desplaza la página; con ⌘/Ctrl (o el pellizco del trackpad) hace zoom.
+      svg.addEventListener('wheel', e => {
+        if (!e.ctrlKey && !e.metaKey) return;
+        e.preventDefault();
+        const [ux, uy] = aMapa(e.clientX, e.clientY);
+        const delta = e.deltaY * (e.deltaMode === 1 ? 33 : 1);   // Firefox puede medir en líneas
+        zoomPunto(Math.exp(-delta * 0.0045), ux, uy, false);
+      }, { passive: false });
+    }
+    /* Al soltar con velocidad, el mapa sigue deslizándose y frena solo. */
+    function deslizar(muestras) {
+      if (calma.matches || muestras.length < 2) return;
+      const a = muestras[0], b = muestras[muestras.length - 1], dt = b.t - a.t;
+      if (dt <= 0 || performance.now() - b.t > 80) return;
+      let vx = (b.x - a.x) / dt, vy = (b.y - a.y) / dt, antes = performance.now();
+      const rapidez = Math.hypot(vx, vy), tope = 1.8;   // px/ms
+      if (rapidez > tope) { vx *= tope / rapidez; vy *= tope / rapidez; }
+      const paso = ahora => {
+        const t = Math.min(32, ahora - antes), k = vb[2] / ancho;
+        antes = ahora;
+        vb = limitar([vb[0] - vx * t * k, vb[1] - vy * t * k, vb[2]]);
+        aplicar();
+        const freno = Math.pow(0.88, t / 16);
+        vx *= freno;
+        vy *= freno;
+        if (Math.hypot(vx, vy) > 0.03) inercia = requestAnimationFrame(paso);
+      };
+      inercia = requestAnimationFrame(paso);
+    }
+    function radios() {
+      if (!D) return;
+      const u = vb[2] / ancho, r = (ancho < 500 ? 4 : 4.6) * u;
+      D.tiendas.forEach(t => {
+        const k = t === activa ? 1.5 : 1;
+        t.punto.setAttribute('r', r * k);
+        t.halo.setAttribute('r', r * 2.3 * k);
+        t.toque.setAttribute('r', 12 * u);
+      });
+      if (pulso) pulso.setAttribute('r', r * 1.5);
+      if (yo) { yo.punto.setAttribute('r', 5.5 * u); yo.halo.setAttribute('r', 17 * u); }
+    }
+
+    function marcarEstado(id) {
+      Object.values(estados).forEach(e => e.el.classList.toggle('mf-sel', e.id === id));
+      svg.classList.toggle('mf-enfocado', !!id);
+      atenuar(id ? t => t.estado === id : null);
+    }
+    function atenuar(visible) {
+      D.tiendas.forEach(t => {
+        const fuera = visible ? !visible(t) : false;
+        t.punto.classList.toggle('mf-tenue', fuera);
+        t.halo.classList.toggle('mf-tenue', fuera);
+      });
+    }
+    function soltarActiva() {
+      if (activa) {
+        activa.punto.classList.remove('mf-activa');
+        if (activa.tarjeta) activa.tarjeta.classList.remove('mf-activa');
+        activa = null;
+      }
+      if (pulso) { pulso.remove(); pulso = null; }
+    }
+
+    /* ── Vistas ── */
+    function verPais(limpiar = true) {
+      if (limpiar) q.value = '';
+      soltarActiva();
+      vistaActual = vistaBase = { tipo: 'pais' };
+      marcarEstado(null);
+      ir(VB0.slice());
+      pintar();
+    }
+    function verEstado(id, limpiar = true) {
+      if (limpiar) q.value = '';
+      soltarActiva();
+      vistaActual = vistaBase = { tipo: 'estado', id };
+      marcarEstado(id);
+      const b = estados[id].bbox;
+      ir(encuadre(b[0], b[1], b[2], b[3], 0.2, 140));
+      pintar();
+    }
+    function buscar() {
+      const texto = q.value.trim();
+      if (texto.length < 2) {
+        if (vistaActual.tipo === 'busqueda') vistaBase.tipo === 'estado' ? verEstado(vistaBase.id, false) : verPais(false);
+        return;
+      }
+      const partes = plano(texto).split(/\s+/);
+      const res = D.tiendas.filter(t => {
+        t._texto = t._texto || plano([t.nombre, t.ciudad, t.direccion, estados[t.estado].nombre].join(' '));
+        return partes.every(p => t._texto.includes(p));
+      });
+      soltarActiva();
+      vistaActual = { tipo: 'busqueda', texto, res };
+      marcarEstado(null);
+      atenuar(res.length ? t => res.includes(t) : null);
+      if (res.length) ir(encuadrePuntos(res, 0.35, 90));
+      pintar();
+    }
+    function cercaDeMi() {
+      const etiqueta = btnCerca.querySelector('span'), antes = etiqueta.textContent;
+      btnCerca.disabled = true;
+      etiqueta.textContent = 'Buscando…';
+      const listo = () => { btnCerca.disabled = false; etiqueta.textContent = antes; };
+      navigator.geolocation.getCurrentPosition(pos => {
+        listo();
+        const { latitude: la, longitude: lo } = pos.coords;
+        const res = D.tiendas.map(t => ({ t, d: distancia(la, lo, t.lat, t.lon) })).sort((a, b) => a.d - b.d).slice(0, 5);
+        ponerYo(la, lo);
+        q.value = '';
+        soltarActiva();
+        vistaActual = { tipo: 'cerca', res };
+        marcarEstado(null);
+        atenuar(t => res.some(r => r.t === t));
+        ir(encuadrePuntos(res.slice(0, 3).map(r => r.t).concat(yo ? [yo] : []), 0.4, 90));
+        pintar();
+        if (typeof gtag !== 'undefined') gtag('event', 'buscar_cerca_de_mi');
+      }, err => {
+        listo();
+        vistaActual = { tipo: 'aviso', texto: err.code === 1
+          ? 'Para mostrarte las tiendas más cercanas, permite que el navegador use tu ubicación. También puedes buscar tu ciudad.'
+          : 'No pudimos obtener tu ubicación. Inténtalo de nuevo o busca tu ciudad.' };
+        pintar();
+      }, { enableHighAccuracy: false, timeout: 12000, maximumAge: 300000 });
+    }
+    function ponerYo(la, lo) {
+      const P = D.mapa.proyeccion;
+      const x = (lo - P.lon0) * P.cos * P.k + P.margen, y = (P.lat1 - la) * P.k + P.margen;
+      gYo.replaceChildren();
+      yo = null;
+      if (x < 0 || y < 0 || x > D.mapa.ancho || y > D.mapa.alto) return;
+      yo = { x, y, halo: sv('circle', { cx: x, cy: y, class: 'mf-yo-halo' }), punto: sv('circle', { cx: x, cy: y, class: 'mf-yo' }) };
+      gYo.append(yo.halo, yo.punto);
+      radios();
+    }
+    function distancia(la1, lo1, la2, lo2) {
+      const rad = Math.PI / 180, dLa = (la2 - la1) * rad, dLo = (lo2 - lo1) * rad;
+      const h = Math.sin(dLa / 2) ** 2 + Math.cos(la1 * rad) * Math.cos(la2 * rad) * Math.sin(dLo / 2) ** 2;
+      return 12742 * Math.asin(Math.sqrt(h));
+    }
+    function elegirTienda(t, desdeMapa, verMapa) {
+      const enLista = vistaActual.tipo === 'estado' && vistaActual.id === t.estado
+        || vistaActual.tipo === 'busqueda' && vistaActual.res.includes(t)
+        || vistaActual.tipo === 'cerca' && vistaActual.res.some(r => r.t === t);
+      soltarActiva();
+      activa = t;
+      t.punto.classList.add('mf-activa');
+      pulso = sv('circle', { cx: t.x, cy: t.y, class: 'mf-pulso' });
+      gPuntos.appendChild(pulso);
+      if (enLista && t.tarjeta && t.tarjeta.isConnected) {
+        t.tarjeta.classList.add('mf-activa');
+      } else {
+        if (!enLista) {
+          q.value = '';
+          vistaActual = vistaBase = { tipo: 'estado', id: t.estado };
+          marcarEstado(t.estado);
+        }
+        pintar();
+      }
+      ir(encuadre(t.x - 25, t.y - 19, t.x + 25, t.y + 19, 0, 90));
+      if (desdeMapa && t.tarjeta) t.tarjeta.scrollIntoView({ behavior: suave(), block: 'nearest' });
+      if (verMapa) {
+        const r = svg.getBoundingClientRect();
+        if (r.top < 0 || r.bottom > innerHeight) svg.scrollIntoView({ behavior: suave(), block: 'center' });
+      }
+    }
+
+    /* ── Panel ── */
+    function pintar() {
+      const v = vistaActual;
+      const nodos = [];
+      tip.hidden = true;
+      controles();
+      if (v.tipo === 'pais') {
+        const ids = Object.keys(tiendasDe).sort((a, b) =>
+          tiendasDe[b].length - tiendasDe[a].length || estados[a].nombre.localeCompare(estados[b].nombre, 'es'));
+        rotulo('Venezuela', plural(D.tiendas.length, 'tienda', 'tiendas') + ' con SVR');
+        nodos.push(cabecera('Elige tu estado', 'Toca un estado en el mapa o en esta lista.'));
+        nodos.push(recortable(ids.length, `Ver los ${ids.length} estados`, limite => {
+          const ul = el('ul', 'mf-filas');
+          ids.slice(0, limite).forEach(id => ul.append(filaEstado(id)));
+          return [ul];
+        }));
+      } else if (v.tipo === 'estado') {
+        const e = estados[v.id], lista = tiendasDe[v.id];
+        rotulo(e.nombre, plural(lista.length, 'tienda', 'tiendas'));
+        nodos.push(atras('← Todos los estados', () => verPais()),
+                   cabecera(e.nombre, `${plural(lista.length, 'tienda', 'tiendas')} en ${plural(contar(lista, 'ciudad').size, 'ciudad', 'ciudades')}`),
+                   porCiudad(lista));
+      } else if (v.tipo === 'busqueda') {
+        const n = v.res.length;
+        rotulo(`«${v.texto}»`, plural(n, 'tienda', 'tiendas'));
+        nodos.push(atras('← Volver', volverBase),
+                   cabecera(n ? `${plural(n, 'tienda', 'tiendas')} para «${v.texto}»` : `Sin resultados para «${v.texto}»`,
+                            n ? '' : 'Prueba con tu ciudad, tu estado o el nombre de un centro comercial.'));
+        if (n) nodos.push(porCiudad(v.res, true));
+      } else if (v.tipo === 'cerca') {
+        rotulo('Cerca de ti', `Las ${v.res.length} más cercanas`);
+        nodos.push(atras('← Volver', volverBase),
+                   cabecera('Las tiendas más cercanas', 'Distancia en línea recta desde tu ubicación.'));
+        v.res.forEach(r => nodos.push(tarjeta(r.t, { donde: true, km: r.d })));
+      } else {
+        nodos.push(atras('← Volver', volverBase), el('p', 'mf-aviso', v.texto));
+      }
+      vista.replaceChildren(...nodos);
+      vista.scrollTop = 0;
+      anuncio.textContent = v.tipo === 'aviso' ? v.texto : `${lugar.textContent}: ${lugarN.textContent}`;
+    }
+    function volverBase() {
+      if (vistaBase.tipo === 'estado') verEstado(vistaBase.id); else verPais();
+    }
+    function rotulo(arriba, abajo) { lugar.textContent = arriba; lugarN.textContent = abajo; }
+    function cabecera(titulo, sub) {
+      const c = el('div', 'mf-vista-cab');
+      c.append(el('h3', null, titulo));
+      if (sub) c.append(el('p', null, sub));
+      return c;
+    }
+    function atras(texto, accion) {
+      const b = el('button', 'mf-atras', texto);
+      b.type = 'button';
+      b.addEventListener('click', accion);
+      return b;
+    }
+    /* Muestra los primeros CORTA elementos y un botón para el resto. */
+    function recortable(total, textoMas, construir, expandido) {
+      const caja = el('div');
+      const llenar = todo => {
+        caja.replaceChildren(...construir(todo ? Infinity : CORTA));
+        if (todo || total <= CORTA) return;
+        const mas = el('button', 'mf-mas', textoMas);
+        mas.type = 'button';
+        mas.addEventListener('click', () => {
+          llenar(true);
+          const enfocable = caja.querySelectorAll('button.mf-fila, a.mf-ir')[CORTA];
+          if (enfocable) enfocable.focus({ preventScroll: true });
+        });
+        caja.append(mas);
+      };
+      llenar(!!expandido);
+      return caja;
+    }
+    function filaEstado(id) {
+      const lista = tiendasDe[id];
+      const ciudades = [...contar(lista, 'ciudad')].sort((a, b) => b[1] - a[1]).map(c => c[0]);
+      const li = el('li'), b = el('button', 'mf-fila'), txt = el('span', 'mf-fila-txt'), flecha = el('span', 'mf-fila-flecha', '›');
+      b.type = 'button';
+      flecha.setAttribute('aria-hidden', 'true');
+      txt.append(el('b', null, estados[id].nombre),
+                 el('small', null, ciudades.slice(0, 3).join(', ') + (ciudades.length > 3 ? ` y ${ciudades.length - 3} más` : '')));
+      b.append(txt, el('span', 'mf-fila-n', lista.length), flecha);
+      b.addEventListener('click', () => verEstado(id));
+      b.addEventListener('mouseenter', () => estados[id].el.classList.add('mf-hover'));
+      b.addEventListener('mouseleave', () => estados[id].el.classList.remove('mf-hover'));
+      li.append(b);
+      return li;
+    }
+    function porCiudad(lista, conEstado) {
+      const grupos = [...lista.reduce((m, t) => m.set(t.ciudad, (m.get(t.ciudad) || []).concat(t)), new Map())]
+        .sort((a, b) => b[1].length - a[1].length || a[0].localeCompare(b[0], 'es'));
+      const pos = activa ? grupos.flatMap(g => g[1]).indexOf(activa) : -1;
+      return recortable(lista.length, `Ver las ${lista.length} tiendas`, limite => {
+        const nodos = [];
+        let n = 0;
+        for (const [ciudad, tiendas] of grupos) {
+          if (n >= limite) break;
+          const cab = el('p', 'mf-ciudad', ciudad + (conEstado ? ' · ' + estados[tiendas[0].estado].nombre : ''));
+          cab.append(el('span', null, tiendas.length));
+          nodos.push(cab);
+          for (const t of tiendas) {
+            if (n++ >= limite) break;
+            nodos.push(tarjeta(t, {}));
+          }
+        }
+        return nodos;
+      }, pos >= CORTA);
+    }
+    function tarjeta(t, op) {
+      const a = el('article', 'mf-tienda' + (t === activa ? ' mf-activa' : ''));
+      const cab = el('div', 'mf-tienda-cab');
+      t.tarjeta = a;
+      cab.append(el('h4', null, t.nombre));
+      if (op.km != null) cab.append(el('span', 'mf-dist', distanciaTexto(op.km)));
+      a.append(cab);
+      if (op.donde) a.append(el('p', 'mf-donde', `${t.ciudad} · ${estados[t.estado].nombre}`));
+      if (t.direccion && plano(t.direccion) !== plano(t.ciudad)) a.append(el('p', 'mf-dir', t.direccion));
+      a.append(el('p', 'mf-hora' + (t.h24 ? ' mf-24' : ''), t.horario));
+      const prods = el('ul', 'mf-prods');
+      prods.setAttribute('aria-label', 'Productos SVR en existencia');
+      t.productos.forEach(i => {
+        const p = D.productos[i], li = el('li'), punto = el('i');
+        punto.style.background = `var(${LINEAS[p.linea] || '--light-gray'})`;
+        li.append(punto, p.corto);
+        prods.append(li);
+      });
+      const acciones = el('div', 'mf-acciones');
+      const ver = el('button', 'mf-ver', 'Ver en el mapa');
+      ver.type = 'button';
+      ver.addEventListener('click', () => elegirTienda(t, false, true));
+      acciones.append(
+        enlace('mf-btn mf-ir', 'Cómo llegar', `https://www.google.com/maps/dir/?api=1&destination=${t.lat},${t.lon}`, t, 'google_maps'),
+        enlace('mf-btn mf-waze', 'Waze', `https://waze.com/ul?ll=${t.lat},${t.lon}&navigate=yes`, t, 'waze'),
+        ver);
+      a.append(prods, acciones);
+      a.addEventListener('mouseenter', () => t.punto.classList.add('mf-resalta'));
+      a.addEventListener('mouseleave', () => t.punto.classList.remove('mf-resalta'));
+      return a;
+    }
+    function enlace(cls, texto, href, t, via) {
+      const a = el('a', cls, texto);
+      a.href = href;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.setAttribute('aria-label', `${texto} a Farmatodo ${t.nombre}, ${t.ciudad}`);
+      a.addEventListener('click', () => {
+        if (typeof fbq !== 'undefined') fbq('track', 'FindLocation', { content_name: t.nombre, content_category: t.ciudad });
+        if (typeof gtag !== 'undefined') gtag('event', 'click_como_llegar', { via, tienda: t.nombre, ciudad: t.ciudad });
+      });
+      return a;
+    }
+    function distanciaTexto(km) {
+      return km < 1 ? `a ${Math.max(10, Math.round(km * 100) * 10)} m`
+                    : `a ${decimal.format(km < 10 ? km : Math.round(km))} km`;
+    }
+  })();
+  </script>
 
   <!-- ══ PRODUCTS — 7 LINES ══ -->
   <section id="productos">
