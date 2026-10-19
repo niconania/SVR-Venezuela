@@ -1546,13 +1546,17 @@
     .mf-hora { display: flex; align-items: center; gap: 7px; font-size: 0.74rem; color: var(--mf-text); margin-top: 7px; }
     .mf-hora::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #b7c0cb; flex-shrink: 0; }
     .mf-hora.mf-24::before { background: #34c759; box-shadow: 0 0 0 3px rgba(52,199,89,0.2); }
-    .mf-prods { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 9px; list-style: none; }
-    .mf-prods li {
-      display: inline-flex; align-items: center; gap: 6px;
-      font-size: 0.64rem; color: var(--mf-text);
-      background: var(--mf-field); border-radius: 100px; padding: 3px 9px 3px 7px;
+    .mf-prods { display: grid; gap: 6px; margin-top: 10px; }
+    .mf-prods-cab { font-size: 0.66rem; color: var(--mf-muted); }
+    .mf-prods-cab b { color: var(--mf-text); font-weight: 600; }
+    .mf-linea { display: flex; flex-wrap: wrap; align-items: center; gap: 5px; }
+    .mf-linea-n {
+      display: inline-flex; align-items: center; gap: 6px; min-width: 84px;
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--mf-text);
     }
-    .mf-prods i { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .mf-linea-n i { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .mf-p { font-size: 0.64rem; color: var(--mf-text); background: var(--mf-field); border: 1px solid transparent; border-radius: 100px; padding: 2px 9px; }
+    .mf-p.mf-no { background: transparent; border-color: var(--mf-line); color: var(--mf-faint); text-decoration: line-through; }
     .mf-acciones { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 12px; }
     .mf-btn {
       display: inline-flex; align-items: center; gap: 6px;
@@ -1781,9 +1785,9 @@
         <div class="mf-panel">
           <div class="mf-buscar">
             <label class="mf-campo">
-              <span class="mf-sr">Busca por ciudad, zona o centro comercial</span>
+              <span class="mf-sr">Busca por ciudad, zona, centro comercial o producto</span>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></svg>
-              <input type="search" id="mfQ" placeholder="Busca tu ciudad o zona" autocomplete="off" enterkeyhint="search">
+              <input type="search" id="mfQ" placeholder="Busca ciudad, zona o producto" autocomplete="off" enterkeyhint="search">
             </label>
             <button type="button" class="mf-cerca" id="mfCerca">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
@@ -2161,7 +2165,10 @@
       const partes = plano(texto).split(/\s+/);
       const res = D.tiendas.filter(t => {
         t._texto = t._texto || plano([t.nombre, t.ciudad, t.direccion, estados[t.estado].nombre].join(' '));
-        return partes.every(p => t._texto.includes(p));
+        t._prods = t._prods || t.productos.map(i => plano(`${D.productos[i].linea} ${D.productos[i].nombre} ${D.productos[i].tam}`));
+        // Cada palabra va en la tienda o en UN mismo producto que tenga: «gel moussant 400» no se arma con dos productos.
+        return partes.every(p => t._texto.includes(p))
+          || t._prods.some(pt => partes.every(p => t._texto.includes(p) || pt.includes(p)));
       });
       soltarActiva();
       vistaActual = { tipo: 'busqueda', texto, res };
@@ -2265,7 +2272,7 @@
         rotulo(`«${v.texto}»`, plural(n, 'tienda', 'tiendas'));
         nodos.push(atras('← Volver', volverBase),
                    cabecera(n ? `${plural(n, 'tienda', 'tiendas')} para «${v.texto}»` : `Sin resultados para «${v.texto}»`,
-                            n ? '' : 'Prueba con tu ciudad, tu estado o el nombre de un centro comercial.'));
+                            n ? '' : 'Prueba con tu ciudad, tu estado, un centro comercial o un producto como «cicavit».'));
         if (n) nodos.push(porCiudad(v.res, true));
       } else if (v.tipo === 'cerca') {
         rotulo('Cerca de ti', `Las ${v.res.length} más cercanas`);
@@ -2358,13 +2365,23 @@
       if (op.donde) a.append(el('p', 'mf-donde', `${t.ciudad} · ${estados[t.estado].nombre}`));
       if (t.direccion && plano(t.direccion) !== plano(t.ciudad)) a.append(el('p', 'mf-dir', t.direccion));
       a.append(el('p', 'mf-hora' + (t.h24 ? ' mf-24' : ''), t.horario));
-      const prods = el('ul', 'mf-prods');
-      prods.setAttribute('aria-label', 'Productos SVR en existencia');
-      t.productos.forEach(i => {
-        const p = D.productos[i], li = el('li'), punto = el('i');
-        punto.style.background = `var(${LINEAS[p.linea] || '--light-gray'})`;
-        li.append(punto, p.corto);
-        prods.append(li);
+      const prods = el('div', 'mf-prods');
+      const resumen = el('p', 'mf-prods-cab', 'Productos SVR: ');
+      resumen.append(el('b', null, `${t.productos.length} de ${D.productos.length} disponibles`));
+      prods.append(resumen);
+      // Todos los productos SVR de Farmatodo, por línea: los que faltan en esta tienda van tachados.
+      [...new Set(D.productos.map(p => p.linea))].forEach(linea => {
+        const fila = el('div', 'mf-linea'), nombre = el('span', 'mf-linea-n', linea), punto = el('i');
+        punto.style.background = `var(${LINEAS[linea] || '--light-gray'})`;
+        nombre.prepend(punto);
+        fila.append(nombre);
+        D.productos.forEach((p, i) => {
+          if (p.linea !== linea) return;
+          const hay = t.productos.includes(i), chip = el('span', 'mf-p' + (hay ? '' : ' mf-no'), p.corto);
+          if (!hay) { chip.title = 'No disponible en esta tienda'; chip.append(el('span', 'mf-sr', ' (no disponible aquí)')); }
+          fila.append(chip);
+        });
+        prods.append(fila);
       });
       const acciones = el('div', 'mf-acciones');
       const ver = el('button', 'mf-ver', 'Ver en el mapa');
@@ -2502,6 +2519,7 @@
         </div>
         <div class="line-products-grid">
           <div class="product-card" onclick="openProduct('cicavit-creme-hppi')">
+            <a href="https://www.farmatodo.com.ve/producto/116437642-crem-facial-svr-hppi-cicavit-40ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
             <span class="product-size">40 ML</span>
             <h3 class="product-name">Crème HPPI</h3>
             <p class="product-desc">Crema cicatrizante para piel irritada, post-procedimiento o con heridas. Acelera la cicatrización, reduce el riesgo de queloide y calma la inflamación. Apta para toda la familia.</p>
@@ -3151,7 +3169,7 @@
           { type: 'img', src: 'assets/productos/pdt-creme-hppi.jpg' },
           { type: 'img', src: 'assets/productos/pdt-creme-hppi-2.jpg' }
         ],
-        farmatodo: null
+        farmatodo: 'https://www.farmatodo.com.ve/producto/116437642-crem-facial-svr-hppi-cicavit-40ml'
       },
       'sunsecure-extreme': {
         line: 'Sun Secure', lc: 'var(--lc-sunsecure)', emoji: '☀️',
