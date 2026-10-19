@@ -423,120 +423,86 @@
     }
     .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: #5b9bd5; flex-shrink: 0; }
 
-    /* Line block */
-    .line-block {
-      margin-bottom: 64px;
+    /* Una tarjeta por línea con sus productos adentro: mosaico en
+       computadora (las líneas cortas y largas encajan sin huecos) y
+       carrusel horizontal en celular para no alargar la página. */
+    .gamas { columns: 3 300px; column-gap: 18px; }
+    .gama {
+      display: inline-block; width: 100%; vertical-align: top; break-inside: avoid;
+      margin: 0 0 18px;
+      background: #fff; border: 1px solid var(--border); border-radius: 20px; overflow: hidden;
+      box-shadow: 0 6px 22px rgba(26,26,26,0.05);
     }
-    .line-block:last-child { margin-bottom: 0; }
-    .line-header {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 20px 24px;
-      border-radius: 6px 6px 0 0;
-      margin-bottom: 2px;
-      background: var(--lc);
+    .gama-cab {
+      display: flex; align-items: center; gap: 12px;
+      padding: 15px 16px 14px;
+      background: color-mix(in srgb, var(--lc) 13%, #fff);
+      border-top: 4px solid var(--lc);
     }
-    .line-emoji { font-size: 1.5rem; line-height: 1; }
-    .line-header-text { flex: 1; }
-    .line-name {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: var(--btn-text, #fff);
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      line-height: 1;
-      margin-bottom: 4px;
+    .gama-emoji {
+      width: 40px; height: 40px; flex-shrink: 0; display: grid; place-items: center;
+      background: #fff; border-radius: 12px; font-size: 1.2rem; line-height: 1;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.06);
     }
-    .line-desc {
-      font-size: 0.75rem;
-      font-weight: 400;
-      color: var(--btn-text, #fff);
-      opacity: 0.75;
-      line-height: 1.4;
+    .gama-cab-txt { flex: 1; min-width: 0; }
+    .gama-cab h3 { font-size: 0.98rem; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; color: var(--dark); line-height: 1.15; }
+    .gama-cab p { font-size: 0.72rem; color: var(--gray); line-height: 1.45; margin-top: 3px; }
+    .gama-n {
+      display: inline-block; vertical-align: 2px; margin-left: 6px;
+      font-size: 0.58rem; font-weight: 700; letter-spacing: 0; text-transform: none; color: var(--dark);
+      background: #fff; border-radius: 100px; padding: 3px 8px;
     }
-    .line-products-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 2px;
+    .gama-lista { list-style: none; padding: 10px; display: grid; gap: 6px; }
+    .gama-prod { display: flex; align-items: center; background: var(--cream); border-radius: 14px; transition: background 0.2s, transform 0.2s; }
+    .gama-prod:hover { background: #f1eee9; transform: translateY(-1px); }
+    .gama-prod-ver {
+      flex: 1; min-width: 0; display: flex; align-items: center; gap: 12px;
+      padding: 8px 10px 8px 8px; text-align: left;
+      font: inherit; color: inherit; background: none; border: none; border-radius: 14px; cursor: pointer;
     }
-    .product-card {
-      background: var(--cream);
-      padding: 28px 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      transition: background 0.25s, transform 0.25s;
-      border-radius: 0;
+    .gama-prod-ver img { width: 52px; height: 52px; flex-shrink: 0; border-radius: 10px; background: #fff; object-fit: contain; }
+    .gama-prod-txt { min-width: 0; display: grid; gap: 2px; }
+    .gama-prod-nom { font-size: 0.86rem; font-weight: 700; color: var(--dark); line-height: 1.25; }
+    .gama-prod-nom small { font-size: 0.64rem; font-weight: 600; color: #8a8f8f; margin-left: 3px; white-space: nowrap; }
+    .gama-prod-det { font-size: 0.72rem; color: var(--gray); line-height: 1.4; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .gama-prod-ftd {
+      flex-shrink: 0; margin-right: 10px;
+      display: inline-flex; align-items: center; gap: 5px;
+      background: #eff6ff; border: 1px solid #bfdbfe; color: #3b78b8;
+      font-size: 0.52rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 5px 9px; border-radius: 100px; text-decoration: none;
+      transition: background 0.2s;
     }
-    .product-card:last-child { border-radius: 0 0 6px 0; }
-    .product-card:hover { background: #f0ede8; transform: translateY(-2px); }
-    .product-size {
-      font-size: 0.58rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--lc);
+    .gama-prod-ftd::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #5b9bd5; flex-shrink: 0; }
+    .gama-prod-ftd:hover { background: #dbeafe; }
+    .gama-prod-ver:focus-visible, .gama-prod-ftd:focus-visible, .gamas-nav button:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
+    .gamas-nav { display: none; }
+    @media (max-width: 640px) {
+      .gamas-nav {
+        display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+        margin: 0 -18px 14px; padding: 2px 18px;
+      }
+      .gamas-nav::-webkit-scrollbar, .gamas::-webkit-scrollbar { display: none; }
+      .gamas-nav button {
+        flex-shrink: 0; display: inline-flex; align-items: center; gap: 7px;
+        font: inherit; font-size: 0.72rem; font-weight: 600; color: var(--dark);
+        background: #fff; border: 1px solid var(--border); border-radius: 100px; padding: 8px 14px; cursor: pointer;
+      }
+      .gamas-nav button i { width: 8px; height: 8px; border-radius: 50%; background: var(--lc); }
+      .gamas-nav button.activo { background: var(--dark); border-color: var(--dark); color: #fff; }
+      .gamas {
+        columns: auto; display: flex; align-items: flex-start; gap: 12px;
+        overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none;
+        margin: 0 -18px; padding: 2px 18px 14px; scroll-padding: 0 18px;
+      }
+      .gama { flex: 0 0 86%; margin: 0; scroll-snap-align: start; }
+      .gamas.ajustable { overflow-y: hidden; transition: height 0.3s ease; }
+      .gama-prod { position: relative; }
+      .gama-prod.con-ftd .gama-prod-ver { padding-bottom: 36px; }
+      .gama-prod-ftd { position: absolute; left: 72px; bottom: 10px; margin: 0; }
+      .gama-prod-det { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; }
     }
-    .product-name {
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: var(--dark);
-      line-height: 1.25;
-    }
-    .product-desc {
-      font-size: 0.78rem;
-      font-weight: 400;
-      color: var(--gray);
-      line-height: 1.7;
-      flex-grow: 1;
-    }
-    .product-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 8px;
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--btn-text, #fff);
-      background: var(--lc);
-      padding: 9px 16px;
-      text-decoration: none;
-      border-radius: 3px;
-      align-self: flex-start;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-    .product-btn:hover { opacity: 0.82; transform: translateY(-1px); }
-    .product-btn-pdv {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 8px;
-      font-size: 0.58rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--gray);
-      background: transparent;
-      padding: 9px 16px;
-      text-decoration: none;
-      border-radius: 3px;
-      border: 1.5px solid var(--border);
-      align-self: flex-start;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .product-btn-pdv:hover { border-color: var(--lc); color: var(--lc); }
-
-    /* Per-line btn text color overrides */
-    .line-sebiaclear  { --lc: var(--lc-sebiaclear); --btn-text: #ffffff; }
-    .line-topialyse   { --lc: var(--lc-topialyse);  --btn-text: #ffffff; }
-    .line-cicavit     { --lc: var(--lc-cicavit);     --btn-text: #ffffff; }
-    .line-sunsecure   { --lc: var(--lc-sunsecure);   --btn-text: #ffffff; }
-    .line-sensifine   { --lc: var(--lc-sensifine);   --btn-text: #ffffff; }
-    .line-clairial    { --lc: var(--lc-clairial);    --btn-text: #ffffff; }
-    .line-antiage     { --lc: var(--lc-antiage);     --btn-text: #ffffff; }
+    @media (max-width: 640px) and (prefers-reduced-motion: reduce) { .gamas.ajustable { transition: none; } }
 
     /* ══════════════════════════════
        PUNTOS DE VENTA
@@ -943,14 +909,12 @@
       .state-row { grid-template-columns: 1fr auto; }
       .state-row .state-handle { display: none; }
       .products-header { margin-bottom: 48px; }
-      .line-block { margin-bottom: 40px; }
       .puntos-header { margin-bottom: 36px; }
     }
     @media (max-width: 640px) {
       .container { padding: 0 18px; }
       section { padding: 40px 0; }
       .nav-cta { font-size: 0.48rem; padding: 8px 12px; }
-      .line-products-grid { grid-template-columns: 1fr; }
       .footer-inner { grid-template-columns: 1fr; gap: 24px; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
       .state-row { grid-template-columns: 1fr auto; gap: 12px; padding: 14px 18px; }
@@ -958,7 +922,6 @@
       .stat-item { padding: 22px 16px; }
       .stat-number { font-size: 1.8rem; }
       .products-header { margin-bottom: 32px; }
-      .line-block { margin-bottom: 28px; }
       footer { padding: 44px 0 28px; }
 
     }
@@ -1008,53 +971,6 @@
       .whatsapp-float { bottom: 18px; right: 18px; }
       .whatsapp-float span { display: none; }
       .whatsapp-float:hover { padding: 15px; gap: 0; }
-    }
-
-    /* ── PRODUCT CARD (clickable) ── */
-    .product-card { position: relative; cursor: pointer; }
-    .product-card-hint {
-      display: inline-flex;
-      align-items: center;
-      align-self: flex-start;
-      gap: 4px;
-      margin-top: 8px;
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--lc);
-      opacity: 0.65;
-      transition: opacity 0.2s, gap 0.2s;
-    }
-    .product-card:hover .product-card-hint { opacity: 1; gap: 9px; }
-    .product-card-farmatodo {
-      position: absolute;
-      top: 14px;
-      right: 14px;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: #eff6ff;
-      border: 1px solid #bfdbfe;
-      color: #5b9bd5;
-      font-size: 0.52rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      padding: 5px 9px;
-      border-radius: 100px;
-      text-decoration: none;
-      z-index: 2;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .product-card-farmatodo:hover { background: #dbeafe; transform: translateY(-1px); }
-    .product-card-farmatodo::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #5b9bd5;
-      flex-shrink: 0;
     }
 
     /* ── PRODUCT MODAL ── */
@@ -2429,249 +2345,355 @@
         </div>
       </div>
 
-      <!-- 1 — SEBIACLEAR -->
-      <div class="line-block line-sebiaclear reveal">
-        <div class="line-header">
-          <span class="line-emoji">🫧</span>
-          <div class="line-header-text">
-            <div class="line-name">Sebiaclear</div>
-            <div class="line-desc">Control de imperfecciones y acné · Piel grasa y mixta</div>
-          </div>
-        </div>
-        <div class="line-products-grid">
-          <div class="product-card" onclick="openProduct('sebia-active-gel')">
-            <a href="https://www.farmatodo.com.ve/producto/116457598-corrector-facial-svr-active-gel-sebiaclear-40ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
-            <span class="product-size">40 ML</span>
-            <h3 class="product-name">Active Gel</h3>
-            <p class="product-desc">Tratamiento antigranos con Zinc y BHA. Reduce imperfecciones activas, puntos negros y marcas en tiempo récord. Textura gel de absorción inmediata, no comedogénico.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('sebia-gel-moussant-200')">
-            <a href="https://www.farmatodo.com.ve/producto/116437651-limpiador-facial-svr-sebiaclear-gel-moussant-200ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
-            <span class="product-size">200 ML</span>
-            <h3 class="product-name">Gel Moussant</h3>
-            <p class="product-desc">Gel limpiador purificante para piel con tendencia acneica. Elimina el exceso de sebo y limpia los poros sin resecar ni irritar. Uso diario mañana y noche.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('sebia-gel-moussant-400')">
-            <a href="https://www.farmatodo.com.ve/producto/116438611-limpiador-facial-svr-sebiaclear-gel-moussant-400ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
-            <span class="product-size">400 ML</span>
-            <h3 class="product-name">Gel Moussant</h3>
-            <p class="product-desc">Gel limpiador purificante en formato familiar. Controla el sebo, limpia poros y calma imperfecciones sin efecto tirante. Mayor rendimiento para uso prolongado.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('sebia-ampoule-az')">
-            <span class="product-size">30 ML</span>
-            <h3 class="product-name">Ampoule AZ</h3>
-            <p class="product-desc">Ampolla de choque antiimperfecciones con Zinc purificante. Desinflama granos activos, regula el sebo y previene nuevos brotes. Ideal para acné recurrente o brotes severos.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('sebia-serum')">
-            <span class="product-size">30 ML</span>
-            <h3 class="product-name">Sérum</h3>
-            <p class="product-desc">Sérum doble acción antiedad y antigranos para piel adulta con imperfecciones. Controla el sebo mientras combate las arrugas. La rutina completa en un solo paso.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-        </div>
+      <div class="gamas-nav" id="gamasNav" role="group" aria-label="Elige una línea">
+        <button type="button" class="activo" aria-current="true" style="--lc: var(--lc-sebiaclear)" aria-controls="gama-sebiaclear"><i></i>Sebiaclear</button>
+        <button type="button" style="--lc: var(--lc-topialyse)" aria-controls="gama-topialyse"><i></i>Topialyse</button>
+        <button type="button" style="--lc: var(--lc-cicavit)" aria-controls="gama-cicavit"><i></i>Cicavit+</button>
+        <button type="button" style="--lc: var(--lc-sunsecure)" aria-controls="gama-sunsecure"><i></i>Sun Secure</button>
+        <button type="button" style="--lc: var(--lc-sensifine)" aria-controls="gama-sensifine"><i></i>Sensifine</button>
+        <button type="button" style="--lc: var(--lc-clairial)" aria-controls="gama-clairial"><i></i>Clairial</button>
+        <button type="button" style="--lc: var(--lc-antiage)" aria-controls="gama-antiage"><i></i>Anti Age</button>
       </div>
-
-      <!-- 2 — TOPIALYSE -->
-      <div class="line-block line-topialyse reveal">
-        <div class="line-header">
-          <span class="line-emoji">🩷</span>
-          <div class="line-header-text">
-            <div class="line-name">Topialyse</div>
-            <div class="line-desc">Piel atópica, seca y muy seca · Para toda la familia desde el nacimiento</div>
-          </div>
-        </div>
-        <div class="line-products-grid">
-          <div class="product-card" onclick="openProduct('topialyse-huile-lavante')">
-            <a href="https://www.farmatodo.com.ve/producto/116437677-limpiador-facial-svr-topialyse-400ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
-            <span class="product-size">400 ML</span>
-            <h3 class="product-name">Huile Lavante Refo</h3>
-            <p class="product-desc">Aceite de baño y ducha para piel seca y atópica. Limpia sin irritar y deja una película hidratante protectora al enjuagar. Para toda la familia, desde bebés hasta adultos.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('topialyse-baume-protect')">
-            <a href="https://www.farmatodo.com.ve/producto/116438629-crema-facial-svr-topialyse-200ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
-            <span class="product-size">200 ML</span>
-            <h3 class="product-name">Baume Protect+</h3>
-            <p class="product-desc">Bálsamo emoliente de alta protección para piel muy seca o atópica. Restaura la barrera hidrolipídica, calma el picor y protege de agresiones externas. Confort inmediato y duradero.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('topialyse-palpebral')">
-            <span class="product-size">30 ML</span>
-            <h3 class="product-name">Palpebral+ Baume</h3>
-            <p class="product-desc">Bálsamo especializado para párpados con eccema o dermatitis. Sin perfume ni conservantes. Calma el picor, reduce la descamación y restaura la barrera del párpado. Dermatológicamente probado.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 3 — CICAVIT+ -->
-      <div class="line-block line-cicavit reveal">
-        <div class="line-header">
-          <span class="line-emoji">❤️‍🩹</span>
-          <div class="line-header-text">
-            <div class="line-name">Cicavit+</div>
-            <div class="line-desc">Reparación · Irritaciones · Post-procedimiento · Desde el nacimiento</div>
-          </div>
-        </div>
-        <div class="line-products-grid">
-          <div class="product-card" onclick="openProduct('cicavit-creme-hppi')">
-            <a href="https://www.farmatodo.com.ve/producto/116437642-crem-facial-svr-hppi-cicavit-40ml" target="_blank" rel="noopener" class="product-card-farmatodo" onclick="event.stopPropagation()" title="Ver en Farmatodo">Farmatodo</a>
-            <span class="product-size">40 ML</span>
-            <h3 class="product-name">Crème HPPI</h3>
-            <p class="product-desc">Crema cicatrizante para piel irritada, post-procedimiento o con heridas. Acelera la cicatrización, reduce el riesgo de queloide y calma la inflamación. Apta para toda la familia.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 4 — SUN SECURE -->
-      <div class="line-block line-sunsecure reveal">
-        <div class="line-header">
-          <span class="line-emoji">☀️</span>
-          <div class="line-header-text">
-            <div class="line-name">Sun Secure</div>
-            <div class="line-desc">Fotoprotección dermatológica SPF 50+ · Alta tolerancia</div>
-          </div>
-        </div>
-        <div class="line-products-grid">
-          <div class="product-card" onclick="openProduct('sunsecure-extreme')">
-            <span class="product-size">50 ML</span>
-            <h3 class="product-name">Extreme SPF50+</h3>
-            <p class="product-desc">Protector solar fluido de muy alta protección UVA/UVB. Textura ultraligera, fotoestable y resistente al agua. Para todo tipo de piel. El básico indispensable de la rutina solar.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('sunsecure-blur')">
-            <span class="product-size">50 ML</span>
-            <h3 class="product-name">Blur Sans Parfum SPF50+</h3>
-            <p class="product-desc">SPF50+ con efecto blur, sin perfume. Difumina poros e imperfecciones con acabado mate sedoso. Para pieles sensibles a las fragancias que no renuncian a una protección perfecta.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('sunsecure-blur-teinte')">
-            <span class="product-size">50 ML</span>
-            <h3 class="product-name">Blur Teinté Hale SPF50+</h3>
-            <p class="product-desc">Protector solar SPF50+ con tinte bronceado y efecto blur. Unifica el tono con acabado luminoso y natural. El solar que también embellece mientras cuida tu piel.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('sunsecure-fluide-photoage')">
-            <span class="product-size">40 ML</span>
-            <h3 class="product-name">Fluide Photo Age SPF50+</h3>
-            <p class="product-desc">Solar antiedad de muy alta protección. Previene el fotoenvejecimiento prematuro, las manchas y la pérdida de firmeza. Para piel madura que protege su inversión antiedad.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 5 — SENSIFINE -->
-      <div class="line-block line-sensifine reveal">
-        <div class="line-header">
-          <span class="line-emoji">🌸</span>
-          <div class="line-header-text">
-            <div class="line-name">Sensifine</div>
-            <div class="line-desc">Pieles reactivas, intolerantes y con rosácea</div>
-          </div>
-        </div>
-        <div class="line-products-grid">
-          <div class="product-card" onclick="openProduct('sensifine-extreme')">
-            <span class="product-size">30 ML</span>
-            <h3 class="product-name">Extreme</h3>
-            <p class="product-desc">Crema SOS para piel muy sensible e intolerante. Apaga el ardor, el picor y las rojeces de inmediato. Refuerza la barrera cutánea y protege de agresiones externas todo el día.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('sensifine-eau-micellaire')">
-            <span class="product-size">400 ML</span>
-            <h3 class="product-name">AR Eau Micellaire</h3>
-            <p class="product-desc">Agua micelar para piel con rosácea o rojeces crónicas. Limpieza suave sin frotar, sin alcohol. Reduce la reactividad vascular y calma el enrojecimiento desde la limpieza diaria.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 6 — CLAIRIAL -->
-      <div class="line-block line-clairial reveal">
-        <div class="line-header">
-          <span class="line-emoji">🩹</span>
-          <div class="line-header-text">
-            <div class="line-name">Clairial</div>
-            <div class="line-desc">Despigmentación · Manchas · Uniformización del tono</div>
-          </div>
-        </div>
-        <div class="line-products-grid">
-          <div class="product-card" onclick="openProduct('clairial-ampoule')">
-            <span class="product-size">30 ML</span>
-            <h3 class="product-name">Ampoule</h3>
-            <p class="product-desc">Ampolla antimancha de alta concentración para uso diario. Actúa sobre manchas solares, hormonales y postinflamatorias desde el interior de la piel. Tono verdaderamente uniforme.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('clairial-night-peel')">
-            <span class="product-size">50 ML</span>
-            <h3 class="product-name">Night Peel</h3>
-            <p class="product-desc">Sérum nocturno despigmentante con AHA. Borra manchas solares, hormonales y postacné mientras duermes. Piel más uniforme y sin marcas en 4 a 8 semanas de uso.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- 7 — ANTI AGE -->
-      <div class="line-block line-antiage reveal">
-        <div class="line-header">
-          <span class="line-emoji">💫</span>
-          <div class="line-header-text">
-            <div class="line-name">Anti Age</div>
-            <div class="line-desc">Antienvejecimiento · Vitamina C · Retinol · Colágeno · Ácido Hialurónico</div>
-          </div>
-        </div>
-        <div class="line-products-grid">
-          <div class="product-card" onclick="openProduct('antiage-ampoule-c')">
-            <span class="product-size">30 ML</span>
-            <h3 class="product-name">Ampoule C</h3>
-            <p class="product-desc">Vitamina C optimizada al 20% en ampolla. Flash antimancha, antioxidante y antiedad. Activa la síntesis de colágeno y aporta luminosidad visible desde los primeros días.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('antiage-ampoule-b3')">
-            <span class="product-size">30 ML</span>
-            <h3 class="product-name">Ampoule B3</h3>
-            <p class="product-desc">Ampolla concentrada con Niacinamida 10%. Unifica el tono, afina los poros y regula el sebo. Textura impecable en 4 semanas de uso constante. Apta para todo tipo de piel.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('antiage-ampoule-a')">
-            <span class="product-size">30 ML</span>
-            <h3 class="product-name">Ampoule A</h3>
-            <p class="product-desc">Retinol encapsulado de tolerancia mejorada. Suaviza arrugas, renueva y regenera la piel mientras duermes. Toda la eficacia del retinol sin la irritación clásica.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('antiage-ceye')">
-            <span class="product-size">15 ML</span>
-            <h3 class="product-name">[C] Eye Biotic</h3>
-            <p class="product-desc">Contorno de ojos antiedad con Vitamina C pura y probióticos. Ilumina ojeras, reduce bolsas y protege del estrés oxidativo. Piel del contorno visiblemente más joven desde la primera semana.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('antiage-c20')">
-            <span class="product-size">50 ML</span>
-            <h3 class="product-name">[C20] Rechargeable</h3>
-            <p class="product-desc">20% de Vitamina C pura: máxima concentración antiedad. Efecto tensor, antimancha y antifatiga. Envase recargable eco-friendly. Para piel madura que exige resultados reales.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('antiage-collagen')">
-            <span class="product-size">50 ML</span>
-            <h3 class="product-name">[Collagen] Rechargeable</h3>
-            <p class="product-desc">Colágeno marino y probióticos en sérum recargable. Recupera densidad, firmeza y elasticidad. Piel visiblemente más llena y tonificada en 4 semanas de uso constante.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-          <div class="product-card" onclick="openProduct('antiage-hyalu')">
-            <span class="product-size">50 ML</span>
-            <h3 class="product-name">[Hyalu] Rechargeable</h3>
-            <p class="product-desc">Ácido Hialurónico triple acción: hidratación superficial, relleno en profundidad y barrera reforzada. Sérum antiedad de nueva generación en envase recargable.</p>
-            <span class="product-card-hint">Ver más →</span>
-          </div>
-        </div>
+      <div class="gamas reveal" id="gamas">
+        <article class="gama" id="gama-sebiaclear" style="--lc: var(--lc-sebiaclear)" aria-labelledby="gama-sebiaclear-t">
+          <header class="gama-cab">
+            <span class="gama-emoji" aria-hidden="true">🫧</span>
+            <div class="gama-cab-txt">
+              <h3 id="gama-sebiaclear-t">Sebiaclear <span class="gama-n">5 productos</span></h3>
+              <p>Control de imperfecciones y acné · Piel grasa y mixta</p>
+            </div>
+          </header>
+          <ul class="gama-lista">
+            <li class="gama-prod con-ftd">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sebia-active-gel')">
+                <img src="assets/productos/mini/sebia-active-gel.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Active Gel <small>40 ml</small></span>
+                  <span class="gama-prod-det">Tratamiento antigranos con Zinc y BHA.</span>
+                </span>
+              </button>
+              <a href="https://www.farmatodo.com.ve/producto/116457598-corrector-facial-svr-active-gel-sebiaclear-40ml" target="_blank" rel="noopener" class="gama-prod-ftd" aria-label="Ver Active Gel 40 ml en Farmatodo">Farmatodo</a>
+            </li>
+            <li class="gama-prod con-ftd">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sebia-gel-moussant-200')">
+                <img src="assets/productos/mini/sebia-gel-moussant-200.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Gel Moussant <small>200 ml</small></span>
+                  <span class="gama-prod-det">Gel limpiador purificante para piel con tendencia acneica.</span>
+                </span>
+              </button>
+              <a href="https://www.farmatodo.com.ve/producto/116437651-limpiador-facial-svr-sebiaclear-gel-moussant-200ml" target="_blank" rel="noopener" class="gama-prod-ftd" aria-label="Ver Gel Moussant 200 ml en Farmatodo">Farmatodo</a>
+            </li>
+            <li class="gama-prod con-ftd">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sebia-gel-moussant-400')">
+                <img src="assets/productos/mini/sebia-gel-moussant-400.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Gel Moussant <small>400 ml</small></span>
+                  <span class="gama-prod-det">Gel limpiador purificante en formato familiar.</span>
+                </span>
+              </button>
+              <a href="https://www.farmatodo.com.ve/producto/116438611-limpiador-facial-svr-sebiaclear-gel-moussant-400ml" target="_blank" rel="noopener" class="gama-prod-ftd" aria-label="Ver Gel Moussant 400 ml en Farmatodo">Farmatodo</a>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sebia-ampoule-az')">
+                <img src="assets/productos/mini/sebia-ampoule-az.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Ampoule AZ <small>30 ml</small></span>
+                  <span class="gama-prod-det">Ampolla de choque antiimperfecciones con Zinc purificante.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sebia-serum')">
+                <img src="assets/productos/mini/sebia-serum.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Sérum <small>30 ml</small></span>
+                  <span class="gama-prod-det">Sérum doble acción antiedad y antigranos para piel adulta con imperfecciones.</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </article>
+        <article class="gama" id="gama-topialyse" style="--lc: var(--lc-topialyse)" aria-labelledby="gama-topialyse-t">
+          <header class="gama-cab">
+            <span class="gama-emoji" aria-hidden="true">🩷</span>
+            <div class="gama-cab-txt">
+              <h3 id="gama-topialyse-t">Topialyse <span class="gama-n">3 productos</span></h3>
+              <p>Piel atópica, seca y muy seca · Para toda la familia desde el nacimiento</p>
+            </div>
+          </header>
+          <ul class="gama-lista">
+            <li class="gama-prod con-ftd">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('topialyse-huile-lavante')">
+                <img src="assets/productos/mini/topialyse-huile-lavante.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Huile Lavante Refo <small>400 ml</small></span>
+                  <span class="gama-prod-det">Aceite de baño y ducha para piel seca y atópica.</span>
+                </span>
+              </button>
+              <a href="https://www.farmatodo.com.ve/producto/116437677-limpiador-facial-svr-topialyse-400ml" target="_blank" rel="noopener" class="gama-prod-ftd" aria-label="Ver Huile Lavante Refo 400 ml en Farmatodo">Farmatodo</a>
+            </li>
+            <li class="gama-prod con-ftd">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('topialyse-baume-protect')">
+                <img src="assets/productos/mini/topialyse-baume-protect.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Baume Protect+ <small>200 ml</small></span>
+                  <span class="gama-prod-det">Bálsamo emoliente de alta protección para piel muy seca o atópica.</span>
+                </span>
+              </button>
+              <a href="https://www.farmatodo.com.ve/producto/116438629-crema-facial-svr-topialyse-200ml" target="_blank" rel="noopener" class="gama-prod-ftd" aria-label="Ver Baume Protect+ 200 ml en Farmatodo">Farmatodo</a>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('topialyse-palpebral')">
+                <img src="assets/productos/mini/topialyse-palpebral.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Palpebral+ Baume <small>30 ml</small></span>
+                  <span class="gama-prod-det">Bálsamo especializado para párpados con eccema o dermatitis.</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </article>
+        <article class="gama" id="gama-cicavit" style="--lc: var(--lc-cicavit)" aria-labelledby="gama-cicavit-t">
+          <header class="gama-cab">
+            <span class="gama-emoji" aria-hidden="true">❤️‍🩹</span>
+            <div class="gama-cab-txt">
+              <h3 id="gama-cicavit-t">Cicavit+ <span class="gama-n">1 producto</span></h3>
+              <p>Reparación · Irritaciones · Post-procedimiento · Desde el nacimiento</p>
+            </div>
+          </header>
+          <ul class="gama-lista">
+            <li class="gama-prod con-ftd">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('cicavit-creme-hppi')">
+                <img src="assets/productos/mini/cicavit-creme-hppi.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Crème HPPI <small>40 ml</small></span>
+                  <span class="gama-prod-det">Crema cicatrizante para piel irritada, post-procedimiento o con heridas.</span>
+                </span>
+              </button>
+              <a href="https://www.farmatodo.com.ve/producto/116437642-crem-facial-svr-hppi-cicavit-40ml" target="_blank" rel="noopener" class="gama-prod-ftd" aria-label="Ver Crème HPPI 40 ml en Farmatodo">Farmatodo</a>
+            </li>
+          </ul>
+        </article>
+        <article class="gama" id="gama-sunsecure" style="--lc: var(--lc-sunsecure)" aria-labelledby="gama-sunsecure-t">
+          <header class="gama-cab">
+            <span class="gama-emoji" aria-hidden="true">☀️</span>
+            <div class="gama-cab-txt">
+              <h3 id="gama-sunsecure-t">Sun Secure <span class="gama-n">4 productos</span></h3>
+              <p>Fotoprotección dermatológica SPF 50+ · Alta tolerancia</p>
+            </div>
+          </header>
+          <ul class="gama-lista">
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sunsecure-extreme')">
+                <img src="assets/productos/mini/sunsecure-extreme.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Extreme SPF50+ <small>50 ml</small></span>
+                  <span class="gama-prod-det">Protector solar fluido de muy alta protección UVA/UVB.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sunsecure-blur')">
+                <img src="assets/productos/mini/sunsecure-blur.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Blur Sans Parfum SPF50+ <small>50 ml</small></span>
+                  <span class="gama-prod-det">SPF50+ con efecto blur, sin perfume.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sunsecure-blur-teinte')">
+                <img src="assets/productos/mini/sunsecure-blur-teinte.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Blur Teinté Hale SPF50+ <small>50 ml</small></span>
+                  <span class="gama-prod-det">Protector solar SPF50+ con tinte bronceado y efecto blur.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sunsecure-fluide-photoage')">
+                <img src="assets/productos/mini/sunsecure-fluide-photoage.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Fluide Photo Age SPF50+ <small>40 ml</small></span>
+                  <span class="gama-prod-det">Solar antiedad de muy alta protección.</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </article>
+        <article class="gama" id="gama-sensifine" style="--lc: var(--lc-sensifine)" aria-labelledby="gama-sensifine-t">
+          <header class="gama-cab">
+            <span class="gama-emoji" aria-hidden="true">🌸</span>
+            <div class="gama-cab-txt">
+              <h3 id="gama-sensifine-t">Sensifine <span class="gama-n">2 productos</span></h3>
+              <p>Pieles reactivas, intolerantes y con rosácea</p>
+            </div>
+          </header>
+          <ul class="gama-lista">
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sensifine-extreme')">
+                <img src="assets/productos/mini/sensifine-extreme.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Extreme <small>30 ml</small></span>
+                  <span class="gama-prod-det">Crema SOS para piel muy sensible e intolerante.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('sensifine-eau-micellaire')">
+                <img src="assets/productos/mini/sensifine-eau-micellaire.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">AR Eau Micellaire <small>400 ml</small></span>
+                  <span class="gama-prod-det">Agua micelar para piel con rosácea o rojeces crónicas.</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </article>
+        <article class="gama" id="gama-clairial" style="--lc: var(--lc-clairial)" aria-labelledby="gama-clairial-t">
+          <header class="gama-cab">
+            <span class="gama-emoji" aria-hidden="true">🩹</span>
+            <div class="gama-cab-txt">
+              <h3 id="gama-clairial-t">Clairial <span class="gama-n">2 productos</span></h3>
+              <p>Despigmentación · Manchas · Uniformización del tono</p>
+            </div>
+          </header>
+          <ul class="gama-lista">
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('clairial-ampoule')">
+                <img src="assets/productos/mini/clairial-ampoule.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Ampoule <small>30 ml</small></span>
+                  <span class="gama-prod-det">Ampolla antimancha de alta concentración para uso diario.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('clairial-night-peel')">
+                <img src="assets/productos/mini/clairial-night-peel.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Night Peel <small>50 ml</small></span>
+                  <span class="gama-prod-det">Sérum nocturno despigmentante con AHA.</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </article>
+        <article class="gama" id="gama-antiage" style="--lc: var(--lc-antiage)" aria-labelledby="gama-antiage-t">
+          <header class="gama-cab">
+            <span class="gama-emoji" aria-hidden="true">💫</span>
+            <div class="gama-cab-txt">
+              <h3 id="gama-antiage-t">Anti Age <span class="gama-n">7 productos</span></h3>
+              <p>Antienvejecimiento · Vitamina C · Retinol · Colágeno · Ácido Hialurónico</p>
+            </div>
+          </header>
+          <ul class="gama-lista">
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('antiage-ampoule-c')">
+                <img src="assets/productos/mini/antiage-ampoule-c.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Ampoule C <small>30 ml</small></span>
+                  <span class="gama-prod-det">Vitamina C optimizada al 20% en ampolla.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('antiage-ampoule-b3')">
+                <img src="assets/productos/mini/antiage-ampoule-b3.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Ampoule B3 <small>30 ml</small></span>
+                  <span class="gama-prod-det">Ampolla concentrada con Niacinamida 10%.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('antiage-ampoule-a')">
+                <img src="assets/productos/mini/antiage-ampoule-a.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">Ampoule A <small>30 ml</small></span>
+                  <span class="gama-prod-det">Retinol encapsulado de tolerancia mejorada.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('antiage-ceye')">
+                <img src="assets/productos/mini/antiage-ceye.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">[C] Eye Biotic <small>15 ml</small></span>
+                  <span class="gama-prod-det">Contorno de ojos antiedad con Vitamina C pura y probióticos.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('antiage-c20')">
+                <img src="assets/productos/mini/antiage-c20.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">[C20] Rechargeable <small>50 ml</small></span>
+                  <span class="gama-prod-det">20% de Vitamina C pura: máxima concentración antiedad.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('antiage-collagen')">
+                <img src="assets/productos/mini/antiage-collagen.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">[Collagen] Rechargeable <small>50 ml</small></span>
+                  <span class="gama-prod-det">Colágeno marino y probióticos en sérum recargable.</span>
+                </span>
+              </button>
+            </li>
+            <li class="gama-prod">
+              <button type="button" class="gama-prod-ver" onclick="openProduct('antiage-hyalu')">
+                <img src="assets/productos/mini/antiage-hyalu.webp" alt="" width="52" height="52" loading="lazy">
+                <span class="gama-prod-txt">
+                  <span class="gama-prod-nom">[Hyalu] Rechargeable <small>50 ml</small></span>
+                  <span class="gama-prod-det">Ácido Hialurónico triple acción: hidratación superficial, relleno en profundidad y barrera reforzada.</span>
+                </span>
+              </button>
+            </li>
+          </ul>
+        </article>
       </div>
 
     </div>
   </section>
+  <script>
+  /* En celular las líneas van en carrusel: los botones de arriba llevan a cada una y marcan la que se ve. */
+  (() => {
+    const pista = document.getElementById('gamas'), nav = document.getElementById('gamasNav');
+    if (!pista || !nav) return;
+    const tarjetas = [...pista.querySelectorAll('.gama')], botones = [...nav.querySelectorAll('button')];
+    const suave = () => matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    let activo = 0;
+    // El carrusel toma la altura de la línea visible: sin huecos bajo las que tienen pocos productos.
+    const ajustar = () => {
+      const carrusel = getComputedStyle(nav).display !== 'none';
+      pista.classList.toggle('ajustable', carrusel);
+      pista.style.height = carrusel ? (tarjetas[activo].offsetHeight + 16) + 'px' : '';
+    };
+    botones.forEach((b, i) => b.addEventListener('click', () => {
+      pista.scrollTo({ left: tarjetas[i].offsetLeft - tarjetas[0].offsetLeft, behavior: suave() });
+    }));
+    // La línea activa es la más centrada en horizontal (las más altas que la visible quedan recortadas).
+    const elegir = () => {
+      if (getComputedStyle(nav).display === 'none') return;
+      const p = pista.getBoundingClientRect(), centro = p.left + p.width / 2;
+      let i = 0, menor = Infinity;
+      tarjetas.forEach((t, j) => { const r = t.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - centro); if (d < menor) { menor = d; i = j; } });
+      if (i === activo) return;
+      activo = i;
+      ajustar();
+      botones.forEach((b, j) => { b.classList.toggle('activo', j === i); b.setAttribute('aria-current', j === i ? 'true' : 'false'); });
+      nav.scrollTo({ left: botones[i].offsetLeft - botones[0].offsetLeft, behavior: suave() });
+    };
+    let pendiente = 0;
+    pista.addEventListener('scroll', () => { cancelAnimationFrame(pendiente); pendiente = requestAnimationFrame(elegir); }, { passive: true });
+    new ResizeObserver(ajustar).observe(tarjetas[0].parentNode);
+    addEventListener('resize', ajustar);
+    ajustar();
+  })();
+  </script>
 
   <!-- ══ PUNTOS DE VENTA POR ESTADOS ══ -->
   <section id="puntos">
