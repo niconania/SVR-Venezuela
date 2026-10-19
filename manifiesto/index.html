@@ -403,6 +403,149 @@
       .whatsapp-float span { display: none; }
       .whatsapp-float:hover { padding: 15px; gap: 0; }
     }
+
+    /* ── HERENCIA Y CIENCIA (venían del home) ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 80px; }
+    .label-coral { font-size: 0.62rem; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase; color: var(--coral); }
+    #herencia, #filosofia { --white: #ffffff; padding: 80px 0; }
+    #herencia h2, #filosofia h2, #herencia h3, #filosofia h3 { line-height: 1.15; }
+    #filosofia + .related { margin-top: 0; }   /* la ciencia ya trae su propio aire */
+    /* ══════════════════════════════
+       HERITAGE
+    ══════════════════════════════ */
+    #herencia { background: var(--cream); }
+    .heritage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 88px;
+      align-items: center;
+    }
+    .heritage-year-card {
+      background: var(--coral);
+      padding: 60px 44px;
+      position: relative;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+    .heritage-year-card::before {
+      content: '1962';
+      position: absolute;
+      bottom: -0.12em; right: -0.04em;
+      font-size: 10rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.08);
+      line-height: 1;
+      pointer-events: none;
+    }
+    .heritage-year-label {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.65);
+      display: block;
+      margin-bottom: 16px;
+    }
+    .heritage-year-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .heritage-year-desc {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.75;
+    }
+    .heritage-text .label-coral { display: block; margin-bottom: 14px; }
+    .heritage-text h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--dark);
+      margin-bottom: 22px;
+    }
+    .heritage-text p {
+      font-size: 0.92rem;
+      color: var(--gray);
+      line-height: 1.85;
+      margin-bottom: 14px;
+    }
+    .heritage-text strong { color: var(--dark); font-weight: 600; }
+    .heritage-divider { width: 36px; height: 3px; background: var(--coral); margin: 24px 0; border-radius: 2px; }
+    .heritage-quote {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--dark);
+      line-height: 1.55;
+      padding-left: 18px;
+      border-left: 3px solid var(--coral);
+      font-style: normal;
+    }
+
+    /* ══════════════════════════════
+       PHILOSOPHY
+    ══════════════════════════════ */
+    #filosofia { background: var(--white); }
+    .philosophy-header {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 64px;
+    }
+    .philosophy-header .label-coral { display: block; margin-bottom: 14px; }
+    .philosophy-header h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      color: var(--dark);
+      margin-bottom: 16px;
+    }
+    .philosophy-header p { font-size: 0.92rem; color: var(--gray); line-height: 1.8; }
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .pillar {
+      background: var(--cream);
+      padding: 48px 36px;
+      border-radius: 4px;
+      transition: box-shadow 0.3s;
+    }
+    .pillar:hover { box-shadow: 0 8px 32px rgba(251,99,126,0.1); }
+    .pillar-emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+    .pillar-num {
+      font-size: 0.58rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--coral);
+      display: block;
+      margin-bottom: 10px;
+    }
+    .pillar h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 14px;
+    }
+    .pillar p { font-size: 0.86rem; font-weight: 400; color: var(--gray); line-height: 1.85; }
+    @media (max-width: 960px) {
+      .container { padding: 0 24px; }
+      #herencia, #filosofia { padding: 56px 0; }
+      .heritage-grid { grid-template-columns: 1fr; gap: 32px; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .pillar { padding: 32px 24px; }
+      .heritage-year-card { padding: 40px 28px; }
+      .heritage-text h2 { margin-bottom: 16px; }
+    }
+    @media (max-width: 640px) {
+      #herencia, #filosofia { padding: 44px 0; }
+      .pillar { padding: 26px 20px; }
+    }
   </style>
   <!-- Meta Pixel Code -->
   <script>
@@ -495,6 +638,72 @@
 
     </div>
   </div>
+
+  <!-- ══ HERITAGE ══ -->
+  <section id="herencia">
+    <div class="container">
+      <div class="heritage-grid">
+        <div>
+          <div class="heritage-year-card">
+            <span class="heritage-year-label">El comienzo</span>
+            <h3 class="heritage-year-title">Una farmacéutica<br>y su laboratorio<br>en Ault</h3>
+            <p class="heritage-year-desc">
+              En 1962, Simone y Robert Véret fundaron SVR desde la trastienda de una farmacia en el norte de Francia. Sus iniciales, su legado.
+            </p>
+          </div>
+        </div>
+        <div class="heritage-text">
+          <span class="label-coral">Herencia Farmacéutica</span>
+          <h2>Desde 1962, ciencia al servicio de la piel</h2>
+          <p>
+            Todo comenzó con <strong>Simone Véret</strong>, farmacéutica francesa que formulaba
+            soluciones para pieles frágiles. Los productos de entonces no estaban pensados para las
+            pieles más sensibles. Ella cambió eso.
+          </p>
+          <p>
+            Más de seis décadas después, esa misma convicción guía cada fórmula SVR:
+            <strong>concentraciones excepcionalmente altas de principios activos</strong>,
+            tolerancia comprobada y resultados rápidos y visibles.
+          </p>
+          <div class="heritage-divider"></div>
+          <blockquote class="heritage-quote" style="border-left-color:#ff7c23;font-size:1.5rem;font-weight:800;color:#ff7c23;letter-spacing:-0.01em;">
+            #AGustoEnMiPiel
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ PHILOSOPHY ══ -->
+  <section id="filosofia">
+    <div class="container">
+      <div class="philosophy-header">
+        <span class="label-coral">Nuestra Ciencia</span>
+        <h2>Formulados para pieles sensibles</h2>
+        <p>Millones de personas conviven con piel sensible sin encontrar productos que realmente las entiendan. SVR nació para resolver eso.</p>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar">
+          <span class="pillar-emoji">🔬</span>
+          <span class="pillar-num">01</span>
+          <h3>El problema: piel reactiva sin solución real</h3>
+          <p>La piel sensible necesita activos potentes pero tolera poco. SVR desarrolla fórmulas con las concentraciones más altas del mercado, probadas para no irritar incluso las pieles más reactivas.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-emoji">🩺</span>
+          <span class="pillar-num">02</span>
+          <h3>La solución: diseñada para pieles sensibles</h3>
+          <p>Cada fórmula se desarrolla pensando primero en la piel sensible: atópica, reactiva, post-procedimiento o simplemente intolerante. Si funciona en la piel más sensible, funciona en cualquiera.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-emoji">🧬</span>
+          <span class="pillar-num">03</span>
+          <h3>El respaldo: prescripción dermatológica</h3>
+          <p>No es cosmética. Es dermocosmética clínica avalada por dermatólogos en más de 72 países. Cuando la piel lo necesita de verdad, SVR es la respuesta que recetan los especialistas.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ── RELATED ── -->
   <div class="related">
