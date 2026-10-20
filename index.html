@@ -1252,6 +1252,8 @@
       pointer-events: none;
     }
     #farmatodo .container { position: relative; }
+    .mf-vista.mf-entra { animation: mf-entra 0.28s cubic-bezier(0.25,0.46,0.45,0.94) both; }
+    @keyframes mf-entra { from { opacity: 0; transform: translateY(10px); } }
     #farmatodo [hidden] { display: none !important; }   /* sus botones usan display:flex, que le gana a [hidden] */
     .mf-sr {
       position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
@@ -1431,6 +1433,7 @@
       padding: 12px 6px; cursor: pointer; transition: background 0.2s;
     }
     .mf-fila:hover { background: rgba(65,143,222,0.07); }
+    .mf-fila:active { background: rgba(65,143,222,0.14); }
     .mf-fila-txt { flex: 1; min-width: 0; }
     .mf-fila-txt b { display: block; font-size: 0.86rem; font-weight: 600; }
     .mf-fila-txt small { display: block; font-size: 0.7rem; color: var(--mf-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -1508,6 +1511,7 @@
       .mf-zoom button { width: 42px; height: 42px; }
     }
     @media (prefers-reduced-motion: reduce) {
+      .mf-vista.mf-entra { animation: none; }
       .mf-pulso { animation: none; opacity: 0.6; }
       .mf-svg.mf-entrada .mf-punto, .mf-svg.mf-entrada .mf-halo { animation: none; }
     }
@@ -2198,9 +2202,30 @@
       } else {
         nodos.push(atras('← Volver', volverBase), el('p', 'mf-aviso', v.texto));
       }
-      vista.replaceChildren(...nodos);
-      vista.scrollTop = 0;
+      sinReacomodo(() => {
+        vista.replaceChildren(...nodos);
+        vista.scrollTop = 0;
+        vista.classList.remove('mf-entra');
+        encuadrarLista();   // se mide antes de la animación, que arranca 10 px más abajo
+        void vista.offsetWidth;   // reinicia la animación de entrada
+        vista.classList.add('mf-entra');
+      });
       anuncio.textContent = v.tipo === 'aviso' ? v.texto : `${lugar.textContent}: ${lugarN.textContent}`;
+    }
+    /* Chrome mueve la página para dejar fijo algo que se ve más abajo cuando la lista cambia de alto:
+       se siente como un salto. Se suspende mientras se rehace la lista. */
+    function sinReacomodo(cambio) {
+      const html = document.documentElement;
+      html.style.overflowAnchor = 'none';
+      cambio();
+      requestAnimationFrame(() => requestAnimationFrame(() => { html.style.overflowAnchor = ''; }));
+    }
+    /* Si el inicio de la lista quedó arriba de la pantalla o bajo el menú fijo, se desliza hasta él. */
+    function encuadrarLista() {
+      const menu = document.querySelector('nav');
+      const tope = (menu && getComputedStyle(menu).position === 'fixed' ? menu.offsetHeight : 0) + 12;   // el menú cambia de alto al bajar
+      const r = vista.getBoundingClientRect();
+      if (r.top < tope) window.scrollTo({ top: scrollY + r.top - tope, behavior: suave() });
     }
     function volverBase() {
       if (vistaBase.tipo === 'estado') verEstado(vistaBase.id); else verPais();
@@ -2227,7 +2252,7 @@
         const mas = el('button', 'mf-mas', textoMas);
         mas.type = 'button';
         mas.addEventListener('click', () => {
-          llenar(true);
+          sinReacomodo(() => llenar(true));
           const enfocable = caja.querySelectorAll('button.mf-fila, a.mf-ir')[CORTA];
           if (enfocable) enfocable.focus({ preventScroll: true });
         });
