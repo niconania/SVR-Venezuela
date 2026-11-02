@@ -1,0 +1,65 @@
+name: Actualizar tasa BCV
+
+# El BCV publica la tasa una vez por día hábil. Consultamos tres veces
+# en la mañana/tarde para no depender de la hora exacta de publicación.
+on:
+  schedule:
+    - cron: '30 13 * * 1-5'   # 09:30 Venezuela
+    - cron: '30 17 * * 1-5'   # 13:30 Venezuela
+    - cron: '30 20 * * 1-5'   # 16:30 Venezuela
+  workflow_dispatch:           # permite ejecutarlo a mano desde la pestaña Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tasa-bcv
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Consultar la tasa oficial
+        run: |
+          set -euo pipefail
+
+          if ! resp=$(curl -sf -m 30 https://ve.dolarapi.com/v1/dolares/oficial); then
+            echo "::warning::DolarAPI no respondió. Se conserva la tasa anterior."
+            exit 0
+          fi
+
+          tasa=$(printf '%s' "$resp" | jq -r '.promedio // empty')
+          act=$(printf '%s'  "$resp" | jq -r '.fechaActualizacion // empty')
+
+          # La tasa debe ser un número positivo; si no, no se toca el archivo.
+          case "$tasa" in
+            ''|*[!0-9.]*|.*|*.)
+              echo "::warning::Tasa inválida ('$tasa'). Se conserva la anterior."
+              exit 0 ;;
+          esac
+          if [ "$(printf '%s\n' "$tasa" | cut -d. -f1)" -le 0 ] 2>/dev/null; then
+            echo "::warning::Tasa no positiva ('$tasa'). Se conserva la anterior."
+            exit 0
+          fi
+
+          jq -n --argjson tasa "$tasa" --arg fecha "${act:0:10}" --arg act "$act" \
+            '{moneda:"VES", fuente:"BCV", tasa:$tasa, fecha:$fecha, actualizado:$act}' \
+            > tasa.json
+
+          echo "Tasa obtenida:"; cat tasa.json
+
+      - name: Publicar si cambió
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- tasa.json; then
+            echo "La tasa no cambió. Nada que publicar."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tasa.json
+          git commit -m "Tasa BCV $(jq -r .tasa tasa.json) Bs/USD — $(jq -r .fecha tasa.json)"
+          git push

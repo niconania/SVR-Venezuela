@@ -1,0 +1,916 @@
+{
+  "moneda": "USD",
+  "nota_precio": "Precio final al público. IVA incluido.",
+  "actualizado": "2026-11-02",
+  "fuente": "Listado de precio SVR-MARKETING (BCV, revisado) — JMedical Aesthetics Sciences C.A. · Desde 2026-11-02, seis precios fijados a mano por JMedical: Active Gel, Gel Moussant 200 y 400, Huile Lavante, Baume Protect+ y Cicavit+ Crème HPPI.",
+  "productos": [
+    {
+      "slug": "sebia-active-gel",
+      "sku": "SEB-AGL-40",
+      "linea": "Sebiaclear",
+      "nombre": "Active Gel",
+      "presentacion": "40 ML",
+      "precio": 52.80,
+      "disponible": true,
+      "color": "var(--lc-sebiaclear)",
+      "emoji": "🫧",
+      "descripcion": "Tratamiento antigranos con Zinc y BHA. Reduce imperfecciones activas, puntos negros y marcas en tiempo récord. Textura gel de absorción inmediata, no comedogénico.",
+      "ingredientes": [
+        "14% Gluconolactona (PHA): Desobstruye poros y refina la piel.",
+        "Niacinamida: Calma la irritación, combate bacterias y previene manchas."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sebia-active-gel-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/ActiveGel_8a.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/sebia-active-gel-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": "https://www.farmatodo.com.ve/producto/116457598-corrector-facial-svr-active-gel-sebiaclear-40ml"
+    },
+    {
+      "slug": "sebia-gel-moussant-200",
+      "sku": "SEB-GML-200",
+      "linea": "Sebiaclear",
+      "nombre": "Gel Moussant",
+      "presentacion": "200 ML",
+      "precio": 30.00,
+      "disponible": true,
+      "color": "var(--lc-sebiaclear)",
+      "emoji": "🫧",
+      "descripcion": "Gel limpiador purificante para piel con tendencia acneica. Elimina el exceso de sebo y limpia los poros sin resecar ni irritar. Uso diario mañana y noche.",
+      "ingredientes": [
+        "Gluconolactona: Desobstruye los poros respetando las pieles sensibles.",
+        "Ácido Salicílico: Exfolia suavemente, regula el sebo y reduce imperfecciones.",
+        "Base Limpiadora Suave (Sin jabón): Limpia a fondo sin agredir."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sebia-gel-moussant-200-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-gel-moussant-200.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-gel-moussant-200-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/sebia-gel-moussant-200-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": "https://www.farmatodo.com.ve/producto/116437651-limpiador-facial-svr-sebiaclear-gel-moussant-200ml"
+    },
+    {
+      "slug": "sebia-gel-moussant-400",
+      "sku": "SEB-GML-400",
+      "linea": "Sebiaclear",
+      "nombre": "Gel Moussant",
+      "presentacion": "400 ML",
+      "precio": 37.00,
+      "disponible": true,
+      "color": "var(--lc-sebiaclear)",
+      "emoji": "🫧",
+      "descripcion": "Gel limpiador purificante en formato familiar. Controla el sebo, limpia poros y calma imperfecciones sin efecto tirante. Mayor rendimiento para uso prolongado.",
+      "ingredientes": [
+        "Gluconolactona: Desobstruye los poros respetando las pieles sensibles.",
+        "Ácido Salicílico: Exfolia suavemente, regula el sebo y reduce imperfecciones.",
+        "Base Limpiadora Suave (Sin jabón): Limpia a fondo sin agredir."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sebia-gel-moussant-400-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-gel-moussant-400.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-gel-moussant-400-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/sebia-gel-moussant-400-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": "https://www.farmatodo.com.ve/producto/116438611-limpiador-facial-svr-sebiaclear-gel-moussant-400ml"
+    },
+    {
+      "slug": "sebia-ampoule-az",
+      "sku": "SEB-AMP-AZ-30",
+      "linea": "Sebiaclear",
+      "nombre": "Ampoule AZ",
+      "presentacion": "30 ML",
+      "precio": 56.38,
+      "disponible": true,
+      "color": "var(--lc-sebiaclear)",
+      "emoji": "🫧",
+      "descripcion": "Ampolla de choque antiimperfecciones con Zinc purificante. Desinflama granos activos, regula el sebo y previene nuevos brotes. Ideal para acné recurrente o brotes severos.",
+      "ingredientes": [
+        "15% Ácido Azelaico: regula el sebo, desinflama y reduce imperfecciones y marcas.",
+        "2% Niacinamida + 2% Zinc: Hidratan, calman la barrera cutánea y controlan el brillo.",
+        "Ácido Salicílico: Purifica y suaviza la textura de la piel."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sebia-ampoule-az-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-az.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-az-2.webp"
+        },
+        {
+          "type": "video",
+          "src": "assets/productos/pdt-ampoule-az-3.mp4"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/sebia-ampoule-az-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "sebia-serum",
+      "sku": "SEB-SER-30",
+      "linea": "Sebiaclear",
+      "nombre": "Sérum",
+      "presentacion": "30 ML",
+      "precio": 57.77,
+      "disponible": true,
+      "color": "var(--lc-sebiaclear)",
+      "emoji": "🫧",
+      "descripcion": "Sérum doble acción antiedad y antigranos para piel adulta con imperfecciones. Controla el sebo mientras combate las arrugas. La rutina completa en un solo paso.",
+      "ingredientes": [
+        "14% Gluconolactona + 4% Niacinamida: Desobstruyen poros, reducen imperfecciones y calman la piel.",
+        "Ácido Hialurónico + Activo Retinoide-Like: Hidratan, reafirman y reducen líneas de expresión.",
+        "Antioxidante Vegetal: Protege la piel de agresiones externas y evita nuevos brotes."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sebia-serum-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-serum-sebiaclear.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-serum-sebiaclear-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/sebia-serum-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "topialyse-huile-lavante",
+      "sku": "TOP-HUL-400",
+      "linea": "Topialyse",
+      "nombre": "Huile Lavante Refo",
+      "presentacion": "400 ML",
+      "precio": 37.33,
+      "disponible": true,
+      "color": "var(--lc-topialyse)",
+      "emoji": "🩷",
+      "descripcion": "Aceite de baño y ducha para piel seca y atópica. Limpia sin irritar y deja una película hidratante protectora al enjuagar. Para toda la familia, desde bebés hasta adultos.",
+      "ingredientes": [
+        "35% Activos Reponedores: Nutren profundamente y restauran la barrera de la piel.",
+        "Niacinamida: Calma la irritación y la tirantez.",
+        "Tensioactivos Suaves: Limpian con delicadeza sin resecar."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/topialyse-huile-lavante-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-huile-lavante.webp"
+        },
+        {
+          "type": "video",
+          "src": "assets/productos/pdt-huile-lavante-2.mp4"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/topialyse-huile-lavante-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": "https://www.farmatodo.com.ve/producto/116437677-limpiador-facial-svr-topialyse-400ml"
+    },
+    {
+      "slug": "topialyse-baume-protect",
+      "sku": "TOP-BPR-200",
+      "linea": "Topialyse",
+      "nombre": "Baume Protect+",
+      "presentacion": "200 ML",
+      "precio": 46.32,
+      "disponible": true,
+      "color": "var(--lc-topialyse)",
+      "emoji": "🩷",
+      "descripcion": "Bálsamo emoliente de alta protección para piel muy seca o atópica. Restaura la barrera hidrolipídica, calma el picor y protege de agresiones externas. Confort inmediato y duradero.",
+      "ingredientes": [
+        "Ceramidas AD Patentadas + Prebióticos: Protegen de alérgenos.",
+        "46% Fase Lipídica (Coco y Babasú): Nutren profundamente y suavizan la piel."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/topialyse-baume-protect-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/BaumeProtect_6a.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-baume-protect-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-baume-protect-3.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/topialyse-baume-protect-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": "https://www.farmatodo.com.ve/producto/116438629-crema-facial-svr-topialyse-200ml"
+    },
+    {
+      "slug": "topialyse-palpebral",
+      "sku": "TOP-PAL-30",
+      "linea": "Topialyse",
+      "nombre": "Palpebral+ Baume",
+      "presentacion": "30 ML",
+      "precio": 38.98,
+      "disponible": true,
+      "color": "var(--lc-topialyse)",
+      "emoji": "🩷",
+      "descripcion": "Bálsamo especializado para párpados con eccema o dermatitis. Sin perfume ni conservantes. Calma el picor, reduce la descamación y restaura la barrera del párpado. Dermatológicamente probado.",
+      "ingredientes": [
+        "Ceramidas AD Patentadas + Prebióticos: Protegen de alérgenos y calman la irritación.",
+        "Fase Lipídica + Omegas 3, 6, 9: Nutren profundamente y evitan la deshidratación.",
+        "Ácido Hialurónico: Hidrata intensamente el área."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/topialyse-palpebral-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-palpebral-baume.webp"
+        },
+        {
+          "type": "video",
+          "src": "assets/productos/pdt-palpebral-baume-2.mp4"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/topialyse-palpebral-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "cicavit-creme-hppi",
+      "sku": "CIC-HPPI-40",
+      "linea": "Cicavit+",
+      "nombre": "Crème HPPI",
+      "presentacion": "40 ML",
+      "precio": 36.68,
+      "disponible": true,
+      "color": "var(--lc-cicavit)",
+      "emoji": "❤️‍🩹",
+      "descripcion": "Crema cicatrizante para piel irritada, post-procedimiento o con heridas. Acelera la cicatrización, reduce el riesgo de queloide y calma la inflamación. Apta para toda la familia.",
+      "ingredientes": [
+        "Derivado de Cúrcuma + Ácido Hialurónico: Calman, hidratan y aceleran la regeneración de la piel.",
+        "Postbióticos Marinos: Evitan la formación de marcas y manchas de hiperpigmentación.",
+        "Polisacáridos + Niacinamida: Protegen la zona y fortalecen la barrera cutánea."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/cicavit-creme-hppi-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-creme-hppi.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-creme-hppi-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/cicavit-creme-hppi-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "sunsecure-extreme",
+      "sku": "SUN-EXT-50",
+      "linea": "Sun Secure",
+      "nombre": "Extreme SPF50+",
+      "presentacion": "50 ML",
+      "precio": 42.46,
+      "disponible": true,
+      "color": "var(--lc-sunsecure)",
+      "emoji": "☀️",
+      "descripcion": "Protector solar fluido de muy alta protección UVA/UVB. Textura ultraligera, fotoestable y resistente al agua. Para todo tipo de piel. El básico indispensable de la rutina solar.",
+      "ingredientes": [
+        "Combinación de 4 filtros solares que protegen la superficie de la piel.",
+        "Protege contra el daño celular causado por los rayos UVA/UVB, la luz azul y la luz infrarroja.",
+        "Acabado invisible, mate y no pegajoso."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sunsecure-extreme-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-sunsecure-extreme.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-sunsecure-extreme-2.webp"
+        },
+        {
+          "type": "video",
+          "src": "assets/productos/pdt-sunsecure-extreme-3.mp4"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/sunsecure-extreme-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "sunsecure-blur",
+      "sku": "SUN-BLR-50",
+      "linea": "Sun Secure",
+      "nombre": "Blur Sans Parfum SPF50+",
+      "presentacion": "50 ML",
+      "precio": 42.46,
+      "disponible": true,
+      "color": "var(--lc-sunsecure)",
+      "emoji": "☀️",
+      "descripcion": "SPF50+ con efecto blur, sin perfume. Difumina poros e imperfecciones con acabado mate sedoso. Para pieles sensibles a las fragancias que no renuncian a una protección perfecta.",
+      "ingredientes": [
+        "4 filtros orgánicos fotoestables de muy alta protección contra rayos UVA/UVB.",
+        "Protege contra la luz azul, infrarroja y el estrés oxidativo que causa el envejecimiento.",
+        "Textura ligera, no grasa y de rápida absorción."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sunsecure-blur-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-blur.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-blur-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/sunsecure-blur-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "sunsecure-blur-teinte",
+      "sku": "SUN-BLT-50",
+      "linea": "Sun Secure",
+      "nombre": "Blur Teinté Hâlé SPF50+",
+      "presentacion": "50 ML",
+      "precio": 42.46,
+      "disponible": true,
+      "color": "var(--lc-sunsecure)",
+      "emoji": "☀️",
+      "descripcion": "Protector solar SPF50+ con tinte bronceado y efecto blur. Unifica el tono con acabado luminoso y natural. El solar que también embellece mientras cuida tu piel.",
+      "ingredientes": [
+        "4 filtros orgánicos fotoestables de muy alta protección contra rayos UVA/UVB.",
+        "Defiende la piel contra la luz azul, infrarroja y el estrés oxidativo para prevenir el envejecimiento.",
+        "Aporta un tono unificado, saludable y aterciopelado al instante."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sunsecure-blur-teinte-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-blur-teinte.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-blur-teinte-2.webp"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "sunsecure-fluide-photoage",
+      "sku": "SUN-FPA-40",
+      "linea": "Sun Secure",
+      "nombre": "Fluide Photo Age SPF50+",
+      "presentacion": "40 ML",
+      "precio": 50.11,
+      "disponible": true,
+      "color": "var(--lc-sunsecure)",
+      "emoji": "☀️",
+      "descripcion": "Solar antiedad de muy alta protección. Previene el fotoenvejecimiento prematuro, las manchas y la pérdida de firmeza. Para piel madura que protege su inversión antiedad.",
+      "ingredientes": [
+        "Defiende contra rayos UVA/UVB, luz azul e infrarroja, evitando manchas solares.",
+        "Hidrata, rellena y suaviza líneas de expresión.",
+        "Combate el estrés oxidativo causante del envejecimiento prematuro."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sunsecure-fluide-photoage-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-fluide-photoage.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-fluide-photoage-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/sunsecure-fluide-photoage-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "sensifine-extreme",
+      "sku": "SEN-EXT-30",
+      "linea": "Sensifine",
+      "nombre": "Extreme",
+      "presentacion": "30 ML",
+      "precio": 43.15,
+      "disponible": true,
+      "color": "var(--lc-sensifine)",
+      "emoji": "🌸",
+      "descripcion": "Crema SOS para piel muy sensible e intolerante. Apaga el ardor, el picor y las rojeces de inmediato. Refuerza la barrera cutánea y protege de agresiones externas todo el día.",
+      "ingredientes": [
+        "Calma, protege y repara la barrera de las pieles más intolerantes.",
+        "Nutre, suaviza y protege la piel con total delicadeza.",
+        "Diseñada con solo 6 componentes para minimizar cualquier riesgo de alergia."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sensifine-extreme-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "video",
+          "src": "assets/productos/pdt-sensifine-extreme-1.mp4"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/sensifine-extreme-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "sensifine-eau-micellaire",
+      "sku": "SEN-EAU-400",
+      "linea": "Sensifine",
+      "nombre": "AR Eau Micellaire",
+      "presentacion": "400 ML",
+      "precio": 25.75,
+      "disponible": true,
+      "color": "var(--lc-sensifine)",
+      "emoji": "🌸",
+      "descripcion": "Agua micelar para piel con rosácea o rojeces crónicas. Limpieza suave sin frotar, sin alcohol. Reduce la reactividad vascular y calma el enrojecimiento desde la limpieza diaria.",
+      "ingredientes": [
+        "Niacinamida: Calma profundamente la piel y reduce las rojeces.",
+        "Tensioactivos: Limpian con total delicadeza respetando las pieles reactivas.",
+        "Agentes Hidratantes: Aportan frescura y evitan la tirantez."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/sensifine-eau-micellaire-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-eau-micellaire.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-eau-micellaire-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/sensifine-eau-micellaire-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "clairial-ampoule",
+      "sku": "CLA-AMP-30",
+      "linea": "Clairial",
+      "nombre": "Ampoule",
+      "presentacion": "30 ML",
+      "precio": 57.77,
+      "disponible": true,
+      "color": "var(--lc-clairial)",
+      "emoji": "🩹",
+      "descripcion": "Ampolla antimancha de alta concentración para uso diario. Actúa sobre manchas solares, hormonales y postinflamatorias desde el interior de la piel. Tono verdaderamente uniforme.",
+      "ingredientes": [
+        "14% Complejo Despigmentante: Reduce el tamaño e intensidad de las manchas oscuras.",
+        "2% Vitamina C Optimizada: Unifica el tono y activa la luminosidad.",
+        "Algas y Microorganismos Marinos: Protegen contra la contaminación y evitan que las manchas reaparezcan."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/clairial-ampoule-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-clairial.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-clairial-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-clairial-3.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/clairial-ampoule-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "clairial-night-peel",
+      "sku": "CLA-NPL-50",
+      "linea": "Clairial",
+      "nombre": "Night Peel",
+      "presentacion": "50 ML",
+      "precio": 53.59,
+      "disponible": true,
+      "color": "var(--lc-clairial)",
+      "emoji": "🩹",
+      "descripcion": "Sérum nocturno despigmentante con AHA. Borra manchas solares, hormonales y postacné mientras duermes. Piel más uniforme y sin marcas en 4 a 8 semanas de uso.",
+      "ingredientes": [
+        "Complejo Despigmentante: Corrige y reduce las manchas existentes y previene su reaparición.",
+        "Enzima de Papaya: Exfolia con total suavidad en la superficie para acelerar la eliminación de manchas.",
+        "Niacinamida + Levadura Anti-Estrés: Potencian la renovación celular y fortalecen la barrera cutánea."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/clairial-night-peel-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-night-peel.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-night-peel-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/clairial-night-peel-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "antiage-ampoule-c",
+      "sku": "AGE-AMP-C-30",
+      "linea": "Anti Age",
+      "nombre": "Ampoule C",
+      "presentacion": "30 ML",
+      "precio": 57.77,
+      "disponible": true,
+      "color": "var(--lc-antiage)",
+      "emoji": "💫",
+      "descripcion": "Vitamina C optimizada al 20% en ampolla. Flash antimancha, antioxidante y antiedad. Activa la síntesis de colágeno y aporta luminosidad visible desde los primeros días.",
+      "ingredientes": [
+        "20% Vitamina C Optimizada: Potente antioxidante que ilumina y reduce arrugas."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-ampoule-c-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-c.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-c-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-ampoule-c-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "antiage-ampoule-b3",
+      "sku": "AGE-AMP-B3-30",
+      "linea": "Anti Age",
+      "nombre": "Ampoule B3",
+      "presentacion": "30 ML",
+      "precio": 54.98,
+      "disponible": true,
+      "color": "var(--lc-antiage)",
+      "emoji": "💫",
+      "descripcion": "Ampolla concentrada con Niacinamida 10%. Unifica el tono, afina los poros y regula el sebo. Textura impecable en 4 semanas de uso constante. Apta para todo tipo de piel.",
+      "ingredientes": [
+        "5% Niacinamida (Vitamina B3): Fortalece, restaura la barrera cutánea y calma la piel.",
+        "3 Ácidos Hialurónicos: Hidratan en la superficie y actúan en profundidad para estimular el colágeno."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-ampoule-b3-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-b3.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-b3-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-ampoule-b3-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "antiage-ampoule-a",
+      "sku": "AGE-AMP-A-30",
+      "linea": "Anti Age",
+      "nombre": "Ampoule A",
+      "presentacion": "30 ML",
+      "precio": 57.77,
+      "disponible": true,
+      "color": "var(--lc-antiage)",
+      "emoji": "💫",
+      "descripcion": "Retinol encapsulado de tolerancia mejorada. Suaviza arrugas, renueva y regenera la piel mientras duermes. Toda la eficacia del retinol sin la irritación clásica.",
+      "ingredientes": [
+        "0.3% Retinol Puro + 2% NovoRetin™: Acelera la renovación celular, alisa arrugas y mejora visiblemente la textura de la piel.",
+        "Niacinamida + Ceramidas: Protegen y fortalecen la barrera cutánea para asegurar una tolerancia óptima."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-ampoule-a-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-a.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ampoule-a-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-ampoule-a-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "antiage-ceye",
+      "sku": "AGE-CEYE-15",
+      "linea": "Anti Age",
+      "nombre": "[C] Eye Biotic",
+      "presentacion": "15 ML",
+      "precio": 46.63,
+      "disponible": true,
+      "color": "var(--lc-antiage)",
+      "emoji": "💫",
+      "descripcion": "Contorno de ojos antiedad con Vitamina C pura y probióticos. Ilumina ojeras, reduce bolsas y protege del estrés oxidativo. Piel del contorno visiblemente más joven desde la primera semana.",
+      "ingredientes": [
+        "5% Vitamina C Optimizada + Péptido: Iluminan, combaten la fatiga y disminuyen las patas de gallo.",
+        "Probióticos + Ácido Hialurónico: Fortalecen la piel, hidratan y rellenan líneas de expresión."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-ceye-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ceye.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-ceye-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-ceye-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "antiage-c20",
+      "sku": "AGE-C20-50",
+      "linea": "Anti Age",
+      "nombre": "[C20] Rechargeable",
+      "presentacion": "50 ML",
+      "precio": 61.25,
+      "disponible": true,
+      "color": "var(--lc-antiage)",
+      "emoji": "💫",
+      "descripcion": "20% de Vitamina C pura: máxima concentración antiedad. Efecto tensor, antimancha y antifatiga. Envase recargable eco-friendly. Para piel madura que exige resultados reales.",
+      "ingredientes": [
+        "20% Vitamina C Optimizada: ilumina y reduce los signos del envejecimiento.",
+        "Probióticos Pasteurizados: Fortalecen la microbiota y protegen la barrera de la piel.",
+        "Ácido Hialurónico: Hidrata en profundidad y suaviza arrugas o líneas de expresión.",
+        "Extracto de Gentiana: Reafirma los párpados y drena bolsas."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-c20-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-c20.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-c20-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-c20-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "antiage-collagen",
+      "sku": "AGE-COL-50",
+      "linea": "Anti Age",
+      "nombre": "[Collagen] Rechargeable",
+      "presentacion": "50 ML",
+      "precio": 61.25,
+      "disponible": true,
+      "color": "var(--lc-antiage)",
+      "emoji": "💫",
+      "descripcion": "Colágeno marino y probióticos en sérum recargable. Recupera densidad, firmeza y elasticidad. Piel visiblemente más llena y tonificada en 4 semanas de uso constante.",
+      "ingredientes": [
+        "2% Colágeno Vegetal: Reestructura y devuelve la firmeza natural a la piel.",
+        "Probióticos Pasteurizados: Fortalecen la microbiota y protegen la barrera cutánea.",
+        "Vitamina C + Ácido Hialurónico: Iluminan, hidratan en profundidad y suavizan las arrugas."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-collagen-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-collagen.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-collagen-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-collagen-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    },
+    {
+      "slug": "antiage-hyalu",
+      "sku": "AGE-HYA-50",
+      "linea": "Anti Age",
+      "nombre": "[Hyalu] Rechargeable",
+      "presentacion": "50 ML",
+      "precio": 66.12,
+      "disponible": true,
+      "color": "var(--lc-antiage)",
+      "emoji": "💫",
+      "descripcion": "Ácido Hialurónico triple acción: hidratación superficial, relleno en profundidad y barrera reforzada. Sérum antiedad de nueva generación en envase recargable.",
+      "ingredientes": [
+        "Dúo de Ácido Hialurónico: Hidrata, rellena y alisa las líneas de expresión.",
+        "Vitamina C Optimizada: Ilumina y previene el envejecimiento prematuro."
+      ],
+      "media": [
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-hyalu-front.webp",
+          "alt": "packshot"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-hyalu.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/pdt-hyalu-2.webp"
+        },
+        {
+          "type": "img",
+          "src": "assets/productos/antiage-hyalu-back.webp",
+          "alt": "dorso"
+        }
+      ],
+      "farmatodo": null
+    }
+  ]
+}
