@@ -2085,31 +2085,38 @@
     };
   }
 
+  /* Texto plano, sin emojis: en algunos teléfonos y en WhatsApp Web los
+     emojis recientes salen como «�». Todo va en viñetas «•», que se ven
+     igual en todas partes. */
   function armarMensaje(d) {
-    let m = '¡Hola! Quiero hacer este pedido en SVR Venezuela:\n\n';
-    m += '👤 ' + d.nombre + '\n';
-    m += '🪪 ' + d.cedula + '\n';
-    m += '📱 ' + d.telefono + '\n\n';
-    m += '📦 ' + d.entrega + '\n';
-    if (d.transporte) m += '🚚 ' + d.transporte + '\n';
-    m += '📍 ' + d.destino + '\n';
-    if (d.gps) m += '🗺️ Ubicación: ' + d.gps + '\n';
-    m += '\n🛒 PEDIDO\n';
+    let m = '¡Hola! Quiero hacer este pedido en SVR Venezuela.\n';
+
+    m += '\nMis datos:\n';
+    m += '• Nombre: ' + d.nombre + '\n';
+    m += '• Cédula: ' + d.cedula + '\n';
+    m += '• Teléfono: ' + d.telefono + '\n';
+
+    m += '\nEntrega:\n';
+    m += '• ' + d.entrega + '\n';
+    if (d.transporte) m += '• Transporte: ' + d.transporte + '\n';
+    m += '• ' + (d.transporte ? 'Ciudad y oficina' : 'Dirección') + ': ' + d.destino + '\n';
+    if (d.gps) m += '• Ubicación: ' + d.gps + '\n';
+
+    m += '\nPedido:\n';
     d.items.forEach(({ p, n, subtotal }) => {
-      m += '• ' + n + ' × ' + p.nombre + ' ' + p.presentacion + ' (' + p.linea + ')\n';
-      m += '   ' + p.sku + ' — ' + fmtUSD(subtotal) + '\n';
+      m += '• ' + n + ' × ' + p.nombre + ' ' + p.presentacion + ' (' + p.linea + ') — ' + p.sku + ' — ' + fmtUSD(subtotal) + '\n';
     });
 
-    m += '\nTOTAL: ' + fmtUSD(d.totalUsd);
+    m += '\nPago:\n';
+    m += '• Total: ' + fmtUSD(d.totalUsd) + '\n';
+    if (d.totalBs) m += '• ' + fmtBs(d.totalBs) + ' referencial a tasa BCV ' + fmtTasa(d.tasa) + '\n';
+    if (d.comprobanteUrl) m += '• Comprobante: ' + d.comprobanteUrl + '\n';
+    else if (COMPROBANTE) m += '• Comprobante de pago enviado a administración\n';
 
-    if (d.comprobanteUrl) m += '\n🧾 Comprobante: ' + d.comprobanteUrl;
-    else if (COMPROBANTE) m += '\n🧾 Comprobante de pago enviado a administración.';
-
-    if (d.totalBs) m += '\n' + fmtBs(d.totalBs) + ' referencial a tasa BCV ' + fmtTasa(d.tasa);
     if (!enHorario()) {
-      m += '\n\n(Pedido fuera del horario de despacho — entiendo que lo confirman ' + proximaAtencion() + '.)';
+      m += '\n(Pedido fuera del horario de despacho — entiendo que lo confirman ' + proximaAtencion() + '.)\n';
     }
-    m += '\n\nQuedo atento para confirmar el pago.';
+    m += '\nQuedo atento para confirmar el pago.';
     return m;
   }
 
