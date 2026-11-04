@@ -1,0 +1,69 @@
+name: Actualizar tasa BCV
+
+# La tasa del BCV entra en vigor a las 12:00 am de cada día hábil (hora de
+# Venezuela). Se consulta TODOS los días y varias veces: si GitHub atrasa o
+# salta una ejecución programada, la siguiente lo compensa. Cada día queda
+# anotada la verificación en tasa.json (campo «verificado»), cambie o no la
+# tasa; y si pasan más de 36 horas sin poder comprobarla, la ejecución falla
+# y GitHub avisa por correo. La lógica está en scripts/actualizar-tasa.js.
+on:
+  schedule:
+    - cron: '30 4 * * *'     # 12:30 am Venezuela: apenas entra la tasa del día
+    - cron: '30 10 * * *'    # 06:30 am
+    - cron: '30 13 * * *'    # 09:30 am
+    - cron: '30 17 * * *'    # 01:30 pm
+    - cron: '30 20 * * *'    # 04:30 pm
+    - cron: '30 23 * * *'    # 07:30 pm
+  workflow_dispatch:         # permite ejecutarlo a mano desde la pestaña Actions
+    inputs:
+      forzar:
+        description: 'Publicar la verificación aunque no haya cambios'
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: tasa-bcv
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Consultar la tasa oficial
+        env:
+          TASA_FORZAR: ${{ inputs.forzar && '1' || '' }}
+        run: node scripts/actualizar-tasa.js
+
+      - name: Publicar si cambió
+        run: |
+          set -euo pipefail
+          if git diff --quiet -- tasa.json; then
+            echo "Nada que publicar."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tasa.json
+          git commit -m "Tasa BCV $(jq -r .tasa tasa.json) Bs/USD — $(jq -r .fecha tasa.json) (verificada $(jq -r .verificado tasa.json | cut -c1-10))"
+
+          # Si alguien subió algo mientras tanto, se rebasa y se reintenta.
+          for intento in 1 2 3 4; do
+            if git pull --rebase origin main && git push origin HEAD:main; then
+              exit 0
+            fi
+            git rebase --abort 2>/dev/null || true
+            echo "::warning::No se pudo publicar (intento $intento de 4). Reintento en 10 s."
+            sleep 10
+          done
+          echo "::error::No se pudo publicar la tasa después de 4 intentos."
+          exit 1
