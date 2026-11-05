@@ -940,6 +940,22 @@
     .card-precio { margin-top: 10px; display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
     .precio-usd { font-size: 1.06rem; font-weight: 800; letter-spacing: -0.02em; }
     .precio-bs { font-size: 0.68rem; font-weight: 500; color: var(--light-gray); }
+    /* Ofertas: precio vigente en rojo, el de antes tachado y una etiqueta con el descuento */
+    .precio-oferta { color: #d9355a; }
+    .precio-antes { font-size: 0.78rem; font-weight: 500; color: var(--light-gray); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+    .card-oferta {
+      position: absolute; top: 10px; left: 10px; z-index: 2;
+      background: #d9355a; color: #fff; padding: 5px 11px; border-radius: 100px;
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 0.08em;
+      box-shadow: 0 3px 10px rgba(217,53,90,0.32);
+    }
+    .badge-oferta {
+      display: inline-flex; align-items: center; vertical-align: middle; margin-left: 10px;
+      background: #d9355a; color: #fff; padding: 5px 12px; border-radius: 100px;
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .ficha-precio-antes { font-size: 1.05rem; font-weight: 500; color: var(--light-gray); text-decoration: line-through; margin-left: 10px; }
+    .citem-antes { display: block; font-size: 0.68rem; font-weight: 500; color: var(--light-gray); text-decoration: line-through; }
     .btn-agregar {
       margin-top: 12px; width: 100%;
       border: 1.5px solid var(--dark); border-radius: 100px; padding: 10px;
@@ -1486,10 +1502,66 @@
   const fmtTasa = n => n.toLocaleString('es-VE', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
   const fmtFecha = f => { const [a, m, d] = f.split('-'); return d + '/' + m + '/' + a; };
   const bsDe = usd => TASA ? usd * TASA.tasa : null;
+
+  /* ── Precios que administración cambia desde /tienda/4dm1n/ ──────────
+     products.json trae el precio de lista. Administración puede cambiarlo
+     o poner una oferta (precio antes + precio promocional); esos cambios
+     viven en el Apps Script y se aplican aquí encima del catálogo. La
+     última lista recibida se recuerda en el navegador, así quien ya visitó
+     la tienda la ve de una vez con los precios vigentes. */
+  const LLAVE_PRECIOS = 'svr-precios-v1';
+  const VIGENCIA_PRECIOS = 3 * 24 * 3600 * 1000;
+  const ofertaPct = p => (p.antes && p.antes > p.precio) ? Math.round((1 - p.precio / p.antes) * 100) : 0;
+
+  function aplicarPrecios(mapa) {
+    let cambio = false;
+    CATALOGO.forEach(p => {
+      if (p.lista === undefined) p.lista = p.precio;
+      const o = mapa && mapa[p.slug];
+      let precio = p.lista, antes = null;
+      if (o && typeof o.precio === 'number' && o.precio > 0) {
+        precio = o.precio;
+        if (typeof o.antes === 'number' && o.antes > o.precio && Math.round((1 - o.precio / o.antes) * 100) >= 1) antes = o.antes;
+      }
+      if (p.precio !== precio || (p.antes || null) !== antes) { p.precio = precio; p.antes = antes; cambio = true; }
+    });
+    return cambio;
+  }
+
+  function leerPreciosRecordados() {
+    try {
+      const g = JSON.parse(localStorage.getItem(LLAVE_PRECIOS) || 'null');
+      if (g && g.precios && typeof g.precios === 'object' && Date.now() - g.t < VIGENCIA_PRECIOS) return g.precios;
+    } catch (e) { /* modo privado */ }
+    return null;
+  }
+
+  function recordarPrecios(mapa) {
+    try { localStorage.setItem(LLAVE_PRECIOS, JSON.stringify({ t: Date.now(), precios: mapa || {} })); } catch (e) { /* modo privado */ }
+  }
+
+  /* Los datos estructurados (Google, Meta) salen del catálogo publicado: si cambió un precio o un
+     agotado, se ajustan aquí para que coincidan con lo que el cliente ve. */
+  function actualizarSchema() {
+    try {
+      const el = [...document.querySelectorAll('script[type="application/ld+json"]')].find(x => /"ItemList"/.test(x.textContent));
+      if (!el) return;
+      const ld = JSON.parse(el.textContent);
+      (ld.itemListElement || []).forEach(it => {
+        const p = CATALOGO.find(x => x.sku === (it.item && it.item.sku));
+        if (p && it.item.offers) {
+          it.item.offers.price = p.precio.toFixed(2);
+          it.item.offers.availability = p.disponible === false ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock';
+        }
+      });
+      el.textContent = JSON.stringify(ld, null, 2);
+    } catch (e) { /* los datos estructurados no deben romper la tienda */ }
+  }
   const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
   /* ── Carga ───────────────────────────────────────────────────── */
   async function cargar() {
+    const extras = traerExtras();          // empieza ya: tarda más que el catálogo y la tasa
     const pedir = f => fetch(BASE + f).then(r => r.ok ? r.json() : null).catch(() => null);
     const [cat, tasa] = await Promise.all([pedir('products.json'), pedir('tasa.json')]);
 
@@ -1502,41 +1574,69 @@
     CATALOGO = cat.productos;
     if (tasa && tasa.tasa > 0) TASA = tasa;
 
+    // Precios y agotados vigentes. Quien ya visitó la tienda usa los de la última vez al instante; en la
+    // primera visita se espera un momento a que lleguen, para no mostrar un precio viejo.
+    const recordados = leerPreciosRecordados();
+    let primeros = null;
+    if (recordados) aplicarPrecios(recordados);
+    else primeros = await Promise.race([extras, new Promise(ok => setTimeout(() => ok(null), 1500))]);
+    if (primeros) aplicarExtras(primeros);
+
     leerCarrito();
+    if (primeros) ajustarCarrito();
     montarFiltroLineas();
     contarPrecios();
     pintarNotaTasa();
     render();
     pintarCarrito();
+    actualizarSchema();
     refrescarTasa();
-    cargarAgotados();
+    // Cuando llegan (o si llegaron tarde) se aplican y, si algo cambió, se vuelve a dibujar.
+    extras.then(d => {
+      if (!d || d === primeros) return;
+      if (aplicarExtras(d)) { contarPrecios(); render(); pintarCarrito(); actualizarSchema(); }
+    });
   }
 
-  /* Los agotados los marca administración en /tienda/4dm1n/. Se piden
-     aparte para no retrasar la vista: la tienda se dibuja de una y los
-     agotados se aplican al llegar. Si falla, manda products.json. */
-  async function cargarAgotados() {
-    if (!HOJA_PEDIDOS) return;
+  /* Los agotados, el stock y los precios los maneja administración en /tienda/4dm1n/ y viven en el
+     Apps Script. Si falla, mandan products.json y los precios de lista. */
+  async function traerExtras() {
+    if (!HOJA_PEDIDOS) return null;
     try {
       const r = await fetch(HOJA_PEDIDOS + '?accion=agotados', { cache: 'no-store' });
-      if (!r.ok) return;
+      if (!r.ok) return null;
       const d = await r.json();
-      if (!d || !d.ok || !Array.isArray(d.agotados)) return;
+      return (d && d.ok && Array.isArray(d.agotados)) ? d : null;
+    } catch (e) { return null; }       // sin conexión: quedan los valores del catálogo
+  }
 
-      INVENTARIO = d.inventario || {};
+  /* Devuelve true si algo de lo que se ve cambió. */
+  function aplicarExtras(d) {
+    let cambio = false;
+    INVENTARIO = d.inventario || {};
+    const mapa = (d.precios && typeof d.precios === 'object') ? d.precios : {};
+    recordarPrecios(mapa);
+    if (aplicarPrecios(mapa)) cambio = true;
+    CATALOGO.forEach(p => {
+      const st = INVENTARIO[p.slug];
+      const sinUnidades = (st !== undefined && st <= 0);
+      const agotado = d.agotados.indexOf(p.slug) !== -1 || sinUnidades;
+      if (p.disponible !== !agotado) { p.disponible = !agotado; cambio = true; }
+    });
+    if (ajustarCarrito()) cambio = true;
+    return cambio;
+  }
 
-      let cambio = false;
-      CATALOGO.forEach(p => {
-        const st = INVENTARIO[p.slug];
-        const sinUnidades = (st !== undefined && st <= 0);
-        const agotado = d.agotados.indexOf(p.slug) !== -1 || sinUnidades;
-        if (p.disponible !== !agotado) { p.disponible = !agotado; cambio = true; }
-        if (agotado && carrito[p.slug]) { delete carrito[p.slug]; cambio = true; }
-        // Si alguien tenía más de lo que queda, se le ajusta la cantidad.
-        if (!agotado && st !== undefined && carrito[p.slug] > st) { carrito[p.slug] = st; cambio = true; }
-      });
-      if (cambio) { guardarCarrito(); render(); pintarCarrito(); }
-    } catch (e) { /* sin conexión: quedan los valores del catálogo */ }
+  function ajustarCarrito() {
+    let cambio = false;
+    CATALOGO.forEach(p => {
+      const st = INVENTARIO[p.slug];
+      if (p.disponible === false && carrito[p.slug]) { delete carrito[p.slug]; cambio = true; }
+      // Si alguien tenía más de lo que queda, se le ajusta la cantidad.
+      if (p.disponible !== false && st !== undefined && carrito[p.slug] > st) { carrito[p.slug] = st; cambio = true; }
+    });
+    if (cambio) guardarCarrito();
+    return cambio;
   }
 
   async function refrescarTasa() {
@@ -1640,11 +1740,13 @@
       const frente = imgs[0] ? BASE + imgs[0].src : '';
       const dorso  = imgs[1] ? BASE + imgs[1].src : '';
       const bs = bsDe(p.precio);
+      const oferta = ofertaPct(p);
       const agotado = p.disponible === false;
       const enCarrito = carrito[p.slug] > 0;
       return ''
         + '<article class="card">'
         +   '<div class="card-foto" onclick="abrirFicha(\'' + p.slug + '\')">'
+        +     (oferta ? '<span class="card-oferta">-' + oferta + '%</span>' : '')
         +     (agotado ? '<div class="card-agotado-velo"><span>Agotado</span></div>' : '')
         +     (frente ? '<img class="frente" src="' + esc(frente) + '" alt="' + esc(p.nombre + ' ' + p.presentacion) + '" loading="lazy" width="600" height="600">' : '')
         +     (dorso  ? '<img class="dorso"  src="' + esc(dorso)  + '" alt="" aria-hidden="true" loading="lazy" width="600" height="600">' : '')
@@ -1656,7 +1758,8 @@
         +   '<div class="card-tam">' + esc(p.presentacion) + '</div>'
         +   (stockAviso(p.slug) ? '<div class="card-stock"><span class="badge-stock">' + stockAviso(p.slug) + '</span></div>' : '')
         +   '<div class="card-precio">'
-        +     '<span class="precio-usd">' + fmtUSD(p.precio) + '</span>'
+        +     '<span class="precio-usd' + (oferta ? ' precio-oferta' : '') + '">' + fmtUSD(p.precio) + '</span>'
+        +     (oferta ? '<s class="precio-antes" title="Precio antes">' + fmtUSD(p.antes) + '</s>' : '')
         +     (bs ? '<span class="precio-bs">' + fmtBs(bs) + '</span>' : '')
         +   '</div>'
         +   '<button class="btn-agregar" data-slug="' + p.slug + '" onclick="agregar(\'' + p.slug + '\', this)"'
@@ -1790,7 +1893,7 @@
         +         '<span>' + n + '</span>'
         +         '<button onclick="cambiarCantidad(\'' + p.slug + '\',1)" aria-label="Agregar uno">+</button>'
         +       '</div>'
-        +       '<div class="citem-precio"><b>' + fmtUSD(subtotal) + '</b>'
+        +       '<div class="citem-precio">' + (ofertaPct(p) ? '<s class="citem-antes" title="Precio antes">' + fmtUSD(p.antes * n) + '</s>' : '') + '<b>' + fmtUSD(subtotal) + '</b>'
         +         (bs ? '<small>' + fmtBs(bs) + '</small>' : '') + '</div>'
         +     '</div>'
         +     '<button class="citem-quitar" onclick="quitar(\'' + p.slug + '\')">Quitar</button>'
@@ -2128,7 +2231,8 @@
 
     m += '\nPedido:\n';
     d.items.forEach(({ p, n, subtotal }) => {
-      m += '• ' + n + ' × ' + p.nombre + ' ' + p.presentacion + ' (' + p.linea + ') — ' + p.sku + ' — ' + fmtUSD(subtotal) + '\n';
+      m += '• ' + n + ' × ' + p.nombre + ' ' + p.presentacion + ' (' + p.linea + ') — ' + p.sku + ' — ' + fmtUSD(subtotal)
+        + (ofertaPct(p) ? ' (oferta -' + ofertaPct(p) + '%, antes ' + fmtUSD(p.antes * n) + ')' : '') + '\n';
     });
 
     m += '\nPago:\n';
@@ -2153,7 +2257,7 @@
       fecha: new Date().toLocaleString('es-VE'),
       nombre: d.nombre, cedula: d.cedula, telefono: d.telefono,
       entrega: d.entrega, transporte: d.transporte, destino: d.destino,
-      productos: d.items.map(({ p, n }) => n + ' × ' + p.sku + ' ' + p.nombre + ' ' + p.presentacion).join(' | '),
+      productos: d.items.map(({ p, n }) => n + ' × ' + p.sku + ' ' + p.nombre + ' ' + p.presentacion + (ofertaPct(p) ? ' (oferta -' + ofertaPct(p) + '%)' : '')).join(' | '),
       unidades: d.unidades,
       totalUsd: d.totalUsd.toFixed(2),
       tasa: d.tasa ? d.tasa.toFixed(4) : '',
@@ -2255,6 +2359,7 @@
     fSlug = slug; fMedia = p.media || []; fIndex = 0;
 
     const bs = bsDe(p.precio);
+    const oferta = ofertaPct(p);
     const agotado = p.disponible === false;
     const color = COLOR_LINEA[p.linea] || 'var(--coral)';
 
@@ -2265,7 +2370,8 @@
             ? '<div class="ficha-stock"><span class="badge-agotado">Agotado</span></div>'
             : (stockAviso(slug) ? '<div class="ficha-stock"><span class="badge-stock">' + stockAviso(slug) + '</span></div>' : ''))
       + '</div>'
-      + '<div><div class="ficha-precio-usd">' + fmtUSD(p.precio) + '</div>'
+      + '<div><div class="ficha-precio-usd">' + fmtUSD(p.precio)
+      +   (oferta ? '<s class="ficha-precio-antes" title="Precio antes">' + fmtUSD(p.antes) + '</s><span class="badge-oferta">Oferta -' + oferta + '%</span>' : '') + '</div>'
       +   (bs ? '<div class="ficha-precio-bs">' + fmtBs(bs) + '</div>' : '')
       +   (bs ? '<div class="ficha-precio-nota">Referencial · IVA incluido · Tasa BCV ' + fmtTasa(TASA.tasa) + ' del ' + fmtFecha(TASA.fecha) + '</div>' : '')
       + '</div>'

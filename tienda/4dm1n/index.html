@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Inventario — SVR Venezuela</title>
+  <title>Administración — SVR Venezuela</title>
   <link rel="icon" type="image/png" sizes="32x32" href="../../assets/favicon-32.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -173,7 +173,142 @@
     }
     .pie b { color: var(--dark); }
     .cargando { text-align: center; padding: 60px 20px; color: var(--light-gray); font-size: 0.88rem; }
-    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+    /* ══ Pestañas, botones y precios ══ */
+    .pestanas { display: flex; gap: 4px; margin-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .pestanas button {
+      padding: 11px 16px; margin-bottom: -1px; border-bottom: 2.5px solid transparent;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--light-gray);
+    }
+    .pestanas button:hover { color: var(--dark); }
+    .pestanas button[aria-selected="true"] { color: var(--dark); border-bottom-color: var(--coral); }
+
+    .btn {
+      font-family: inherit; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 11px 20px; border-radius: 100px; border: 1.5px solid var(--dark); color: var(--dark); background: #fff;
+    }
+    .btn:hover:not(:disabled) { border-color: var(--coral); color: var(--coral); }
+    .btn.oscuro { background: var(--dark); color: #fff; }
+    .btn.oscuro:hover:not(:disabled) { background: var(--coral); border-color: var(--coral); color: #fff; }
+    .btn.enlace { border-color: transparent; background: none; color: var(--coral); padding-left: 6px; padding-right: 6px; }
+    .btn:disabled { opacity: 0.38; cursor: not-allowed; }
+    .btn:focus-visible, .btn-mini:focus-visible, .pestanas button:focus-visible { outline: 2px solid var(--coral); outline-offset: 2px; }
+    .btn-mini {
+      font-family: inherit; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 7px 12px; border-radius: 100px; border: 1.5px solid var(--border); color: var(--dark); background: #fff; white-space: nowrap;
+    }
+    .btn-mini:hover { border-color: var(--coral); color: var(--coral); }
+    .btn-mini.suave { color: var(--gray); }
+
+    .aviso-version {
+      background: #fff4f6; border: 1px solid #f5c2cc; border-radius: 12px; padding: 16px 18px;
+      font-size: 0.8rem; line-height: 1.6; color: #7a1f33; margin-bottom: 18px;
+    }
+    .aviso-version b { font-weight: 700; }
+    .herr { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 4px; }
+    .herr input[type="search"] {
+      flex: 1 1 200px; font-family: inherit; font-size: 0.88rem; padding: 11px 14px;
+      border: 1.5px solid var(--border); border-radius: 100px; background: #fff;
+    }
+    .herr input[type="search"]:focus { outline: none; border-color: var(--coral); }
+    .herr-bot { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .chk-todos { display: flex; align-items: center; gap: 7px; font-size: 0.74rem; color: var(--gray); cursor: pointer; }
+    .chk-todos input { width: 17px; height: 17px; accent-color: var(--coral); }
+    .resumen .sep { color: var(--light-gray); }
+    .resumen .par { display: inline-flex; align-items: center; gap: 10px; }
+    @media (max-width: 520px) { .resumen .sep { display: none; } .resumen .par { flex-basis: 100%; } }
+
+    .fp { flex-wrap: wrap; row-gap: 10px; }
+    .fp.cambiado { background: #fffaf0; box-shadow: inset 3px 0 0 #f5a623; }
+    .sel-caja { display: grid; place-items: center; width: 22px; flex-shrink: 0; cursor: pointer; }
+    .sel-caja input { width: 18px; height: 18px; accent-color: var(--coral); cursor: pointer; }
+    .fp .fila-txt { flex: 1 1 150px; }
+    .fp-meta { font-size: 0.66rem; color: var(--light-gray); margin-top: 1px; }
+    .fp-meta .sin-guardar { color: #b8730a; font-weight: 600; }
+    .fp-precio { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; }
+    .fp-etq { font-size: 0.56rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--light-gray); }
+    .prec-caja { display: flex; align-items: center; border: 1.5px solid var(--border); border-radius: 8px; padding: 0 9px; background: #fff; }
+    .prec-caja:focus-within { border-color: var(--coral); }
+    .prec-caja i { font-style: normal; color: var(--light-gray); font-weight: 600; font-size: 0.85rem; margin-right: 3px; }
+    .prec-caja input {
+      width: 74px; border: none; outline: none; padding: 8px 0; background: transparent;
+      font-family: inherit; font-size: 0.92rem; font-weight: 700; text-align: right;
+    }
+    .prec-caja.invalido { border-color: var(--coral); animation: sacudir 0.3s; }
+    @keyframes sacudir { 25% { transform: translateX(-4px); } 75% { transform: translateX(4px); } }
+    .fp-oferta { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: flex-end; flex-shrink: 0; min-width: 130px; }
+    .chip-oferta {
+      display: inline-flex; align-items: center; gap: 6px; background: #d9355a; color: #fff;
+      padding: 5px 11px; border-radius: 100px; font-size: 0.7rem; font-weight: 700; white-space: nowrap;
+    }
+    .chip-oferta b { font-weight: 800; letter-spacing: 0.02em; }
+    @media (max-width: 600px) {
+      .fp-precio { align-items: flex-start; }
+      .fp-oferta { flex: 1 1 100%; justify-content: flex-start; padding-left: 36px; }
+    }
+
+    .barra-cambios {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 40; background: var(--dark); color: #fff;
+      padding: 12px 18px; display: flex; gap: 12px; align-items: center; justify-content: center; flex-wrap: wrap;
+      box-shadow: 0 -6px 24px rgba(0,0,0,0.18);
+    }
+    .barra-cambios span { font-size: 0.8rem; }
+    .barra-cambios .btn { padding: 9px 18px; border-color: rgba(255,255,255,0.5); color: #fff; background: transparent; }
+    .barra-cambios .btn.coral { background: var(--coral); border-color: var(--coral); }
+    .barra-cambios .btn:hover:not(:disabled) { background: #fff; color: var(--dark); border-color: #fff; }
+    body.con-barra { padding-bottom: 100px; }
+
+    .velo { position: fixed; inset: 0; z-index: 60; background: rgba(0,0,0,0.45); }
+    .modal {
+      position: fixed; z-index: 61; left: 50%; top: 50%; transform: translate(-50%, -50%);
+      width: min(450px, calc(100% - 24px)); max-height: calc(100% - 24px); overflow-y: auto;
+      background: #fff; border-radius: 16px; padding: 24px 22px 20px; box-shadow: 0 24px 60px rgba(0,0,0,0.28);
+    }
+    .modal h3 { font-size: 1.05rem; font-weight: 800; letter-spacing: -0.01em; }
+    .modal .modal-sub { font-size: 0.78rem; color: var(--gray); margin-top: 3px; }
+    .campos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 18px; }
+    .campo-d label { display: block; font-size: 0.6rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gray); margin-bottom: 5px; }
+    .campo-d .in {
+      display: flex; align-items: center; border: 1.5px solid var(--border); border-radius: 10px; padding: 0 10px; background: #fff;
+    }
+    .campo-d .in:focus-within { border-color: var(--coral); }
+    .campo-d .in i { font-style: normal; color: var(--light-gray); font-weight: 600; font-size: 0.85rem; }
+    .campo-d input {
+      width: 100%; min-width: 0; border: none; outline: none; padding: 11px 4px; background: transparent;
+      font-family: inherit; font-size: 1rem; font-weight: 700;
+    }
+    .vista-oferta { margin-top: 16px; background: var(--cream); border-radius: 12px; padding: 14px 16px; }
+    .v-fila { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .v-ahora { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; color: #d9355a; }
+    .v-antes { font-size: 0.95rem; color: var(--light-gray); text-decoration: line-through; }
+    .v-badge { background: #d9355a; color: #fff; font-size: 0.64rem; font-weight: 800; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 100px; }
+    .v-nota { font-size: 0.72rem; color: var(--gray); margin-top: 6px; }
+    .v-lista { max-height: 200px; overflow-y: auto; font-size: 0.76rem; }
+    .v-lista div { display: flex; justify-content: space-between; gap: 10px; padding: 4px 0; border-bottom: 1px solid var(--border); }
+    .v-lista div:last-child { border-bottom: none; }
+    .v-lista b { color: #d9355a; white-space: nowrap; }
+    .alerta { margin-top: 12px; font-size: 0.76rem; line-height: 1.5; color: #b8730a; }
+    .error-m { margin-top: 12px; font-size: 0.78rem; line-height: 1.5; color: #c4254a; font-weight: 600; }
+    .modal-bot { display: flex; gap: 8px; justify-content: flex-end; align-items: center; flex-wrap: wrap; margin-top: 20px; }
+    .r-fila { display: grid; grid-template-columns: 1fr auto; gap: 2px 12px; padding: 10px 0; border-bottom: 1px solid var(--border); font-size: 0.8rem; align-items: center; }
+    .r-fila:last-child { border-bottom: none; }
+    .r-nom small { color: var(--light-gray); margin-left: 4px; }
+    .r-cambio { text-align: right; white-space: nowrap; }
+    .r-cambio s { color: var(--light-gray); margin-right: 5px; }
+    .r-cambio b { color: var(--dark); }
+    .r-cambio .pct { color: #d9355a; font-weight: 700; margin-left: 5px; font-size: 0.72rem; }
+    .r-alerta { grid-column: 1 / -1; font-size: 0.7rem; color: #b8730a; }
+    .r-nota { grid-column: 1 / -1; font-size: 0.7rem; color: var(--gray); }
+    #rLista { margin-top: 12px; }
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 70;
+      background: var(--dark); color: #fff; padding: 13px 20px; border-radius: 100px; font-size: 0.8rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25); max-width: calc(100% - 24px); text-align: center;
+    }
+    .toast a { color: var(--coral); font-weight: 700; margin-left: 6px; }
+    .toast.mal { background: #c4254a; }
+    body.con-barra .toast { bottom: 84px; }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
   </style>
 </head>
 <body>
@@ -181,7 +316,7 @@
   <header>
     <div class="caja">
       <img src="../../assets/SVR-transparent.webp" alt="SVR">
-      <h1>Inventario</h1>
+      <h1>Administración</h1>
       <a href="../" class="volver">Ver la tienda →</a>
     </div>
   </header>
@@ -190,13 +325,19 @@
 
     <div class="entrar" id="entrar">
       <h2>Clave</h2>
-      <p>Para manejar el stock y los agotados.</p>
+      <p>Para manejar el stock, los agotados y los precios.</p>
       <input type="password" id="clave" maxlength="40" autocomplete="current-password" spellcheck="false" aria-label="Clave">
       <button id="btnEntrar">Entrar</button>
       <div class="mal" id="mal" hidden>Clave incorrecta</div>
     </div>
 
     <div id="panel" hidden>
+      <div class="pestanas" role="tablist" aria-label="Secciones">
+        <button type="button" role="tab" id="tabInventario" aria-selected="true" aria-controls="vistaInventario">Inventario</button>
+        <button type="button" role="tab" id="tabPrecios" aria-selected="false" aria-controls="vistaPrecios">Precios y ofertas</button>
+      </div>
+
+      <div id="vistaInventario" role="tabpanel" aria-labelledby="tabInventario">
       <div class="resumen">
         <b id="nDisponibles">—</b>
         <span class="txt">de <span id="nTotal">—</span> productos disponibles</span>
@@ -220,14 +361,95 @@
         viendo con su ficha y su foto, pero sin botón de agregar.<br><br>
         Todo se guarda solo y se aplica de inmediato — no hace falta publicar nada.
       </div>
+      </div>
+
+      <div id="vistaPrecios" role="tabpanel" aria-labelledby="tabPrecios" hidden>
+        <div class="aviso-version" id="avisoVersion" hidden>
+          <b>Falta actualizar el script de Google.</b> Todavía tiene la versión anterior, que no sabe guardar precios,
+          y por eso aquí no se puede cambiar nada (así no se arriesga a guardar un pedido falso).<br>
+          Hay que pegar el archivo nuevo y volver a implementarlo: <b>Implementar → Gestionar implementaciones → lápiz → Nueva versión</b>.
+        </div>
+        <div id="contenidoPrecios">
+          <div class="resumen">
+            <span class="par"><b id="nOfertas">0</b><span class="txt" id="txtOfertas">ofertas activas</span></span>
+            <span class="sep">·</span>
+            <span class="par"><b id="nDistintos">0</b><span class="txt" id="txtDistintos">precios distintos al de lista</span></span>
+            <span class="estado" id="estadoPrecios"><span class="luz"></span><span id="estadoPreciosTxt">Guardado</span></span>
+            <div class="herr" style="flex-basis:100%;margin-top:8px">
+              <input type="search" id="buscar" placeholder="Buscar producto…" aria-label="Buscar producto" autocomplete="off">
+              <div class="herr-bot">
+                <label class="chk-todos"><input type="checkbox" id="selTodos"> Seleccionar todos</label>
+                <button type="button" class="btn" id="btnDescVarios" disabled>Descuento a los seleccionados</button>
+                <button type="button" class="btn" id="btnQuitarVarios" disabled>Quitar ofertas</button>
+              </div>
+            </div>
+          </div>
+          <div id="listaPrecios"><div class="cargando">Cargando catálogo…</div></div>
+          <div class="pie">
+            <b>Precio</b>: escribe el precio nuevo en dólares (IVA incluido) y toca fuera de la casilla. El de la lista
+            (el de <b>products.json</b>) se ve debajo del nombre, y con <b>Lista</b> vuelves a él.<br><br>
+            <b>Descuento</b>: abre un cuadro con el <b>precio antes</b> (el que se muestra tachado), el <b>% de descuento</b>
+            y el <b>precio promocional</b>. Si cambias uno, los otros se calculan solos. En la tienda sale el precio
+            promocional en rojo, el de antes tachado y una etiqueta con el porcentaje; el carrito y el mensaje de
+            WhatsApp usan el precio promocional.<br><br>
+            <b>Nada se publica hasta que lo guardes</b>: abajo aparece «Revisar y guardar», que te muestra cada cambio antes de
+            mandarlo. Al guardar se ve de inmediato en la tienda, sin publicar nada. Cada cambio queda anotado en la hoja de
+            Google, pestaña <b>Historial de precios</b>.
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
 
+  <div class="barra-cambios" id="barraCambios" hidden>
+    <span><b id="nPend">0</b> <span id="nPendTxt">cambios sin guardar</span></span>
+    <button type="button" class="btn" id="btnDescartar">Descartar</button>
+    <button type="button" class="btn coral" id="btnRevisar">Revisar y guardar</button>
+  </div>
+
+  <div class="velo" id="velo" hidden></div>
+
+  <div class="modal" id="modalDesc" role="dialog" aria-modal="true" aria-labelledby="descTit" hidden>
+    <h3 id="descTit">Descuento</h3>
+    <p class="modal-sub" id="descSub"></p>
+    <div id="descUno" class="campos">
+      <div class="campo-d"><label for="dAntes">Precio antes</label><div class="in"><i>$</i><input id="dAntes" type="text" inputmode="decimal" autocomplete="off"></div></div>
+      <div class="campo-d"><label for="dPct">Descuento</label><div class="in"><input id="dPct" type="text" inputmode="decimal" autocomplete="off" placeholder="15"><i>%</i></div></div>
+      <div class="campo-d"><label for="dPromo">Precio promo</label><div class="in"><i>$</i><input id="dPromo" type="text" inputmode="decimal" autocomplete="off"></div></div>
+    </div>
+    <div id="descVarios" hidden>
+      <div class="campos" style="grid-template-columns:1fr">
+        <div class="campo-d"><label for="dPctVarios">Descuento para todos los seleccionados</label><div class="in"><input id="dPctVarios" type="text" inputmode="decimal" autocomplete="off" placeholder="15"><i>%</i></div></div>
+      </div>
+    </div>
+    <div class="vista-oferta" id="dVista"></div>
+    <div class="alerta" id="dAlerta" hidden></div>
+    <div class="error-m" id="dError" hidden></div>
+    <div class="modal-bot">
+      <button type="button" class="btn enlace" id="dQuitar" hidden>Quitar oferta</button>
+      <button type="button" class="btn" id="dCancelar">Cancelar</button>
+      <button type="button" class="btn oscuro" id="dAplicar">Aplicar</button>
+    </div>
+  </div>
+
+  <div class="modal" id="modalResumen" role="dialog" aria-modal="true" aria-labelledby="resTit" hidden>
+    <h3 id="resTit">Revisa antes de guardar</h3>
+    <p class="modal-sub">Esto se verá en la tienda apenas lo guardes.</p>
+    <div id="rLista"></div>
+    <div class="error-m" id="rError" hidden></div>
+    <div class="modal-bot">
+      <button type="button" class="btn" id="rVolver">Volver</button>
+      <button type="button" class="btn oscuro" id="rGuardar">Guardar en la tienda</button>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
   <script>
   /* ══════════════════════════════════════════════════════════════════
-     Pantalla de agotados. La clave se comprueba en el servidor
-     (Apps Script): aquí nunca se guarda ni se compara.
+     Pantalla de administración: inventario, agotados y precios. La clave
+     se comprueba en el servidor (Apps Script): aquí nunca se guarda ni se compara.
      ══════════════════════════════════════════════════════════════════ */
 
   var API = 'https://script.google.com/macros/s/AKfycbxO14XSwm8bJ8S6Z80-qQiKxzZ4LBiUr1mbXE0W3AyOolG2gg_dG1SPGht-R3DEI8Oh6Q/exec';
@@ -295,8 +517,10 @@
         }
         clave = val;
         agotados = d.agotados || [];
+        iniciarPrecios(d.precios);
         document.getElementById('entrar').hidden = true;
         document.getElementById('panel').hidden = false;
+        if (window.__abrirPrecios) mostrarVista('precios'); else mostrarVista('inventario');
         cargarCatalogo();
       })
       .catch(function () {
@@ -312,6 +536,7 @@
       .then(function (r) { return r.json(); })
       .then(function (c) {
         CATALOGO = c.productos || [];
+        prepararPrecios();
         pintar();                       // se muestra ya, sin esperar al inventario
         cargarInventario();
       })
@@ -476,6 +701,466 @@
     document.getElementById('estadoTxt').textContent = texto;
   }
 
+
+  /* ══════════════════════════════════════════════════════════════════
+     PRECIOS Y OFERTAS
+     products.json trae el precio de lista. Aquí se cambia el precio y se
+     ponen ofertas (precio antes + precio promocional). Lo guardado viaja al
+     Apps Script y la tienda lo aplica encima del catálogo, al instante.
+     Modelo de cada producto: { normal, promo } — «normal» es el precio sin
+     oferta (el que sale tachado cuando hay oferta) y «promo» el precio
+     promocional o null. El script guarda { precio: vigente, antes }.
+     ══════════════════════════════════════════════════════════════════ */
+  var PRECIO_MIN = 0.5, PRECIO_MAX = 2000;       // mismos topes que valida el script
+  var LISTA = {};                    // slug -> precio de lista (products.json)
+  var SRV = {};                      // slug -> { precio, antes, t }: lo que ya está guardado
+  var EDIT = {};                     // slug -> { normal, promo }: cambios sin guardar
+  var SEL = {};                      // slug -> true: productos marcados
+  var preciosDisponibles = false;    // el script de Google ya sabe guardar precios
+  var guardandoPrecios = false;
+  var D = null;                      // estado del cuadro de descuento
+  var focoPrevio = null;
+
+  var $ = function (id) { return document.getElementById(id); };
+  function redond(n) { return Math.round(n * 100) / 100; }
+  function igual(a, b) { return Math.abs(a - b) < 0.005; }
+  function fmtP(n) { return n.toFixed(2).replace('.', ','); }
+  function fmtPct(n) { var r = Math.round(n * 10) / 10; return String(r).replace('.', ','); }
+  function pctDe(normal, promo) { return (1 - promo / normal) * 100; }
+  function vigente(e) { return e.promo !== null ? e.promo : e.normal; }
+  function sinTildes(t) { return String(t).normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase(); }
+
+  /* Acepta «52,80», «52.80», «$ 52,80» y «1.052,80». NaN si no es un número. */
+  function leerNumero(t) {
+    var s = String(t == null ? '' : t).replace(/[$\s]/g, '');
+    if (!s || !/^[0-9.,]+$/.test(s)) return NaN;
+    var c = s.lastIndexOf(','), p = s.lastIndexOf('.');
+    if (c > -1 && p > -1) s = (c > p) ? s.replace(/\./g, '').replace(',', '.') : s.replace(/,/g, '');
+    else if (c > -1) { if ((s.match(/,/g) || []).length > 1) return NaN; s = s.replace(',', '.'); }
+    else if (p > -1 && (s.match(/\./g) || []).length > 1) return NaN;
+    var n = Number(s);
+    return isFinite(n) ? n : NaN;
+  }
+  function leerPrecio(t) { var n = leerNumero(t); return (n >= PRECIO_MIN && n <= PRECIO_MAX) ? redond(n) : NaN; }
+
+  function fechaCorta(iso) {
+    var f = new Date(iso);
+    if (isNaN(f.getTime())) return '';
+    return f.toLocaleString('es-VE', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', timeZone: 'America/Caracas' });
+  }
+
+  /* ── Estado de cada producto ── */
+  function estadoSrv(slug) {
+    var o = SRV[slug];
+    if (!o) return { normal: LISTA[slug], promo: null };
+    return o.antes ? { normal: o.antes, promo: o.precio } : { normal: o.precio, promo: null };
+  }
+  function estadoActual(slug) { return EDIT[slug] || estadoSrv(slug); }
+  function aOverride(slug, e) {                       // lo que se manda al script; null = precio de lista
+    if (e.promo !== null) return { precio: e.promo, antes: e.normal };
+    return igual(e.normal, LISTA[slug]) ? null : { precio: e.normal, antes: null };
+  }
+  function overrideSrv(slug) { var o = SRV[slug]; return o ? { precio: o.precio, antes: o.antes || null } : null; }
+  function mismo(a, b) {
+    if (a === null || b === null) return a === b;
+    if (!igual(a.precio, b.precio)) return false;
+    return (a.antes === null && b.antes === null) || (a.antes !== null && b.antes !== null && igual(a.antes, b.antes));
+  }
+  function fijar(slug, e) {                           // si queda igual a lo guardado, deja de ser un cambio
+    EDIT[slug] = e;
+    if (mismo(aOverride(slug, e), overrideSrv(slug))) delete EDIT[slug];
+  }
+  function producto(slug) { return CATALOGO.filter(function (p) { return p.slug === slug; })[0]; }
+  function nombreP(p) { return p.nombre + ' ' + p.presentacion; }
+
+  function iniciarPrecios(mapa) {
+    preciosDisponibles = !!mapa && typeof mapa === 'object' && !(mapa instanceof Array);
+    SRV = preciosDisponibles ? mapa : {};
+  }
+
+  function prepararPrecios() {
+    CATALOGO.forEach(function (p) { LISTA[p.slug] = p.precio; });
+    pintarPrecios();
+  }
+
+  /* ── Pestañas ── */
+  function mostrarVista(v) {
+    var precios = v === 'precios';
+    $('vistaInventario').hidden = precios;
+    $('vistaPrecios').hidden = !precios;
+    $('tabInventario').setAttribute('aria-selected', precios ? 'false' : 'true');
+    $('tabPrecios').setAttribute('aria-selected', precios ? 'true' : 'false');
+    $('avisoVersion').hidden = preciosDisponibles;
+    $('contenidoPrecios').hidden = !preciosDisponibles;
+    actualizarBarra();
+  }
+  $('tabInventario').addEventListener('click', function () { mostrarVista('inventario'); });
+  $('tabPrecios').addEventListener('click', function () { mostrarVista('precios'); });
+
+  /* ── Lista de precios ── */
+  function filaPrecioHtml(p) {
+    var slug = p.slug, e = estadoActual(slug), lista = LISTA[slug];
+    var promo = e.promo !== null, cambiado = !!EDIT[slug];
+    var distinto = promo || !igual(e.normal, lista);
+    var img = (p.media.filter(function (m) { return m.type === 'img'; })[0] || {}).src;
+    var o = SRV[slug];
+    var meta = 'Lista $' + fmtP(lista) + ((o && o.t && !cambiado && fechaCorta(o.t)) ? ' · modificado ' + fechaCorta(o.t) : '');
+    return ''
+      + '<div class="fila fp' + (cambiado ? ' cambiado' : '') + '" id="fp-' + esc(slug) + '">'
+      +   '<label class="sel-caja"><input type="checkbox" data-sel="' + esc(slug) + '"' + (SEL[slug] ? ' checked' : '')
+      +     ' aria-label="Seleccionar ' + esc(nombreP(p)) + '"></label>'
+      +   (img ? '<img src="' + esc(BASE + img) + '" alt="" loading="lazy">' : '<img alt="">')
+      +   '<div class="fila-txt">'
+      +     '<div class="fila-nom">' + esc(p.nombre) + '</div>'
+      +     '<div class="fila-sub">' + esc(p.presentacion) + ' · ' + esc(p.sku) + '</div>'
+      +     '<div class="fp-meta">' + esc(meta) + (cambiado ? ' <span class="sin-guardar">· sin guardar</span>' : '') + '</div>'
+      +   '</div>'
+      +   '<div class="fp-precio">'
+      +     '<span class="fp-etq">' + (promo ? 'Precio normal' : 'Precio') + '</span>'
+      +     '<span class="prec-caja"><i>$</i><input type="text" inputmode="decimal" autocomplete="off" data-precio="' + esc(slug) + '"'
+      +       ' value="' + fmtP(e.normal) + '" aria-label="Precio de ' + esc(nombreP(p)) + ' en dólares"></span>'
+      +   '</div>'
+      +   '<div class="fp-oferta">'
+      +     (promo ? '<span class="chip-oferta"><b>-' + fmtPct(pctDe(e.normal, e.promo)) + '%</b> $' + fmtP(e.promo) + '</span>' : '')
+      +     '<button type="button" class="btn-mini" data-desc="' + esc(slug) + '">' + (promo ? 'Editar oferta' : 'Descuento') + '</button>'
+      +     (distinto ? '<button type="button" class="btn-mini suave" data-lista="' + esc(slug) + '" title="Volver al precio de lista">↺ Lista</button>' : '')
+      +   '</div>'
+      + '</div>';
+  }
+
+  function visibles() {
+    var q = sinTildes($('buscar').value.trim());
+    return CATALOGO.filter(function (p) { return !q || sinTildes(nombreP(p) + ' ' + p.sku + ' ' + p.linea).indexOf(q) !== -1; });
+  }
+
+  function pintarPrecios() {
+    var vis = visibles(), html = '';
+    ORDEN.forEach(function (linea) {
+      var items = vis.filter(function (p) { return p.linea === linea; });
+      if (!items.length) return;
+      html += '<div class="linea-tit"><span class="punto" style="background:' + (COLOR[linea] || 'var(--coral)') + '"></span>' + esc(linea) + '</div>'
+            + '<div class="grupo">' + items.map(filaPrecioHtml).join('') + '</div>';
+    });
+    $('listaPrecios').innerHTML = html || '<div class="cargando">Ningún producto coincide con la búsqueda.</div>';
+    actualizarResumenPrecios();
+  }
+
+  function repintarFila(slug) {
+    var el = $('fp-' + slug), p = producto(slug);
+    if (el && p) { var t = document.createElement('div'); t.innerHTML = filaPrecioHtml(p); el.replaceWith(t.firstChild); }
+    actualizarResumenPrecios();
+  }
+
+  function marcarEstadoPrecios(clase, texto) {
+    $('estadoPrecios').className = 'estado' + (clase ? ' ' + clase : '');
+    $('estadoPreciosTxt').textContent = texto;
+  }
+
+  function actualizarResumenPrecios() {
+    var ofertas = 0, distintos = 0;
+    CATALOGO.forEach(function (p) {
+      var e = estadoActual(p.slug);
+      if (e.promo !== null) ofertas++;
+      if (e.promo !== null || !igual(e.normal, LISTA[p.slug])) distintos++;
+    });
+    $('nOfertas').textContent = ofertas;
+    $('nDistintos').textContent = distintos;
+    $('txtOfertas').textContent = ofertas === 1 ? 'oferta activa' : 'ofertas activas';
+    $('txtDistintos').textContent = distintos === 1 ? 'precio distinto al de lista' : 'precios distintos al de lista';
+
+    var vis = visibles(), marcados = Object.keys(SEL).filter(function (k) { return SEL[k]; });
+    var todosVis = vis.length > 0 && vis.every(function (p) { return SEL[p.slug]; });
+    $('selTodos').checked = todosVis;
+    $('selTodos').indeterminate = !todosVis && vis.some(function (p) { return SEL[p.slug]; });
+    $('btnDescVarios').disabled = marcados.length === 0;
+    $('btnDescVarios').textContent = marcados.length > 1 ? 'Descuento a ' + marcados.length + ' seleccionados' : 'Descuento a los seleccionados';
+    $('btnQuitarVarios').disabled = !marcados.some(function (k) { return estadoActual(k).promo !== null; });
+    actualizarBarra();
+  }
+
+  function actualizarBarra() {
+    var n = Object.keys(EDIT).length;
+    var enPrecios = !$('vistaPrecios').hidden;
+    var ver = n > 0 && enPrecios;
+    $('barraCambios').hidden = !ver;
+    document.body.classList.toggle('con-barra', ver);
+    $('nPend').textContent = n;
+    $('nPendTxt').textContent = n === 1 ? 'cambio sin guardar' : 'cambios sin guardar';
+    if (!guardandoPrecios) marcarEstadoPrecios(n ? 'guardando' : '', n ? 'Cambios sin guardar' : 'Guardado');
+  }
+
+  /* ── Eventos de la lista (delegados: las filas se repintan) ── */
+  $('listaPrecios').addEventListener('change', function (ev) {
+    var t = ev.target;
+    if (t.dataset.precio) editarPrecio(t.dataset.precio, t);
+    else if (t.dataset.sel) { SEL[t.dataset.sel] = t.checked; actualizarResumenPrecios(); }
+  });
+  $('listaPrecios').addEventListener('keydown', function (ev) {
+    if (ev.key === 'Enter' && ev.target.dataset.precio) ev.target.blur();
+  });
+  $('listaPrecios').addEventListener('click', function (ev) {
+    var b = ev.target.closest('button');
+    if (!b) return;
+    if (b.dataset.desc) abrirDescuento([b.dataset.desc]);
+    else if (b.dataset.lista) { fijar(b.dataset.lista, { normal: LISTA[b.dataset.lista], promo: null }); repintarFila(b.dataset.lista); }
+  });
+  $('buscar').addEventListener('input', pintarPrecios);
+  $('selTodos').addEventListener('change', function () {
+    var marcar = this.checked;
+    visibles().forEach(function (p) { SEL[p.slug] = marcar; });
+    pintarPrecios();
+  });
+  $('btnDescVarios').addEventListener('click', function () {
+    abrirDescuento(Object.keys(SEL).filter(function (k) { return SEL[k]; }));
+  });
+  $('btnQuitarVarios').addEventListener('click', function () {
+    Object.keys(SEL).filter(function (k) { return SEL[k] && estadoActual(k).promo !== null; }).forEach(function (k) {
+      fijar(k, { normal: estadoActual(k).normal, promo: null });
+    });
+    pintarPrecios();
+  });
+
+  function editarPrecio(slug, campo) {
+    var e = estadoActual(slug), nuevo = leerPrecio(campo.value);
+    var caja = campo.parentNode;
+    function rechazar(msg) {
+      campo.value = fmtP(e.normal);
+      caja.classList.remove('invalido'); void caja.offsetWidth; caja.classList.add('invalido');
+      aviso(msg, true);
+    }
+    if (isNaN(nuevo)) return rechazar('Escribe un precio entre $' + fmtP(PRECIO_MIN) + ' y $' + fmtP(PRECIO_MAX) + ', por ejemplo 52,80.');
+    if (e.promo !== null && nuevo <= e.promo) return rechazar('El precio normal tiene que ser mayor que el de la oferta ($' + fmtP(e.promo) + '). Cambia primero la oferta.');
+    if (igual(nuevo, e.normal)) { campo.value = fmtP(e.normal); return; }
+    fijar(slug, { normal: nuevo, promo: e.promo });
+    repintarFila(slug);
+  }
+
+  /* ── Cuadro de descuento ── */
+  function abrirModal(id) {
+    focoPrevio = document.activeElement;
+    $('velo').hidden = false; $(id).hidden = false;
+  }
+  function cerrarModales() {
+    $('velo').hidden = true; $('modalDesc').hidden = true; $('modalResumen').hidden = true;
+    if (focoPrevio && focoPrevio.focus) { try { focoPrevio.focus(); } catch (e) {} }
+  }
+  $('velo').addEventListener('click', function () { if (!guardandoPrecios) cerrarModales(); });
+  document.addEventListener('keydown', function (ev) {
+    if (ev.key === 'Escape' && !guardandoPrecios && (!$('modalDesc').hidden || !$('modalResumen').hidden)) cerrarModales();
+  });
+
+  function abrirDescuento(slugs) {
+    if (!slugs.length) return;
+    var varios = slugs.length > 1;
+    D = { slugs: slugs, varios: varios, ultimo: 'pct' };
+    $('descUno').hidden = varios; $('descVarios').hidden = !varios;
+    $('dError').hidden = true; $('dAlerta').hidden = true;
+    if (varios) {
+      $('descTit').textContent = 'Descuento a ' + slugs.length + ' productos';
+      $('descSub').textContent = 'Se calcula sobre el precio normal de cada uno. Si alguno ya tenía oferta, se reemplaza.';
+      $('dPctVarios').value = '';
+      $('dQuitar').hidden = true;
+    } else {
+      var p = producto(slugs[0]), e = estadoActual(slugs[0]);
+      $('descTit').textContent = 'Descuento · ' + nombreP(p);
+      $('descSub').textContent = 'Precio de lista $' + fmtP(LISTA[slugs[0]]) + ' · la tienda mostrará el precio promocional con el de antes tachado.';
+      $('dAntes').value = fmtP(e.normal);
+      if (e.promo !== null) { $('dPromo').value = fmtP(e.promo); $('dPct').value = fmtPct(pctDe(e.normal, e.promo)); D.ultimo = 'promo'; }
+      else { $('dPromo').value = ''; $('dPct').value = ''; }
+      $('dQuitar').hidden = e.promo === null;
+    }
+    abrirModal('modalDesc');
+    pintarVistaDesc();
+    setTimeout(function () { $(varios ? 'dPctVarios' : 'dPct').focus(); }, 30);
+  }
+
+  function recalcularDesc(origen) {
+    if (D.varios) return pintarVistaDesc();
+    if (origen === 'pct' || origen === 'promo') D.ultimo = origen;
+    var antes = leerPrecio($('dAntes').value);
+    if (!isNaN(antes)) {
+      if (D.ultimo === 'pct') {
+        var pct = leerNumero($('dPct').value);
+        if (pct > 0 && pct < 100) $('dPromo').value = fmtP(redond(antes * (1 - pct / 100)));
+        else if ($('dPct').value.trim() === '') $('dPromo').value = '';
+      } else {
+        var pr = leerPrecio($('dPromo').value);
+        if (!isNaN(pr) && pr < antes) $('dPct').value = fmtPct(pctDe(antes, pr));
+        else if ($('dPromo').value.trim() === '') $('dPct').value = '';
+      }
+    }
+    pintarVistaDesc();
+  }
+  ['dAntes', 'dPct', 'dPromo', 'dPctVarios'].forEach(function (id) {
+    $(id).addEventListener('input', function () { recalcularDesc(id === 'dPct' ? 'pct' : id === 'dPromo' ? 'promo' : 'antes'); });
+    $(id).addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); if (!$('dAplicar').disabled) $('dAplicar').click(); } });
+  });
+
+  /* Devuelve { ok, error, alerta, items: [{ slug, normal, promo }] } */
+  function validarDescuento() {
+    var r = { ok: false, error: '', alerta: '', items: [] };
+    if (D.varios) {
+      var pct = leerNumero($('dPctVarios').value);
+      if (!(pct >= 1 && pct <= 90)) { r.error = 'Escribe un descuento entre 1 y 90 %.'; return r; }
+      for (var i = 0; i < D.slugs.length; i++) {
+        var normal = estadoActual(D.slugs[i]).normal, promo = redond(normal * (1 - pct / 100));
+        if (promo < PRECIO_MIN) { r.error = 'Con ese descuento ' + nombreP(producto(D.slugs[i])) + ' quedaría por debajo de $' + fmtP(PRECIO_MIN) + '.'; return r; }
+        r.items.push({ slug: D.slugs[i], normal: normal, promo: promo });
+      }
+      if (pct > 50) r.alerta = '⚠ Es un descuento grande (' + fmtPct(pct) + ' %). Revísalo.';
+      r.ok = true; r.pct = pct; return r;
+    }
+    var antes = leerPrecio($('dAntes').value);
+    if (isNaN(antes)) { r.error = 'Escribe el precio antes (por ejemplo 59,16).'; return r; }
+    var promo1 = leerPrecio($('dPromo').value);
+    if (isNaN(promo1)) {
+      var hayPromo = $('dPromo').value.trim() !== '', hayPct = $('dPct').value.trim() !== '';
+      r.error = hayPromo ? 'Escribe un precio promocional válido (por ejemplo 47,33).'
+        : hayPct ? 'Escribe un descuento entre 1 y 90 %.'
+        : 'Escribe el descuento o el precio promocional.';
+      return r;
+    }
+    if (promo1 >= antes) { r.error = 'El precio promocional tiene que ser menor que el precio antes ($' + fmtP(antes) + ').'; return r; }
+    var p1 = pctDe(antes, promo1);
+    if (Math.round(p1) < 1) { r.error = 'El descuento tiene que ser de al menos 1 %.'; return r; }
+    if (p1 > 50) r.alerta = '⚠ Es un descuento grande (' + fmtPct(p1) + ' %). Revísalo.';
+    r.ok = true; r.pct = p1; r.items = [{ slug: D.slugs[0], normal: antes, promo: promo1 }];
+    return r;
+  }
+
+  function pintarVistaDesc() {
+    var v = validarDescuento(), vista = $('dVista');
+    var hayAlgo = D.varios ? $('dPctVarios').value.trim() !== '' : ($('dPct').value.trim() !== '' || $('dPromo').value.trim() !== '');
+    $('dError').hidden = v.ok || !hayAlgo;
+    $('dError').textContent = v.error;
+    $('dAlerta').hidden = !v.alerta; $('dAlerta').textContent = v.alerta;
+    $('dAplicar').disabled = !v.ok;
+    if (!v.ok) { vista.innerHTML = '<div class="v-nota">Así se verá en la tienda cuando completes los datos.</div>'; return; }
+    if (D.varios) {
+      vista.innerHTML = '<div class="v-lista">' + v.items.map(function (it) {
+        return '<div><span>' + esc(nombreP(producto(it.slug))) + '</span><span>$' + fmtP(it.normal) + ' → <b>$' + fmtP(it.promo) + '</b></span></div>';
+      }).join('') + '</div>';
+    } else {
+      var it = v.items[0];
+      vista.innerHTML = '<div class="v-fila"><span class="v-ahora">$' + fmtP(it.promo) + '</span><span class="v-antes">$' + fmtP(it.normal) + '</span>'
+        + '<span class="v-badge">-' + fmtPct(v.pct) + '%</span></div>'
+        + '<div class="v-nota">Ahorra $' + fmtP(redond(it.normal - it.promo)) + ' por unidad</div>';
+    }
+  }
+
+  $('dAplicar').addEventListener('click', function () {
+    var v = validarDescuento();
+    if (!v.ok) return;
+    v.items.forEach(function (it) { fijar(it.slug, { normal: it.normal, promo: it.promo }); });
+    cerrarModales();
+    if (D.varios) pintarPrecios(); else repintarFila(D.slugs[0]);
+  });
+  $('dQuitar').addEventListener('click', function () {
+    var slug = D.slugs[0], e = estadoActual(slug);
+    fijar(slug, { normal: e.normal, promo: null });
+    cerrarModales(); repintarFila(slug);
+  });
+  $('dCancelar').addEventListener('click', cerrarModales);
+
+  /* ── Revisar y guardar ── */
+  var toastT = null;
+  function aviso(txt, mal, enlace) {
+    var t = $('toast');
+    t.className = 'toast' + (mal ? ' mal' : '');
+    t.textContent = txt;
+    if (enlace) { var a = document.createElement('a'); a.href = '../'; a.textContent = 'Ver la tienda →'; t.appendChild(a); }
+    t.hidden = false;
+    clearTimeout(toastT);
+    toastT = setTimeout(function () { t.hidden = true; }, mal ? 6000 : 7000);
+  }
+
+  function precioEnTienda(slug, e) { return e.promo !== null ? e.promo : e.normal; }
+
+  function construirCambios() {
+    var cambios = {}, meta = {};
+    Object.keys(EDIT).forEach(function (slug) {
+      cambios[slug] = aOverride(slug, EDIT[slug]);
+      meta[slug] = { nombre: nombreP(producto(slug)), lista: LISTA[slug] };
+    });
+    return { cambios: cambios, meta: meta };
+  }
+
+  $('btnDescartar').addEventListener('click', function () {
+    var slugs = Object.keys(EDIT);
+    EDIT = {};
+    slugs.forEach(repintarFila);
+    actualizarBarra();
+  });
+
+  $('btnRevisar').addEventListener('click', function () {
+    var slugs = Object.keys(EDIT);
+    if (!slugs.length) return;
+    $('rError').hidden = true;
+    $('rLista').innerHTML = slugs.map(function (slug) {
+      var p = producto(slug), hoy = estadoSrv(slug), nuevo = EDIT[slug];
+      var antesV = precioEnTienda(slug, hoy), ahoraV = precioEnTienda(slug, nuevo);
+      var ratio = ahoraV / antesV, raro = ratio >= 2.5 || ratio <= 0.4;
+      var hoyTxt = hoy.promo !== null ? '$' + fmtP(hoy.promo) + ' (oferta)' : '$' + fmtP(hoy.normal);
+      var nuevoTxt = '<b>$' + fmtP(ahoraV) + '</b>' + (nuevo.promo !== null
+        ? '<span class="pct">-' + fmtPct(pctDe(nuevo.normal, nuevo.promo)) + '%</span>' : '');
+      var vuelve = aOverride(slug, nuevo) === null;
+      return '<div class="r-fila">'
+        + '<div class="r-nom">' + esc(p.nombre) + '<small>' + esc(p.presentacion) + '</small></div>'
+        + '<div class="r-cambio"><s>' + hoyTxt + '</s> → ' + (vuelve ? '<b>$' + fmtP(ahoraV) + '</b> (precio de lista)' : nuevoTxt) + '</div>'
+        + (nuevo.promo !== null && !vuelve ? '<div class="r-nota">Oferta · en la tienda se verá tachado el precio antes de $' + fmtP(nuevo.normal) + '</div>' : '')
+        + (raro ? '<div class="r-alerta">⚠ El precio cambia mucho: ¿seguro que no falta o sobra un cero?</div>' : '')
+        + '</div>';
+    }).join('');
+    $('rGuardar').disabled = false; $('rGuardar').textContent = 'Guardar en la tienda';
+    abrirModal('modalResumen');
+  });
+  $('rVolver').addEventListener('click', function () { if (!guardandoPrecios) cerrarModales(); });
+
+  $('rGuardar').addEventListener('click', function () {
+    if (guardandoPrecios || !preciosDisponibles) return;
+    var c = construirCambios();
+    guardandoPrecios = true;
+    $('rGuardar').disabled = true; $('rGuardar').textContent = 'Guardando…';
+    $('rError').hidden = true;
+    marcarEstadoPrecios('guardando', 'Guardando…');
+    fetch(API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ accion: 'precios-guardar', clave: clave, cambios: c.cambios, meta: c.meta })
+    })
+      .then(function (r) { return r.text(); })
+      .then(function (txt) {
+        var d; try { d = JSON.parse(txt); } catch (e) { d = null; }
+        guardandoPrecios = false;
+        if (d && d.ok) {
+          var n = Object.keys(EDIT).length;
+          SRV = d.precios || {}; EDIT = {};
+          cerrarModales(); pintarPrecios();
+          aviso('Listo: ' + n + (n === 1 ? ' cambio guardado' : ' cambios guardados') + '. Ya se ve en la tienda.', false, true);
+          return;
+        }
+        var msg = 'No se guardó nada. Tus cambios siguen aquí.';
+        if (d && d.error === 'clave') msg = 'La clave ya no es válida. Recarga la página y vuelve a entrar; tus cambios no se guardaron.';
+        else if (d && (d.error === 'precio' || d.error === 'antes')) msg = 'El script rechazó el precio de ' + (producto(d.slug) ? nombreP(producto(d.slug)) : d.slug) + '. Revisa que esté entre $' + fmtP(PRECIO_MIN) + ' y $' + fmtP(PRECIO_MAX) + ' y que el de antes sea mayor.';
+        else if (!d) msg = 'El script de Google no respondió como se esperaba. No se guardó nada; revisa que esté en su versión nueva.';
+        $('rError').hidden = false; $('rError').textContent = msg;
+        $('rGuardar').disabled = false; $('rGuardar').textContent = 'Reintentar';
+        actualizarBarra();
+      })
+      .catch(function () {
+        guardandoPrecios = false;
+        $('rError').hidden = false;
+        $('rError').textContent = 'Sin conexión: no se guardó nada. Tus cambios siguen aquí; vuelve a intentarlo.';
+        $('rGuardar').disabled = false; $('rGuardar').textContent = 'Reintentar';
+        actualizarBarra();
+      });
+  });
+
+  window.addEventListener('beforeunload', function (ev) {
+    if (Object.keys(EDIT).length) { ev.preventDefault(); ev.returnValue = ''; }
+  });
+
+  if (location.hash === '#precios') window.__abrirPrecios = true;
   document.getElementById('clave').focus();
   </script>
 </body>
