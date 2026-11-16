@@ -821,7 +821,7 @@
     }
     .btn-filtros:hover { border-color: var(--coral); color: var(--coral); }
     select.orden {
-      font-family: inherit; font-size: 0.76rem; font-weight: 500; color: var(--dark);
+      font-family: inherit; font-size: 16px; font-weight: 500; color: var(--dark);
       border: 1px solid var(--border); border-radius: 100px;
       padding: 9px 34px 9px 15px; cursor: pointer; background: #fff;
       appearance: none;
@@ -1034,7 +1034,7 @@
       text-transform: uppercase; color: var(--gray);
     }
     .campo input, .campo select {
-      font-family: inherit; font-size: 0.88rem; color: var(--dark);
+      font-family: inherit; font-size: 16px; color: var(--dark);
       border: 1.5px solid var(--border); border-radius: 9px;
       padding: 11px 13px; background: #fff; width: 100%;
     }
@@ -1042,6 +1042,12 @@
       outline: none; border-color: var(--coral);
     }
     .campo input::placeholder { color: #c4c4c4; }
+
+    /* Confirmación del pedido: queda en el carrito hasta que el cliente agrega algo nuevo */
+    .confirmacion { margin: 4px 0 18px; padding: 15px 16px; background: #e8f7ee; border: 1.5px solid #34c759; border-radius: 11px; }
+    .confirmacion-tit { font-size: 0.84rem; font-weight: 700; color: #1a7a3c; }
+    .confirmacion p { font-size: 0.76rem; color: var(--gray); margin: 5px 0 0; line-height: 1.5; }
+    .confirmacion .btn-pedido { margin-top: 12px; text-decoration: none; }
     .campo.error input, .campo.error select { border-color: var(--coral); }
     .campo-error {
       font-size: 0.68rem; color: var(--coral); font-weight: 500; display: none;
@@ -1344,6 +1350,7 @@
     </div>
 
     <div class="paso" id="paso1">
+      <div class="confirmacion" id="confirmacion" hidden></div>
       <div class="carrito-items" id="carritoItems"></div>
     </div>
 
@@ -1858,6 +1865,7 @@
 
   function pintarCarrito() {
     const items = lineasCarrito();
+    if (items.length) ocultarConfirmacion();
     const nTotal = items.reduce((s, i) => s + i.n, 0);
     const total  = items.reduce((s, i) => s + i.subtotal, 0);
 
@@ -2239,7 +2247,7 @@
     m += '• Total: ' + fmtUSD(d.totalUsd) + '\n';
     if (d.totalBs) m += '• ' + fmtBs(d.totalBs) + ' referencial a tasa BCV ' + fmtTasa(d.tasa) + '\n';
     if (d.comprobanteUrl) m += '• Comprobante: ' + d.comprobanteUrl + '\n';
-    else if (COMPROBANTE) m += '• Comprobante de pago enviado a administración\n';
+    else if (COMPROBANTE) m += '• Comprobante de pago: lo adjunto en este chat\n';
 
     if (!enHorario()) {
       m += '\n(Pedido fuera del horario de despacho — entiendo que lo confirman ' + proximaAtencion() + '.)\n';
@@ -2267,42 +2275,42 @@
       items: d.items.map(({ p, n }) => ({ slug: p.slug, cantidad: n })),
       fueraDeHorario: enHorario() ? '' : 'Sí — se confirma ' + proximaAtencion()
     };
+    const ctl = new AbortController();
+    const corte = setTimeout(() => ctl.abort(), 30000);
     return fetch(HOJA_PEDIDOS, {
       method: 'POST',
       headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-      body: JSON.stringify(fila)
+      body: JSON.stringify(fila),
+      signal: ctl.signal
     })
       .then(r => r.text())
       .then(t => { try { return JSON.parse(t); } catch (e) { return null; } })
-      .catch(() => null);   // la venta no se detiene por esto
+      .catch(() => null)   // la venta no se detiene por esto
+      .finally(() => clearTimeout(corte));
   }
 
-  /* Plan B cuando el navegador bloquea la pestaña: el pedido YA está
-     guardado, así que solo falta que el cliente toque el enlace. */
-  function mostrarEnlaceWhatsapp(enlace) {
-    if (document.getElementById('avisoWhatsapp')) return;
-    const caja = document.createElement('div');
-    caja.id = 'avisoWhatsapp';
+  /* Queda en el carrito después de enviar. Tiene el botón para abrir WhatsApp
+     por si el navegador no abrió la ventana sola (pasa en algunos celulares). */
+  function mostrarConfirmacion(enlace) {
+    const caja = document.getElementById('confirmacion');
     caja.innerHTML =
-      '<div style="background:#e8f7ee;border:1.5px solid #34c759;border-radius:11px;padding:15px 16px;margin-bottom:13px">'
-      + '<div style="font-size:0.82rem;font-weight:700;color:#1a7a3c">Tu pedido quedó registrado ✓</div>'
-      + '<div style="font-size:0.75rem;color:var(--gray);margin-top:5px;line-height:1.5">'
-      +   'El navegador bloqueó la ventana de WhatsApp. Toca el botón para enviarnos el mensaje.</div>'
-      + '<a href="' + enlace + '" target="_blank" rel="noopener" class="btn-pedido" style="margin-top:11px">'
-      +   'Abrir WhatsApp</a>'
-      + '</div>';
-    const pie = document.getElementById('carritoPie');
-    pie.insertBefore(caja, pie.firstChild);
-    caja.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      '<div class="confirmacion-tit">Tu pedido está listo ✓</div>'
+      + '<p>Para coordinar el pago, envíalo por WhatsApp. Si la ventana no se abrió sola, toca el botón.</p>'
+      + '<a href="' + enlace + '" target="_blank" rel="noopener" class="btn-pedido">Abrir WhatsApp</a>';
+    caja.hidden = false;
   }
 
-  function limpiarAvisoWhatsapp() {
-    const a = document.getElementById('avisoWhatsapp');
-    if (a) a.remove();
+  function ocultarConfirmacion() {
+    const caja = document.getElementById('confirmacion');
+    if (caja) caja.hidden = true;
   }
+
+  /* La hoja y el correo tardan (sobre todo con el comprobante). El cliente no
+     se queda esperando: pasado este tiempo se le abre WhatsApp igual. */
+  const ESPERA_HOJA_MS = 6000;
 
   function enviarPedido() {
-    limpiarAvisoWhatsapp();
+    ocultarConfirmacion();
     if (!lineasCarrito().length || !validar()) return;
     const d = datosPedido();
     const btn = document.getElementById('btnPedido');
@@ -2311,26 +2319,25 @@
     /* El navegador solo permite abrir una pestaña como consecuencia
        directa del clic. Como después hay que esperar al servidor, se
        abre AHORA en blanco y se le pone la dirección cuando llegue la
-       respuesta. Si aun así la bloquean, más abajo se ofrece un enlace. */
+       respuesta (o cuando se acabe la espera). */
     const ventana = window.open('', '_blank');
 
     btn.disabled = true;
     txtBtn.textContent = COMPROBANTE ? ' Enviando comprobante…' : ' Enviando pedido…';
 
-    avisarAdministracion(d).then(res => {
+    const hoja = avisarAdministracion(d).then(res => {
       // El servidor guarda el comprobante y devuelve su enlace.
       if (res && res.comprobante) d.comprobanteUrl = res.comprobante;
-    }).finally(() => {
+    });
+    const tope = new Promise(ok => setTimeout(ok, ESPERA_HOJA_MS));
+
+    Promise.race([hoja, tope]).then(() => {
       if (typeof fbq !== 'undefined') fbq('track', 'Purchase', { value: d.totalUsd, currency: 'USD', num_items: d.unidades });
       if (typeof gtag !== 'undefined') gtag('event', 'purchase', { currency: 'USD', value: d.totalUsd });
 
       const enlace = 'https://wa.me/' + WA + '?text=' + encodeURIComponent(armarMensaje(d));
-
-      if (ventana && !ventana.closed) {
-        ventana.location.href = enlace;          // la pestaña ya estaba abierta
-      } else {
-        mostrarEnlaceWhatsapp(enlace);           // la bloquearon: se ofrece a mano
-      }
+      if (ventana && !ventana.closed) ventana.location.href = enlace;   // se abre sola
+      mostrarConfirmacion(enlace);                                     // y queda el botón por si acaso
 
       carrito = {};
       guardarCarrito();
@@ -2340,13 +2347,7 @@
       render();
       btn.disabled = false;
       txtBtn.textContent = ' Enviar pedido por WhatsApp';
-
-      // Si hubo que ofrecer el enlace a mano, el carrito se queda
-      // abierto para que el cliente lo vea.
-      if (!document.getElementById('avisoWhatsapp')) {
-        irAPaso(1);
-        cerrarCarrito();
-      }
+      irAPaso(1);
     });
   }
 
