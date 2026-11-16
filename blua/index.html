@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <!-- Meta Pixel y Google Analytics: solo en svr-venezuela.com (la vista previa local no ensucia las métricas) -->
+  <script>
+  if (/(^|\.)svr-venezuela\.com$/.test(location.hostname)) {
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1545919737263263');
+    fbq('track', 'PageView');
+    var ga = document.createElement('script');
+    ga.async = true; ga.src = 'https://www.googletagmanager.com/gtag/js?id=G-Y2ZGXL2DV8';
+    document.head.appendChild(ga);
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = function () { dataLayer.push(arguments); };
+    gtag('js', new Date());
+    gtag('config', 'G-Y2ZGXL2DV8');
+  }
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Compra más de $50 en productos SVR en Farmatodo, sube la foto de tu factura y participa por una de las 3 sesiones de HydraFacial en Blua Clinic. Cada sesión incluye 1 sesión de NCTF adicional.">
+  <title>Compra y gana HydraFacial · SVR × Blua Clinic — SVR Venezuela</title>
+  <link rel="canonical" href="https://svr-venezuela.com/blua/">
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="../assets/favicon-512.png">
+  <link rel="apple-touch-icon" href="../assets/favicon-180.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://svr-venezuela.com/blua/">
+  <meta property="og:title" content="Compra y gana HydraFacial · SVR × Blua Clinic">
+  <meta property="og:description" content="Compra más de $50 en productos SVR en Farmatodo, sube tu factura y participa. 3 ganadoras: una sesión de HydraFacial cada una, con 1 sesión de NCTF adicional.">
+  <meta property="og:image" content="https://svr-venezuela.com/assets/og-blua.jpg">
+  <meta property="og:locale" content="es_VE">
+  <meta name="theme-color" content="#0b5a72">
+  <link rel="preload" as="image" href="../assets/hero-blua.webp" type="image/webp" media="(min-width: 641px)" fetchpriority="high">
+  <link rel="preload" as="image" href="../assets/hero-blua-movil.webp" type="image/webp" media="(max-width: 640px)" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --teal:       #0b5a72;
+      --teal-2:     #13809d;
+      --aqua:       #2fb0c2;
+      --hielo:      #eef7f9;
+      --hielo-2:    #d6edf2;
+      --cream:      #f8f6f3;
+      --dark:       #1a1a1a;
+      --gray:       #5a5a5a;
+      --light-gray: #8d9393;
+      --border:     rgba(0,0,0,0.12);
+      --error:      #c42b48;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { font-family: 'Poppins', sans-serif; color: var(--dark); background: #fff; -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    button, input { font: inherit; color: inherit; }
+    button { cursor: pointer; background: none; border: 0; }
+    a { color: inherit; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+    /* Sin esta regla, un bloque con display:grid/flex ignora el atributo hidden y se ve aunque debería estar oculto. */
+    [hidden] { display: none !important; }
+
+    /* ── Cabecera: transparente sobre la portada, como en el inicio ── */
+    .cab {
+      position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 20px clamp(16px, 4vw, 56px);
+    }
+    .cab-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .cab-logo img { height: 34px; width: auto; filter: brightness(0) invert(1); }
+    .cab-logo-div { width: 1px; height: 22px; background: rgba(255,255,255,0.3); }
+    .cab-logo-sub { font-size: 0.52rem; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(255,255,255,0.7); }
+    .cab-volver {
+      font-size: 0.62rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #fff; text-decoration: none; padding: 10px 16px; border-radius: 100px;
+      border: 1px solid rgba(255,255,255,0.45); transition: background 0.2s;
+    }
+    .cab-volver:hover { background: rgba(255,255,255,0.14); }
+
+    /* ── Portada: el mismo banner de la diapositiva del inicio ── */
+    .portada { position: relative; background: linear-gradient(100deg, #0b4f66 0%, #13809d 52%, #2fb0c2 100%); overflow: hidden; }
+    .portada-escena { position: relative; width: min(100%, 1920px); aspect-ratio: 2400 / 1000; margin: 0 auto; }
+    .portada-escena picture, .portada-escena img { width: 100%; height: 100%; }
+    .portada-cta {
+      position: absolute; left: 4.1667%; top: 78%;
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: clamp(0.55rem, 0.85vw, 0.7rem); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: #fff; background: #1a1a1a; text-decoration: none; border-radius: 3px;
+      padding: clamp(9px, 0.9vw, 14px) clamp(18px, 1.8vw, 32px);
+      box-shadow: 0 12px 28px rgba(3,40,54,0.38); transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+    .portada-cta:hover { background: #fff; color: var(--teal); transform: translateY(-2px); }
+    @media (max-width: 640px) {
+      .portada-escena { aspect-ratio: 1200 / 900; }
+      .portada-cta { left: 4.5%; top: 74%; font-size: 0.6rem; padding: 11px 20px; gap: 8px; }
+      .cab { padding: 16px; }
+      .cab-logo img { height: 28px; }
+      .cab-volver { padding: 8px 12px; font-size: 0.56rem; }
+    }
+
+    /* ── Secciones ── */
+    .seccion { padding: clamp(44px, 7vw, 84px) clamp(16px, 4vw, 56px); }
+    .eyebrow { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--teal-2); text-align: center; }
+    /* Logos de SVR y de Blua sobre el título del formulario */
+    .eyebrow-logos { display: flex; justify-content: center; align-items: flex-end; gap: 14px; letter-spacing: 0; margin-bottom: 10px; }
+    .eyebrow-logos img { display: block; width: auto; }
+    .eyebrow-logos .l-svr { height: 20px; }
+    .eyebrow-logos .l-blua { height: 23px; }
+    .eyebrow-logos .x { font-size: 0.95rem; line-height: 1; margin-bottom: 1px; }
+    .seccion h2 { font-size: clamp(1.6rem, 4.2vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; text-align: center; margin-top: 10px; }
+    .seccion .bajada { text-align: center; color: var(--gray); font-size: 0.95rem; line-height: 1.6; margin: 12px auto 0; max-width: 560px; }
+
+    .pasos { list-style: none; max-width: 1080px; margin: 36px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .paso { background: var(--hielo); border-radius: 18px; padding: 22px; display: flex; gap: 16px; align-items: flex-start; }
+    .paso-num {
+      flex: none; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
+      background: var(--teal); color: #fff;
+    }
+    .paso-num svg { width: 22px; height: 22px; }
+    .paso h3 { font-size: 1rem; font-weight: 700; letter-spacing: -0.01em; }
+    .paso p { font-size: 0.86rem; color: var(--gray); line-height: 1.55; margin-top: 4px; }
+    .donde { text-align: center; margin-top: 22px; font-size: 0.86rem; color: var(--gray); }
+    .donde a { color: var(--teal); font-weight: 600; text-decoration-color: var(--aqua); text-underline-offset: 3px; }
+    @media (max-width: 820px) { .pasos { grid-template-columns: 1fr; max-width: 560px; } }
+
+    /* ── Formulario ── */
+    .form-sec { background: var(--cream); }
+    .tarjeta {
+      max-width: 600px; margin: 30px auto 0; background: #fff; border-radius: 22px;
+      box-shadow: 0 24px 60px rgba(3,40,54,0.10); padding: clamp(22px, 4.5vw, 40px);
+    }
+    .campo { border: 0; display: flex; flex-direction: column; gap: 9px; margin-bottom: 24px; min-width: 0; }
+    .etiqueta { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.13em; text-transform: uppercase; color: var(--gray); }
+    .pista { font-size: 0.8rem; color: var(--light-gray); line-height: 1.45; margin-top: -2px; }
+    .texto {
+      width: 100%; height: 54px; border: 1.5px solid var(--border); border-radius: 13px;
+      padding: 0 16px; font-size: 1rem; background: #fff; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .texto::placeholder { color: #b7bcbc; }
+    .texto:focus { border-color: var(--teal-2); box-shadow: 0 0 0 4px rgba(19,128,157,0.14); }
+    .error { display: none; font-size: 0.8rem; font-weight: 500; color: var(--error); }
+    .campo.invalido .error { display: block; }
+    .campo.invalido .texto { border-color: var(--error); }
+    .campo.invalido .zonas .zona, .campo.invalido .foto-vacia .btn-foto { border-color: rgba(196,43,72,0.55); }
+
+    .zonas { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+    @media (min-width: 560px) { .zonas { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+    .zona {
+      position: relative; display: flex; flex-direction: column; gap: 3px; min-height: 70px;
+      border: 1.5px solid var(--border); border-radius: 13px; padding: 12px 13px; cursor: pointer;
+      transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .zona input { position: absolute; opacity: 0; pointer-events: none; }
+    .zona-tit { font-size: 0.92rem; font-weight: 700; }
+    .zona-sub { font-size: 0.7rem; color: var(--gray); line-height: 1.35; }
+    .zona.marcada { border-color: var(--teal); background: var(--hielo); box-shadow: inset 0 0 0 1px var(--teal); }
+    .zona:has(input:focus-visible) { box-shadow: 0 0 0 4px rgba(19,128,157,0.22); }
+    .zona-otra { margin-top: 2px; }
+
+    .sugerencia { font-size: 0.82rem; color: var(--teal); }
+    .sugerencia button { font-weight: 700; text-decoration: underline; text-underline-offset: 3px; color: var(--teal); }
+
+    .foto-vacia { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .btn-foto {
+      min-height: 76px; border: 1.5px dashed var(--teal-2); border-radius: 14px; background: var(--hielo);
+      color: var(--teal); font-weight: 700; font-size: 0.9rem; line-height: 1.2;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 10px;
+      transition: background 0.15s, transform 0.15s; -webkit-tap-highlight-color: transparent;
+    }
+    .btn-foto svg { width: 26px; height: 26px; }
+    .btn-foto:active { transform: scale(0.98); }
+    .btn-foto:hover { background: var(--hielo-2); }
+    .btn-foto small { font-weight: 500; font-size: 0.72rem; color: var(--gray); }
+    .solo-escritorio .btn-camara { display: none; }
+    .solo-escritorio .foto-vacia { grid-template-columns: 1fr; }
+    .foto-vacia.arrastrando .btn-foto { background: var(--hielo-2); border-style: solid; }
+    .foto-lista {
+      display: grid; grid-template-columns: 92px 1fr; gap: 14px; align-items: center;
+      border: 1.5px solid var(--teal-2); background: var(--hielo); border-radius: 14px; padding: 10px;
+    }
+    .foto-lista img, .foto-icono { width: 92px; height: 116px; border-radius: 10px; object-fit: cover; background: #fff; }
+    .foto-icono { display: grid; place-items: center; color: var(--teal); }
+    .foto-icono svg { width: 34px; height: 34px; }
+    .foto-ok { font-size: 0.9rem; font-weight: 700; color: var(--teal); display: flex; align-items: center; gap: 6px; }
+    .foto-ok svg { width: 18px; height: 18px; }
+    .foto-info { font-size: 0.76rem; color: var(--gray); margin-top: 2px; word-break: break-word; }
+    .foto-acciones { display: flex; gap: 16px; margin-top: 8px; }
+    .foto-acciones button { font-size: 0.82rem; font-weight: 700; color: var(--teal); text-decoration: underline; text-underline-offset: 3px; padding: 4px 0; }
+    .foto-procesando { font-size: 0.85rem; color: var(--gray); display: flex; align-items: center; gap: 10px; padding: 14px 4px; }
+
+    .acepto { flex-direction: row; align-items: flex-start; gap: 12px; cursor: pointer; }
+    .acepto input { flex: none; width: 22px; height: 22px; margin-top: 1px; accent-color: var(--teal); cursor: pointer; }
+    .acepto span { font-size: 0.86rem; color: var(--gray); line-height: 1.5; }
+    .campo-acepto { margin-bottom: 26px; }
+
+    .btn-enviar {
+      width: 100%; min-height: 58px; border-radius: 100px; background: var(--teal); color: #fff;
+      font-weight: 700; font-size: 0.82rem; letter-spacing: 0.14em; text-transform: uppercase;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      box-shadow: 0 14px 30px rgba(11,90,114,0.30); transition: background 0.2s, transform 0.2s;
+    }
+    .btn-enviar:hover { background: #094a5e; transform: translateY(-1px); }
+    .btn-enviar:disabled { cursor: progress; transform: none; opacity: 0.85; }
+    .giro { width: 18px; height: 18px; border-radius: 50%; border: 2.5px solid rgba(255,255,255,0.35); border-top-color: #fff; animation: giro 0.8s linear infinite; }
+    .giro.oscuro { border-color: rgba(11,90,114,0.2); border-top-color: var(--teal); }
+    @keyframes giro { to { transform: rotate(360deg); } }
+    .barra { height: 4px; border-radius: 4px; background: var(--hielo-2); overflow: hidden; margin-top: 14px; }
+    .barra span { display: block; height: 100%; width: 35%; background: var(--teal-2); border-radius: 4px; animation: barra 1.2s ease-in-out infinite; }
+    @keyframes barra { 0% { transform: translateX(-100%); } 100% { transform: translateX(290%); } }
+    .estado { font-size: 0.86rem; line-height: 1.5; margin-top: 14px; text-align: center; color: var(--gray); }
+    .estado.mal { color: var(--error); font-weight: 500; }
+    .estado a { color: var(--teal); font-weight: 700; }
+    .trampa { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+
+    .exito { text-align: center; padding: 8px 0 4px; }
+    .exito-ico { width: 74px; height: 74px; border-radius: 50%; background: var(--teal); color: #fff; display: grid; place-items: center; margin: 0 auto 18px; box-shadow: 0 14px 30px rgba(11,90,114,0.28); }
+    .exito-ico svg { width: 34px; height: 34px; }
+    .exito h3 { font-size: 1.5rem; font-weight: 800; letter-spacing: -0.02em; }
+    .exito-num { display: inline-block; margin-top: 14px; font-size: 0.74rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--teal); background: var(--hielo); border-radius: 100px; padding: 9px 16px; }
+    .exito p { color: var(--gray); font-size: 0.92rem; line-height: 1.6; margin: 14px auto 0; max-width: 430px; }
+    .exito-botones { display: flex; flex-direction: column; gap: 10px; margin-top: 24px; }
+    .btn-sec { min-height: 52px; border-radius: 100px; border: 1.5px solid var(--teal); color: var(--teal); font-weight: 700; font-size: 0.76rem; letter-spacing: 0.12em; text-transform: uppercase; display: flex; align-items: center; justify-content: center; text-decoration: none; }
+    .btn-sec.lleno { background: var(--teal); color: #fff; }
+
+    /* ── Condiciones ── */
+    .condiciones { max-width: 600px; margin: 22px auto 0; }
+    .condiciones details { background: #fff; border-radius: 16px; padding: 4px 20px; border: 1px solid var(--border); }
+    .condiciones summary { cursor: pointer; list-style: none; padding: 16px 0; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--gray); display: flex; justify-content: space-between; align-items: center; }
+    .condiciones summary::-webkit-details-marker { display: none; }
+    .condiciones summary::after { content: '+'; font-size: 1.2rem; color: var(--teal); }
+    .condiciones details[open] summary::after { content: '−'; }
+    .condiciones ul { padding: 0 0 18px 18px; }
+    .condiciones li { font-size: 0.84rem; color: var(--gray); line-height: 1.6; margin-bottom: 6px; }
+
+    footer { background: var(--dark); color: rgba(255,255,255,0.6); padding: 26px clamp(16px, 4vw, 56px); }
+    .pie { max-width: 1340px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; font-size: 0.72rem; }
+    .pie a { color: rgba(255,255,255,0.8); text-decoration: none; }
+    .pie a:hover { color: #fff; }
+    .pie .sep { flex: 1; }
+
+    /* Solo en la vista previa local: avisa dentro de la tarjeta, sin flotar sobre el contenido. */
+    .vista-previa {
+      background: #fff8e6; border: 1px dashed #d9a441; color: #7a5308; border-radius: 12px;
+      font-size: 0.78rem; font-weight: 600; line-height: 1.45; padding: 10px 14px; margin-bottom: 22px;
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .giro, .barra span { animation-duration: 2.4s; } }
+  </style>
+</head>
+<body>
+
+  <header class="cab">
+    <a href="../" class="cab-logo" aria-label="SVR Venezuela, ir al inicio">
+      <img src="../assets/SVR-transparent.webp" alt="SVR Laboratoire Dermatologique" width="34" height="34">
+      <span class="cab-logo-div"></span>
+      <span class="cab-logo-sub">Venezuela</span>
+    </a>
+    <a href="../" class="cab-volver">← Inicio</a>
+  </header>
+
+  <main>
+    <section class="portada">
+      <div class="portada-escena">
+        <picture>
+          <source media="(max-width: 640px)" srcset="../assets/hero-blua-movil.webp">
+          <img src="../assets/hero-blua.webp" width="2400" height="1000" alt="" fetchpriority="high" decoding="async">
+        </picture>
+        <h1 class="sr-only">Alianza SVR × Blua Clinic: compra y gana HydraFacial. 3 ganadoras por compras SVR de más de $50 en Farmatodo.</h1>
+        <a href="#participa" class="portada-cta">Participa <span aria-hidden="true">↓</span></a>
+      </div>
+    </section>
+
+    <section class="seccion">
+      <div class="eyebrow">Así participas</div>
+      <h2>Tres pasos y listo</h2>
+      <ol class="pasos">
+        <li class="paso">
+          <span class="paso-num" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+          <div><h3>1. Compra en Farmatodo</h3><p>Una compra de más de $50 en productos SVR.</p></div>
+        </li>
+        <li class="paso">
+          <span class="paso-num" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
+          <div><h3>2. Fotografía tu factura</h3><p>Que se vean bien la fecha, los productos y el total.</p></div>
+        </li>
+        <li class="paso">
+          <span class="paso-num" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+          <div><h3>3. Llena el formulario</h3><p>Tus datos y la foto. Toma menos de un minuto.</p></div>
+        </li>
+      </ol>
+      <p class="donde">¿Buscas un Farmatodo con SVR? <a href="../#farmatodo">Mira las tiendas en el mapa →</a></p>
+    </section>
+
+    <section class="seccion form-sec" id="participa">
+      <div class="eyebrow eyebrow-logos" role="img" aria-label="SVR × Blua Clinic"><img class="l-svr" src="../assets/svr-logo-gris.svg" alt="" width="49" height="20"><span class="x" aria-hidden="true">×</span><img class="l-blua" src="../assets/blua-logo-azul.png" alt="" width="64" height="23"></div>
+      <h2>Participa</h2>
+      <p class="bajada">3 sesiones de HydraFacial en Blua Clinic, una para cada una de las 3 ganadoras. Cada sesión incluye 1 sesión de NCTF adicional.</p>
+
+      <div class="tarjeta">
+        <noscript><p class="estado mal" style="margin:0 0 18px">Para participar necesitas activar JavaScript en tu navegador. También puedes escribirnos por <a href="https://wa.me/584242565586?text=Hola%2C%20quiero%20participar%20en%20la%20promoci%C3%B3n%20SVR%20%C3%97%20Blua%20Clinic">WhatsApp</a>.</p></noscript>
+        <form id="formBlua" novalidate>
+          <div class="campo" id="cNombre">
+            <label class="etiqueta" for="fNombre">Nombre y apellido</label>
+            <input class="texto" type="text" id="fNombre" autocomplete="name" autocapitalize="words" enterkeyhint="next" placeholder="Ana Pérez" maxlength="80">
+            <span class="error">Escribe tu nombre y tu apellido.</span>
+          </div>
+
+          <fieldset class="campo" id="cZona">
+            <legend class="etiqueta">¿En qué zona de Caracas estás?</legend>
+            <div class="zonas">
+              <label class="zona"><input type="radio" name="zona" value="Libertador"><span class="zona-tit">Libertador</span><span class="zona-sub">El Paraíso, La Candelaria, San Bernardino…</span></label>
+              <label class="zona"><input type="radio" name="zona" value="Chacao"><span class="zona-tit">Chacao</span><span class="zona-sub">Altamira, Los Palos Grandes, La Castellana…</span></label>
+              <label class="zona"><input type="radio" name="zona" value="Baruta"><span class="zona-tit">Baruta</span><span class="zona-sub">Las Mercedes, El Cafetal, Prados del Este…</span></label>
+              <label class="zona"><input type="radio" name="zona" value="Sucre"><span class="zona-tit">Sucre</span><span class="zona-sub">Los Dos Caminos, La Urbina, Petare…</span></label>
+              <label class="zona"><input type="radio" name="zona" value="El Hatillo"><span class="zona-tit">El Hatillo</span><span class="zona-sub">La Lagunita, Los Naranjos, Oripoto…</span></label>
+              <label class="zona"><input type="radio" name="zona" value="Otra"><span class="zona-tit">Otra zona</span><span class="zona-sub">Fuera de estos municipios</span></label>
+            </div>
+            <div class="zona-otra" id="grupoZonaOtra" hidden>
+              <input class="texto" type="text" id="fZonaOtra" placeholder="¿Dónde? Ej.: Los Teques, Guarenas, La Guaira" maxlength="60" aria-label="¿En qué zona estás?">
+            </div>
+            <span class="error" id="errZona">Elige tu zona.</span>
+          </fieldset>
+
+          <div class="campo" id="cCorreo">
+            <label class="etiqueta" for="fCorreo">Correo electrónico</label>
+            <input class="texto" type="email" id="fCorreo" autocomplete="email" inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done" placeholder="ana@gmail.com" maxlength="100">
+            <span class="sugerencia" id="sugerencia" hidden></span>
+            <span class="pista">Ahí te escribimos si ganas.</span>
+            <span class="error">Revisa tu correo: parece incompleto.</span>
+          </div>
+
+          <div class="campo" id="cFactura">
+            <span class="etiqueta" id="etqFactura">Foto de tu factura de Farmatodo</span>
+            <span class="pista">Que se lean la fecha, los productos y el total.</span>
+            <input type="file" id="fCamara" accept="image/*" capture="environment" hidden>
+            <input type="file" id="fGaleria" accept="image/*,application/pdf" hidden>
+            <div class="foto-vacia" id="fotoVacia">
+              <button type="button" class="btn-foto btn-camara" id="btnCamara" aria-describedby="etqFactura">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
+                Tomar foto
+              </button>
+              <button type="button" class="btn-foto" id="btnGaleria" aria-describedby="etqFactura">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                <span id="txtGaleria">Elegir de la galería</span>
+                <small id="txtArrastrar" hidden>o arrastra la foto aquí</small>
+              </button>
+            </div>
+            <div class="foto-procesando" id="fotoProcesando" hidden><span class="giro oscuro"></span>Preparando la foto…</div>
+            <div class="foto-lista" id="fotoLista" hidden>
+              <img id="fotoImg" alt="Vista previa de tu factura">
+              <div class="foto-icono" id="fotoIcono" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg></div>
+              <div>
+                <div class="foto-ok"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Factura lista</div>
+                <div class="foto-info" id="fotoInfo"></div>
+                <div class="foto-acciones">
+                  <button type="button" id="fotoCambiar">Cambiar</button>
+                  <button type="button" id="fotoQuitar">Quitar</button>
+                </div>
+              </div>
+            </div>
+            <span class="error" id="errFactura">Agrega la foto de tu factura.</span>
+          </div>
+
+          <label class="campo acepto campo-acepto" id="cAcepto">
+            <input type="checkbox" id="fAcepto">
+            <span>Acepto que SVR Venezuela use mis datos y la foto de mi factura solo para esta promoción.</span>
+          </label>
+          <span class="error" id="errAcepto" style="margin:-16px 0 20px">Necesitamos tu autorización para participar.</span>
+
+          <input type="text" class="trampa" id="fSitio" name="sitio" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <button type="submit" class="btn-enviar" id="btnEnviar">Enviar mi participación</button>
+          <div class="barra" id="barra" hidden><span></span></div>
+          <p class="estado" id="estado" role="status" aria-live="polite"></p>
+        </form>
+
+        <div class="exito" id="exito" hidden tabindex="-1">
+          <div class="exito-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></div>
+          <h3>¡Listo, ya estás participando!</h3>
+          <span class="exito-num" id="exitoNumero"></span>
+          <p>Revisaremos tu factura y, si eres una de las 3 ganadoras, te escribiremos a <b id="exitoCorreo"></b>.</p>
+          <div class="exito-botones">
+            <button type="button" class="btn-sec lleno" id="otraCompra">Registrar otra compra</button>
+            <a class="btn-sec" href="../tienda/">Ver la tienda SVR</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="condiciones">
+        <details>
+          <summary>Condiciones de la promoción</summary>
+          <ul>
+            <li>Participan las compras de productos SVR por más de $50 en Farmatodo.</li>
+            <li>Premio: 3 sesiones de HydraFacial en Blua Clinic (Caracas), una para cada una de las 3 ganadoras. Cada sesión de HydraFacial incluye 1 sesión de NCTF adicional.</li>
+            <li>La factura debe verse completa y legible: fecha, productos y total.</li>
+            <li>Usamos tus datos solo para esta promoción y para contactarte si ganas.</li>
+            <li>Fechas y bases completas: por confirmar.</li>
+          </ul>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="pie">
+      <span>© 2026 Laboratoires SVR · Distribuido en Venezuela por canal farmacéutico oficial.</span>
+      <span class="sep"></span>
+      <a href="../">Inicio</a>
+      <a href="../tienda/">Tienda</a>
+      <a href="https://www.instagram.com/svr_venezuela" target="_blank" rel="noopener">@svr_venezuela</a>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── Configuración ───────────────────────────────────────────────
+       Las participaciones llegan al mismo Apps Script de los pedidos
+       (acción «sorteo-blua»): fila en la hoja «Sorteo Blua», la foto en
+       Drive y un correo a jmedicalas@jmedicalcorp.com con la foto adjunta.
+       Fuera de svr-venezuela.com (vista previa local) NO se envía nada:
+       se simula. Para probar el envío real desde la vista previa: ?enviar=real */
+    var RECEPTOR = 'https://script.google.com/macros/s/AKfycbxO14XSwm8bJ8S6Z80-qQiKxzZ4LBiUr1mbXE0W3AyOolG2gg_dG1SPGht-R3DEI8Oh6Q/exec';
+    var PRODUCCION = /(^|\.)svr-venezuela\.com$/.test(location.hostname);
+    var ENVIO_REAL = PRODUCCION || /[?&]enviar=real\b/.test(location.search);
+    var MAX_LADO = 2400;                 // px del lado mayor: el total y los productos se leen bien y pesa ~0,6–1,3 MB
+    var CALIDAD = 0.86;
+    var MAX_FOTO = 25 * 1024 * 1024;     // foto original (antes de comprimir)
+    var MAX_TAL_CUAL = 8 * 1024 * 1024;  // PDF, o foto que el navegador no sabe abrir (va sin comprimir)
+    var BORRADOR = 'svr-blua-borrador';
+    var WHATSAPP = 'https://wa.me/584242565586?text=' + encodeURIComponent('Hola, quiero participar en la promoción SVR × Blua Clinic y no pude enviar el formulario.');
+
+    var $ = function (id) { return document.getElementById(id); };
+    var form = $('formBlua'), FACTURA = null, enviando = false, intentado = false;
+
+    if (!ENVIO_REAL) {
+      var aviso = document.createElement('div');
+      aviso.className = 'vista-previa';
+      aviso.textContent = 'Vista previa · este formulario no envía nada.';
+      var tarjeta = document.querySelector('.tarjeta');
+      tarjeta.insertBefore(aviso, tarjeta.firstChild);
+    }
+    // En computadora no hay cámara útil: un solo botón para subir el archivo (y se puede arrastrar)
+    var tactil = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    if (!tactil) {
+      document.body.classList.add('solo-escritorio');
+      $('txtGaleria').textContent = 'Subir foto de la factura';
+      $('txtArrastrar').hidden = false;
+    }
+
+    /* ── El Apps Script tiene que conocer la acción del sorteo antes de mandarle nada:
+       una versión vieja guardaría la participación como un pedido. ── */
+    var receptorListo = null;
+    // Resuelve 'ok' | 'cerrado' (promoción cerrada) | 'version' (el Apps Script publicado aún no conoce el sorteo) | 'red' (sin conexión)
+    function comprobarReceptor() {
+      if (!ENVIO_REAL) return Promise.resolve('ok');
+      if (!receptorListo) {
+        receptorListo = fetch(RECEPTOR + '?accion=sorteo-estado', { cache: 'no-store' })
+          .then(function (r) {
+            return r.json().then(function (j) {
+              if (j && j.ok && j.sorteo === 'blua') return j.abierto ? 'ok' : 'cerrado';
+              return 'version';
+            }, function () { return 'version'; });          // no era JSON: es la versión vieja del Apps Script
+          })
+          .catch(function () { return 'red'; });
+      }
+      return receptorListo;
+    }
+    comprobarReceptor();
+
+    /* ── Borrador: si el teléfono recarga la página al volver de la cámara, no se pierde lo escrito ── */
+    function guardarBorrador() {
+      try {
+        sessionStorage.setItem(BORRADOR, JSON.stringify({
+          nombre: $('fNombre').value, correo: $('fCorreo').value, zona: zonaElegida(), zonaOtra: $('fZonaOtra').value
+        }));
+      } catch (e) { /* modo privado */ }
+    }
+    function leerBorrador() {
+      try {
+        var b = JSON.parse(sessionStorage.getItem(BORRADOR) || 'null');
+        if (!b) return;
+        $('fNombre').value = b.nombre || '';
+        $('fCorreo').value = b.correo || '';
+        $('fZonaOtra').value = b.zonaOtra || '';
+        if (b.zona) { var r = form.querySelector('input[name="zona"][value="' + b.zona + '"]'); if (r) r.checked = true; }
+      } catch (e) { /* sin borrador */ }
+    }
+
+    /* ── Zona ── */
+    function zonaElegida() { var r = form.querySelector('input[name="zona"]:checked'); return r ? r.value : ''; }
+    function pintarZonas() {
+      form.querySelectorAll('.zona').forEach(function (z) { z.classList.toggle('marcada', z.querySelector('input').checked); });
+      $('grupoZonaOtra').hidden = zonaElegida() !== 'Otra';
+    }
+    form.querySelectorAll('input[name="zona"]').forEach(function (r) {
+      r.addEventListener('change', function () {
+        pintarZonas(); guardarBorrador(); if (intentado) validar();
+        if (r.value === 'Otra' && r.checked) setTimeout(function () { $('fZonaOtra').focus(); }, 30);
+      });
+    });
+
+    /* ── Correo: aviso de errores de tipeo frecuentes (gmial.com, hotmail.con…) ── */
+    var DOMINIOS = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'icloud.com', 'live.com', 'msn.com', 'yahoo.es', 'hotmail.es', 'outlook.es'];
+    function distancia(a, b) {
+      var d = [], i, j;
+      for (i = 0; i <= a.length; i++) d[i] = [i];
+      for (j = 0; j <= b.length; j++) d[0][j] = j;
+      for (i = 1; i <= a.length; i++) for (j = 1; j <= b.length; j++) {
+        d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      }
+      return d[a.length][b.length];
+    }
+    function sugerirCorreo(v) {
+      var m = v.trim().toLowerCase().match(/^([^@\s]+)@([^@\s]+)$/);
+      if (!m || DOMINIOS.indexOf(m[2]) !== -1) return '';
+      var mejor = '', min = 3;
+      DOMINIOS.forEach(function (d) { var x = distancia(m[2], d); if (x < min) { min = x; mejor = d; } });
+      return mejor ? m[1] + '@' + mejor : '';
+    }
+    function pintarSugerencia() {
+      var s = sugerirCorreo($('fCorreo').value), el = $('sugerencia');
+      el.hidden = !s;
+      el.innerHTML = '';
+      if (!s) return;
+      el.appendChild(document.createTextNode('¿Quisiste decir '));
+      var b = document.createElement('button');
+      b.type = 'button'; b.textContent = s;
+      b.addEventListener('click', function () { $('fCorreo').value = s; el.hidden = true; guardarBorrador(); if (intentado) validar(); });
+      el.appendChild(b);
+      el.appendChild(document.createTextNode('?'));
+    }
+    var correoValido = function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@.]{2,}$/.test(v.trim()); };
+
+    ['fNombre', 'fCorreo', 'fZonaOtra'].forEach(function (id) {
+      $(id).addEventListener('input', function () { guardarBorrador(); if (intentado) validar(); });
+    });
+    $('fCorreo').addEventListener('blur', pintarSugerencia);
+    $('fCorreo').addEventListener('input', function () { if (!$('sugerencia').hidden) pintarSugerencia(); });
+    $('fNombre').addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); form.querySelector('input[name="zona"]').focus(); } });
+
+    /* ── Foto de la factura ──────────────────────────────────────────
+       Se reduce y comprime AQUÍ: una foto de teléfono pesa 3–5 MB y
+       así viaja en ~0,5–1 MB, rápido aunque sea con datos móviles. */
+    function leerDataURL(blob) {
+      return new Promise(function (ok, no) { var l = new FileReader(); l.onload = function () { ok(l.result); }; l.onerror = function () { no(l.error); }; l.readAsDataURL(blob); });
+    }
+    function abrirImagen(url) {
+      return new Promise(function (ok, no) { var im = new Image(); im.onload = function () { ok(im); }; im.onerror = no; im.src = url; });
+    }
+    function kb(bytes) { return bytes >= 1048576 ? (bytes / 1048576).toFixed(1).replace('.', ',') + ' MB' : Math.max(1, Math.round(bytes / 1024)) + ' KB'; }
+
+    function prepararArchivo(archivo) {
+      var esPdf = archivo.type === 'application/pdf' || /\.pdf$/i.test(archivo.name || '');
+      if (esPdf) {
+        if (archivo.size > MAX_TAL_CUAL) return Promise.reject(new Error('El PDF pesa más de 8 MB. Mejor tómale una foto a la factura.'));
+        return leerDataURL(archivo).then(function (d) { return { datos: d, tipo: 'application/pdf', nombre: archivo.name || 'factura.pdf', bytes: archivo.size, pdf: true }; });
+      }
+      if (archivo.type && !/^image\//.test(archivo.type)) return Promise.reject(new Error('Ese archivo no es una foto. Elige una foto o un PDF de la factura.'));
+      if (archivo.size > MAX_FOTO) return Promise.reject(new Error('La foto es demasiado pesada. Prueba con otra.'));
+      var url = URL.createObjectURL(archivo);
+      return abrirImagen(url).then(function (im) {
+        var w0 = im.naturalWidth, h0 = im.naturalHeight;
+        var escala = Math.min(1, MAX_LADO / Math.max(w0, h0));
+        var w = Math.round(w0 * escala), h = Math.round(h0 * escala);
+        var lienzo = document.createElement('canvas');
+        lienzo.width = w; lienzo.height = h;
+        var g = lienzo.getContext('2d');
+        g.fillStyle = '#fff'; g.fillRect(0, 0, w, h);
+        g.drawImage(im, 0, 0, w, h);
+        var datos = lienzo.toDataURL('image/jpeg', CALIDAD);
+        return { datos: datos, tipo: 'image/jpeg', nombre: 'factura.jpg', ancho: w, alto: h, bytes: Math.round((datos.length - 23) * 0.75) };
+      }, function () {
+        // El navegador no sabe abrir esta foto (p. ej. HEIC en una computadora): va tal cual si no es enorme.
+        if (archivo.size > MAX_TAL_CUAL) throw new Error('No pudimos abrir esa foto. Prueba con otra o tómala de nuevo.');
+        return leerDataURL(archivo).then(function (d) { return { datos: d, tipo: archivo.type || 'image/heic', nombre: archivo.name || 'factura', bytes: archivo.size, sinVista: true }; });
+      }).finally(function () { URL.revokeObjectURL(url); });
+    }
+
+    function pintarFactura() {
+      var hay = !!FACTURA;
+      $('fotoVacia').hidden = hay;
+      $('fotoLista').hidden = !hay;
+      if (!hay) return;
+      var conVista = !FACTURA.pdf && !FACTURA.sinVista;
+      $('fotoImg').hidden = !conVista;
+      $('fotoIcono').hidden = conVista;
+      if (conVista) $('fotoImg').src = FACTURA.datos;
+      $('fotoInfo').textContent = (FACTURA.pdf ? 'PDF · ' : 'Foto · ') + kb(FACTURA.bytes) + (FACTURA.sinVista ? ' · sin vista previa' : '');
+    }
+
+    function elegirArchivo(archivo) {
+      if (!archivo) return;
+      $('fotoVacia').hidden = true;
+      $('fotoLista').hidden = true;
+      $('fotoProcesando').hidden = false;
+      prepararArchivo(archivo).then(function (f) {
+        FACTURA = f;
+        $('errFactura').textContent = 'Agrega la foto de tu factura.';
+        $('cFactura').classList.remove('invalido');
+      }).catch(function (e) {
+        FACTURA = null;
+        $('errFactura').textContent = e.message;
+        $('cFactura').classList.add('invalido');
+      }).then(function () {
+        $('fotoProcesando').hidden = true;
+        pintarFactura();
+        if (FACTURA && intentado) validar();
+      });
+    }
+    ['fCamara', 'fGaleria'].forEach(function (id) {
+      $(id).addEventListener('change', function () { elegirArchivo(this.files && this.files[0]); this.value = ''; });
+    });
+    $('btnCamara').addEventListener('click', function () { $('fCamara').click(); });
+    $('btnGaleria').addEventListener('click', function () { $('fGaleria').click(); });
+    $('fotoCambiar').addEventListener('click', function () { (tactil ? $('fCamara') : $('fGaleria')).click(); });
+    $('fotoQuitar').addEventListener('click', function () { FACTURA = null; pintarFactura(); });
+    // En computadora también se puede arrastrar la foto sobre el botón
+    var zonaFoto = $('fotoVacia');
+    ['dragenter', 'dragover'].forEach(function (t) { zonaFoto.addEventListener(t, function (e) { e.preventDefault(); zonaFoto.classList.add('arrastrando'); }); });
+    ['dragleave', 'drop'].forEach(function (t) { zonaFoto.addEventListener(t, function (e) { e.preventDefault(); zonaFoto.classList.remove('arrastrando'); }); });
+    zonaFoto.addEventListener('drop', function (e) { elegirArchivo(e.dataTransfer && e.dataTransfer.files[0]); });
+
+    $('fAcepto').addEventListener('change', function () { if (intentado) validar(); });
+
+    /* ── Validación ── */
+    function marcar(id, malo) { $(id).classList.toggle('invalido', !!malo); return !malo; }
+    function validar() {
+      var nombre = $('fNombre').value.trim().split(/\s+/).filter(function (p) { return p.length >= 2; });
+      var zona = zonaElegida();
+      var r = [
+        marcar('cNombre', nombre.length < 2),
+        marcar('cZona', !zona || (zona === 'Otra' && $('fZonaOtra').value.trim().length < 3)),
+        marcar('cCorreo', !correoValido($('fCorreo').value)),
+        marcar('cFactura', !FACTURA)
+      ];
+      $('errZona').textContent = zona === 'Otra' ? 'Dinos en qué zona estás.' : 'Elige tu zona.';
+      var acepta = $('fAcepto').checked;
+      $('errAcepto').style.display = acepta ? 'none' : 'block';
+      r.push(acepta);
+      return r.every(Boolean);
+    }
+    function primerError() {
+      var c = form.querySelector('.campo.invalido');
+      if (c) return c;
+      return $('fAcepto').checked ? null : $('cAcepto');
+    }
+
+    /* ── Envío ── */
+    function estado(texto, malo, conWhatsApp) {
+      var el = $('estado');
+      el.className = 'estado' + (malo ? ' mal' : '');
+      el.textContent = texto;
+      if (conWhatsApp) {
+        el.appendChild(document.createTextNode(' '));
+        var a = document.createElement('a');
+        a.href = WHATSAPP; a.target = '_blank'; a.rel = 'noopener'; a.textContent = 'Escríbenos por WhatsApp';
+        el.appendChild(a);
+        el.appendChild(document.createTextNode('.'));
+      }
+    }
+    function ocupado(si) {
+      enviando = si;
+      var b = $('btnEnviar');
+      b.disabled = si;
+      b.innerHTML = si ? '<span class="giro"></span>Enviando tu participación…' : 'Enviar mi participación';
+      $('barra').hidden = !si;
+    }
+    var MENSAJES = {
+      nombre: 'Revisa tu nombre y apellido.', zona: 'Elige tu zona.', correo: 'Revisa tu correo electrónico.',
+      factura: 'No pudimos leer la foto de la factura. Prueba con otra.', acepta: 'Necesitamos tu autorización para participar.',
+      cerrado: 'La promoción no está recibiendo participaciones en este momento.'
+    };
+
+    function enviarAlReceptor(datos) {
+      if (!ENVIO_REAL) {
+        return new Promise(function (ok) { setTimeout(function () { ok({ ok: true, numero: 0, prueba: true }); }, 1400); });
+      }
+      var ctrl = window.AbortController ? new AbortController() : null;
+      var reloj = ctrl ? setTimeout(function () { ctrl.abort(); }, 90000) : null;
+      return fetch(RECEPTOR, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },   // sin preflight: así lo acepta Apps Script
+        body: JSON.stringify(datos),
+        signal: ctrl ? ctrl.signal : undefined
+      }).then(function (r) { return r.json(); }).finally(function () { if (reloj) clearTimeout(reloj); });
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (enviando) return;
+      intentado = true;
+      estado('');
+      if (!validar()) {
+        var c = primerError();
+        if (c) {
+          c.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          var f = (c.id === 'cZona' && zonaElegida() === 'Otra') ? $('fZonaOtra')
+            : c.querySelector('input:not([type="radio"]):not([hidden]), input[type="radio"]');
+          if (f && c.id !== 'cFactura') setTimeout(function () { f.focus({ preventScroll: true }); }, 350);
+        }
+        return;
+      }
+      var zona = zonaElegida();
+      var datos = {
+        accion: 'sorteo-blua',
+        nombre: $('fNombre').value.trim().replace(/\s+/g, ' '),
+        zona: zona === 'Otra' ? 'Otra: ' + $('fZonaOtra').value.trim() : zona,
+        correo: $('fCorreo').value.trim().toLowerCase(),
+        acepta: true,
+        factura: { datos: FACTURA.datos, tipo: FACTURA.tipo, nombre: FACTURA.nombre },
+        sitio: $('fSitio').value,
+        pagina: location.href.split('#')[0]
+      };
+      ocupado(true);
+      comprobarReceptor().then(function (estadoReceptor) {
+        if (estadoReceptor === 'ok') return estadoReceptor;
+        receptorListo = null;                                   // pudo ser un fallo pasajero: se pregunta una vez más
+        return comprobarReceptor();
+      }).then(function (estadoReceptor) {
+        if (estadoReceptor !== 'ok') { receptorListo = null; throw { receptor: estadoReceptor }; }
+        return enviarAlReceptor(datos);
+      }).then(function (r) {
+        if (!r || !r.ok) throw { codigo: r && r.error };
+        ocupado(false);
+        mostrarExito(r.numero, datos.correo, r.prueba);
+        if (ENVIO_REAL) {
+          if (typeof fbq !== 'undefined') fbq('track', 'CompleteRegistration', { content_name: 'Sorteo SVR × Blua Clinic' });
+          if (typeof gtag !== 'undefined') gtag('event', 'sorteo_blua_participacion', { zona: zona });
+        }
+      }).catch(function (err) {
+        ocupado(false);
+        if (err && err.receptor === 'version') estado('El registro abre muy pronto. Vuelve a intentarlo más tarde.', true, true);
+        else if (err && err.receptor === 'cerrado') estado(MENSAJES.cerrado, true, true);
+        else if (err && err.codigo && MENSAJES[err.codigo]) estado(MENSAJES[err.codigo], true, err.codigo === 'cerrado');
+        else estado('No pudimos enviar tu participación. Revisa tu conexión y vuelve a intentarlo.', true, true);
+      });
+    });
+
+    function mostrarExito(numero, correo, prueba) {
+      try { sessionStorage.removeItem(BORRADOR); } catch (e) {}
+      $('exitoNumero').textContent = 'Participación N.º ' + String(numero || 0).padStart(4, '0') + (prueba ? ' · vista previa' : '');
+      $('exitoCorreo').textContent = correo;
+      form.hidden = true;
+      var ex = $('exito');
+      ex.hidden = false;
+      ex.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(function () { ex.focus({ preventScroll: true }); }, 400);
+    }
+    $('otraCompra').addEventListener('click', function () {
+      FACTURA = null; pintarFactura();
+      $('fAcepto').checked = false; intentado = false;
+      form.querySelectorAll('.campo.invalido').forEach(function (c) { c.classList.remove('invalido'); });
+      $('errAcepto').style.display = 'none';
+      estado('');
+      $('exito').hidden = true; form.hidden = false;
+      guardarBorrador();
+      $('cFactura').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+
+    $('errAcepto').style.display = 'none';
+    leerBorrador();
+    pintarZonas();
+    pintarFactura();
+  })();
+  </script>
+</body>
+</html>

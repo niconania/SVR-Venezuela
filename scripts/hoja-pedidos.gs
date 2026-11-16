@@ -8,6 +8,10 @@
  * fila en una hoja de cálculo. La hoja la crea él solo la primera vez
  * que llega un pedido: no hay que crear nada a mano.
  *
+ * También recibe las participaciones del sorteo SVR × Blua Clinic
+ * (svr-venezuela.com/blua): pestaña «Sorteo Blua» en la misma hoja, la
+ * foto de la factura en Drive y un correo a jmedicalas@ con la foto.
+ *
  * ── CÓMO INSTALARLO ─────────────────────────────────────────────────
  *  1. Pega TODO este archivo en Código.gs (borra lo que haya).
  *  2. Guarda con Cmd+S.
@@ -287,6 +291,235 @@ function guardarAgotados(lista) {
   return limpia;
 }
 
+/* ── Precios y ofertas ──────────────────────────────────────────────
+   El precio de lista vive en products.json (publicado en el sitio). Aquí
+   se guardan los CAMBIOS que administración hace desde /tienda/4dm1n/:
+   un precio nuevo y, si hay oferta, el «precio antes» (el que la tienda
+   muestra tachado). La tienda los aplica encima del catálogo al cargar,
+   así que un cambio se ve al instante, sin publicar nada. Cada guardado
+   queda anotado en la pestaña «Historial de precios» de esta hoja.
+   Guardado: { slug: { p: precio vigente, a: precio antes (o null), t: fecha } } */
+var PRECIO_MIN = 0.5;
+var PRECIO_MAX = 2000;
+var MAX_PRECIOS = 60;
+var HOJA_HIST_PRECIOS = 'Historial de precios';
+var HIST_PRECIOS_ENCABEZADOS = ['Fecha', 'Producto', 'Slug', 'Precio de lista', 'Antes (publicado)', 'Ahora',
+                                'Precio antes de la oferta', 'Descuento', 'Qué se hizo'];
+
+function leerPreciosCrudos() {
+  var raw = PropertiesService.getScriptProperties().getProperty('PRECIOS');
+  try {
+    var o = raw ? JSON.parse(raw) : {};
+    return (o && typeof o === 'object' && !(o instanceof Array)) ? o : {};
+  } catch (err) { return {}; }
+}
+
+/** Lo que ve la tienda: { slug: { precio, antes (o null), t } } */
+function preciosPublicos() {
+  var crudos = leerPreciosCrudos(), out = {};
+  for (var slug in crudos) {
+    var c = crudos[slug];
+    out[slug] = { precio: c.p, antes: c.a || null, t: c.t || '' };
+  }
+  return out;
+}
+
+function redondear2(n) { return Math.round(n * 100) / 100; }
+
+/** Un número (o texto numérico) dentro del rango de precios, redondeado a centavos; si no, null. */
+function precioValido(v) {
+  var esNumero = typeof v === 'number' || (typeof v === 'string' && /^\d+(\.\d{1,6})?$/.test(v));
+  if (!esNumero) return null;
+  var n = redondear2(Number(v));
+  return (isFinite(n) && n >= PRECIO_MIN && n <= PRECIO_MAX) ? n : null;
+}
+
+function hojaHistorialPrecios() {
+  var libro = obtenerHoja().getParent();
+  var hoja = libro.getSheetByName(HOJA_HIST_PRECIOS);
+  if (!hoja) {
+    hoja = libro.insertSheet(HOJA_HIST_PRECIOS);
+    hoja.appendRow(HIST_PRECIOS_ENCABEZADOS);
+    hoja.setFrozenRows(1);
+    hoja.getRange(1, 1, 1, HIST_PRECIOS_ENCABEZADOS.length)
+        .setFontWeight('bold').setBackground('#d0405b').setFontColor('#ffffff');
+    [130, 230, 190, 110, 120, 90, 150, 90, 230].forEach(function (ancho, i) { hoja.setColumnWidth(i + 1, ancho); });
+  }
+  return hoja;
+}
+
+/**
+ * Aplica los cambios de precios que manda la pantalla de administración.
+ *   cambios: { slug: { precio, antes } | null }   (null = volver al precio de lista)
+ *   meta:    { slug: { nombre, lista } }          (solo para anotar el historial)
+ * Todo o nada: si un solo dato no es válido no se guarda ninguno.
+ */
+function guardarPrecios(cambios, meta) {
+  if (!cambios || typeof cambios !== 'object' || cambios instanceof Array) return { ok: false, error: 'cambios' };
+  var slugs = Object.keys(cambios);
+  if (!slugs.length || slugs.length > MAX_PRECIOS) return { ok: false, error: 'cambios' };
+
+  var nuevos = {};
+  for (var i = 0; i < slugs.length; i++) {
+    var slug = slugs[i], c = cambios[slug];
+    if (!/^[a-z0-9][a-z0-9-]{1,58}$/.test(slug)) return { ok: false, error: 'slug', slug: slug };
+    if (c === null) { nuevos[slug] = null; continue; }
+    if (!c || typeof c !== 'object') return { ok: false, error: 'precio', slug: slug };
+    var precio = precioValido(c.precio);
+    if (precio === null) return { ok: false, error: 'precio', slug: slug };
+    var antes = null;
+    if (c.antes !== null && c.antes !== undefined) {
+      antes = precioValido(c.antes);
+      if (antes === null || antes <= precio) return { ok: false, error: 'antes', slug: slug };
+    }
+    nuevos[slug] = { p: precio, a: antes };
+  }
+
+  var filas = [];
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    var actuales = leerPreciosCrudos();
+    var ahora = Utilities.formatDate(new Date(), 'America/Caracas', "yyyy-MM-dd'T'HH:mm:ssXXX");
+    var fecha = Utilities.formatDate(new Date(), 'America/Caracas', 'yyyy-MM-dd HH:mm');
+    for (var s in nuevos) {
+      var previo = actuales[s] || null, nuevo = nuevos[s];
+      if (nuevo === null && !previo) continue;                                        // ya estaba en el precio de lista
+      if (nuevo && previo && previo.p === nuevo.p && (previo.a || null) === nuevo.a) continue;   // sin cambios
+
+      var m = (meta && meta[s] && typeof meta[s] === 'object') ? meta[s] : {};
+      var lista = precioValido(m.lista);
+      var accion = nuevo === null ? 'Volvió al precio de lista'
+                 : nuevo.a ? (previo && previo.a ? 'Cambió la oferta' : 'Puso una oferta')
+                 : (previo && previo.a ? 'Quitó la oferta y fijó el precio' : 'Cambió el precio');
+      filas.push([fecha, String(m.nombre || s).slice(0, 80), s, lista === null ? '' : lista,
+                  previo ? previo.p : (lista === null ? '' : lista),
+                  nuevo ? nuevo.p : (lista === null ? 'lista' : lista),
+                  nuevo && nuevo.a ? nuevo.a : '',
+                  nuevo && nuevo.a ? Math.round((1 - nuevo.p / nuevo.a) * 1000) / 10 + ' %' : '',
+                  accion]);
+      if (nuevo === null) delete actuales[s];
+      else { nuevo.t = ahora; actuales[s] = nuevo; }
+    }
+    if (Object.keys(actuales).length > MAX_PRECIOS) return { ok: false, error: 'cambios' };
+    var props = PropertiesService.getScriptProperties();
+    if (Object.keys(actuales).length) props.setProperty('PRECIOS', JSON.stringify(actuales));
+    else props.deleteProperty('PRECIOS');
+  } finally {
+    lock.releaseLock();
+  }
+
+  if (filas.length) {
+    try {
+      var hoja = hojaHistorialPrecios();
+      filas.forEach(function (f) { hoja.appendRow(f); });
+    } catch (err) { /* el precio ya quedó guardado; si falla la anotación no se deshace */ }
+  }
+  return { ok: true, precios: preciosPublicos(), cambios: filas.length };
+}
+
+/* ── Sorteo SVR × Blua Clinic ──────────────────────────────────────
+   La página svr-venezuela.com/blua/ manda cada participación con la
+   acción «sorteo-blua». Queda una fila en la pestaña «Sorteo Blua» de
+   esta misma hoja, la foto de la factura en Drive y sale un correo a
+   SORTEO_CORREOS con la foto adjunta (al responderlo, le contestas al
+   participante). Para cerrar la promoción: SORTEO_ABIERTO = false y
+   publica una versión nueva; la página deja de aceptar participaciones. */
+var SORTEO_CORREOS = 'jmedicalas@jmedicalcorp.com';
+var SORTEO_ABIERTO = true;
+var SORTEO_HOJA = 'Sorteo Blua';
+var SORTEO_CARPETA = 'SVR — Sorteo Blua (facturas)';
+var SORTEO_ENCABEZADOS = ['Fecha', 'N.º', 'Nombre y apellido', 'Zona de Caracas', 'Correo', 'Factura', 'Revisión'];
+var SORTEO_TIPOS = /^(image\/(jpeg|png|webp|heic|heif)|application\/pdf)$/;
+
+function hojaSorteo() {
+  var libro = obtenerHoja().getParent();
+  var hoja = libro.getSheetByName(SORTEO_HOJA);
+  if (!hoja) {
+    hoja = libro.insertSheet(SORTEO_HOJA);
+    hoja.appendRow(SORTEO_ENCABEZADOS);
+    hoja.setFrozenRows(1);
+    hoja.getRange(1, 1, 1, SORTEO_ENCABEZADOS.length)
+        .setFontWeight('bold').setBackground('#0b5a72').setFontColor('#ffffff');
+    [130, 60, 200, 170, 230, 320, 140].forEach(function (ancho, i) { hoja.setColumnWidth(i + 1, ancho); });
+  }
+  return hoja;
+}
+
+function carpetaSorteo() {
+  var it = DriveApp.getFoldersByName(SORTEO_CARPETA);
+  return it.hasNext() ? it.next() : DriveApp.createFolder(SORTEO_CARPETA);
+}
+
+/** Valida y guarda una participación. Devuelve { ok, numero } o { ok: false, error }. */
+function registrarSorteo(d) {
+  if (!SORTEO_ABIERTO) return { ok: false, error: 'cerrado' };
+  if (d.sitio) return { ok: true, numero: 0 };          // campo trampa lleno: es un robot, no se guarda nada
+
+  var nombre = String(d.nombre || '').trim().replace(/\s+/g, ' ').slice(0, 80);
+  var zona = String(d.zona || '').trim().slice(0, 70);
+  var correo = String(d.correo || '').trim().toLowerCase().slice(0, 100);
+  if (nombre.split(' ').length < 2) return { ok: false, error: 'nombre' };
+  if (!zona) return { ok: false, error: 'zona' };
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@.]{2,}$/.test(correo)) return { ok: false, error: 'correo' };
+  if (d.acepta !== true) return { ok: false, error: 'acepta' };
+
+  // La factura llega como "data:image/jpeg;base64,XXXX"
+  var partes = String((d.factura && d.factura.datos) || '').match(/^data:([^;]+);base64,([\s\S]+)$/);
+  if (!partes || !SORTEO_TIPOS.test(partes[1])) return { ok: false, error: 'factura' };
+  var bytes;
+  try { bytes = Utilities.base64Decode(partes[2]); } catch (err) { return { ok: false, error: 'factura' }; }
+  if (!bytes.length || bytes.length > 10 * 1024 * 1024) return { ok: false, error: 'factura' };
+
+  // El número se asigna con candado: dos participaciones a la vez no se pisan.
+  var lock = LockService.getScriptLock();
+  lock.waitLock(20000);
+  try {
+    var hoja = hojaSorteo();
+    var numero = Math.max(0, hoja.getLastRow() - 1) + 1;
+    var tipo = partes[1];
+    var ext = tipo === 'application/pdf' ? 'pdf' : tipo === 'image/png' ? 'png' :
+              tipo === 'image/webp' ? 'webp' : /hei[cf]/.test(tipo) ? 'heic' : 'jpg';
+    var archivo = carpetaSorteo().createFile(
+      Utilities.newBlob(bytes, tipo, 'N' + ('000' + numero).slice(-4) + ' - ' + nombre.slice(0, 40) + '.' + ext));
+    var fecha = Utilities.formatDate(new Date(), 'America/Caracas', 'yyyy-MM-dd HH:mm');
+    hoja.appendRow([fecha, numero, nombre, zona, correo, archivo.getUrl(), '']);
+    SpreadsheetApp.flush();
+  } finally {
+    lock.releaseLock();
+  }
+
+  avisarSorteo({ numero: numero, nombre: nombre, zona: zona, correo: correo, fecha: fecha, archivo: archivo,
+                 urlHoja: hoja.getParent().getUrl() + '#gid=' + hoja.getSheetId() });
+  return { ok: true, numero: numero };
+}
+
+function avisarSorteo(p) {
+  if (!SORTEO_CORREOS) return;
+  try {
+    var n = ('000' + p.numero).slice(-4);
+    MailApp.sendEmail({
+      to: SORTEO_CORREOS,
+      replyTo: p.correo,
+      name: 'SVR × Blua Clinic',
+      subject: 'Sorteo SVR × Blua — participación N.º ' + n + ' — ' + p.nombre,
+      body:
+        'Nueva participación en el sorteo SVR × Blua Clinic\n\n' +
+        'N.º:     ' + n + '\n' +
+        'Fecha:   ' + p.fecha + '\n' +
+        'Nombre:  ' + p.nombre + '\n' +
+        'Zona:    ' + p.zona + '\n' +
+        'Correo:  ' + p.correo + '\n\n' +
+        'La foto de la factura va adjunta. También queda en Drive:\n' + p.archivo.getUrl() + '\n\n' +
+        'Todas las participaciones (pestaña «Sorteo Blua»):\n' + p.urlHoja + '\n\n' +
+        'Para escribirle al participante, responde este correo.',
+      attachments: [p.archivo.getBlob()]
+    });
+  } catch (err) {
+    // Si el correo falla, la participación ya quedó guardada en la hoja.
+  }
+}
+
 /**
  * Recibe el pedido que manda la tienda, o el cambio de agotados
  * que manda la pantalla de administración.
@@ -314,6 +547,15 @@ function doPost(e) {
       if (!claveValida(d.clave)) return responder({ ok: false, error: 'clave' });
       return responder({ ok: true, inventario: inventarioPlano(guardarInventario(d.cambios || {})) });
     }
+
+    // Precios y ofertas desde la pantalla de administración.
+    if (d.accion === 'precios-guardar') {
+      if (!claveValida(d.clave)) return responder({ ok: false, error: 'clave' });
+      return responder(guardarPrecios(d.cambios, d.meta));
+    }
+
+    // Participación en el sorteo SVR × Blua Clinic (página /blua/).
+    if (d.accion === 'sorteo-blua') return responder(registrarSorteo(d));
 
     // Un pedido no trae «accion». Si trae una que no existe (una página
     // vieja pidiendo algo que ya se quitó), se rechaza: no crea una fila.
@@ -377,13 +619,19 @@ function doGet(e) {
 
   // La tienda pregunta qué productos están agotados y cuánto stock hay.
   if (accion === 'agotados') {
-    return responder({ ok: true, agotados: leerAgotados(), inventario: inventarioPublico() });
+    return responder({ ok: true, agotados: leerAgotados(), inventario: inventarioPublico(), precios: preciosPublicos() });
+  }
+
+  // La página del sorteo pregunta si ya puede mandar participaciones
+  // (una versión vieja de este archivo las guardaría como pedidos).
+  if (accion === 'sorteo-estado') {
+    return responder({ ok: true, sorteo: 'blua', abierto: SORTEO_ABIERTO });
   }
 
   // La pantalla de administración comprueba la clave al entrar.
   if (accion === 'entrar') {
     var bien = claveValida(e.parameter.clave);
-    return responder(bien ? { ok: true, agotados: leerAgotados() }
+    return responder(bien ? { ok: true, agotados: leerAgotados(), precios: preciosPublicos() }
                           : { ok: false, error: 'clave' });
   }
 
