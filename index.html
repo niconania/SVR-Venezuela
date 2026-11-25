@@ -31,8 +31,22 @@
   <meta name="description" content="SVR Laboratoire Dermatologique — Ciencia francesa para pieles sensibles. Más de 60 años de innovación. Disponible en Venezuela.">
   <title>SVR Venezuela — Laboratoire Dermatologique</title>
   <link rel="canonical" href="https://svr-venezuela.com/">
-  <link rel="preload" as="image" href="assets/hero-tienda.webp" type="image/webp" media="(min-width: 641px)" fetchpriority="high">
-  <link rel="preload" as="image" href="assets/hero-tienda-movil.webp" type="image/webp" media="(max-width: 640px)" fetchpriority="high">
+  <script>
+    /* Black Friday: hasta el martes 1-dic-2026 (fin del día, hora de Caracas) la primera diapositiva
+       lleva el banner de Black Friday; después vuelve sola al de la tienda. Para quitarlo antes:
+       borrar este bloque, la clase .bf-solo del slide y los CSS «html.bf». */
+    (function () {
+      var bf = Date.now() < Date.parse('2026-12-02T00:00:00-04:00');
+      if (bf) document.documentElement.classList.add('bf');
+      var n = bf ? 'hero-bf' : 'hero-tienda';
+      [['', '(min-width: 641px)'], ['-movil', '(max-width: 640px)']].forEach(function (v) {
+        var l = document.createElement('link');
+        l.rel = 'preload'; l.as = 'image'; l.type = 'image/webp'; l.media = v[1];
+        l.href = 'assets/' + n + v[0] + '.webp'; l.setAttribute('fetchpriority', 'high');
+        document.head.appendChild(l);
+      });
+    })();
+  </script>
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
   <link rel="icon" type="image/png" sizes="512x512" href="assets/favicon-512.png">
   <link rel="apple-touch-icon" href="assets/favicon-180.png">
@@ -359,6 +373,13 @@
        El banner (titular, delivery y productos) es una imagen WebP con transparencia; el degradado
        de fondo lo pone el sitio, así se adapta a cualquier ancho de pantalla sin costuras. */
     .hero-slide--tienda { background: linear-gradient(100deg, #e0405f 0%, #FB637E 52%, #ff7c70 100%); }
+    /* Black Friday (ver el script del <head>): mismo slide, otra imagen y fondo oscuro */
+    .hero-tienda-escena .bf-solo { display: none; }
+    html.bf .hero-tienda-escena .bf-solo { display: block; }
+    html.bf .hero-tienda-escena .bf-no { display: none; }
+    html.bf .hero-slide--tienda { background: linear-gradient(100deg, #0c0c0e 0%, #1d1015 52%, #43121f 100%); }
+    html.bf .hero-tienda-cta { background: #fff; color: #d9355a; box-shadow: 0 12px 28px rgba(0,0,0,0.45); }
+    html.bf .hero-tienda-cta:hover { background: #fff3cf; color: #b52248; }
     /* Segunda diapositiva: alianza SVR × Blua Clinic (mismo mecanismo que la de la tienda) */
     .hero-slide--blua { background: linear-gradient(100deg, #0b4f66 0%, #13809d 52%, #2fb0c2 100%); }
     .hero-tienda-escena, .hero-blua-escena {
@@ -1687,11 +1708,16 @@
   <section class="hero-slider" id="heroSlider">
     <div class="hero-slide hero-slide--tienda active" data-index="0" style="--slide-accent:#ffffff">
       <div class="hero-tienda-escena">
-        <picture>
+        <picture class="bf-no">
           <source media="(max-width: 640px)" srcset="assets/hero-tienda-movil.webp">
           <img src="assets/hero-tienda.webp" width="2400" height="1000" alt="" fetchpriority="high" decoding="async">
         </picture>
-        <h2 class="sr-only">Tu SVR, a un clic. Delivery gratis en toda Caracas.</h2>
+        <h2 class="sr-only bf-no">Tu SVR, a un clic. Delivery gratis en toda Caracas.</h2>
+        <picture class="bf-solo">
+          <source media="(max-width: 640px)" srcset="assets/hero-bf-movil.webp">
+          <img src="assets/hero-bf.webp" width="2400" height="1000" alt="" loading="lazy" decoding="async">
+        </picture>
+        <h2 class="sr-only bf-solo">Black Friday: hasta 20% de descuento en SVR en compras online.</h2>
         <a href="tienda/" class="hero-tienda-cta"><span>Comprar<span class="cta-extra"> ahora</span></span><span aria-hidden="true">→</span></a>
       </div>
     </div>
